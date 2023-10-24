@@ -12,3 +12,5 @@ RoxygenNote: 7.2.3
 Imports: 
     dplyr,
     readr
+URL: https://github.com/feinleib/filibustr
+BugReports: https://github.com/feinleib/filibustr/issues
