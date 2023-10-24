@@ -1,0 +1,49 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# filibustr
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The `filibustr` package provides data utilities for research on the U.S. Congress.
+This package provides a uniform interface for accessing data on members and votes.
+
+## Installation
+
+You can install the development version of filibustr from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("feinleib/filibustr")
+```
+
+## Usage
+
+The `get_voteview_members()` function downloads data from [Voteview](https://voteview.com/data) on Presidents, Senators, and Representatives.
+
+```{r example}
+library(filibustr)
+
+get_voteview_members()
+```
+
+## Data sources
+
+This package uses data from the following websites and research:
+* Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin, and Luke Sonnet (2023). *Voteview: Congressional Roll-Call Votes Database.* <https://voteview.com/>
+* Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023). The Bipartisan Path to Effective Lawmaking. *The Journal of Politics*, *85*(3), 1048–1063. <https://doi.org/10.1086/723805>
+
+
