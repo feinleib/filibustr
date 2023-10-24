@@ -7,7 +7,8 @@
 get_voteview_members(local = TRUE, local_dir = ".", chamber = "all")
 }
 \arguments{
-\item{local}{Whether to read the data from a local file, as opposed to the Voteview website.}
+\item{local}{Whether to read the data from a local file, as opposed to the Voteview website.
+Default is \code{TRUE}. If the local file does not exist, will fall back to reading from Voteview.}
 
 \item{local_dir}{The directory containing the local file. Defaults to the working directory.}
 
