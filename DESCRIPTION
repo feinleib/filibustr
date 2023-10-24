@@ -14,3 +14,6 @@ Imports:
     readr
 URL: https://github.com/feinleib/filibustr
 BugReports: https://github.com/feinleib/filibustr/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
