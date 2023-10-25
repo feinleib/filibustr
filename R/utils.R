@@ -32,6 +32,33 @@ current_congress <- function() {
   floor((as.numeric(format(Sys.Date(), "%Y")) - 1787) / 2)
 }
 
+#' Get Voteview string for a specified Congress
+#'
+#' Get a Congress number as a three-digit string.
+#' This is the format of Congress numbers in Voteview data file names.
+#'
+#' If an invalid Congress number (or none) is given, this will return `"all"`.
+#'
+#' @param congress A Congress number.
+#'
+#' Valid Congress numbers are integers between 1 and `r current_congress()`
+#' (the current Congress).
+#'
+#'
+#' @return A three-character string.
+#'
+#' Either three digits between `"001"` and ``r paste0('"', current_congress(), '"')``,
+#' or `"all"` in case of an invalid Congress number.
+#'
+#' @examples
+#' match_congress(118)
+#' match_congress(1)
+#'
+#' match_congress(NULL)
+#' match_congress(300)
+#' match_congress("not a valid number")
+#'
+#' @noRd
 match_congress <- function(congress) {
   ifelse(is.numeric(congress) &&
            congress >= 1 &&
