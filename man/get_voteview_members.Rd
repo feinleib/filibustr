@@ -4,7 +4,12 @@
 \alias{get_voteview_members}
 \title{Get data on members of Congress from Voteview}
 \usage{
-get_voteview_members(local = TRUE, local_dir = ".", chamber = "all")
+get_voteview_members(
+  local = TRUE,
+  local_dir = ".",
+  chamber = "all",
+  congress = NULL
+)
 }
 \arguments{
 \item{local}{Whether to read the data from a local file, as opposed to the Voteview website.
@@ -17,11 +22,16 @@ Default is \code{TRUE}. If the local file does not exist, will fall back to read
 \item \code{"all"}, \code{"congress"}: Both House and Senate data (the default).
 \item \code{"house"}, \code{"h"}, \code{"hr"}: House data only.
 \item \code{"senate"}, \code{"s"}, \code{"sen"}: Senate data only.
+These options are case-insensitive. If you explicitly pass a different value,
+it will default to "all" with a warning.
 }
 
 Note that presidents are included in all datasets. Therefore, reading \emph{both} \code{"house"}
 and \code{"senate"} data will duplicate data on the presidents. The recommended way to get
 all data is to use the default argument, \code{"all"}.}
+
+\item{congress}{A whole number, to get data for a single Congress.
+Optional; will retrieve data for all Congresses by default.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.
@@ -39,11 +49,16 @@ Congress (i.e., each member is listed once for every two years in office). See t
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_voteview_members()
-
-# Get data for only one chamber
-get_voteview_members(chamber = "house")
-get_voteview_members(chamber = "senate")
 \dontshow{\}) # examplesIf}
 # Get data from Voteview website
 try(get_voteview_members(local = FALSE))
+
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Get data for only one chamber
+get_voteview_members(chamber = "house")
+get_voteview_members(chamber = "senate")
+
+# Get data for a specific Congress
+get_voteview_data(congress = `current_congress()`)
+\dontshow{\}) # examplesIf}
 }

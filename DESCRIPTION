@@ -11,7 +11,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     dplyr,
-    readr
+    readr,
+    stringr
 URL: https://github.com/feinleib/filibustr
 BugReports: https://github.com/feinleib/filibustr/issues
 Suggests: 
