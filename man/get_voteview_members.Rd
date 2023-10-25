@@ -59,6 +59,6 @@ get_voteview_members(chamber = "house")
 get_voteview_members(chamber = "senate")
 
 # Get data for a specific Congress
-get_voteview_data(congress = `current_congress()`)
+get_voteview_members(congress = `current_congress()`)
 \dontshow{\}) # examplesIf}
 }
