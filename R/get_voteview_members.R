@@ -47,21 +47,9 @@
 #' get_voteview_members(congress = `current_congress()`)
 #'
 get_voteview_members <- function(local = TRUE, local_dir = ".", chamber = "all", congress = NULL) {
-  chamber_code <- dplyr::case_match(tolower(chamber),
-                            c("all", "congress") ~ "HS",
-                            c("house", "h", "hr") ~ "H",
-                            c("senate", "s", "sen") ~ "S",
-                            .default = "HS_default")
-  # warn for invalid chamber argument
-  if (chamber_code == "HS_default") {
-    warning("Invalid chamber (\"", chamber, "\") provided. Using `chamber = \"all\"`.")
-    chamber_code <- "HS"
-  }
+  chamber_code <- match_chamber(chamber)
 
-  congress_code <- ifelse(is.numeric(congress) && congress <= current_congress(),
-                          stringr::str_pad(string = as.integer(congress),
-                                           width = 3, side = "left", pad = 0),
-                          "all")
+  congress_code <- match_congress(congress)
 
   voteview_source <- "https://voteview.com/static/data/out/members"
   source <- ifelse(local,
