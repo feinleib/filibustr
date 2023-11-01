@@ -44,6 +44,7 @@ get_voteview_members()
 ## Data sources
 
 This package uses data from the following websites and research:
+
 * Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin, and Luke Sonnet (2023). *Voteview: Congressional Roll-Call Votes Database.* <https://voteview.com/>
 * Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023). The Bipartisan Path to Effective Lawmaking. *The Journal of Politics*, *85*(3), 1048–1063. <https://doi.org/10.1086/723805>
 
