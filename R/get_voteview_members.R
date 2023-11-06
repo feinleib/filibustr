@@ -10,6 +10,7 @@
 #'  Default is `TRUE`. If the local file does not exist, will fall back to reading from Voteview.
 #'
 #' @param local_dir The directory containing the local file. Defaults to the working directory.
+#'
 #' @param chamber Which chamber to get data for. Options are:
 #'  * `"all"`, `"congress"`: Both House and Senate data (the default).
 #'  * `"house"`, `"h"`, `"hr"`: House data only.
@@ -60,20 +61,10 @@ get_voteview_members <- function(local = TRUE, local_dir = ".", chamber = "all",
                                                                          congress = .cong))
     return(dplyr::bind_rows(list_of_dfs))
   }
-  chamber_code <- match_chamber(chamber)
 
-  congress_code <- match_congress(congress)
-
-  voteview_source <- "https://voteview.com/static/data/out/members"
-  source <- ifelse(local,
-                   local_dir,
-                   voteview_source)
-  full_path <- paste0(source, "/", chamber_code, congress_code, "_members.csv")
-
-  # Use Voteview website if local file doesn't exist
-  if(!file.exists(full_path)) {
-    full_path <- paste0(voteview_source, "/", chamber_code, congress_code, "_members.csv")
-  }
+  full_path <- build_file_path(local = local, local_dir = local_dir,
+                               chamber = chamber, congress = congress,
+                               sheet_type = "members")
 
   readr::read_csv(full_path,
                   col_types = "ifiinfiiiccnnnnnni")

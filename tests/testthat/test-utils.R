@@ -44,15 +44,33 @@ test_that("match chamber", {
 })
 
 test_that("match congress number", {
-  # valid args
+  # valid congress numbers
   expect_equal(match_congress(118), "118")
   expect_equal(match_congress(110), "110")
   expect_equal(match_congress(23), "023")
   expect_equal(match_congress(1), "001")
 
-  # invalid args
+  # invalid congress numbers
   expect_equal(match_congress(0), "all")
   expect_equal(match_congress(-2), "all")
   expect_equal(match_congress("five"), "all")
   expect_equal(match_congress("all"), "all")
+})
+
+test_that("build file path", {
+  # expected usage
+  expect_equal(build_file_path(sheet_type = "members"),
+               "https://voteview.com/static/data/out/members/HSall_members.csv")
+  expect_equal(build_file_path(sheet_type = "rollcalls"),
+               "https://voteview.com/static/data/out/rollcalls/HSall_rollcalls.csv")
+
+  # specify chamber, congress
+  expect_equal(build_file_path(sheet_type = "members", congress = 117),
+               "https://voteview.com/static/data/out/members/HS117_members.csv")
+  expect_equal(build_file_path(sheet_type = "rollcalls", chamber = "senate"),
+               "https://voteview.com/static/data/out/rollcalls/Sall_rollcalls.csv")
+  expect_equal(build_file_path(sheet_type = "members", chamber = "hr", congress = 90),
+               "https://voteview.com/static/data/out/members/H090_members.csv")
+
+  # TODO: specify local path
 })

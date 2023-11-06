@@ -68,3 +68,21 @@ match_congress <- function(congress) {
                           width = 3, side = "left", pad = 0),
          "all")
 }
+
+build_file_path <- function(local = TRUE, local_dir = ".", chamber = "all", congress = NULL, sheet_type) {
+  chamber_code <- match_chamber(chamber)
+
+  congress_code <- match_congress(congress)
+
+  voteview_source <- paste0("https://voteview.com/static/data/out/", sheet_type)
+  source <- ifelse(local,
+                   local_dir,
+                   voteview_source)
+  full_path <- paste0(source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
+
+  # Use Voteview website if local file doesn't exist
+  if(!file.exists(full_path)) {
+    full_path <- paste0(voteview_source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
+  }
+  return(full_path)
+}
