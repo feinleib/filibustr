@@ -2,4 +2,5 @@
 
 export(current_congress)
 export(get_voteview_members)
+export(get_voteview_parties)
 export(get_voteview_rollcall_votes)
