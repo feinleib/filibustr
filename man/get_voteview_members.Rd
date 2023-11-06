@@ -50,10 +50,12 @@ Congress (i.e., each member is listed once for every two years in office). See t
 \href{https://voteview.com/data}{Voteview} website for more information on their data.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_voteview_members()
 
 # Force to get data from Voteview website
 get_voteview_members(local = FALSE)
+\dontshow{\}) # examplesIf}
 
 # Get data for only one chamber
 get_voteview_members(chamber = "house")

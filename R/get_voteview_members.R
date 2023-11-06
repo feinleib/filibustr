@@ -35,11 +35,13 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf interactive()
 #' get_voteview_members()
 #'
 #' # Force to get data from Voteview website
 #' get_voteview_members(local = FALSE)
+#'
+#' @examples
 #'
 #' # Get data for only one chamber
 #' get_voteview_members(chamber = "house")
