@@ -44,6 +44,7 @@
 #' @examples
 #'
 #' # Get data for only one chamber
+#' # NOTE: the President is included in all data
 #' get_voteview_members(chamber = "house")
 #' get_voteview_members(chamber = "senate")
 #'

@@ -58,6 +58,7 @@ get_voteview_members(local = FALSE)
 \dontshow{\}) # examplesIf}
 
 # Get data for only one chamber
+# NOTE: the President is included in all data
 get_voteview_members(chamber = "house")
 get_voteview_members(chamber = "senate")
 

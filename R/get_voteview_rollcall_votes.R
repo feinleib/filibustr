@@ -19,6 +19,7 @@
 #' get_voteview_rollcall_votes(local = FALSE)
 #'
 #' # Get data for only one chamber
+#' # NOTE: the President is included in all data
 #' get_voteview_rollcall_votes(chamber = "house")
 #' get_voteview_rollcall_votes(chamber = "senate")
 #'
