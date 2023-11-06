@@ -1,5 +1,12 @@
 #' Get ICPSR party codes from Voteview
 #'
+#' `get_voteview_parties()` returns a tibble associating ICPSR party codes with more
+#' information on the party.
+#' The parties of the President, Senate, and House are listed in the data.
+#' Each row is one party in one chamber for each Congress (i.e., each party is listed
+#' once for every two years). See the [Voteview](https://voteview.com/data) website
+#' for more information on their data.
+#'
 #' @inheritParams get_voteview_members
 #'
 #' @returns A [tibble()].
@@ -7,6 +14,22 @@
 #'
 #' @examples
 #' get_voteview_parties()
+#'
+#' # Force to get data from Voteview website
+#' get_voteview_parties(local = FALSE)
+#'
+#' # get parties for only one chamber
+#' # NOTE: the President is included in all data
+#' get_voteview_parties(chamber = "house")
+#' get_voteview_parties(chamber = "senate")
+#'
+#' # get parties for a specific Congress
+#' get_voteview_parties(congress = 100)
+#' get_voteview_parties(congress = current_congress())
+#'
+#' # get parties for a set of Congresses
+#' get_voteview_parties(congress = 1:10)
+#'
 get_voteview_parties <- function(local = TRUE, local_dir = ".", chamber = "all", congress = NULL) {
   # join multiple congresses
   if (length(congress) > 1 & is.numeric(congress)) {

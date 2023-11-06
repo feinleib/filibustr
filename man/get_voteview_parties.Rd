@@ -40,8 +40,29 @@ If specified, Congress numbers cannot be greater than the \code{\link[=current_c
 A \code{\link[=tibble]{tibble()}}.
 }
 \description{
-Get ICPSR party codes from Voteview
+\code{get_voteview_parties()} returns a tibble associating ICPSR party codes with more
+information on the party.
+The parties of the President, Senate, and House are listed in the data.
+Each row is one party in one chamber for each Congress (i.e., each party is listed
+once for every two years). See the \href{https://voteview.com/data}{Voteview} website
+for more information on their data.
 }
 \examples{
 get_voteview_parties()
+
+# Force to get data from Voteview website
+get_voteview_parties(local = FALSE)
+
+# get parties for only one chamber
+# NOTE: the President is included in all data
+get_voteview_parties(chamber = "house")
+get_voteview_parties(chamber = "senate")
+
+# get parties for a specific Congress
+get_voteview_parties(congress = 100)
+get_voteview_parties(congress = current_congress())
+
+# get parties for a set of Congresses
+get_voteview_parties(congress = 1:10)
+
 }
