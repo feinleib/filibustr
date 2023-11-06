@@ -24,10 +24,11 @@ match_chamber <- function(chamber) {
 #'
 #' @return A positive whole number.
 #'
+#' @export
+#'
 #' @examples
 #' current_congress()
 #'
-#' @noRd
 current_congress <- function() {
   floor((as.numeric(format(Sys.Date(), "%Y")) - 1787) / 2)
 }

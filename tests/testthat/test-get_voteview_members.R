@@ -43,12 +43,19 @@ test_that("filter by congress", {
                c("President", "House", "Senate"))
   expect_equal(unique(members_1$congress), 1)
 
-  members_all_congresses <- get_voteview_members(congress = 200, chamber = "sen")
-  expect_s3_class(members_all_congresses, "tbl_df")
-  expect_equal(levels(members_all_congresses$chamber),
+  sens_all_congresses <- get_voteview_members(congress = 200, chamber = "sen")
+  expect_s3_class(sens_all_congresses, "tbl_df")
+  expect_equal(levels(sens_all_congresses$chamber),
                c("President", "Senate"))
-  expect_equal(unique(members_all_congresses$congress), 1:118)
+  expect_equal(unique(sens_all_congresses$congress), 1:118)
 
-  expect_gt(nrow(members_all_congresses), nrow(members_110))
+  expect_gt(nrow(sens_all_congresses), nrow(members_110))
+
+  members_90_95 <- get_voteview_members(congress = 90:95)
+  expect_s3_class(members_90_95, "tbl_df")
+  expect_equal(unique(members_90_95$congress), 90:95)
+  expect_equal(levels(members_90_95$chamber),
+               c("President", "House", "Senate"))
+  expect_equal(nrow(members_90_95), 3276)
 })
 

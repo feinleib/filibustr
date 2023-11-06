@@ -30,8 +30,11 @@ Note that presidents are included in all datasets. Therefore, reading \emph{both
 and \code{"senate"} data will duplicate data on the presidents. The recommended way to get
 all data is to use the default argument, \code{"all"}.}
 
-\item{congress}{A whole number, to get data for a single Congress.
-Optional; will retrieve data for all Congresses by default.}
+\item{congress}{A single whole number (to get data for a single Congress), or
+a numeric vector (to get data for a set of congresses).
+Optional; will retrieve data for all Congresses by default.
+If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}
+(i.e., you cannot try to get future data).}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.
@@ -47,18 +50,20 @@ Congress (i.e., each member is listed once for every two years in office). See t
 \href{https://voteview.com/data}{Voteview} website for more information on their data.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_voteview_members()
-\dontshow{\}) # examplesIf}
-# Get data from Voteview website
-try(get_voteview_members(local = FALSE))
 
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Force to get data from Voteview website
+get_voteview_members(local = FALSE)
+
 # Get data for only one chamber
 get_voteview_members(chamber = "house")
 get_voteview_members(chamber = "senate")
 
 # Get data for a specific Congress
-get_voteview_members(congress = `current_congress()`)
-\dontshow{\}) # examplesIf}
+get_voteview_members(congress = 100)
+get_voteview_members(congress = current_congress())
+
+# Get data for a set of Congresses
+get_voteview_members(congress = 1:10)
+
 }

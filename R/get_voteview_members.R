@@ -21,8 +21,11 @@
 #' and `"senate"` data will duplicate data on the presidents. The recommended way to get
 #' all data is to use the default argument, `"all"`.
 #'
-#' @param congress A whole number, to get data for a single Congress.
+#' @param congress A single whole number (to get data for a single Congress), or
+#'  a numeric vector (to get data for a set of congresses).
 #'  Optional; will retrieve data for all Congresses by default.
+#'  If specified, Congress numbers cannot be greater than the [current_congress()]
+#'  (i.e., you cannot try to get future data).
 #'
 #' @returns A [tibble()].
 #'
@@ -31,22 +34,32 @@
 #'
 #' @export
 #'
-#' @examplesIf interactive()
+#' @examples
 #' get_voteview_members()
 #'
-#' @examples
-#' # Get data from Voteview website
-#' try(get_voteview_members(local = FALSE))
+#' # Force to get data from Voteview website
+#' get_voteview_members(local = FALSE)
 #'
-#' @examplesIf interactive()
 #' # Get data for only one chamber
 #' get_voteview_members(chamber = "house")
 #' get_voteview_members(chamber = "senate")
 #'
 #' # Get data for a specific Congress
-#' get_voteview_members(congress = `current_congress()`)
+#' get_voteview_members(congress = 100)
+#' get_voteview_members(congress = current_congress())
+#'
+#' # Get data for a set of Congresses
+#' get_voteview_members(congress = 1:10)
 #'
 get_voteview_members <- function(local = TRUE, local_dir = ".", chamber = "all", congress = NULL) {
+  # join multiple congresses
+  if (length(congress) > 1 & is.numeric(congress)) {
+    list_of_dfs <- lapply(congress, function(.cong) get_voteview_members(local = local,
+                                                                         local_dir = local_dir,
+                                                                         chamber = chamber,
+                                                                         congress = .cong))
+    return(dplyr::bind_rows(list_of_dfs))
+  }
   chamber_code <- match_chamber(chamber)
 
   congress_code <- match_congress(congress)
