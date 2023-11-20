@@ -11,8 +11,11 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     dplyr,
+    magrittr,
     readr,
-    stringr
+    rvest,
+    stringr,
+    tidyr
 URL: https://github.com/feinleib/filibustr
 BugReports: https://github.com/feinleib/filibustr/issues
 Suggests: 
