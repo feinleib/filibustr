@@ -1,4 +1,4 @@
-test_that("congress numbers", {
+test_that("years to congress numbers", {
   ## proper usage
   # numbers
   expect_equal(congress_in_year(1789), 1)
@@ -32,6 +32,42 @@ test_that("congress numbers", {
                regexp = paste("The provided year (1492) is too early.",
                               "The first Congress started in 1789."),
                fixed = TRUE)
+})
+
+test_that("congress numbers to years", {
+  # basics
+  expect_equal(year_of_congress(1), 1789)
+  expect_equal(year_of_congress(57), 1901)
+  expect_equal(year_of_congress(118), 2023)
+
+  # error handling
+  expect_error(year_of_congress("abc"),
+               regexp = "Must provide the Congress number as a positive whole number.",
+               fixed = TRUE)
+  expect_error(year_of_congress(10.5),
+               regexp = "Must provide the Congress number as a positive whole number.",
+               fixed = TRUE)
+  expect_error(year_of_congress(-3.14),
+               regexp = "Must provide the Congress number as a positive whole number.",
+               fixed = TRUE)
+  expect_error(year_of_congress(0),
+               regexp = paste("Invalid Congress number (0).",
+                              "The Congress number must be a positive whole number."),
+               fixed = TRUE)
+  expect_error(year_of_congress(-50),
+               regexp = paste("Invalid Congress number (-50).",
+                              "The Congress number must be a positive whole number."),
+               fixed = TRUE)
+
+  # warnings
+  expect_warning(expect_equal(year_of_congress(1789), 5365),
+                 regexp = paste("That Congress number looks more like a year.",
+                                "Did you mean `congress_in_year(1789)`?"),
+                 fixed = TRUE)
+  expect_warning(expect_equal(year_of_congress(2010), 5807),
+                 regexp = paste("That Congress number looks more like a year.",
+                                "Did you mean `congress_in_year(2010)`?"),
+                 fixed = TRUE)
 })
 
 test_that("current congress", {

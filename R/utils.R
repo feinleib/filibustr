@@ -58,7 +58,37 @@ congress_in_year <- function(year) {
   if (year < 1789) {
     stop("The provided year (", year, ") is too early. The first Congress started in 1789.")
   }
-  floor((year - 1789) / 2) + 1
+  floor((year - 1787) / 2)
+}
+
+#' Get the starting year of a Congress
+#'
+#' This function gives the first year for a specified Congress number.
+#'
+#' @inherit current_congress details
+#'
+#' @param congress A positive whole number.
+#'
+#' @returns A positive whole number, representing the first year of the given Congress.
+#'  This year will always be an odd number.
+#' @export
+#'
+#' @examples
+#' year_of_congress(1)
+#' year_of_congress(118)
+year_of_congress <- function(congress) {
+  if (!(is.numeric(congress) && congress == as.integer(congress))) {
+    stop("Must provide the Congress number as a positive whole number.")
+  }
+  if (congress < 1) {
+    stop("Invalid Congress number (", congress, "). ",
+         "The Congress number must be a positive whole number.")
+  }
+  if (congress >= 1789) {
+    warning("That Congress number looks more like a year. ",
+            "Did you mean `congress_in_year(", congress, ")`?")
+  }
+  1787 + 2 * congress
 }
 
 #' Get Voteview string for a specified Congress
