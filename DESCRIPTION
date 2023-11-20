@@ -13,9 +13,11 @@ Imports:
     dplyr,
     magrittr,
     readr,
+    rlang,
     rvest,
     stringr,
-    tidyr
+    tidyr,
+    tidyselect
 URL: https://github.com/feinleib/filibustr
 BugReports: https://github.com/feinleib/filibustr/issues
 Suggests: 

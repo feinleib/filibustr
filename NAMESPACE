@@ -2,7 +2,9 @@
 
 export("%>%")
 export(current_congress)
+export(get_senate_sessions)
 export(get_voteview_members)
 export(get_voteview_parties)
 export(get_voteview_rollcall_votes)
 importFrom(magrittr,"%>%")
+importFrom(rlang,.data)
