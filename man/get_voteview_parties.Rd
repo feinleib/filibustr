@@ -30,7 +30,7 @@ Note that presidents are included in all datasets. Therefore, reading \emph{both
 and \code{"senate"} data will duplicate data on the presidents. The recommended way to get
 all data is to use the default argument, \code{"all"}.}
 
-\item{congress}{A single whole number (to get data for a single Congress), or
+\item{congress}{A whole number (to get data for a single Congress), or
 a numeric vector (to get data for a set of congresses).
 Optional; will retrieve data for all Congresses by default.
 If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}

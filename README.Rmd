@@ -31,21 +31,55 @@ You can install the development version of filibustr from [GitHub](https://githu
 devtools::install_github("feinleib/filibustr")
 ```
 
-## Usage
+## Functions
 
-The `get_voteview_members()` function downloads data from [Voteview](https://voteview.com/data) on Presidents, Senators, and Representatives.
+### Voteview
 
-```{r example}
+There are three functions that download data from [Voteview](https://voteview.com/data):
+
+* `get_voteview_members()`: data on members (Presidents, Senators, and Representatives).
+* `get_voteview_parties()`: data on parties (size and ideology)
+* `get_voteview_rollcall_votes()`: results of recorded votes (overall results, not positions of individual members)
+
+These functions share a common interface. Here are their arguments:
+
+* `local`: Whether to read the data from a local file, as opposed to the Voteview website. Default is `TRUE`. If the local file does not exist, will fall back to reading from Voteview.
+* `local_dir`: The directory containing the local file. Defaults to the working directory.
+* `chamber`: Which chamber to get data for. Options are:
+  * `"all"`, `"congress"`: Both House and Senate data (the default).
+  * `"house"`, `"h"`, `"hr"`: House data only.
+  * `"senate"`, `"s"`, `"sen"`: Senate data only.
+These options are case-insensitive. If you explicitly pass a different value, it will default to "all" with a warning.
+
+**Note:** for `get_voteview_members()` and `get_voteview_parties()`, presidents are included in all datasets. Therefore, reading *both* `"house"` and `"senate"` data will duplicate data on the presidents. The recommended way to get all data is to use the default argument, `"all"`.
+
+* `congress`: A whole number (to get data for a single Congress), or a numeric vector (to get data for a set of congresses). Optional; will retrieve data for all Congresses by default. If specified, Congress numbers cannot be greater than the `current_congress()` (i.e., you cannot try to get future data).
+
+Here is the table returned by `get_voteview_members()`.
+
+```{r Voteview example}
 library(filibustr)
 
 get_voteview_members()
 ```
 
+### Senate.gov
+
+The function `get_senate_sessions()` retrieves the start and end dates of each legislative session of the Senate.
+
+This function takes no arguments, as it always returns the full [table from the Senate website](https://www.senate.gov/legislative/DatesofSessionsofCongress.htm).
+
+### Small utilities
+
+This package also provides some smaller utility functions for working with congressional data.
+
+* `current_congress()` returns the number of the current Congress, which is currently `r current_congress()`.
+
 ## Data sources
 
 This package uses data from the following websites and research:
 
-* Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin, and Luke Sonnet (2023). *Voteview: Congressional Roll-Call Votes Database.* <https://voteview.com/>
 * Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023). The Bipartisan Path to Effective Lawmaking. *The Journal of Politics*, *85*(3), 1048–1063. <https://doi.org/10.1086/723805>
-
+* Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin, and Luke Sonnet (2023). *Voteview: Congressional Roll-Call Votes Database.* <https://voteview.com/>
+* U.S. Senate. <https://www.senate.gov/>
 

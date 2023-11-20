@@ -26,7 +26,7 @@ These options are case-insensitive. If you explicitly pass a different value,
 it will default to "all" with a warning.
 }}
 
-\item{congress}{A single whole number (to get data for a single Congress), or
+\item{congress}{A whole number (to get data for a single Congress), or
 a numeric vector (to get data for a set of congresses).
 Optional; will retrieve data for all Congresses by default.
 If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}
