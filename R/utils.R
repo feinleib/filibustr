@@ -19,7 +19,7 @@ match_chamber <- function(chamber) {
 #' This function gives the number of the Congress for the
 #' current calendar year, using [Sys.Date()].
 #'
-#' A new Congress begins in every odd-numbered year, starting in 1787.
+#' A new Congress begins in every odd-numbered year, starting in 1789.
 #' For example, 2021-2022 was the 117th Congress.
 #'
 #' @return A positive whole number.
@@ -30,7 +30,35 @@ match_chamber <- function(chamber) {
 #' current_congress()
 #'
 current_congress <- function() {
-  floor((as.numeric(format(Sys.Date(), "%Y")) - 1787) / 2)
+  congress_in_year(Sys.Date())
+}
+
+#' Calculate the Congress number of a given year
+#'
+#' This function gives the number of the Congress for a specified calendar year.
+#'
+#' @inherit current_congress details
+#' @param year Either a number or a Date object.
+#'  Cannot be earlier than 1789, the year of the first Congress.
+#'
+#' @return A positive whole number.
+#' @export
+#'
+#' @examples
+#' congress_in_year(1800)
+#' congress_in_year(2022)
+congress_in_year <- function(year) {
+  if (!(is.numeric(year) | inherits(year, "Date"))) {
+    stop("Must provide the year as a number or Date object.")
+  }
+  # handle Date objects
+  if (inherits(year, "Date")) {
+    year <- as.numeric(format(year, "%Y"))
+  }
+  if (year < 1789) {
+    stop("The provided year (", year, ") is too early. The first Congress started in 1789.")
+  }
+  floor((year - 1789) / 2) + 1
 }
 
 #' Get Voteview string for a specified Congress

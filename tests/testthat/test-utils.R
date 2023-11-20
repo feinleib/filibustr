@@ -1,7 +1,47 @@
+test_that("congress numbers", {
+  ## proper usage
+  # numbers
+  expect_equal(congress_in_year(1789), 1)
+  expect_equal(congress_in_year(2000), 106)
+  expect_equal(congress_in_year(2023), 118)
+  expect_equal(congress_in_year(2100), 156)
+  expect_equal(congress_in_year(3000), 606)
+
+  # Date objects
+  expect_equal(congress_in_year(as.Date("1789-01-01")), 1)
+  expect_equal(congress_in_year(as.Date("1800-07-01")), 6)
+  expect_equal(congress_in_year(as.Date("1800-07-01")), 6)
+  expect_equal(congress_in_year(as.Date("2021-01-06")), 117)
+
+  ## error handling
+  expect_error(congress_in_year("word"),
+               regexp = "Must provide the year as a number or Date object.",
+               fixed = TRUE)
+  expect_error(congress_in_year("1901"),
+               regexp = "Must provide the year as a number or Date object.",
+               fixed = TRUE)
+  expect_error(congress_in_year(1788),
+               regexp = paste("The provided year (1788) is too early.",
+                              "The first Congress started in 1789."),
+               fixed = TRUE)
+  expect_error(congress_in_year(110),
+               regexp = paste("The provided year (110) is too early.",
+                              "The first Congress started in 1789."),
+               fixed = TRUE)
+  expect_error(congress_in_year(as.Date("1492-09-01")),
+               regexp = paste("The provided year (1492) is too early.",
+                              "The first Congress started in 1789."),
+               fixed = TRUE)
+})
+
 test_that("current congress", {
   curr_cong <- current_congress()
   # check that current congress is integer
   expect_equal(curr_cong, as.integer(curr_cong))
+
+  # matches congress_in_year()
+  expect_equal(curr_cong, congress_in_year(as.numeric(format(Sys.Date(), "%Y"))))
+  expect_equal(curr_cong, congress_in_year(Sys.Date()))
 
   expect_gte(curr_cong, 118)
   # reasonable upper bound on current congress
