@@ -81,7 +81,7 @@ build_file_path <- function(local = TRUE, local_dir = ".", chamber = "all", cong
   full_path <- paste0(source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
 
   # Use Voteview website if local file doesn't exist
-  if(!file.exists(full_path)) {
+  if (!file.exists(full_path)) {
     full_path <- paste0(voteview_source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
   }
 
