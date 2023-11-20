@@ -73,7 +73,9 @@ This function takes no arguments, as it always returns the full [table from the 
 
 This package also provides some smaller utility functions for working with congressional data.
 
-* `current_congress()` returns the number of the current Congress, which is currently `r current_congress()`.
+* `year_of_congress()` returns the starting year for a given Congress.
+* `congress_in_year()` returns the Congress number for a given year.
+* `current_congress()` returns the number of the current Congress, which is currently `r current_congress()`. `current_congress()` is equivalent to `congress_in_year(Sys.Date())`.
 
 ## Data sources
 

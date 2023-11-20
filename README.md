@@ -102,8 +102,11 @@ website](https://www.senate.gov/legislative/DatesofSessionsofCongress.htm).
 This package also provides some smaller utility functions for working
 with congressional data.
 
+- `year_of_congress()` returns the starting year for a given Congress.
+- `congress_in_year()` returns the Congress number for a given year.
 - `current_congress()` returns the number of the current Congress, which
-  is currently 118.
+  is currently 118. `current_congress()` is equivalent to
+  `congress_in_year(Sys.Date())`.
 
 ## Data sources
 
