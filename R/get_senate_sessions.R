@@ -40,12 +40,9 @@
 #' @examples
 #' get_senate_sessions()
 get_senate_sessions <- function() {
-  session_dates <- rvest::read_html(paste0("https://www.senate.gov",
-                                           "/legislative/DatesofSessionsofCongress.htm")) %>%
-    rvest::html_elements(css = "#SortableData_table") %>%
-    rvest::html_table() %>%
-    # unlist
-    `[[`(1)
+  session_dates <- read_html_table(url = paste0("https://www.senate.gov",
+                                                "/legislative/DatesofSessionsofCongress.htm"),
+                                   css = "#SortableData_table")
 
   # move row 1 to column names
   names(session_dates) <- session_dates[1,] %>%
@@ -70,7 +67,7 @@ get_senate_sessions <- function() {
     tidyr::separate_longer_delim(cols = tidyselect::ends_with("_date"),
                                  delim = stringr::regex("(?<=[:digit:]{4})(?=[:alpha:])")) %>%
     dplyr::mutate(session = stringr::str_split_1(dplyr::first(.data$session), ""),
-                  .by = .data$congress) %>%
+                  .by = "congress") %>%
     # fix column types
     dplyr::mutate(congress = as.integer(.data$congress),
                   session = as.factor(.data$session),

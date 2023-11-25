@@ -145,3 +145,9 @@ build_file_path <- function(local = TRUE, local_dir = ".", chamber = "all", cong
 
   full_path
 }
+
+read_html_table <- function(url, css) {
+  rvest::read_html(url) %>%
+    rvest::html_element(css = css) %>%
+    rvest::html_table()
+}
