@@ -8,7 +8,8 @@ get_voteview_rollcall_votes(
   local = TRUE,
   local_dir = ".",
   chamber = "all",
-  congress = NULL
+  congress = NULL,
+  parallel_cores = 1
 )
 }
 \arguments{
@@ -31,6 +32,9 @@ a numeric vector (to get data for a set of congresses).
 Optional; will retrieve data for all Congresses by default.
 If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}
 (i.e., you cannot try to get future data).}
+
+\item{parallel_cores}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} If reading multiple \code{congress}es, you can specify
+the number of cores to use (\code{mc.cores}) in \code{\link[parallel:mclapply]{parallel::mclapply()}}.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.

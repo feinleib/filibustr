@@ -9,6 +9,9 @@
 #'  These options are case-insensitive. If you explicitly pass a different value,
 #'  it will default to "all" with a warning.
 #'
+#' @param parallel_cores `r lifecycle::badge('experimental')` If reading multiple `congress`es, you can specify
+#'  the number of cores to use (`mc.cores`) in [parallel::mclapply()].
+#'
 #' @returns A [tibble()].
 #' @export
 #'
