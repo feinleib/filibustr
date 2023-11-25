@@ -65,9 +65,12 @@ get_voteview_members()
 
 ### Senate.gov
 
-The function `get_senate_sessions()` retrieves the start and end dates of each legislative session of the Senate.
+The following functions retrieve data tables from [Senate.gov](https://www.senate.gov).
 
-This function takes no arguments, as it always returns the full [table from the Senate website](https://www.senate.gov/legislative/DatesofSessionsofCongress.htm).
+* `get_senate_sessions()`: The start and end dates of each legislative session of the Senate. ([table link]((https://www.senate.gov/legislative/DatesofSessionsofCongress.htm)))
+* `get_senate_cloture_votes()`: Senate action on cloture motions and cloture votes. ([table link](https://www.senate.gov/legislative/cloture/clotureCounts.htm))
+
+These functions take no arguments, and they always return the full data table from the Senate website.
 
 ### Small utilities
 

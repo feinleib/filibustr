@@ -66,7 +66,7 @@ Here is the table returned by `get_voteview_members()`.
 library(filibustr)
 
 get_voteview_members()
-#> # A tibble: 50,486 × 22
+#> # A tibble: 50,487 × 22
 #>    congress chamber   icpsr state_icpsr district_code state_abbrev party_code
 #>       <int> <fct>     <int>       <int>         <dbl> <fct>             <int>
 #>  1        1 President 99869          99             0 USA                5000
@@ -79,7 +79,7 @@ get_voteview_members()
 #>  8        1 House      8363          52             2 MD                 4000
 #>  9        1 House      8693          52             4 MD                 4000
 #> 10        1 House      8983          52             1 MD                 4000
-#> # ℹ 50,476 more rows
+#> # ℹ 50,477 more rows
 #> # ℹ 15 more variables: occupancy <int>, last_means <int>, bioname <chr>,
 #> #   bioguide_id <chr>, born <dbl>, died <dbl>, nominate_dim1 <dbl>,
 #> #   nominate_dim2 <dbl>, nominate_log_likelihood <dbl>,
@@ -90,12 +90,18 @@ get_voteview_members()
 
 ### Senate.gov
 
-The function `get_senate_sessions()` retrieves the start and end dates
-of each legislative session of the Senate.
+The following functions retrieve data tables from
+[Senate.gov](https://www.senate.gov).
 
-This function takes no arguments, as it always returns the full [table
-from the Senate
-website](https://www.senate.gov/legislative/DatesofSessionsofCongress.htm).
+- `get_senate_sessions()`: The start and end dates of each legislative
+  session of the Senate. ([table
+  link]((https://www.senate.gov/legislative/DatesofSessionsofCongress.htm)))
+- `get_senate_cloture_votes()`: Senate action on cloture motions and
+  cloture votes. ([table
+  link](https://www.senate.gov/legislative/cloture/clotureCounts.htm))
+
+These functions take no arguments, and they always return the full data
+table from the Senate website.
 
 ### Small utilities
 
