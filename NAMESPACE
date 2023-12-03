@@ -3,6 +3,7 @@
 export("%>%")
 export(congress_in_year)
 export(current_congress)
+export(get_lhy_data)
 export(get_senate_cloture_votes)
 export(get_senate_sessions)
 export(get_voteview_members)
