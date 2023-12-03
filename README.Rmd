@@ -35,7 +35,7 @@ devtools::install_github("feinleib/filibustr")
 
 ### Voteview
 
-There are three functions that download data from [Voteview](https://voteview.com/data):
+There are three functions that retrieve data from [Voteview](https://voteview.com/data):
 
 * `get_voteview_members()`: data on members (Presidents, Senators, and Representatives).
 * `get_voteview_parties()`: data on parties (size and ideology)
@@ -61,6 +61,29 @@ Here is the table returned by `get_voteview_members()`.
 library(filibustr)
 
 get_voteview_members()
+```
+
+### Harbridge-Yong (LHY) et al. (2023)
+
+The function `get_lhy_data()` retrives replication data for [Harbridge-Yong et al. (2023)](https://doi.org/10.1086/723805), aka "LHY et al."
+
+`get_lhy_data()` takes the following arguments:
+
+* `local`, `local_dir`: Same as the Voteview functions.
+* `chamber`: Which chamber to get data for. See the **Voteview** section above for more info on this argument.
+
+Note: Unlike the Voteview functions, there is no "all" option. The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables.
+
+You must specify either House or Senate data, since there is no "default" option.
+
+
+Here are the tables returned by `get_lhy_data()`:
+
+```{r LHY example}
+library(filibustr)
+
+get_lhy_data("house")
+get_lhy_data("senate")
 ```
 
 ### Senate.gov
