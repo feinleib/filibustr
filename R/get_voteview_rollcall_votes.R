@@ -1,6 +1,10 @@
 #' Get data on congressional roll call votes from Voteview
 #'
+#' `get_voteview_rollcall_votes()` returns a tibble with information on recorded
+#' (roll call) votes in the House and Senate.
+#'
 #' @inheritParams get_voteview_members
+#' @inherit get_voteview_members details
 #'
 #' @param chamber Which chamber to get data for. Options are:
 #'  * `"all"`, `"congress"`: Both House and Senate data (the default).

@@ -3,8 +3,7 @@
 #' `get_voteview_members()` returns a tibble of data on members of Congress,
 #' sourced from [Voteview](https://voteview.com/data). Members in the data include
 #' Senators, Representatives, and Presidents. Each row is one member in one
-#' Congress (i.e., each member is listed once for every two years in office). See the
-#' [Voteview](https://voteview.com/data) website for more information on their data.
+#' Congress (i.e., each member is listed once for every two years in office).
 #'
 #' @param local Whether to read the data from a local file, as opposed to the Voteview website.
 #'  Default is `TRUE`. If the local file does not exist, will fall back to reading from Voteview.
@@ -32,6 +31,16 @@
 #'
 #' The tibble includes data on the member's office, party, and ideology.
 #' See [Voteview](https://voteview.com/data) for descriptions of specific columns.
+#'
+#' @details
+#' See the
+#' [Voteview](https://voteview.com/data) website for more information on their data.
+#'
+#' Please cite this dataset as:
+#'
+#' Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
+#' and Luke Sonnet (2023). *Voteview: Congressional Roll-Call Votes Database*.
+#' <https://voteview.com/>
 #'
 #' @export
 #'

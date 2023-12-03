@@ -46,8 +46,17 @@ See \href{https://voteview.com/data}{Voteview} for descriptions of specific colu
 \code{get_voteview_members()} returns a tibble of data on members of Congress,
 sourced from \href{https://voteview.com/data}{Voteview}. Members in the data include
 Senators, Representatives, and Presidents. Each row is one member in one
-Congress (i.e., each member is listed once for every two years in office). See the
+Congress (i.e., each member is listed once for every two years in office).
+}
+\details{
+See the
 \href{https://voteview.com/data}{Voteview} website for more information on their data.
+
+Please cite this dataset as:
+
+Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
+and Luke Sonnet (2023). \emph{Voteview: Congressional Roll-Call Votes Database}.
+\url{https://voteview.com/}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

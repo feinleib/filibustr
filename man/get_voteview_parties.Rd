@@ -44,8 +44,17 @@ A \code{\link[=tibble]{tibble()}}.
 information on the party.
 The parties of the President, Senate, and House are listed in the data.
 Each row is one party in one chamber for each Congress (i.e., each party is listed
-once for every two years). See the \href{https://voteview.com/data}{Voteview} website
-for more information on their data.
+once for every two years).
+}
+\details{
+See the
+\href{https://voteview.com/data}{Voteview} website for more information on their data.
+
+Please cite this dataset as:
+
+Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
+and Luke Sonnet (2023). \emph{Voteview: Congressional Roll-Call Votes Database}.
+\url{https://voteview.com/}
 }
 \examples{
 get_voteview_parties()

@@ -40,7 +40,18 @@ the number of cores to use (\code{mc.cores}) in \code{\link[parallel:mclapply]{p
 A \code{\link[=tibble]{tibble()}}.
 }
 \description{
-Get data on congressional roll call votes from Voteview
+\code{get_voteview_rollcall_votes()} returns a tibble with information on recorded
+(roll call) votes in the House and Senate.
+}
+\details{
+See the
+\href{https://voteview.com/data}{Voteview} website for more information on their data.
+
+Please cite this dataset as:
+
+Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
+and Luke Sonnet (2023). \emph{Voteview: Congressional Roll-Call Votes Database}.
+\url{https://voteview.com/}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

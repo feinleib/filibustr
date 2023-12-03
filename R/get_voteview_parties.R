@@ -4,10 +4,10 @@
 #' information on the party.
 #' The parties of the President, Senate, and House are listed in the data.
 #' Each row is one party in one chamber for each Congress (i.e., each party is listed
-#' once for every two years). See the [Voteview](https://voteview.com/data) website
-#' for more information on their data.
+#' once for every two years).
 #'
 #' @inheritParams get_voteview_members
+#' @inherit get_voteview_members details
 #'
 #' @returns A [tibble()].
 #' @export
