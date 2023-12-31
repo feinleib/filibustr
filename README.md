@@ -34,6 +34,8 @@ There are three functions that retrieve data from
 - `get_voteview_parties()`: data on parties (size and ideology)
 - `get_voteview_rollcall_votes()`: results of recorded votes (overall
   results, not positions of individual members)
+- `get_voteview_member_votes()`: individual members’ votes on recorded
+  votes
 
 These functions share a common interface. Here are their arguments:
 
@@ -66,7 +68,7 @@ Here is the table returned by `get_voteview_members()`.
 library(filibustr)
 
 get_voteview_members()
-#> # A tibble: 50,487 × 22
+#> # A tibble: 50,488 × 22
 #>    congress chamber   icpsr state_icpsr district_code state_abbrev party_code
 #>       <int> <fct>     <int>       <int>         <dbl> <fct>             <int>
 #>  1        1 President 99869          99             0 USA                5000
@@ -79,7 +81,7 @@ get_voteview_members()
 #>  8        1 House      8363          52             2 MD                 4000
 #>  9        1 House      8693          52             4 MD                 4000
 #> 10        1 House      8983          52             1 MD                 4000
-#> # ℹ 50,477 more rows
+#> # ℹ 50,478 more rows
 #> # ℹ 15 more variables: occupancy <int>, last_means <int>, bioname <chr>,
 #> #   bioguide_id <chr>, born <dbl>, died <dbl>, nominate_dim1 <dbl>,
 #> #   nominate_dim2 <dbl>, nominate_log_likelihood <dbl>,
