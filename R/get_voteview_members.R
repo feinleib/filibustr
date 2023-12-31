@@ -5,10 +5,10 @@
 #' Senators, Representatives, and Presidents. Each row is one member in one
 #' Congress (i.e., each member is listed once for every two years in office).
 #'
-#' @param local Whether to read the data from a local file, as opposed to the Voteview website.
+#' @param local `r lifecycle::badge('experimental')` Whether to read the data from a local file, as opposed to the Voteview website.
 #'  Default is `TRUE`. If the local file does not exist, will fall back to reading from Voteview.
 #'
-#' @param local_dir The directory containing the local file. Defaults to the working directory.
+#' @param local_dir `r lifecycle::badge('experimental')` The directory containing the local file. Defaults to the working directory.
 #'
 #' @param chamber Which chamber to get data for. Options are:
 #'  * `"all"`, `"congress"`: Both House and Senate data (the default).
