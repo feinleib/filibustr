@@ -19,6 +19,7 @@ test_that("filter rollcalls by chamber", {
   expect_equal(levels(hr_votes$chamber), "House")
   expect_equal(unique(hr_votes$congress), 1:current_congress())
 
+  # House has more recorded votes
   expect_lt(nrow(s_votes), nrow(hr_votes))
 })
 
