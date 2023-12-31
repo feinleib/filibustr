@@ -67,6 +67,6 @@ get_voteview_member_votes(congress = 110)
 get_voteview_member_votes(congress = current_congress())
 
 # Get data for a set of Congresses
-get_voteview_member_votes(congress = 65:70)
+get_voteview_member_votes(congress = 68:70)
 
 }

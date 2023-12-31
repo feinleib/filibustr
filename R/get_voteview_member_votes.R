@@ -27,7 +27,7 @@
 #' get_voteview_member_votes(congress = current_congress())
 #'
 #' # Get data for a set of Congresses
-#' get_voteview_member_votes(congress = 65:70)
+#' get_voteview_member_votes(congress = 68:70)
 #'
 get_voteview_member_votes <- function(local = TRUE, local_dir = ".",
                                       chamber = "all", congress = NULL) {

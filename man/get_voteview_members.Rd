@@ -64,13 +64,12 @@ get_voteview_members()
 
 # Force to get data from Voteview website
 get_voteview_members(local = FALSE)
-\dontshow{\}) # examplesIf}
 
 # Get data for only one chamber
 # NOTE: the President is included in all data
 get_voteview_members(chamber = "house")
 get_voteview_members(chamber = "senate")
-
+\dontshow{\}) # examplesIf}
 # Get data for a specific Congress
 get_voteview_members(congress = 100)
 get_voteview_members(congress = current_congress())
