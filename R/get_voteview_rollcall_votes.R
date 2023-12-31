@@ -71,6 +71,7 @@ get_voteview_rollcall_votes <- function(local = TRUE, local_dir = ".",
                                chamber = chamber, congress = congress,
                                sheet_type = "rollcalls")
 
-  # TODO: ideally change cols 5:6 to integers
-  readr::read_csv(full_path, col_types = "ifiDddiidddddccccc")
+  readr::read_csv(full_path, col_types = "ifiDddiidddddccccc") |>
+    dplyr::mutate(dplyr::across(.cols = c("session", "clerk_rollnumber"),
+                                .fns = as.integer))
 }
