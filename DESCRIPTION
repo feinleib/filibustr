@@ -1,6 +1,6 @@
 Package: filibustr
 Title: Data Utilities for Congressional Research
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Max", "Feinleib", , "mhfeinleib@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-9604-3533"))
