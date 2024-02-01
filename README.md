@@ -44,6 +44,14 @@ These functions share a common interface. Here are their arguments:
   will fall back to reading from Voteview.
 - `local_dir`: The directory containing the local file. Defaults to the
   working directory.
+
+**Note:** Especially when working with large datasets, reading data from
+Voteview can take a long time. If you are repeatedly loading the same
+static dataset (i.e., not including information from the current
+Congress), it may be useful to download the dataset as a CSV from
+Voteview so you can read that local file instead of having to use the
+web interface.
+
 - `chamber`: Which chamber to get data for. Options are:
   - `"all"`, `"congress"`: Both House and Senate data (the default).
   - `"house"`, `"h"`, `"hr"`: House data only.
@@ -51,7 +59,7 @@ These functions share a common interface. Here are their arguments:
     case-insensitive. If you explicitly pass a different value, it will
     default to “all” with a warning.
 
-**Note:** for `get_voteview_members()` and `get_voteview_parties()`,
+**Note:** For `get_voteview_members()` and `get_voteview_parties()`,
 presidents are included in all datasets. Therefore, reading *both*
 `"house"` and `"senate"` data will duplicate data on the presidents. The
 recommended way to get all data is to use the default argument, `"all"`.
@@ -102,9 +110,9 @@ et al.”
 - `chamber`: Which chamber to get data for. See the **Voteview** section
   above for more info on this argument.
 
-Note: Unlike the Voteview functions, there is no “all” option. The House
-and Senate data do not have the same number of variables, or the same
-variable names, so it is not trivial to join the two tables.
+**Note:** Unlike the Voteview functions, there is no “all” option. The
+House and Senate data do not have the same number of variables, or the
+same variable names, so it is not trivial to join the two tables.
 
 You must specify either House or Senate data, since there is no
 “default” option.
