@@ -25,7 +25,14 @@ This package provides a uniform interface for accessing data on members and vote
 
 ## Installation
 
-You can install the development version of `filibustr` from [GitHub](https://github.com/) with:
+You can install the stable version of filibustr from CRAN with:
+
+``` r
+install.packages("filibustr")
+```
+
+You can install the development version of filibustr from [GitHub](https://github.com/) with:
+
 
 ``` r
 # install.packages("devtools")

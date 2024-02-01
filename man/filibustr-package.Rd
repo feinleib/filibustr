@@ -6,7 +6,7 @@
 \alias{filibustr-package}
 \title{filibustr: Data Utilities for Congressional Research}
 \description{
-The goal of 'filibustr' is to provide easy ways to access data on the U.S. Congress. This is originally designed for my B.A. honors thesis, but should be generally useful for congressional research.
+Provides easy-to-understand and consistent interfaces for accessing data on the U.S. Congress.
 }
 \seealso{
 Useful links:
@@ -17,7 +17,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Max Feinleib \email{mhfeinleib@gmail.com} (\href{https://orcid.org/0009-0002-9604-3533}{ORCID})
+\strong{Maintainer}: Max Feinleib \email{mhfeinleib@gmail.com} (\href{https://orcid.org/0009-0002-9604-3533}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

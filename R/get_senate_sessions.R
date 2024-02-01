@@ -45,16 +45,16 @@ get_senate_sessions <- function() {
                                    css = "#SortableData_table")
 
   # move row 1 to column names
-  names(session_dates) <- session_dates[1,] %>%
-    as.character() %>%
-    stringr::str_replace_all(" ", "_") %>%
+  names(session_dates) <- session_dates[1,] |>
+    as.character() |>
+    stringr::str_replace_all(" ", "_") |>
     tolower()
 
-  session_dates <- session_dates %>%
+  session_dates <- session_dates |>
     dplyr::slice(-1)
 
   # remove footnotes and newline characters from dates
-  session_dates %>%
+  session_dates |>
     dplyr::mutate(dplyr::across(
       .cols = tidyselect::ends_with("_date"),
       .fns = function(.x) {
@@ -62,12 +62,12 @@ get_senate_sessions <- function() {
                                 pattern = paste("(?<=[:digit:]{4})[:digit:]*[:space:]",
                                                 "(?<=[:digit:]{4})[:digit:]*$",
                                                 "\\n", sep = "|"))
-      })) %>%
+      })) |>
     # split each session into its own row
     tidyr::separate_longer_delim(cols = tidyselect::ends_with("_date"),
-                                 delim = stringr::regex("(?<=[:digit:]{4})(?=[:alpha:])")) %>%
+                                 delim = stringr::regex("(?<=[:digit:]{4})(?=[:alpha:])")) |>
     dplyr::mutate(session = stringr::str_split_1(dplyr::first(.data$session), ""),
-                  .by = "congress") %>%
+                  .by = "congress") |>
     # fix column types
     dplyr::mutate(congress = as.integer(.data$congress),
                   session = as.factor(.data$session),

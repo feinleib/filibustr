@@ -16,7 +16,13 @@ on members and votes.
 
 ## Installation
 
-You can install the development version of `filibustr` from
+You can install the stable version of filibustr from CRAN with:
+
+``` r
+install.packages("filibustr")
+```
+
+You can install the development version of filibustr from
 [GitHub](https://github.com/) with:
 
 ``` r

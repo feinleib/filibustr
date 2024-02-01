@@ -22,7 +22,7 @@ match_chamber <- function(chamber) {
 #' A new Congress begins in every odd-numbered year, starting in 1789.
 #' For example, 2021-2022 was the 117th Congress.
 #'
-#' @return A positive whole number.
+#' @returns A positive whole number.
 #'
 #' @export
 #'
@@ -41,7 +41,7 @@ current_congress <- function() {
 #' @param year Either a number or a Date object.
 #'  Cannot be earlier than 1789, the year of the first Congress.
 #'
-#' @return A positive whole number.
+#' @returns A positive whole number.
 #' @export
 #'
 #' @examples
@@ -104,7 +104,7 @@ year_of_congress <- function(congress) {
 #' (the current Congress).
 #'
 #'
-#' @return A three-character string.
+#' @returns A three-character string.
 #'
 #' Either three digits between `"001"` and ``r paste0('"', current_congress(), '"')``,
 #' or `"all"` in case of an invalid Congress number.
@@ -147,7 +147,7 @@ build_file_path <- function(local = TRUE, local_dir = ".", chamber = "all", cong
 }
 
 read_html_table <- function(url, css) {
-  rvest::read_html(url) %>%
-    rvest::html_element(css = css) %>%
+  rvest::read_html(url) |>
+    rvest::html_element(css = css) |>
     rvest::html_table()
 }

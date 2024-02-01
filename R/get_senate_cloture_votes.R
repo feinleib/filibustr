@@ -16,10 +16,10 @@
 get_senate_cloture_votes <- function() {
   read_html_table(url = paste0("https://www.senate.gov",
                                "/legislative/cloture/clotureCounts.htm"),
-                  css = ".cloturecount") %>%
-    dplyr::rename_with(function(.name) tolower(stringr::str_replace_all(.name, " ", "_"))) %>%
+                  css = ".cloturecount") |>
+    dplyr::rename_with(function(.name) tolower(stringr::str_replace_all(.name, " ", "_"))) |>
     # remove "Total" row
-    dplyr::slice_head(n = -1) %>%
+    dplyr::slice_head(n = -1) |>
     # fix data types
     dplyr::mutate(dplyr::across(!tidyselect::any_of("years"), as.integer))
 }
