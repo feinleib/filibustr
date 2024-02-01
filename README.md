@@ -174,7 +174,7 @@ The following functions retrieve data tables from
 
 - `get_senate_sessions()`: The start and end dates of each legislative
   session of the Senate. ([table
-  link]((https://www.senate.gov/legislative/DatesofSessionsofCongress.htm)))
+  link](https://www.senate.gov/legislative/DatesofSessionsofCongress.htm))
 - `get_senate_cloture_votes()`: Senate action on cloture motions and
   cloture votes. ([table
   link](https://www.senate.gov/legislative/cloture/clotureCounts.htm))
