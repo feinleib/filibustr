@@ -25,7 +25,7 @@ This package provides a uniform interface for accessing data on members and vote
 
 ## Installation
 
-You can install the development version of filibustr from [GitHub](https://github.com/) with:
+You can install the development version of `filibustr` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -77,9 +77,7 @@ The function `get_lhy_data()` retrives replication data for [Harbridge-Yong et a
 * `local`, `local_dir`: Same as the Voteview functions.
 * `chamber`: Which chamber to get data for. See the **Voteview** section above for more info on this argument.
 
-**Note:** Unlike the Voteview functions, there is no "all" option. The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables.
-
-You must specify either House or Senate data, since there is no "default" option.
+**Note:** Unlike the Voteview functions, there is no "all" option for `chamber`. The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables. You must specify either House or Senate data, since there is no default option.
 
 
 Here are the tables returned by `get_lhy_data()`:
@@ -95,7 +93,7 @@ get_lhy_data("senate")
 
 The following functions retrieve data tables from [Senate.gov](https://www.senate.gov).
 
-* `get_senate_sessions()`: The start and end dates of each legislative session of the Senate. ([table link]((https://www.senate.gov/legislative/DatesofSessionsofCongress.htm)))
+* `get_senate_sessions()`: The start and end dates of each legislative session of the Senate. ([table link](https://www.senate.gov/legislative/DatesofSessionsofCongress.htm))
 * `get_senate_cloture_votes()`: Senate action on cloture motions and cloture votes. ([table link](https://www.senate.gov/legislative/cloture/clotureCounts.htm))
 
 These functions take no arguments, and they always return the full data table from the Senate website.

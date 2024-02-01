@@ -15,7 +15,7 @@ on members and votes.
 
 ## Installation
 
-You can install the development version of filibustr from
+You can install the development version of `filibustr` from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -111,12 +111,11 @@ et al.”
 - `chamber`: Which chamber to get data for. See the **Voteview** section
   above for more info on this argument.
 
-**Note:** Unlike the Voteview functions, there is no “all” option. The
-House and Senate data do not have the same number of variables, or the
-same variable names, so it is not trivial to join the two tables.
-
-You must specify either House or Senate data, since there is no
-“default” option.
+**Note:** Unlike the Voteview functions, there is no “all” option for
+`chamber`. The House and Senate data do not have the same number of
+variables, or the same variable names, so it is not trivial to join the
+two tables. You must specify either House or Senate data, since there is
+no default option.
 
 Here are the tables returned by `get_lhy_data()`:
 
@@ -174,7 +173,7 @@ The following functions retrieve data tables from
 
 - `get_senate_sessions()`: The start and end dates of each legislative
   session of the Senate. ([table
-  link]((https://www.senate.gov/legislative/DatesofSessionsofCongress.htm)))
+  link](https://www.senate.gov/legislative/DatesofSessionsofCongress.htm))
 - `get_senate_cloture_votes()`: Senate action on cloture motions and
   cloture votes. ([table
   link](https://www.senate.gov/legislative/cloture/clotureCounts.htm))
