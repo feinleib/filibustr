@@ -6,7 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/feinleib/filibustr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/feinleib/filibustr/actions/workflows/R-CMD-check.yaml)
-[![test-coverage](https://github.com/feinleib/filibustr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/feinleib/filibustr/actions/workflows/test-coverage.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/feinleib/filibustr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/feinleib/filibustr?branch=main)
 <!-- badges: end -->
 
 The `filibustr` package provides data utilities for research on the U.S.
@@ -117,12 +118,11 @@ et al.”
 - `chamber`: Which chamber to get data for. See the **Voteview** section
   above for more info on this argument.
 
-**Note:** Unlike the Voteview functions, there is no “all” option. The
-House and Senate data do not have the same number of variables, or the
-same variable names, so it is not trivial to join the two tables.
-
-You must specify either House or Senate data, since there is no
-“default” option.
+**Note:** Unlike the Voteview functions, there is no “all” option for
+`chamber`. The House and Senate data do not have the same number of
+variables, or the same variable names, so it is not trivial to join the
+two tables. You must specify either House or Senate data, since there is
+no default option.
 
 Here are the tables returned by `get_lhy_data()`:
 
