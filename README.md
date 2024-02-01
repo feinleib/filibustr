@@ -6,6 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/feinleib/filibustr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/feinleib/filibustr/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/feinleib/filibustr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/feinleib/filibustr/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 The `filibustr` package provides data utilities for research on the U.S.
