@@ -13,9 +13,6 @@
 #'  These options are case-insensitive. If you explicitly pass a different value,
 #'  it will default to "all" with a warning.
 #'
-#' @param parallel_cores `r lifecycle::badge('experimental')` If reading multiple `congress`es, you can specify
-#'  the number of cores to use (`mc.cores`) in [parallel::mclapply()].
-#'
 #' @returns A [tibble()].
 #' @export
 #'
@@ -39,31 +36,14 @@
 #' get_voteview_rollcall_votes(congress = 1:10)
 #'
 get_voteview_rollcall_votes <- function(local = TRUE, local_dir = ".",
-                                        chamber = "all", congress = NULL,
-                                        parallel_cores = 1) {
+                                        chamber = "all", congress = NULL) {
   # join multiple congresses
   if (length(congress) > 1 & is.numeric(congress)) {
-    list_of_dfs <- if (parallel_cores != 1) {
-      if (!is.numeric(parallel_cores)
-          | length(parallel_cores) != 1
-          | parallel_cores < 1
-          | parallel_cores != as.integer(parallel_cores)) {
-        stop("Invalid value (", parallel_cores, ") for `parallel_cores`.",
-             "`parallel_cores` must be a positive whole number.")
-      }
-      parallel::mclapply(congress,
-                         function(.cong) get_voteview_rollcall_votes(local = local,
-                                                                     local_dir = local_dir,
-                                                                     chamber = chamber,
-                                                                     congress = .cong),
-                         mc.cores = parallel_cores)
-    } else {
-      lapply(congress,
-             function(.cong) get_voteview_rollcall_votes(local = local,
-                                                         local_dir = local_dir,
-                                                         chamber = chamber,
-                                                         congress = .cong))
-    }
+    list_of_dfs <- lapply(congress,
+                          function(.cong) get_voteview_rollcall_votes(local = local,
+                                                                      local_dir = local_dir,
+                                                                      chamber = chamber,
+                                                                      congress = .cong))
     return(dplyr::bind_rows(list_of_dfs))
   }
 
