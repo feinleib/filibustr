@@ -34,7 +34,7 @@ A \code{\link[=tibble]{tibble()}}.
 \item Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023).
 The bipartisan path to effective lawmaking.
 \emph{The Journal of Politics}, \emph{85}(3), 1048–1063.
-\url{https://doi.org/10.1086/723805}
+\doi{doi:10.1086/723805}
 }
 
 or "LHY et al." for short.

@@ -6,7 +6,7 @@
 #' * Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023).
 #' The bipartisan path to effective lawmaking.
 #' *The Journal of Politics*, *85*(3), 1048–1063.
-#' <https://doi.org/10.1086/723805>
+#' \doi{doi:10.1086/723805}
 #'
 #' or "LHY et al." for short.
 #'
