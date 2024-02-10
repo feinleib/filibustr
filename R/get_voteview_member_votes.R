@@ -21,11 +21,11 @@
 #' get_voteview_member_votes(chamber = "house")
 #' get_voteview_member_votes(chamber = "senate")
 #'
-#' @examples
 #' # Get data for a specific Congress
 #' get_voteview_member_votes(congress = 110)
 #' get_voteview_member_votes(congress = current_congress())
 #'
+#' @examples
 #' # Get data for a set of Congresses
 #' get_voteview_member_votes(congress = 68:70)
 #'

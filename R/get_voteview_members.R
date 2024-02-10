@@ -60,6 +60,7 @@
 #' get_voteview_members(congress = 100)
 #' get_voteview_members(congress = current_congress())
 #'
+#' @examplesIf interactive()
 #' # Get data for a set of Congresses
 #' get_voteview_members(congress = 1:10)
 #'

@@ -74,7 +74,8 @@ get_voteview_members(chamber = "senate")
 get_voteview_members(congress = 100)
 get_voteview_members(congress = current_congress())
 
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Get data for a set of Congresses
 get_voteview_members(congress = 1:10)
-
+\dontshow{\}) # examplesIf}
 }

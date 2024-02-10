@@ -12,7 +12,7 @@
 #' @returns A [tibble()].
 #' @export
 #'
-#' @examples
+#' @examplesIf interactive()
 #' get_voteview_parties()
 #'
 #' # Force to get data from Voteview website
@@ -23,10 +23,12 @@
 #' get_voteview_parties(chamber = "house")
 #' get_voteview_parties(chamber = "senate")
 #'
+#' @examples
 #' # get parties for a specific Congress
 #' get_voteview_parties(congress = 100)
 #' get_voteview_parties(congress = current_congress())
 #'
+#' @examplesIf interactive()
 #' # get parties for a set of Congresses
 #' get_voteview_parties(congress = 1:10)
 #'

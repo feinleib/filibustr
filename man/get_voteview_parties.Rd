@@ -57,6 +57,7 @@ and Luke Sonnet (2023). \emph{Voteview: Congressional Roll-Call Votes Database}.
 \url{https://voteview.com/}
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_voteview_parties()
 
 # Force to get data from Voteview website
@@ -66,12 +67,13 @@ get_voteview_parties(local = FALSE)
 # NOTE: the President is included in all data
 get_voteview_parties(chamber = "house")
 get_voteview_parties(chamber = "senate")
-
+\dontshow{\}) # examplesIf}
 # get parties for a specific Congress
 get_voteview_parties(congress = 100)
 get_voteview_parties(congress = current_congress())
 
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # get parties for a set of Congresses
 get_voteview_parties(congress = 1:10)
-
+\dontshow{\}) # examplesIf}
 }

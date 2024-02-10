@@ -32,6 +32,7 @@
 #' get_voteview_rollcall_votes(congress = 100)
 #' get_voteview_rollcall_votes(congress = current_congress())
 #'
+#' @examplesIf interactive()
 #' # Get data for a set of Congresses
 #' get_voteview_rollcall_votes(congress = 1:10)
 #'
