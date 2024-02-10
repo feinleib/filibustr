@@ -67,6 +67,6 @@ get_voteview_member_votes(congress = 110)
 get_voteview_member_votes(congress = current_congress())
 \dontshow{\}) # examplesIf}
 # Get data for a set of Congresses
-get_voteview_member_votes(congress = 68:70)
+get_voteview_member_votes(congress = 1:3)
 
 }
