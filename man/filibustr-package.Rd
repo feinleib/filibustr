@@ -6,7 +6,7 @@
 \alias{filibustr-package}
 \title{filibustr: Data Utilities for Congressional Research}
 \description{
-Provides easy-to-understand and consistent interfaces for accessing data on the U.S. Congress.
+Provides easy-to-understand and consistent interfaces for accessing data on the U.S. Congress. The functions in 'filibustr' streamline the process for importing data on Congress into R, removing the need to download and work from CSV files and the like. Data sources include 'Voteview' (\url{https://voteview.com/}), the U.S. Senate website (\url{https://www.senate.gov/}), and more.
 }
 \seealso{
 Useful links:
