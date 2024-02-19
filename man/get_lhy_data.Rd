@@ -52,5 +52,7 @@ under \href{https://creativecommons.org/publicdomain/zero/1.0/}{CC0 1.0}.
 }
 \examples{
 get_lhy_data("senate")
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_lhy_data("house")
+\dontshow{\}) # examplesIf}
 }

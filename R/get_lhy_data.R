@@ -39,6 +39,7 @@
 #'
 #' @examples
 #' get_lhy_data("senate")
+#' @examplesIf interactive()
 #' get_lhy_data("house")
 get_lhy_data <- function(chamber, local = TRUE, local_dir = ".") {
   house_file <- "https://dataverse.harvard.edu/api/access/datafile/6299608"
