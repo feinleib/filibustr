@@ -41,8 +41,8 @@ get_voteview_member_votes <- function(chamber = "all", congress = NULL,
     return(dplyr::bind_rows(list_of_dfs))
   }
 
-  full_path <- build_file_path(local = local, local_dir = local_dir,
-                               chamber = chamber, congress = congress,
+  full_path <- build_file_path(chamber = chamber, congress = congress,
+                               local = local, local_dir = local_dir,
                                sheet_type = "votes")
 
   readr::read_csv(full_path, col_types = "ifiddd", na = c("", "N/A")) |>

@@ -127,7 +127,7 @@ match_congress <- function(congress) {
          "all")
 }
 
-build_file_path <- function(local = TRUE, local_dir = ".", chamber = "all", congress = NULL, sheet_type) {
+build_file_path <- function(chamber = "all", congress = NULL, local = TRUE, local_dir = ".", sheet_type) {
   chamber_code <- match_chamber(chamber)
 
   congress_code <- match_congress(congress)
