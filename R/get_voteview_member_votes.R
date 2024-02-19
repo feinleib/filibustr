@@ -29,8 +29,8 @@
 #' # Get data for a set of Congresses
 #' get_voteview_member_votes(congress = 1:3)
 #'
-get_voteview_member_votes <- function(local = TRUE, local_dir = ".",
-                                      chamber = "all", congress = NULL) {
+get_voteview_member_votes <- function(chamber = "all", congress = NULL,
+                                      local = TRUE, local_dir = ".") {
   # join multiple congresses
   if (length(congress) > 1 & is.numeric(congress)) {
     list_of_dfs <- lapply(congress,

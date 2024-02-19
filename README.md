@@ -47,19 +47,6 @@ There are three functions that retrieve data from
 
 These functions share a common interface. Here are their arguments:
 
-- `local`: Whether to read the data from a local file, as opposed to the
-  Voteview website. Default is `TRUE`. If the local file does not exist,
-  will fall back to reading from Voteview.
-- `local_dir`: The directory containing the local file. Defaults to the
-  working directory.
-
-**Note:** Especially when working with large datasets, reading data from
-Voteview can take a long time. If you are repeatedly loading the same
-static dataset (i.e., not including information from the current
-Congress), it may be useful to download the dataset as a CSV from
-Voteview so you can read that local file instead of having to use the
-web interface.
-
 - `chamber`: Which chamber to get data for. Options are:
   - `"all"`, `"congress"`: Both House and Senate data (the default).
   - `"house"`, `"h"`, `"hr"`: House data only.
@@ -77,6 +64,20 @@ recommended way to get all data is to use the default argument, `"all"`.
   retrieve data for all Congresses by default. If specified, Congress
   numbers cannot be greater than the `current_congress()` (i.e., you
   cannot try to get future data).
+
+- `local`: Whether to read the data from a local file, as opposed to the
+  Voteview website. Default is `TRUE`. If the local file does not exist,
+  will fall back to reading from Voteview.
+
+- `local_dir`: The directory containing the local file. Defaults to the
+  working directory.
+
+**Note:** Especially when working with large datasets, reading data from
+Voteview can take a long time. If you are repeatedly loading the same
+static dataset (i.e., not including information from the current
+Congress), it may be useful to download the dataset as a CSV from
+Voteview so you can read that local file instead of having to use the
+web interface.
 
 Here is the table returned by `get_voteview_members()`.
 
@@ -114,7 +115,6 @@ et al.”
 
 `get_lhy_data()` takes the following arguments:
 
-- `local`, `local_dir`: Same as the Voteview functions.
 - `chamber`: Which chamber to get data for. See the **Voteview** section
   above for more info on this argument.
 
@@ -123,6 +123,8 @@ et al.”
 variables, or the same variable names, so it is not trivial to join the
 two tables. You must specify either House or Senate data, since there is
 no default option.
+
+- `local`, `local_dir`: Same as the Voteview functions.
 
 Here are the tables returned by `get_lhy_data()`:
 

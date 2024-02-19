@@ -32,7 +32,7 @@
 #' # get parties for a set of Congresses
 #' get_voteview_parties(congress = 1:10)
 #'
-get_voteview_parties <- function(local = TRUE, local_dir = ".", chamber = "all", congress = NULL) {
+get_voteview_parties <- function(chamber = "all", congress = NULL, local = TRUE, local_dir = ".") {
   # join multiple congresses
   if (length(congress) > 1 & is.numeric(congress)) {
     list_of_dfs <- lapply(congress, function(.cong) get_voteview_parties(local = local,

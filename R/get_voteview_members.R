@@ -5,11 +5,6 @@
 #' Senators, Representatives, and Presidents. Each row is one member in one
 #' Congress (i.e., each member is listed once for every two years in office).
 #'
-#' @param local `r lifecycle::badge('experimental')` Whether to read the data from a local file, as opposed to the Voteview website.
-#'  Default is `TRUE`. If the local file does not exist, will fall back to reading from Voteview.
-#'
-#' @param local_dir `r lifecycle::badge('experimental')` The directory containing the local file. Defaults to the working directory.
-#'
 #' @param chamber Which chamber to get data for. Options are:
 #'  * `"all"`, `"congress"`: Both House and Senate data (the default).
 #'  * `"house"`, `"h"`, `"hr"`: House data only.
@@ -26,6 +21,11 @@
 #'  Optional; will retrieve data for all Congresses by default.
 #'  If specified, Congress numbers cannot be greater than the [current_congress()]
 #'  (i.e., you cannot try to get future data).
+#'
+#' @param local `r lifecycle::badge('experimental')` Whether to read the data from a local file, as opposed to the Voteview website.
+#'  Default is `TRUE`. If the local file does not exist, will fall back to reading from Voteview.
+#'
+#' @param local_dir `r lifecycle::badge('experimental')` The directory containing the local file. Defaults to the working directory.
 #'
 #' @returns A [tibble()].
 #'
@@ -64,7 +64,7 @@
 #' # Get data for a set of Congresses
 #' get_voteview_members(congress = 1:10)
 #'
-get_voteview_members <- function(local = TRUE, local_dir = ".", chamber = "all", congress = NULL) {
+get_voteview_members <- function(chamber = "all", congress = NULL, local = TRUE, local_dir = ".") {
   # join multiple congresses
   if (length(congress) > 1 & is.numeric(congress)) {
     list_of_dfs <- lapply(congress, function(.cong) get_voteview_members(local = local,
