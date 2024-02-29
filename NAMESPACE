@@ -3,6 +3,7 @@
 export(congress_in_year)
 export(current_congress)
 export(get_hvw_data)
+export(get_les)
 export(get_senate_cloture_votes)
 export(get_senate_sessions)
 export(get_voteview_member_votes)
