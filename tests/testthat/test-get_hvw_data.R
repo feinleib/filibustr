@@ -1,5 +1,5 @@
-test_that("LHY et al. house data", {
-  house_data <- get_lhy_data("house")
+test_that("HVW house data", {
+  house_data <- get_hvw_data("house")
 
   # data checks
   expect_s3_class(house_data, "tbl_df")
@@ -9,12 +9,12 @@ test_that("LHY et al. house data", {
   expect_equal(unique(house_data$year), c(seq(1973, 2015, 2), NA))
 
   # check chamber argument
-  expect_equal(house_data, get_lhy_data("h"))
-  expect_equal(house_data, get_lhy_data("hr"))
+  expect_equal(house_data, get_hvw_data("h"))
+  expect_equal(house_data, get_hvw_data("hr"))
 })
 
-test_that("LHY et al. senate data", {
-  senate_data <- get_lhy_data("senate")
+test_that("HVW senate data", {
+  senate_data <- get_hvw_data("senate")
 
   # data checks
   expect_s3_class(senate_data, "tbl_df")
@@ -24,12 +24,12 @@ test_that("LHY et al. senate data", {
   expect_equal(unique(senate_data$year), seq(1972, 2014, 2))
 
   # check chamber argument
-  expect_equal(senate_data, get_lhy_data("s"))
-  expect_equal(senate_data, get_lhy_data("sen"))
+  expect_equal(senate_data, get_hvw_data("s"))
+  expect_equal(senate_data, get_hvw_data("sen"))
 })
 
-test_that("LHY et al. chamber errors", {
-  expect_error(get_lhy_data("all"))
-  expect_error(get_lhy_data("congress"))
-  expect_error(get_lhy_data(), "argument \"chamber\" is missing, with no default")
+test_that("HVW chamber errors", {
+  expect_error(get_hvw_data("all"))
+  expect_error(get_hvw_data("congress"))
+  expect_error(get_hvw_data(), "argument \"chamber\" is missing, with no default")
 })

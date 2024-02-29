@@ -34,7 +34,7 @@ devtools::install_github("feinleib/filibustr")
 
 ### Voteview
 
-There are three functions that retrieve data from
+There are four functions that retrieve data from
 [Voteview](https://voteview.com/data):
 
 - `get_voteview_members()`: data on members (Presidents, Senators, and
@@ -107,13 +107,13 @@ get_voteview_members()
 #> #   nokken_poole_dim1 <dbl>, nokken_poole_dim2 <dbl>
 ```
 
-### Harbridge-Yong (LHY) et al. (2023)
+### Harbridge-Yong, Volden, and Wiseman (2023)
 
-The function `get_lhy_data()` retrives replication data for
-[Harbridge-Yong et al. (2023)](https://doi.org/10.1086/723805), aka “LHY
-et al.”
+The function `get_hvw_data()` retrives replication data for
+[Harbridge-Yong, Volden, and Wiseman
+(2023)](https://doi.org/10.1086/723805).
 
-`get_lhy_data()` takes the following arguments:
+`get_hvw_data()` takes the following arguments:
 
 - `chamber`: Which chamber to get data for. See the **Voteview** section
   above for more info on this argument.
@@ -126,12 +126,12 @@ no default option.
 
 - `local`, `local_dir`: Same as the Voteview functions.
 
-Here are the tables returned by `get_lhy_data()`:
+Here are the tables returned by `get_hvw_data()`:
 
 ``` r
 library(filibustr)
 
-get_lhy_data("house")
+get_hvw_data("house")
 #> # A tibble: 9,825 × 109
 #>    thomas_num thomas_name     icpsr congress  year st_name    cd   dem elected
 #>         <dbl> <chr>           <dbl>    <dbl> <dbl> <chr>   <dbl> <dbl>   <dbl>
@@ -152,7 +152,7 @@ get_lhy_data("house")
 #> #   s_aic <dbl>, s_abc <dbl>, s_pass <dbl>, s_law <dbl>, c_bills <dbl>,
 #> #   c_aic <dbl>, c_abc <dbl>, c_pass <dbl>, c_law <dbl>, afam <dbl>,
 #> #   latino <dbl>, power <dbl>, budget <dbl>, chair <dbl>, state_leg <dbl>, …
-get_lhy_data("senate")
+get_hvw_data("senate")
 #> # A tibble: 2,228 × 104
 #>    last  first state  cabc  caic cbill  claw cpass  sabc  saic sbill  slaw spass
 #>    <chr> <chr> <chr> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>

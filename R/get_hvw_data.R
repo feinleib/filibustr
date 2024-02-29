@@ -1,4 +1,4 @@
-#' Get replication data from Harbridge-Yong et al. (2023)
+#' Get replication data from Harbridge-Yong, Volden, and Wiseman (2023)
 #'
 #' @description
 #' `get_voteview_members()` returns replication data from:
@@ -7,8 +7,6 @@
 #' The bipartisan path to effective lawmaking.
 #' *The Journal of Politics*, *85*(3), 1048–1063.
 #' \doi{doi:10.1086/723805}
-#'
-#' or "LHY et al." for short.
 #'
 #' @details
 #' The replication data is available at the
@@ -38,10 +36,10 @@
 #' @export
 #'
 #' @examples
-#' get_lhy_data("senate")
+#' get_hvw_data("senate")
 #' @examplesIf interactive()
-#' get_lhy_data("house")
-get_lhy_data <- function(chamber, local = TRUE, local_dir = ".") {
+#' get_hvw_data("house")
+get_hvw_data <- function(chamber, local = TRUE, local_dir = ".") {
   house_file <- "https://dataverse.harvard.edu/api/access/datafile/6299608"
   senate_file <- "https://dataverse.harvard.edu/api/access/datafile/6299605"
   file_arg <- dplyr::case_match(match_chamber(chamber),
@@ -50,7 +48,7 @@ get_lhy_data <- function(chamber, local = TRUE, local_dir = ".") {
                                 .default = "chamber not found")
   # Error
   if (file_arg == "chamber not found") {
-    stop("Invalid `chamber` argument (\"", chamber, "\") provided for get_lhy_data.")
+    stop("Invalid `chamber` argument (\"", chamber, "\") provided for get_hvw_data.")
   }
   readr::read_tsv(file_arg, show_col_types = FALSE)
 }
