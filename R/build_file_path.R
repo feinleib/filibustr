@@ -1,20 +1,92 @@
-build_file_path <- function(chamber = "all", congress = NULL, local = TRUE, local_dir = ".", sheet_type) {
+build_file_path <- function(data_source, chamber = "all", congress = NULL,
+                            sheet_type = NULL, local = TRUE, local_dir = ".") {
   chamber_code <- match_chamber(chamber)
 
   congress_code <- match_congress(congress)
 
+  file_path <- switch(
+    tolower(data_source),
+    voteview = build_voteview_file_path(sheet_type = sheet_type,
+                                        chamber_code = chamber_code,
+                                        congress_code = congress_code,
+                                        local = local, local_dir = local_dir),
+    hvw = build_hvw_file_path(chamber_code = chamber_code,
+                              local = local, local_dir = local_dir),
+    lhy = build_hvw_file_path(chamber_code = chamber_code,
+                              local = local, local_dir = local_dir),
+    les = build_les_file_path(les_2 = sheet_type,
+                              chamber_code = chamber_code,
+                              local = local, local_dir = local_dir),
+    "source not implemented"
+  )
+
+  if (file_path == "source not implemented") {
+    stop("Invalid data source name: ", data_source)
+  }
+
+  # if local file doesn't exist, fall back to online
+  if (local && !file.exists(file_path)) {
+    file_path <- build_file_path(data_source = data_source,
+                                 chamber = chamber, congress = congress,
+                                 sheet_type = sheet_type, local = FALSE)
+  }
+
+  file_path
+}
+
+build_voteview_file_path <- function(sheet_type, chamber_code = "HS", congress_code = "all",
+                                     local = TRUE, local_dir = ".") {
   voteview_source <- paste0("https://voteview.com/static/data/out/", sheet_type)
   source <- ifelse(local,
                    local_dir,
                    voteview_source)
-  full_path <- paste0(source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
 
-  # Use Voteview website if local file doesn't exist
-  if (!file.exists(full_path)) {
-    full_path <- paste0(voteview_source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
+  paste0(source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
+}
+
+build_hvw_file_path <- function(chamber_code, local = TRUE, local_dir = ".") {
+  # no "all" option for HVW
+  if (!(chamber_code %in% c("H", "S"))) {
+    stop("Invalid `chamber` argument (\"", chamber_code, "\") provided for `get_hvw_data()`.\n",
+         "`chamber` must be either House or Senate, not both.")
   }
 
-  full_path
+  if (local) {
+    # local files
+    source <- local_dir
+    file <- ifelse(chamber_code == "H",
+                   "HarbridgeYong_Volden_Wiseman_House_Replication.tab",
+                   "HarbridgeYong_Volden_Wiseman_Senate_Replication.tab")
+  } else {
+    # online files
+    source <- "https://dataverse.harvard.edu/api/access/datafile"
+    file <- ifelse(chamber_code == "H",
+                   "6299608",
+                   "6299605")
+  }
+
+  paste0(source, "/", file)
+}
+
+build_les_file_path <- function(chamber_code, les_2 = FALSE, local = TRUE, local_dir = ".") {
+  # no "all" option for LES
+  if (!(chamber_code %in% c("H", "S"))) {
+    stop("Invalid `chamber` argument (\"", chamber_code, "\") provided for `get_les()`.\n",
+         "`chamber` must be either House or Senate, not both.")
+  }
+
+  les_source <- "https://thelawmakers.org/wp-content/uploads/2023/04"
+  source <- ifelse(local,
+                   local_dir,
+                   les_source)
+  chamber_name <- ifelse(chamber_code == "H",
+                         "House",
+                         "Senate")
+  sheet_type <- ifelse(les_2,
+                       "117ReducedLES2",
+                       "93to117ReducedClassic")
+
+  paste0(source, "/CEL", chamber_name, sheet_type, ".dta")
 }
 
 match_chamber <- function(chamber) {

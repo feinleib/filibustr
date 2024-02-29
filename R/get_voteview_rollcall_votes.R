@@ -48,9 +48,8 @@ get_voteview_rollcall_votes <- function(chamber = "all", congress = NULL,
     return(dplyr::bind_rows(list_of_dfs))
   }
 
-  full_path <- build_file_path(chamber = chamber, congress = congress,
-                               local = local, local_dir = local_dir,
-                               sheet_type = "rollcalls")
+  full_path <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
+                               sheet_type = "rollcalls", local = local, local_dir = local_dir)
 
   readr::read_csv(full_path, col_types = "ifiDddiidddddccccc") |>
     dplyr::mutate(dplyr::across(.cols = c("session", "clerk_rollnumber"),

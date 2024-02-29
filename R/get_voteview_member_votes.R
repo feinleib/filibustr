@@ -41,9 +41,8 @@ get_voteview_member_votes <- function(chamber = "all", congress = NULL,
     return(dplyr::bind_rows(list_of_dfs))
   }
 
-  full_path <- build_file_path(chamber = chamber, congress = congress,
-                               local = local, local_dir = local_dir,
-                               sheet_type = "votes")
+  full_path <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
+                               sheet_type = "votes", local = local, local_dir = local_dir)
 
   readr::read_csv(full_path, col_types = "ifiddd", na = c("", "N/A")) |>
     dplyr::mutate(dplyr::across(.cols = c("icpsr", "cast_code"),

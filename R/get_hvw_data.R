@@ -40,15 +40,8 @@
 #' @examplesIf interactive()
 #' get_hvw_data("house")
 get_hvw_data <- function(chamber, local = TRUE, local_dir = ".") {
-  house_file <- "https://dataverse.harvard.edu/api/access/datafile/6299608"
-  senate_file <- "https://dataverse.harvard.edu/api/access/datafile/6299605"
-  file_arg <- dplyr::case_match(match_chamber(chamber),
-                                "H" ~ house_file,
-                                "S" ~ senate_file,
-                                .default = "chamber not found")
-  # Error
-  if (file_arg == "chamber not found") {
-    stop("Invalid `chamber` argument (\"", chamber, "\") provided for get_hvw_data.")
-  }
-  readr::read_tsv(file_arg, show_col_types = FALSE)
+  file <- build_file_path(data_source = "hvw", chamber = chamber,
+                          local = local, local_dir = local_dir)
+
+  readr::read_tsv(file, show_col_types = FALSE)
 }
