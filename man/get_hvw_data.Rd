@@ -11,8 +11,9 @@ get_hvw_data(chamber, local = TRUE, local_dir = ".")
 \itemize{
 \item \code{"house"}, \code{"h"}, \code{"hr"}: House data only.
 \item \code{"senate"}, \code{"s"}, \code{"sen"}: Senate data only.
-These options are case-insensitive. Any other argument results in an error.
 }
+
+These options are case-insensitive. Any other argument results in an error.
 
 \strong{Note:} Unlike the Voteview functions, there is no \code{"all"} option.
 The House and Senate data do not have the same number of variables,
@@ -20,22 +21,24 @@ or the same variable names, so it is not trivial to join the two tables.
 
 You \emph{must} specify either House or Senate data, since there is no "default" option.}
 
-\item{local}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Whether to read the data from a local file, as opposed to the Voteview website.
-Default is \code{TRUE}. If the local file does not exist, will fall back to reading from Voteview.}
+\item{local}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Whether to
+read the data from a local file, as opposed to the Harvard
+Dataverse website. Default is \code{TRUE}. If the local file does
+not exist, will fall back to reading from online.}
 
-\item{local_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} The directory containing the local file. Defaults to the working directory.}
+\item{local_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} The directory containing
+the local file. Defaults to the working directory.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.
 }
 \description{
-\code{get_voteview_members()} returns replication data from:
-\itemize{
-\item Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023).
+\code{get_hvw_data()} returns replication data from:
+
+Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023).
 The bipartisan path to effective lawmaking.
 \emph{The Journal of Politics}, \emph{85}(3), 1048–1063.
 \doi{doi:10.1086/723805}
-}
 }
 \details{
 The replication data is available at the
@@ -44,6 +47,8 @@ The replication data is available at the
 The House and Senate data come from the files
 \code{HarbridgeYong_Volden_Wiseman_House_Replication.tab} and
 \code{HarbridgeYong_Volden_Wiseman_Senate_Replication.tab}, respectively.
+
+The data spans the 93rd through 114th Congresses (1973-2016).
 
 These datasets have been dedicated to the public domain
 under \href{https://creativecommons.org/publicdomain/zero/1.0/}{CC0 1.0}.

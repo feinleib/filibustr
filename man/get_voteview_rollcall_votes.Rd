@@ -27,10 +27,12 @@ Optional; will retrieve data for all Congresses by default.
 If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}
 (i.e., you cannot try to get future data).}
 
-\item{local}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Whether to read the data from a local file, as opposed to the Voteview website.
-Default is \code{TRUE}. If the local file does not exist, will fall back to reading from Voteview.}
+\item{local}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Whether to read the data from
+a local file, as opposed to the Voteview website. Default is \code{TRUE}. If the
+local file does not exist, will fall back to reading from Voteview.}
 
-\item{local_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} The directory containing the local file. Defaults to the working directory.}
+\item{local_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} The directory containing
+the local file. Defaults to the working directory.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.

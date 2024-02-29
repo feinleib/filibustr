@@ -22,10 +22,12 @@
 #'  If specified, Congress numbers cannot be greater than the [current_congress()]
 #'  (i.e., you cannot try to get future data).
 #'
-#' @param local `r lifecycle::badge('experimental')` Whether to read the data from a local file, as opposed to the Voteview website.
-#'  Default is `TRUE`. If the local file does not exist, will fall back to reading from Voteview.
+#' @param local `r lifecycle::badge('experimental')` Whether to read the data from
+#'  a local file, as opposed to the Voteview website. Default is `TRUE`. If the
+#'  local file does not exist, will fall back to reading from Voteview.
 #'
-#' @param local_dir `r lifecycle::badge('experimental')` The directory containing the local file. Defaults to the working directory.
+#' @param local_dir `r lifecycle::badge('experimental')` The directory containing
+#'  the local file. Defaults to the working directory.
 #'
 #' @returns A [tibble()].
 #'
