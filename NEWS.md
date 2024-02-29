@@ -1,7 +1,15 @@
 # filibustr 0.2.0
 
 ## Breaking changes
-* Move `chamber` and `congress` arguments before `local` and `local_dir` in `get_voteview_*()` functions to match argument order in `get_lhy_data()`.
+
+* `get_lhy_data()` has been renamed to `get_hvw_data()`.
+* In `get_voteview_*()`, `chamber` and `congress` now come before `local` and 
+  `local_dir`. This matches the argument order in `get_hvw_data()` (#3).
+
+## New features
+
+* New function `get_les()` retrieves Legislative Effectiveness Scores data from the Center 
+  for Effective Lawmaking (#5).
 
 # filibustr 0.1.1
 
