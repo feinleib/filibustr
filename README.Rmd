@@ -21,7 +21,12 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 The `filibustr` package provides data utilities for research on the U.S. Congress.
-This package provides a uniform interface for accessing data on members and votes.
+This package provides a uniform interface for accessing data from sources such as Voteview, the Legislative Effectiveness Scores, and more. Accessing your data using these functions removes many of the manual steps involved with importing data. This has two primary benefits: 
+
+* **Speeding up your workflow** and enabling you to quickly experiment with a variety of data choices.
+* Ensuring you always have the **most up-to-date data**.
+
+`filibustr` is inspired by the [`baseballr`](https://github.com/BillPetti/baseballr) package, which provides similar conveniences for baseball analytics data.
 
 ## Installation
 
@@ -62,17 +67,41 @@ These options are case-insensitive. If you explicitly pass a different value, it
 
 * `congress`: A whole number (to get data for a single Congress), or a numeric vector (to get data for a set of congresses). Optional; will retrieve data for all Congresses by default. If specified, Congress numbers cannot be greater than the `current_congress()` (i.e., you cannot try to get future data).
 
-* `local`: `r lifecycle::badge('experimental')` Whether to read the data from a local file, as opposed to the Voteview website. Default is `TRUE`. If the local file does not exist, will fall back to reading from Voteview.
+* `local`: `r lifecycle::badge('experimental')` `r filibustr:::doc_arg_local("Voteview")`
 * `local_dir`: `r lifecycle::badge('experimental')` The directory containing the local file. Defaults to the working directory.
 
 **Note:** Especially when working with large datasets, reading data from Voteview can take a long time. If you are repeatedly loading the same static dataset (i.e., not including information from the current Congress), it may be useful to download the dataset as a CSV from Voteview so you can read that local file instead of having to use the web interface.
 
-Here is the table returned by `get_voteview_members()`.
+For demonstration, here is the table returned by `get_voteview_parties()`.
 
 ```{r Voteview example}
 library(filibustr)
 
-get_voteview_members()
+get_voteview_parties()
+```
+
+### Legislative Effectiveness Scores
+
+The function `get_les()` retrieves Legislative Effectiveness Scores Data from the [Center for Effective Lawmaking](https://thelawmakers.org).
+
+`get_les()` takes the following arguments:
+
+* `chamber`: Which chamber to get data for. See the **Voteview** section above for more info on this argument.
+
+**Note:** Unlike the Voteview functions, there is no "all" option for `chamber`. You *must* specify either House or Senate data, since there is no "default" option.
+
+There are non-trivial differences between the House and Senate datasets, so take care when joining House and Senate data.
+
+* `les_2`: Whether to use LES 2.0 (instead of Classic Legislative Effectiveness Scores).  LES 2.0 credits lawmakers when language from their sponsored bills is included in other legislators' bills that become law. LES 2.0 is only available for the 117th Congress. Classic LES is available for the 93rd through 117th Congresses.
+
+* `local`, `local_dir`: Same as the Voteview functions.
+
+Here is an example table returned by `get_les()`.
+
+```{r LES example}
+library(filibustr)
+
+get_les(chamber = "senate", les_2 = FALSE)
 ```
 
 ### Harbridge-Yong, Volden, and Wiseman (2023)
@@ -83,7 +112,9 @@ The function `get_hvw_data()` retrives replication data for [Harbridge-Yong, Vol
 
 * `chamber`: Which chamber to get data for. See the **Voteview** section above for more info on this argument.
 
-**Note:** Unlike the Voteview functions, there is no "all" option for `chamber`. The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables. You must specify either House or Senate data, since there is no default option.
+**Note:** Unlike the Voteview functions, there is no "all" option for `chamber`. You *must* specify either House or Senate data, since there is no "default" option.
+
+The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables.
 
 * `local`, `local_dir`: Same as the Voteview functions.
 
@@ -120,4 +151,5 @@ This package uses data from the following websites and research:
 * Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023). The Bipartisan Path to Effective Lawmaking. *The Journal of Politics*, *85*(3), 1048–1063. <https://doi.org/10.1086/723805>
 * Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin, and Luke Sonnet (2023). *Voteview: Congressional Roll-Call Votes Database.* <https://voteview.com/>
 * U.S. Senate. <https://www.senate.gov/>
+* Volden, C., & Wiseman, A. E. (2023). *Legislative Effectiveness Scores* [dataset]. Center for Effective Lawmaking. <https://thelawmakers.org/>
 
