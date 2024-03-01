@@ -80,3 +80,9 @@ read_html_table <- function(url, css) {
     rvest::html_element(css = css) |>
     rvest::html_table()
 }
+
+doc_arg_local <- function(data_source) {
+  paste("Whether to read the data from a local file, as opposed to the", data_source, "website.",
+        "Default is `TRUE`.",
+        "If the local file does not exist, will fall back to reading from online.")
+}

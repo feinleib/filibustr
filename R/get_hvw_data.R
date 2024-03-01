@@ -35,10 +35,7 @@
 #'
 #'  You *must* specify either House or Senate data, since there is no "default" option.
 #'
-#' @param local `r lifecycle::badge('experimental')` Whether to
-#'  read the data from a local file, as opposed to the Harvard
-#'  Dataverse website. Default is `TRUE`. If the local file does
-#'  not exist, will fall back to reading from online.
+#' @param local `r lifecycle::badge('experimental')` `r doc_arg_local("Harvard Dataverse")`
 #'
 #' @returns A [tibble()].
 #' @export

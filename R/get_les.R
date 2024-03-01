@@ -33,10 +33,7 @@
 #'  that become law. LES 2.0 is only available for the 117th Congress.
 #'  Classic LES is available for the 93rd through 117th Congresses.
 #'
-#' @param local `r lifecycle::badge('experimental')` Whether to read the
-#'  data from a local file, as opposed to the Center for Effective Lawmaking
-#'  website. Default is `TRUE`. If the local file does not exist, will fall
-#'  back to reading from online.
+#' @param local `r lifecycle::badge('experimental')` `r doc_arg_local("Center for Effective Lawmaking")`
 #'
 #' @returns A [tibble()].
 #'
