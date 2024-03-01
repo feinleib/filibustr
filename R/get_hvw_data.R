@@ -1,14 +1,12 @@
-#' Get replication data from Harbridge-Yong et al. (2023)
+#' Get replication data from Harbridge-Yong, Volden, and Wiseman (2023)
 #'
 #' @description
-#' `get_voteview_members()` returns replication data from:
+#' `get_hvw_data()` returns replication data from:
 #'
-#' * Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023).
+#' Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023).
 #' The bipartisan path to effective lawmaking.
 #' *The Journal of Politics*, *85*(3), 1048–1063.
 #' \doi{doi:10.1086/723805}
-#'
-#' or "LHY et al." for short.
 #'
 #' @details
 #' The replication data is available at the
@@ -18,6 +16,8 @@
 #' `HarbridgeYong_Volden_Wiseman_House_Replication.tab` and
 #' `HarbridgeYong_Volden_Wiseman_Senate_Replication.tab`, respectively.
 #'
+#' The data spans the 93rd through 114th Congresses (1973-2016).
+#'
 #' These datasets have been dedicated to the public domain
 #' under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
 #'
@@ -26,6 +26,7 @@
 #' @param chamber Which chamber to get data for. Options are:
 #'  * `"house"`, `"h"`, `"hr"`: House data only.
 #'  * `"senate"`, `"s"`, `"sen"`: Senate data only.
+#'
 #'  These options are case-insensitive. Any other argument results in an error.
 #'
 #'  **Note:** Unlike the Voteview functions, there is no `"all"` option.
@@ -34,22 +35,18 @@
 #'
 #'  You *must* specify either House or Senate data, since there is no "default" option.
 #'
+#' @param local `r lifecycle::badge('experimental')` `r doc_arg_local("Harvard Dataverse")`
+#'
 #' @returns A [tibble()].
 #' @export
 #'
 #' @examples
-#' get_lhy_data("senate")
-#' get_lhy_data("house")
-get_lhy_data <- function(chamber, local = TRUE, local_dir = ".") {
-  house_file <- "https://dataverse.harvard.edu/api/access/datafile/6299608"
-  senate_file <- "https://dataverse.harvard.edu/api/access/datafile/6299605"
-  file_arg <- dplyr::case_match(match_chamber(chamber),
-                                "H" ~ house_file,
-                                "S" ~ senate_file,
-                                .default = "chamber not found")
-  # Error
-  if (file_arg == "chamber not found") {
-    stop("Invalid `chamber` argument (\"", chamber, "\") provided for get_lhy_data.")
-  }
-  readr::read_tsv(file_arg, show_col_types = FALSE)
+#' get_hvw_data("senate")
+#' @examplesIf interactive()
+#' get_hvw_data("house")
+get_hvw_data <- function(chamber, local = TRUE, local_dir = ".") {
+  file <- build_file_path(data_source = "hvw", chamber = chamber,
+                          local = local, local_dir = local_dir)
+
+  readr::read_tsv(file, show_col_types = FALSE)
 }

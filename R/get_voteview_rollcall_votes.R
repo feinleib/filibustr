@@ -36,8 +36,8 @@
 #' # Get data for a set of Congresses
 #' get_voteview_rollcall_votes(congress = 1:10)
 #'
-get_voteview_rollcall_votes <- function(local = TRUE, local_dir = ".",
-                                        chamber = "all", congress = NULL) {
+get_voteview_rollcall_votes <- function(chamber = "all", congress = NULL,
+                                        local = TRUE, local_dir = ".") {
   # join multiple congresses
   if (length(congress) > 1 & is.numeric(congress)) {
     list_of_dfs <- lapply(congress,
@@ -48,9 +48,8 @@ get_voteview_rollcall_votes <- function(local = TRUE, local_dir = ".",
     return(dplyr::bind_rows(list_of_dfs))
   }
 
-  full_path <- build_file_path(local = local, local_dir = local_dir,
-                               chamber = chamber, congress = congress,
-                               sheet_type = "rollcalls")
+  full_path <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
+                               sheet_type = "rollcalls", local = local, local_dir = local_dir)
 
   readr::read_csv(full_path, col_types = "ifiDddiidddddccccc") |>
     dplyr::mutate(dplyr::across(.cols = c("session", "clerk_rollnumber"),

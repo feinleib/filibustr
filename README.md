@@ -12,7 +12,18 @@ coverage](https://codecov.io/gh/feinleib/filibustr/branch/main/graph/badge.svg)]
 
 The `filibustr` package provides data utilities for research on the U.S.
 Congress. This package provides a uniform interface for accessing data
-on members and votes.
+from sources such as Voteview, the Legislative Effectiveness Scores, and
+more. Accessing your data using these functions removes many of the
+manual steps involved with importing data. This has two primary
+benefits:
+
+- **Speeding up your workflow** and enabling you to quickly experiment
+  with a variety of data choices.
+- Ensuring you always have the **most up-to-date data**.
+
+`filibustr` is inspired by the
+[`baseballr`](https://github.com/BillPetti/baseballr) package, which
+provides similar conveniences for baseball analytics data.
 
 ## Installation
 
@@ -34,7 +45,7 @@ devtools::install_github("feinleib/filibustr")
 
 ### Voteview
 
-There are three functions that retrieve data from
+There are four functions that retrieve data from
 [Voteview](https://voteview.com/data):
 
 - `get_voteview_members()`: data on members (Presidents, Senators, and
@@ -46,19 +57,6 @@ There are three functions that retrieve data from
   votes
 
 These functions share a common interface. Here are their arguments:
-
-- `local`: Whether to read the data from a local file, as opposed to the
-  Voteview website. Default is `TRUE`. If the local file does not exist,
-  will fall back to reading from Voteview.
-- `local_dir`: The directory containing the local file. Defaults to the
-  working directory.
-
-**Note:** Especially when working with large datasets, reading data from
-Voteview can take a long time. If you are repeatedly loading the same
-static dataset (i.e., not including information from the current
-Congress), it may be useful to download the dataset as a CSV from
-Voteview so you can read that local file instead of having to use the
-web interface.
 
 - `chamber`: Which chamber to get data for. Options are:
   - `"all"`, `"congress"`: Both House and Senate data (the default).
@@ -78,58 +76,124 @@ recommended way to get all data is to use the default argument, `"all"`.
   numbers cannot be greater than the `current_congress()` (i.e., you
   cannot try to get future data).
 
-Here is the table returned by `get_voteview_members()`.
+- `local`: Whether to read the data from a local file, as opposed to the
+  Voteview website. Default is `TRUE`. If the local file does not exist,
+  will fall back to reading from online.
+
+- `local_dir`: The directory containing the local file. Defaults to the
+  working directory.
+
+**Note:** Especially when working with large datasets, reading data from
+Voteview can take a long time. If you are repeatedly loading the same
+static dataset (i.e., not including information from the current
+Congress), it may be useful to download the dataset as a CSV from
+Voteview so you can read that local file instead of having to use the
+web interface.
+
+For demonstration, here is the table returned by
+`get_voteview_parties()`.
 
 ``` r
 library(filibustr)
 
-get_voteview_members()
-#> # A tibble: 50,488 × 22
-#>    congress chamber   icpsr state_icpsr district_code state_abbrev party_code
-#>       <int> <fct>     <int>       <int>         <dbl> <fct>             <int>
-#>  1        1 President 99869          99             0 USA                5000
-#>  2        1 House       379          44             2 GA                 4000
-#>  3        1 House      4854          44             1 GA                 4000
-#>  4        1 House      6071          44             3 GA                 4000
-#>  5        1 House      1538          52             6 MD                 5000
-#>  6        1 House      2010          52             3 MD                 4000
-#>  7        1 House      3430          52             5 MD                 5000
-#>  8        1 House      8363          52             2 MD                 4000
-#>  9        1 House      8693          52             4 MD                 4000
-#> 10        1 House      8983          52             1 MD                 4000
-#> # ℹ 50,478 more rows
-#> # ℹ 15 more variables: occupancy <int>, last_means <int>, bioname <chr>,
-#> #   bioguide_id <chr>, born <dbl>, died <dbl>, nominate_dim1 <dbl>,
-#> #   nominate_dim2 <dbl>, nominate_log_likelihood <dbl>,
-#> #   nominate_geo_mean_probability <dbl>, nominate_number_of_votes <int>,
-#> #   nominate_number_of_errors <dbl>, conditional <lgl>,
-#> #   nokken_poole_dim1 <dbl>, nokken_poole_dim2 <dbl>
+get_voteview_parties()
+#> # A tibble: 840 × 9
+#>    congress chamber   party_code party_name       n_members nominate_dim1_median
+#>       <int> <fct>          <int> <fct>                <int>                <dbl>
+#>  1        1 President       5000 Pro-Administrat…         1               NA    
+#>  2        1 House           4000 Anti-Administra…        29                0.018
+#>  3        1 House           5000 Pro-Administrat…        31                0.576
+#>  4        1 Senate          4000 Anti-Administra…         9               -0.238
+#>  5        1 Senate          5000 Pro-Administrat…        20                0.427
+#>  6        2 President       5000 Pro-Administrat…         1               NA    
+#>  7        2 House           4000 Anti-Administra…        32               -0.022
+#>  8        2 House           5000 Pro-Administrat…        40                0.533
+#>  9        2 Senate          4000 Anti-Administra…        14               -0.392
+#> 10        2 Senate          5000 Pro-Administrat…        17                0.446
+#> # ℹ 830 more rows
+#> # ℹ 3 more variables: nominate_dim2_median <dbl>, nominate_dim1_mean <dbl>,
+#> #   nominate_dim2_mean <dbl>
 ```
 
-### Harbridge-Yong (LHY) et al. (2023)
+### Legislative Effectiveness Scores
 
-The function `get_lhy_data()` retrives replication data for
-[Harbridge-Yong et al. (2023)](https://doi.org/10.1086/723805), aka “LHY
-et al.”
+The function `get_les()` retrieves Legislative Effectiveness Scores Data
+from the [Center for Effective Lawmaking](https://thelawmakers.org).
 
-`get_lhy_data()` takes the following arguments:
+`get_les()` takes the following arguments:
 
-- `local`, `local_dir`: Same as the Voteview functions.
 - `chamber`: Which chamber to get data for. See the **Voteview** section
   above for more info on this argument.
 
 **Note:** Unlike the Voteview functions, there is no “all” option for
-`chamber`. The House and Senate data do not have the same number of
-variables, or the same variable names, so it is not trivial to join the
-two tables. You must specify either House or Senate data, since there is
-no default option.
+`chamber`. You *must* specify either House or Senate data, since there
+is no “default” option.
 
-Here are the tables returned by `get_lhy_data()`:
+There are non-trivial differences between the House and Senate datasets,
+so take care when joining House and Senate data.
+
+- `les_2`: Whether to use LES 2.0 (instead of Classic Legislative
+  Effectiveness Scores). LES 2.0 credits lawmakers when language from
+  their sponsored bills is included in other legislators’ bills that
+  become law. LES 2.0 is only available for the 117th Congress. Classic
+  LES is available for the 93rd through 117th Congresses.
+
+- `local`, `local_dir`: Same as the Voteview functions.
+
+Here is an example table returned by `get_les()`.
 
 ``` r
 library(filibustr)
 
-get_lhy_data("house")
+get_les(chamber = "senate", les_2 = FALSE)
+#> # A tibble: 2,533 × 60
+#>    last     first state congress cgnum icpsr  year   dem majority elected female
+#>    <chr>    <chr> <chr>    <dbl> <dbl> <dbl> <dbl> <dbl>    <dbl>   <dbl>  <dbl>
+#>  1 Abourezk James SD          93     1 13000  1972     1        1    1972      0
+#>  2 Aiken    Geor… VT          93     2    52  1972     0        0    1940      0
+#>  3 Allen    James AL          93     3 12100  1972     1        1    1968      0
+#>  4 Baker    Howa… TN          93     4 11200  1972     0        0    1966      0
+#>  5 Bartlett Dewey OK          93     5 14100  1972     0        0    1972      0
+#>  6 Bayh     Birch IN          93     6 10800  1972     1        1    1962      0
+#>  7 Beall    J.    MD          93     7 12002  1972     0        0    1970      0
+#>  8 Bellmon  Henry OK          93     8 12101  1972     0        0    1968      0
+#>  9 Bennett  Wall… UT          93     9   645  1972     0        0    1950      0
+#> 10 Bentsen  Lloyd TX          93    10   660  1972     1        1    1970      0
+#> # ℹ 2,523 more rows
+#> # ℹ 49 more variables: afam <dbl>, latino <dbl>, votepct <dbl>, chair <dbl>,
+#> #   subchr <dbl>, seniority <dbl>, state_leg <dbl>, state_leg_prof <dbl>,
+#> #   maj_leader <dbl>, min_leader <dbl>, votepct_sq <dbl>, lagles <dbl>,
+#> #   power <dbl>, freshman <dbl>, sensq <dbl>, deleg_size <dbl>,
+#> #   party_code <dbl>, bioname <chr>, bioguide_id <chr>, born <dbl>, died <dbl>,
+#> #   dwnom1 <dbl>, dwnom2 <dbl>, meddist <dbl>, majdist <dbl>, cbill1 <dbl>, …
+```
+
+### Harbridge-Yong, Volden, and Wiseman (2023)
+
+The function `get_hvw_data()` retrives replication data for
+[Harbridge-Yong, Volden, and Wiseman
+(2023)](https://doi.org/10.1086/723805).
+
+`get_hvw_data()` takes the following arguments:
+
+- `chamber`: Which chamber to get data for. See the **Voteview** section
+  above for more info on this argument.
+
+**Note:** Unlike the Voteview functions, there is no “all” option for
+`chamber`. You *must* specify either House or Senate data, since there
+is no “default” option.
+
+The House and Senate data do not have the same number of variables, or
+the same variable names, so it is not trivial to join the two tables.
+
+- `local`, `local_dir`: Same as the Voteview functions.
+
+Here are the tables returned by `get_hvw_data()`:
+
+``` r
+library(filibustr)
+
+get_hvw_data("house")
 #> # A tibble: 9,825 × 109
 #>    thomas_num thomas_name     icpsr congress  year st_name    cd   dem elected
 #>         <dbl> <chr>           <dbl>    <dbl> <dbl> <chr>   <dbl> <dbl>   <dbl>
@@ -150,7 +214,7 @@ get_lhy_data("house")
 #> #   s_aic <dbl>, s_abc <dbl>, s_pass <dbl>, s_law <dbl>, c_bills <dbl>,
 #> #   c_aic <dbl>, c_abc <dbl>, c_pass <dbl>, c_law <dbl>, afam <dbl>,
 #> #   latino <dbl>, power <dbl>, budget <dbl>, chair <dbl>, state_leg <dbl>, …
-get_lhy_data("senate")
+get_hvw_data("senate")
 #> # A tibble: 2,228 × 104
 #>    last  first state  cabc  caic cbill  claw cpass  sabc  saic sbill  slaw spass
 #>    <chr> <chr> <chr> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
@@ -210,3 +274,6 @@ This package uses data from the following websites and research:
   Rudkin, and Luke Sonnet (2023). *Voteview: Congressional Roll-Call
   Votes Database.* <https://voteview.com/>
 - U.S. Senate. <https://www.senate.gov/>
+- Volden, C., & Wiseman, A. E. (2023). *Legislative Effectiveness
+  Scores* \[dataset\]. Center for Effective Lawmaking.
+  <https://thelawmakers.org/>

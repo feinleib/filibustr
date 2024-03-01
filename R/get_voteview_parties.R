@@ -32,7 +32,7 @@
 #' # get parties for a set of Congresses
 #' get_voteview_parties(congress = 1:10)
 #'
-get_voteview_parties <- function(local = TRUE, local_dir = ".", chamber = "all", congress = NULL) {
+get_voteview_parties <- function(chamber = "all", congress = NULL, local = TRUE, local_dir = ".") {
   # join multiple congresses
   if (length(congress) > 1 & is.numeric(congress)) {
     list_of_dfs <- lapply(congress, function(.cong) get_voteview_parties(local = local,
@@ -42,9 +42,8 @@ get_voteview_parties <- function(local = TRUE, local_dir = ".", chamber = "all",
     return(dplyr::bind_rows(list_of_dfs))
   }
 
-  full_path <- build_file_path(local = local, local_dir = local_dir,
-                               chamber = chamber, congress = congress,
-                               sheet_type = "parties")
+  full_path <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
+                               sheet_type = "parties", local = local, local_dir = local_dir)
 
   readr::read_csv(full_path, col_types = "ififidddd")
 }
