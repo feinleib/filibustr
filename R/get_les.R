@@ -64,5 +64,11 @@ get_les <- function(chamber, les_2 = FALSE, local = TRUE, local_dir = ".") {
   full_path <- build_file_path(data_source = "les", chamber = chamber, sheet_type = les_2,
                                local = local, local_dir = local_dir)
 
+  # check that online connection is working
+  # TODO: fuller error handling with `get_online_data()`
+  if (R.utils::isUrl(full_path) & !crul::ok(full_path, info = F)) {
+    stop("ERROR: Could not connect to Center for Effective Lawmaking website")
+  }
+
   haven::read_dta(full_path)
 }

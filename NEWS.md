@@ -1,4 +1,8 @@
-# filibustr (development version)
+# filibustr 0.2.1
+
+## Bug fixes
+
+* Handle HTTP errors when using online connections (#12)
 
 # filibustr 0.2.0
 

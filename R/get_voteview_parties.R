@@ -45,5 +45,10 @@ get_voteview_parties <- function(chamber = "all", congress = NULL, local = TRUE,
   full_path <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
                                sheet_type = "parties", local = local, local_dir = local_dir)
 
+  # request data from online
+  if (R.utils::isUrl(full_path)) {
+    full_path <- get_online_data(url = full_path, source_name = "Voteview")
+  }
+
   readr::read_csv(full_path, col_types = "ififidddd")
 }

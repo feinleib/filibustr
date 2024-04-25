@@ -48,5 +48,10 @@ get_hvw_data <- function(chamber, local = TRUE, local_dir = ".") {
   file <- build_file_path(data_source = "hvw", chamber = chamber,
                           local = local, local_dir = local_dir)
 
+  # request data from online
+  if (R.utils::isUrl(file)) {
+    file <- get_online_data(url = file, source_name = "Harvard Dataverse")
+  }
+
   readr::read_tsv(file, show_col_types = FALSE)
 }
