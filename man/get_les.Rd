@@ -47,7 +47,8 @@ the local file. Defaults to the working directory.}
 A \code{\link[=tibble]{tibble()}}.
 }
 \description{
-\code{get_les()} returns \href{https://thelawmakers.org/data-download}{Legislative Effectiveness Scores data}
+\code{get_les()} returns
+\href{https://thelawmakers.org/data-download}{Legislative Effectiveness Scores data}
 from the Center for Effective Lawmaking.
 }
 \details{
