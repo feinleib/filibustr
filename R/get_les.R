@@ -1,6 +1,7 @@
 #' Get Legislative Effectiveness Scores data
 #'
-#' `get_les()` returns [Legislative Effectiveness Scores data](https://thelawmakers.org/data-download)
+#' `get_les()` returns
+#' [Legislative Effectiveness Scores data](https://thelawmakers.org/data-download)
 #' from the Center for Effective Lawmaking.
 #'
 #' @inheritParams get_voteview_members
@@ -70,5 +71,48 @@ get_les <- function(chamber, les_2 = FALSE, local = TRUE, local_dir = ".") {
     stop("ERROR: Could not connect to Center for Effective Lawmaking website")
   }
 
-  haven::read_dta(full_path)
+  haven::read_dta(full_path) |>
+    fix_les_coltypes(les_2 = les_2)
+}
+
+fix_les_coltypes <- function(df, les_2) {
+  df <- df |>
+    # using `any_of()` because of colname differences between S and HR sheets
+    dplyr::mutate(dplyr::across(
+      .cols = dplyr::any_of(c("state", "st_name")),
+      as.factor)) |>
+    dplyr::mutate(dplyr::across(
+      .cols = dplyr::any_of(c("congress", "cgnum", "icpsr", "year", "elected",
+                              "votepct", "seniority", "votepct_sq", "sensq",
+                              "deleg_size", "party_code", "born", "died",
+                              "thomas_num", "cd")),
+      as.integer)) |>
+    dplyr::mutate(dplyr::across(
+      .cols = dplyr::any_of(c("dem", "majority", "female", "afam", "latino",
+                              "chair", "subchr", "state_leg", "maj_leader",
+                              "min_leader", "power", "freshman", "speaker")),
+      as.logical))
+
+  # bill progress columns have different names in the LES2 sheets
+  if (les_2) {
+    df <- df |>
+      dplyr::mutate(dplyr::across(
+        .cols = dplyr::any_of(c("cbill2", "caic2", "cabc2", "cpass2", "claw2",
+                                "sbill2", "saic2", "sabc2", "spass2", "slaw2",
+                                "ssbill2", "ssaic2", "ssabc2", "sspass2", "sslaw2",
+                                "expectation2", "allbill2", "allaic2",
+                                "allabc2", "allpass2", "alllaw2")),
+        as.integer))
+  } else {
+    df <- df |>
+      dplyr::mutate(dplyr::across(
+        .cols = dplyr::any_of(c("cbill1", "caic1", "cabc1", "cpass1", "claw1",
+                                "sbill1", "saic1", "sabc1", "spass1", "slaw1",
+                                "ssbill1", "ssaic1", "ssabc1", "sspass1", "sslaw1",
+                                "expectation1", "allbill1", "allaic1",
+                                "allabc1", "allpass1", "alllaw1")),
+        as.integer))
+  }
+
+  df
 }
