@@ -6,6 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/feinleib/filibustr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/feinleib/filibustr/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/feinleib/filibustr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/feinleib/filibustr/actions/workflows/test-coverage.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/feinleib/filibustr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/feinleib/filibustr?branch=main)
 [![CRAN
