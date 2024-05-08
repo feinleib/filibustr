@@ -70,3 +70,7 @@ get_voteview_member_votes(congress = current_congress())
 get_voteview_member_votes(congress = 1:3)
 
 }
+\seealso{
+\code{\link[=get_voteview_cast_codes]{get_voteview_cast_codes()}} for a dictionary of
+the cast codes in this data.
+}
