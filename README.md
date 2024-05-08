@@ -8,6 +8,8 @@
 [![R-CMD-check](https://github.com/feinleib/filibustr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/feinleib/filibustr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/feinleib/filibustr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/feinleib/filibustr?branch=main)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/filibustr)](https://CRAN.R-project.org/package=filibustr)
 <!-- badges: end -->
 
 The `filibustr` package provides data utilities for research on the U.S.
@@ -147,25 +149,25 @@ library(filibustr)
 
 get_les(chamber = "senate", les_2 = FALSE)
 #> # A tibble: 2,533 × 60
-#>    last     first state congress cgnum icpsr  year   dem majority elected female
-#>    <chr>    <chr> <chr>    <dbl> <dbl> <dbl> <dbl> <dbl>    <dbl>   <dbl>  <dbl>
-#>  1 Abourezk James SD          93     1 13000  1972     1        1    1972      0
-#>  2 Aiken    Geor… VT          93     2    52  1972     0        0    1940      0
-#>  3 Allen    James AL          93     3 12100  1972     1        1    1968      0
-#>  4 Baker    Howa… TN          93     4 11200  1972     0        0    1966      0
-#>  5 Bartlett Dewey OK          93     5 14100  1972     0        0    1972      0
-#>  6 Bayh     Birch IN          93     6 10800  1972     1        1    1962      0
-#>  7 Beall    J.    MD          93     7 12002  1972     0        0    1970      0
-#>  8 Bellmon  Henry OK          93     8 12101  1972     0        0    1968      0
-#>  9 Bennett  Wall… UT          93     9   645  1972     0        0    1950      0
-#> 10 Bentsen  Lloyd TX          93    10   660  1972     1        1    1970      0
+#>    last     first state congress cgnum icpsr  year dem   majority elected female
+#>    <chr>    <chr> <fct>    <int> <int> <int> <int> <lgl> <lgl>      <int> <lgl> 
+#>  1 Abourezk James SD          93     1 13000  1972 TRUE  TRUE        1972 FALSE 
+#>  2 Aiken    Geor… VT          93     2    52  1972 FALSE FALSE       1940 FALSE 
+#>  3 Allen    James AL          93     3 12100  1972 TRUE  TRUE        1968 FALSE 
+#>  4 Baker    Howa… TN          93     4 11200  1972 FALSE FALSE       1966 FALSE 
+#>  5 Bartlett Dewey OK          93     5 14100  1972 FALSE FALSE       1972 FALSE 
+#>  6 Bayh     Birch IN          93     6 10800  1972 TRUE  TRUE        1962 FALSE 
+#>  7 Beall    J.    MD          93     7 12002  1972 FALSE FALSE       1970 FALSE 
+#>  8 Bellmon  Henry OK          93     8 12101  1972 FALSE FALSE       1968 FALSE 
+#>  9 Bennett  Wall… UT          93     9   645  1972 FALSE FALSE       1950 FALSE 
+#> 10 Bentsen  Lloyd TX          93    10   660  1972 TRUE  TRUE        1970 FALSE 
 #> # ℹ 2,523 more rows
-#> # ℹ 49 more variables: afam <dbl>, latino <dbl>, votepct <dbl>, chair <dbl>,
-#> #   subchr <dbl>, seniority <dbl>, state_leg <dbl>, state_leg_prof <dbl>,
-#> #   maj_leader <dbl>, min_leader <dbl>, votepct_sq <dbl>, lagles <dbl>,
-#> #   power <dbl>, freshman <dbl>, sensq <dbl>, deleg_size <dbl>,
-#> #   party_code <dbl>, bioname <chr>, bioguide_id <chr>, born <dbl>, died <dbl>,
-#> #   dwnom1 <dbl>, dwnom2 <dbl>, meddist <dbl>, majdist <dbl>, cbill1 <dbl>, …
+#> # ℹ 49 more variables: afam <lgl>, latino <lgl>, votepct <int>, chair <lgl>,
+#> #   subchr <lgl>, seniority <int>, state_leg <lgl>, state_leg_prof <dbl>,
+#> #   maj_leader <lgl>, min_leader <lgl>, votepct_sq <int>, lagles <dbl>,
+#> #   power <lgl>, freshman <lgl>, sensq <int>, deleg_size <int>,
+#> #   party_code <int>, bioname <chr>, bioguide_id <chr>, born <int>, died <int>,
+#> #   dwnom1 <dbl>, dwnom2 <dbl>, meddist <dbl>, majdist <dbl>, cbill1 <int>, …
 ```
 
 ### Harbridge-Yong, Volden, and Wiseman (2023)
