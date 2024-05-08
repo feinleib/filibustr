@@ -4,13 +4,13 @@
 
 * `get_voteview_cast_codes()` provides the cast codes used in Voteview's member votes data (#13).
 
-# filibustr 0.2.1
+# filibustr 0.2.1 (2024-05-02)
 
 ## Bug fixes
 
 * Handle HTTP errors when using online connections (#12).
 
-# filibustr 0.2.0
+# filibustr 0.2.0 (2024-03-01)
 
 ## Breaking changes
 
@@ -23,10 +23,10 @@
 * New function `get_les()` retrieves Legislative Effectiveness Scores data from the Center 
   for Effective Lawmaking (#5).
 
-# filibustr 0.1.1
+# filibustr 0.1.1 (2024-02-13)
 
 * Fixes for CRAN.
 
-# filibustr 0.1.0
+# filibustr 0.1.0 (2024-02-01)
 
 * Initial CRAN submission.
