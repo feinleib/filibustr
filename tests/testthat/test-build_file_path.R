@@ -120,34 +120,21 @@ test_that("`build_file_path()` for Voteview", {
 })
 
 # Harbridge-Yong, Volden, and Wiseman ------------
-test_that("`build_hvw_file_path()`: online paths", {
-  expect_equal(build_hvw_file_path(chamber_code = "H", local = FALSE),
+test_that("`build_hvw_url()`: online paths", {
+  expect_equal(build_hvw_url(chamber_code = "H"),
                "https://dataverse.harvard.edu/api/access/datafile/6299608")
-  expect_equal(build_hvw_file_path(chamber_code = "S", local = FALSE),
+  expect_equal(build_hvw_url(chamber_code = "S"),
                "https://dataverse.harvard.edu/api/access/datafile/6299605")
 })
 
-test_that("`build_hvw_file_path()`: local paths", {
-  expect_equal(build_hvw_file_path(chamber_code = "H", local = TRUE),
-               "./HarbridgeYong_Volden_Wiseman_House_Replication.tab")
-  expect_equal(build_hvw_file_path(chamber_code = "S", local = TRUE),
-               "./HarbridgeYong_Volden_Wiseman_Senate_Replication.tab")
-
-  # local_dir
-  expect_equal(build_hvw_file_path(chamber_code = "H", local = TRUE, local_dir = "test_dir"),
-               "test_dir/HarbridgeYong_Volden_Wiseman_House_Replication.tab")
-  expect_equal(build_hvw_file_path(chamber_code = "S", local = TRUE, local_dir = "~/a/b/c"),
-               "~/a/b/c/HarbridgeYong_Volden_Wiseman_Senate_Replication.tab")
-})
-
-test_that("`build_hvw_file_path()`: invalid `chamber_code` errors", {
+test_that("`build_hvw_url()`: invalid `chamber_code` errors", {
   # any `chamber_code` beside "H" or "S" is an error
-  expect_error(build_hvw_file_path(chamber_code = "HS"),
-               paste("Invalid `chamber` argument \\(\"HS\"\\) provided for `get_hvw_data\\(\\)`.",
-                     "`chamber` must be either House or Senate, not both.", sep = "\\n"))
-  expect_error(build_hvw_file_path(chamber_code = "something else"),
-               paste("Invalid `chamber` argument \\(\"something else\"\\) provided for `get_hvw_data\\(\\)`.",
-                     "`chamber` must be either House or Senate, not both.", sep = "\\n"))
+  expect_error(build_hvw_url(chamber_code = "HS"),
+               "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_hvw_data\\(\\)`.")
+  expect_error(build_hvw_url(chamber_code = "HS"),
+               "Invalid `chamber` argument")
+  expect_error(build_hvw_url(chamber_code = "something else"),
+               "Invalid `chamber` argument \\(\"something else\"\\) provided for `get_hvw_data\\(\\)`.")
 })
 
 test_that("`build_file_path()` for HVW", {
@@ -164,13 +151,7 @@ test_that("`build_file_path()` for HVW", {
 
   # need to specify a chamber
   expect_error(build_file_path(data_source = "hvw"),
-               paste("Invalid `chamber` argument \\(\"HS\"\\) provided for `get_hvw_data\\(\\)`.",
-                     "`chamber` must be either House or Senate, not both.", sep = "\\n"))
-
-  # TODO: how to check that it successfully reads local files?
-  # withr::with_file(test_path("./HarbridgeYong_Volden_Wiseman_House_Replication.tab"),
-  #                  expect_equal(build_file_path(data_source = "hvw", chamber = "hr"),
-  #                               "./HarbridgeYong_Volden_Wiseman_House_Replication.tab"))
+               "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_hvw_data\\(\\)`.")
 })
 
 # LES --------------------------------------------

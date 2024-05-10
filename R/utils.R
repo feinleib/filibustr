@@ -4,6 +4,7 @@ read_html_table <- function(url, css) {
     rvest::html_table()
 }
 
+# TODO: can remove this function when I finish removing all the `local` arguments
 doc_arg_local <- function(data_source) {
   paste("Whether to read the data from a local file, as opposed to the", data_source, "website.",
         "Default is `TRUE`.",
@@ -41,4 +42,32 @@ get_online_data <- function(url, source_name) {
 
   # return response body as UTF-8 string
   httr2::resp_body_string(response)
+}
+
+read_local_file <- function(path, ...) {
+  file_ending <- stringr::str_extract(path, "(?<=\\.)[:alpha:]{3}$") |> tolower()
+  switch(file_ending,
+         csv = readr::read_csv(path, ...),
+         tsv = readr::read_tsv(path, ...),
+         tab = readr::read_tsv(path, ...),
+         dta = haven::read_dta(path, ...),
+         cli::cli_abort(c(
+           "Invalid `path` provided:",
+           "x" = "{path}",
+           "i" = "File must be in one of the following formats: .csv, .dta, .tab, .tsv"
+         )))
+}
+
+write_local_file <- function(path, ...) {
+  file_ending <- stringr::str_extract(path, "(?<=\\.)[:alpha:]{3}$") |> tolower()
+  switch(file_ending,
+         csv = readr::write_csv(path, ...),
+         tsv = readr::write_tsv(path, ...),
+         tab = readr::write_tsv(path, ...),
+         dta = haven::write_dta(path, ...),
+         cli::cli_abort(c(
+           "Invalid `path` provided:",
+           "x" = "{path}",
+           "i" = "File must be in one of the following formats: .csv, .dta, .tab, .tsv"
+         )))
 }

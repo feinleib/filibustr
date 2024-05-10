@@ -10,10 +10,8 @@ build_file_path <- function(data_source, chamber = "all", congress = NULL,
                                         chamber_code = chamber_code,
                                         congress_code = congress_code,
                                         local = local, local_dir = local_dir),
-    hvw = build_hvw_file_path(chamber_code = chamber_code,
-                              local = local, local_dir = local_dir),
-    lhy = build_hvw_file_path(chamber_code = chamber_code,
-                              local = local, local_dir = local_dir),
+    hvw = build_hvw_url(chamber_code = chamber_code),
+    lhy = build_hvw_url(chamber_code = chamber_code),
     les = build_les_file_path(les_2 = sheet_type,
                               chamber_code = chamber_code,
                               local = local, local_dir = local_dir),
@@ -44,26 +42,18 @@ build_voteview_file_path <- function(sheet_type, chamber_code = "HS", congress_c
   paste0(source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
 }
 
-build_hvw_file_path <- function(chamber_code, local = TRUE, local_dir = ".") {
+build_hvw_url <- function(chamber_code) {
   # no "all" option for HVW
   if (!(chamber_code %in% c("H", "S"))) {
     stop("Invalid `chamber` argument (\"", chamber_code, "\") provided for `get_hvw_data()`.\n",
          "`chamber` must be either House or Senate, not both.")
   }
 
-  if (local) {
-    # local files
-    source <- local_dir
-    file <- ifelse(chamber_code == "H",
-                   "HarbridgeYong_Volden_Wiseman_House_Replication.tab",
-                   "HarbridgeYong_Volden_Wiseman_Senate_Replication.tab")
-  } else {
-    # online files
-    source <- "https://dataverse.harvard.edu/api/access/datafile"
-    file <- ifelse(chamber_code == "H",
-                   "6299608",
-                   "6299605")
-  }
+  # online files
+  source <- "https://dataverse.harvard.edu/api/access/datafile"
+  file <- ifelse(chamber_code == "H",
+                 "6299608",
+                 "6299605")
 
   paste0(source, "/", file)
 }

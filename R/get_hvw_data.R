@@ -21,8 +21,6 @@
 #' These datasets have been dedicated to the public domain
 #' under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
 #'
-#' @inheritParams get_voteview_members
-#'
 #' @param chamber Which chamber to get data for. Options are:
 #'  * `"house"`, `"h"`, `"hr"`: House data only.
 #'  * `"senate"`, `"s"`, `"sen"`: Senate data only.
@@ -35,7 +33,12 @@
 #'
 #'  You *must* specify either House or Senate data, since there is no "default" option.
 #'
-#' @param local `r lifecycle::badge('experimental')` `r doc_arg_local("Harvard Dataverse")`
+#' @param read_from_local_path `r lifecycle::badge('experimental')` A file path for
+#'  reading from a local file. If no `read_from_local_path` is specified,
+#'  `get_hvw_data()` will read data from the Harvard Dataverse website.
+#'
+#' @param write_to_local_path `r lifecycle::badge('experimental')` A file path for
+#'  writing to a local file.
 #'
 #' @returns A [tibble()].
 #' @export
@@ -44,14 +47,23 @@
 #' get_hvw_data("senate")
 #' @examplesIf interactive()
 #' get_hvw_data("house")
-get_hvw_data <- function(chamber, local = TRUE, local_dir = ".") {
-  file <- build_file_path(data_source = "hvw", chamber = chamber,
-                          local = local, local_dir = local_dir)
-
-  # request data from online
-  if (R.utils::isUrl(file)) {
-    file <- get_online_data(url = file, source_name = "Harvard Dataverse")
+get_hvw_data <- function(chamber, read_from_local_path = NULL, write_to_local_path = NULL) {
+  if (is.null(read_from_local_path)) {
+    # online reading
+    url <- build_file_path(data_source = "hvw", chamber = chamber)
+    online_file <- get_online_data(url = url, source_name = "Harvard Dataverse")
+    df <- readr::read_tsv(online_file, show_col_types = FALSE)
+  } else {
+    # local reading
+    df <- read_local_file(read_from_local_path, show_col_types = FALSE)
   }
 
-  readr::read_tsv(file, show_col_types = FALSE)
+  # no filtering by `chamber` since the House and Senate sheets don't join
+
+  # write to local file
+  if (!is.null(write_to_local_path)) {
+    write_local_file(write_to_local_path)
+  }
+
+  df
 }

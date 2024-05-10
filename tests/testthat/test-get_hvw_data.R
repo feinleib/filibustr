@@ -33,3 +33,7 @@ test_that("HVW chamber errors", {
   expect_error(get_hvw_data("congress"))
   expect_error(get_hvw_data(), "argument \"chamber\" is missing, with no default")
 })
+
+# TODO: test local reading with `read_from_local_path`
+
+# TODO: test local writing with `write_to_local_path`
