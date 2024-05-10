@@ -162,7 +162,7 @@ test_that("`build_les_file_path()`: online paths", {
   expect_equal(build_les_file_path(chamber_code = "S", les_2 = F, local = F),
                "https://thelawmakers.org/wp-content/uploads/2023/04/CELSenate93to117ReducedClassic.dta")
 
-    # LES 2
+  # LES 2
   expect_equal(build_les_file_path(chamber_code = "H", les_2 = T, local = F),
                "https://thelawmakers.org/wp-content/uploads/2023/04/CELHouse117ReducedLES2.dta")
   expect_equal(build_les_file_path(chamber_code = "S", les_2 = T, local = F),
@@ -188,11 +188,9 @@ test_that("`build_les_file_path()`: local paths", {
 test_that("`build_les_file_path()`: invalid `chamber_code` errors", {
   # any `chamber_code` beside "H" or "S" is an error
   expect_error(build_les_file_path(chamber_code = "HS"),
-               paste("Invalid `chamber` argument \\(\"HS\"\\) provided for `get_les\\(\\)`.",
-                     "`chamber` must be either House or Senate, not both.", sep = "\\n"))
+               "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_les\\(\\)`.")
   expect_error(build_les_file_path(chamber_code = "foo"),
-               paste("Invalid `chamber` argument \\(\"foo\"\\) provided for `get_les\\(\\)`.",
-                     "`chamber` must be either House or Senate, not both.", sep = "\\n"))
+               "Invalid `chamber` argument \\(\"foo\"\\) provided for `get_les\\(\\)`.")
 })
 
 test_that("`build_file_path()` for LES", {
@@ -205,6 +203,5 @@ test_that("`build_file_path()` for LES", {
 
   # need to specify a chamber
   expect_error(build_file_path(data_source = "les"),
-               paste("Invalid `chamber` argument \\(\"HS\"\\) provided for `get_les\\(\\)`.",
-                     "`chamber` must be either House or Senate, not both.", sep = "\\n"))
+               "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_les\\(\\)`.")
 })

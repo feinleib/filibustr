@@ -45,8 +45,10 @@ build_voteview_file_path <- function(sheet_type, chamber_code = "HS", congress_c
 build_hvw_url <- function(chamber_code) {
   # no "all" option for HVW
   if (!(chamber_code %in% c("H", "S"))) {
-    stop("Invalid `chamber` argument (\"", chamber_code, "\") provided for `get_hvw_data()`.\n",
-         "`chamber` must be either House or Senate, not both.")
+    cli::cli_abort(c(
+      "Invalid `chamber` argument (\"{chamber_code}\") provided for `get_hvw_data()`.",
+      "i" = "`chamber` must be either House or Senate, not both."
+    ))
   }
 
   # online files
@@ -61,8 +63,10 @@ build_hvw_url <- function(chamber_code) {
 build_les_file_path <- function(chamber_code, les_2 = FALSE, local = TRUE, local_dir = ".") {
   # no "all" option for LES
   if (!(chamber_code %in% c("H", "S"))) {
-    stop("Invalid `chamber` argument (\"", chamber_code, "\") provided for `get_les()`.\n",
-         "`chamber` must be either House or Senate, not both.")
+    cli::cli_abort(c(
+      "Invalid `chamber` argument (\"{chamber_code}\") provided for `get_les()`.",
+      "i" = "`chamber` must be either House or Senate, not both."
+    ))
   }
 
   les_source <- "https://thelawmakers.org/wp-content/uploads/2023/04"
