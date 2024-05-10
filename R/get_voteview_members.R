@@ -85,5 +85,6 @@ get_voteview_members <- function(chamber = "all", congress = NULL, local = TRUE,
   readr::read_csv(full_path,
                   col_types = "ifiinfiiiccnnnnnni") |>
     # fix order of state abbreviations
-    dplyr::mutate(state_abbrev = factor(state_abbrev, levels = c(datasets::state.abb, "USA")))
+    dplyr::mutate(dplyr::across(.cols = "state_abbrev",
+                                .fns = ~ factor(.x, levels = c(datasets::state.abb, "USA"))))
 }
