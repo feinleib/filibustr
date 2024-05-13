@@ -45,6 +45,7 @@ get_online_data <- function(url, source_name) {
 }
 
 read_local_file <- function(path, show_col_types) {
+  file_ending <- extract_file_ending(path = path)
   switch(file_ending,
          csv = readr::read_csv(file = path, show_col_types = show_col_types),
          tsv = readr::read_tsv(file = path, show_col_types = show_col_types),
@@ -58,6 +59,7 @@ read_local_file <- function(path, show_col_types) {
 }
 
 write_local_file <- function(df, path, ...) {
+  file_ending <- extract_file_ending(path = path)
   switch(file_ending,
          csv = readr::write_csv(x = df, file = path, ...),
          tsv = readr::write_tsv(x = df, file = path, ...),
@@ -68,4 +70,12 @@ write_local_file <- function(df, path, ...) {
            "x" = "{path}",
            "i" = "File must be in one of the following formats: .csv, .dta, .tab, .tsv"
          )))
+}
+
+# extracts a 3-character file ending from a file path
+# TODO: test
+extract_file_ending <- function(path) {
+  stringr::str_extract(string = path,
+                       pattern = "(?<=\\.)[:alpha:]{3}$") |>
+    tolower()
 }
