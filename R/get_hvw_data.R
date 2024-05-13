@@ -38,7 +38,8 @@
 #'  `get_hvw_data()` will read data from the Harvard Dataverse website.
 #'
 #' @param write_to_local_path `r lifecycle::badge('experimental')` A file path for
-#'  writing to a local file.
+#'  writing to a local file. `get_hvw_data()` will write a file to this local path
+#'  in addition to reading data into R.
 #'
 #' @returns A [tibble()].
 #' @export
