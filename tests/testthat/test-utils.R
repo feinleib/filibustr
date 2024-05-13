@@ -19,7 +19,7 @@ test_that("documentation for `local` arg", {
   )
 })
 
-test_that("get online data: Voteview members", {
+test_that("get_online_data(): Voteview members", {
   vv_resp_members_s117 <- get_online_data(
     "https://voteview.com/static/data/out/members/S117_members.csv", "Voteview")
   expect_type(vv_resp_members_s117, "character")
@@ -32,7 +32,7 @@ test_that("get online data: Voteview members", {
   expect_equal(unique(members_s117_df$congress), 117)
 })
 
-test_that("get online data: Voteview parties", {
+test_that("get_online_data(): Voteview parties", {
   vv_resp_parties <- get_online_data(
     "https://voteview.com/static/data/out/parties/HSall_parties.csv", "Voteview")
   expect_type(vv_resp_parties, "character")
@@ -42,4 +42,34 @@ test_that("get online data: Voteview parties", {
   expect_length(parties_df, 9)
   expect_equal(unique(parties_df$chamber), c("President", "House", "Senate"))
   expect_equal(unique(parties_df$congress), 1:118)
+})
+
+test_that("extract_file_ending(): expected operation", {
+  expect_identical(extract_file_ending("folder/file.csv"), "csv")
+  # capitalization doesn't matter
+  expect_identical(extract_file_ending("folder/file.csV"), "csv")
+  expect_identical(extract_file_ending("folder/file.CSV"), "csv")
+
+  # various file formats
+  expect_identical(extract_file_ending("~/folder/table.tsv"), "tsv")
+  expect_identical(extract_file_ending("~/folder/table.tab"), "tab")
+  expect_identical(extract_file_ending("~/dir/subdir/info.dta"), "dta")
+  expect_identical(extract_file_ending("not_a_file.abc"), "abc")
+
+  # extension length doesn't matter
+  expect_identical(extract_file_ending("utils.R"), "r")
+  expect_identical(extract_file_ending("utils.Rproj"), "rproj")
+})
+
+test_that("extract_file_ending(): errors", {
+  # no period-before-letters pattern
+  expect_error(extract_file_ending("filecsv"), "Can't extract file ending")
+  expect_error(extract_file_ending("file.,csv"), "Can't extract file ending")
+
+  # a double dot doesn't cause errors, though
+  expect_identical(extract_file_ending("A sentence for a file name..csv"), "csv")
+
+  # must end in letters
+  expect_error(extract_file_ending("file.csv."), "Can't extract file ending")
+  expect_error(extract_file_ending("file.csv123"), "Can't extract file ending")
 })
