@@ -34,6 +34,47 @@ test_that("HVW chamber errors", {
   expect_error(get_hvw_data(), "argument \"chamber\" is missing, with no default")
 })
 
-# TODO: test local reading with `read_from_local_path`
+test_that("HVW local reading and writing", {
+  ## create temp file paths
+  tmp_csv <- tempfile(fileext = ".csv")
+  tmp_tsv <- tempfile(fileext = ".tsv")
+  tmp_tab <- tempfile(fileext = ".tab")
+  tmp_dta <- tempfile(fileext = ".dta")
 
-# TODO: test local writing with `write_to_local_path`
+  ## download data from online
+  sen_online <- get_hvw_data(chamber = "s", write_to_local_path = tmp_csv)
+  expect_s3_class(sen_online, "tbl_df")
+  expect_length(sen_online, 104)
+  expect_equal(nrow(sen_online), 2228)
+  expect_equal(unique(sen_online$congress), 93:114)
+  expect_equal(unique(sen_online$year), seq(1972, 2014, 2))
+
+  hr_online <- get_hvw_data(chamber = "hr", write_to_local_path = tmp_tsv)
+  expect_s3_class(hr_online, "tbl_df")
+  expect_length(hr_online, 109)
+  expect_equal(nrow(hr_online), 9825)
+  expect_equal(unique(hr_online$congress), 93:114)
+  expect_equal(unique(hr_online$year), c(seq(1973, 2015, 2), NA))
+
+  ## check that local data matches
+  sen_local <- get_hvw_data("s", read_from_local_path = tmp_csv, write_to_local_path = tmp_tab)
+  expect_s3_class(sen_local, "tbl_df")
+  expect_equal(nrow(sen_local), 2228)
+  expect_equal(sen_online, sen_local)
+
+  hr_local <- get_hvw_data("hr", read_from_local_path = tmp_tsv, write_to_local_path = tmp_dta)
+  expect_equal(hr_online, hr_local)
+
+  ## test that re-written data matches
+  sen_rewritten <- get_hvw_data("s", read_from_local_path = tmp_tab)
+  expect_equal(sen_online, sen_rewritten)
+
+  # TODO: fix these tests
+  # issue has to do with .dta file attributes/labels and NA characters
+  # writing house data in previous senate file
+  # hr_rewritten <- get_hvw_data("hr", read_from_local_path = tmp_dta, write_to_local_path = tmp_csv)
+  # expect_equal(hr_online, hr_rewritten)
+
+  # hr_in_sen_file <- get_hvw_data("hr", read_from_local_path = tmp_csv)
+  # expect_equal(hr_online, hr_in_sen_file)
+})
