@@ -80,18 +80,18 @@ fix_les_coltypes <- function(df, les_2) {
     # using `any_of()` because of colname differences between S and HR sheets
     dplyr::mutate(dplyr::across(
       .cols = dplyr::any_of(c("state", "st_name")),
-      as.factor)) |>
+      .fns = \(.x) factor(.x, levels = state.abb))) |>
     dplyr::mutate(dplyr::across(
       .cols = dplyr::any_of(c("congress", "cgnum", "icpsr", "year", "elected",
                               "votepct", "seniority", "votepct_sq", "sensq",
                               "deleg_size", "party_code", "born", "died",
                               "thomas_num", "cd")),
-      as.integer)) |>
+      .fns = as.integer)) |>
     dplyr::mutate(dplyr::across(
       .cols = dplyr::any_of(c("dem", "majority", "female", "afam", "latino",
                               "chair", "subchr", "state_leg", "maj_leader",
                               "min_leader", "power", "freshman", "speaker")),
-      as.logical))
+      .fns = as.logical))
 
   # bill progress columns have different names in the LES2 sheets
   if (les_2) {
@@ -102,7 +102,7 @@ fix_les_coltypes <- function(df, les_2) {
                                 "ssbill2", "ssaic2", "ssabc2", "sspass2", "sslaw2",
                                 "expectation2", "allbill2", "allaic2",
                                 "allabc2", "allpass2", "alllaw2")),
-        as.integer))
+        .fns = as.integer))
   } else {
     df <- df |>
       dplyr::mutate(dplyr::across(
@@ -111,7 +111,7 @@ fix_les_coltypes <- function(df, les_2) {
                                 "ssbill1", "ssaic1", "ssabc1", "sspass1", "sslaw1",
                                 "expectation1", "allbill1", "allaic1",
                                 "allabc1", "allpass1", "alllaw1")),
-        as.integer))
+        .fns = as.integer))
   }
 
   df
