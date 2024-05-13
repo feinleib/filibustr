@@ -52,17 +52,17 @@ get_hvw_data <- function(chamber, read_from_local_path = NULL, write_to_local_pa
     # online reading
     url <- build_file_path(data_source = "hvw", chamber = chamber)
     online_file <- get_online_data(url = url, source_name = "Harvard Dataverse")
-    df <- readr::read_tsv(online_file, show_col_types = FALSE)
+    df <- readr::read_tsv(file = online_file, show_col_types = FALSE)
   } else {
     # local reading
-    df <- read_local_file(read_from_local_path, show_col_types = FALSE)
+    df <- read_local_file(path = read_from_local_path, show_col_types = FALSE)
   }
 
   # no filtering by `chamber` since the House and Senate sheets don't join
 
   # write to local file
   if (!is.null(write_to_local_path)) {
-    write_local_file(write_to_local_path)
+    write_local_file(df = df, path = write_to_local_path)
   }
 
   df

@@ -44,13 +44,12 @@ get_online_data <- function(url, source_name) {
   httr2::resp_body_string(response)
 }
 
-read_local_file <- function(path, ...) {
-  file_ending <- stringr::str_extract(path, "(?<=\\.)[:alpha:]{3}$") |> tolower()
+read_local_file <- function(path, show_col_types) {
   switch(file_ending,
-         csv = readr::read_csv(path, ...),
-         tsv = readr::read_tsv(path, ...),
-         tab = readr::read_tsv(path, ...),
-         dta = haven::read_dta(path, ...),
+         csv = readr::read_csv(file = path, show_col_types = show_col_types),
+         tsv = readr::read_tsv(file = path, show_col_types = show_col_types),
+         tab = readr::read_tsv(file = path, show_col_types = show_col_types),
+         dta = haven::read_dta(file = path),
          cli::cli_abort(c(
            "Invalid `path` provided:",
            "x" = "{path}",
@@ -58,13 +57,12 @@ read_local_file <- function(path, ...) {
          )))
 }
 
-write_local_file <- function(path, ...) {
-  file_ending <- stringr::str_extract(path, "(?<=\\.)[:alpha:]{3}$") |> tolower()
+write_local_file <- function(df, path, ...) {
   switch(file_ending,
-         csv = readr::write_csv(path, ...),
-         tsv = readr::write_tsv(path, ...),
-         tab = readr::write_tsv(path, ...),
-         dta = haven::write_dta(path, ...),
+         csv = readr::write_csv(x = df, file = path, ...),
+         tsv = readr::write_tsv(x = df, file = path, ...),
+         tab = readr::write_tsv(x = df, file = path, ...),
+         dta = haven::write_dta(data = df, path = path, label = NULL),
          cli::cli_abort(c(
            "Invalid `path` provided:",
            "x" = "{path}",
