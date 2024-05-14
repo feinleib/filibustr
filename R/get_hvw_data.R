@@ -60,10 +60,54 @@ get_hvw_data <- function(chamber, read_from_local_path = NULL, write_to_local_pa
   }
 
   # no filtering by `chamber` since the House and Senate sheets don't join
+  # fix column types
+  df <- df |>
+    fix_hvw_coltypes(chamber = chamber)
 
   # write to local file
   if (!is.null(write_to_local_path)) {
     write_local_file(df = df, path = write_to_local_path)
+  }
+
+  df
+}
+
+fix_hvw_coltypes <- function(df, chamber) {
+  chamber_code <- match_chamber(chamber)
+
+  df <- df |>
+    dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c("state", "st_name")),
+                                .fns = ~ factor(.x, levels = datasets::state.abb))) |>
+    dplyr::mutate(dplyr::across(.cols = "expectation",
+                                .fns = as.factor)) |>
+    dplyr::mutate(dplyr::across(.cols = c("congress", "icpsr", "year", "elected",
+                                          "seniority", "maj_leader", "min_leader",
+                                          "deleg_size", "icpsr_2", "name", "party",
+                                          dplyr::starts_with("count_"),
+                                          "cong", "time", "majsize", "majmargin"),
+                                .fns = as.integer)) |>
+    dplyr::mutate(dplyr::across(.cols = c("dem", "majority", "female", "afam", "latino",
+                                          "chair", "subchr", "state_leg", "power",
+                                          "freshman", "post1994"),
+                                .fns = as.logical))
+
+  if (chamber_code == "s") {
+    df <- df |>
+      dplyr::mutate(dplyr::across(.cols = c("cabc":"cpass", "sabc":"spass",
+                                            "ssabc":"sspass", "cgnum", "allbill":"alllaw",
+                                            "nonclaw"),
+                                  .fns = as.integer)) |>
+      dplyr::mutate(dplyr::across(.cols = "up_for_reelection",
+                                  .fns = as.logical))
+  } else if (chamber_code == "hr") {
+    df <- df |>
+      dplyr::mutate(dplyr::across(.cols = c("thomas_num", "cd", "ss_bills":"ss_law",
+                                            "s_bills":"s_law", "c_bills":"c_law",
+                                            "all_bills":"all_law", "icpsr_trimmed",
+                                            "law_hhiker"),
+                                  .fns = as.integer)) |>
+      dplyr::mutate(dplyr::across(.cols = c("speaker", "budget"),
+                                  .fns = as.logical))
   }
 
   df

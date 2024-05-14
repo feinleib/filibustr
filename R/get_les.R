@@ -80,7 +80,7 @@ fix_les_coltypes <- function(df, les_2) {
     # using `any_of()` because of colname differences between S and HR sheets
     dplyr::mutate(dplyr::across(
       .cols = dplyr::any_of(c("state", "st_name")),
-      .fns = \(.x) factor(.x, levels = state.abb))) |>
+      .fns = ~ factor(.x, levels = datasets::state.abb))) |>
     dplyr::mutate(dplyr::across(
       .cols = dplyr::any_of(c("congress", "cgnum", "icpsr", "year", "elected",
                               "votepct", "seniority", "votepct_sq", "sensq",
