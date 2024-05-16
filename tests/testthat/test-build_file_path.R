@@ -155,41 +155,25 @@ test_that("`build_file_path()` for HVW", {
 })
 
 # LES --------------------------------------------
-test_that("`build_les_file_path()`: online paths", {
+test_that("`build_les_url()`: online paths", {
   # classic LES
-  expect_equal(build_les_file_path(chamber_code = "H", les_2 = F, local = F),
+  expect_equal(build_les_url(chamber_code = "H", les_2 = FALSE),
                "https://thelawmakers.org/wp-content/uploads/2023/04/CELHouse93to117ReducedClassic.dta")
-  expect_equal(build_les_file_path(chamber_code = "S", les_2 = F, local = F),
+  expect_equal(build_les_url(chamber_code = "S", les_2 = FALSE),
                "https://thelawmakers.org/wp-content/uploads/2023/04/CELSenate93to117ReducedClassic.dta")
 
   # LES 2
-  expect_equal(build_les_file_path(chamber_code = "H", les_2 = T, local = F),
+  expect_equal(build_les_url(chamber_code = "H", les_2 = TRUE),
                "https://thelawmakers.org/wp-content/uploads/2023/04/CELHouse117ReducedLES2.dta")
-  expect_equal(build_les_file_path(chamber_code = "S", les_2 = T, local = F),
+  expect_equal(build_les_url(chamber_code = "S", les_2 = TRUE),
                "https://thelawmakers.org/wp-content/uploads/2023/04/CELSenate117ReducedLES2.dta")
 })
 
-test_that("`build_les_file_path()`: local paths", {
-  # basics
-  expect_equal(build_les_file_path(chamber_code = "H", les_2 = F, local = T),
-               "./CELHouse93to117ReducedClassic.dta")
-  expect_equal(build_les_file_path(chamber_code = "S", les_2 = T, local = T),
-               "./CELSenate117ReducedLES2.dta")
-
-  # local_dir
-  expect_equal(build_les_file_path(chamber_code = "S", les_2 = F,
-                                   local = T, local_dir = "~/Downloads"),
-               "~/Downloads/CELSenate93to117ReducedClassic.dta")
-  expect_equal(build_les_file_path(chamber_code = "H", les_2 = T,
-                                   local = T, local_dir = "./subdir/subsubdir"),
-               "./subdir/subsubdir/CELHouse117ReducedLES2.dta")
-})
-
-test_that("`build_les_file_path()`: invalid `chamber_code` errors", {
+test_that("`build_les_url()`: invalid `chamber_code` errors", {
   # any `chamber_code` beside "H" or "S" is an error
-  expect_error(build_les_file_path(chamber_code = "HS"),
+  expect_error(build_les_url(chamber_code = "HS"),
                "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_les\\(\\)`.")
-  expect_error(build_les_file_path(chamber_code = "foo"),
+  expect_error(build_les_url(chamber_code = "foo"),
                "Invalid `chamber` argument \\(\"foo\"\\) provided for `get_les\\(\\)`.")
 })
 

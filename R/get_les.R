@@ -4,8 +4,6 @@
 #' [Legislative Effectiveness Scores data](https://thelawmakers.org/data-download)
 #' from the Center for Effective Lawmaking.
 #'
-#' @inheritParams get_voteview_members
-#'
 #' @param chamber Which chamber to get data for. Options are:
 #'  * `"house"`, `"h"`, `"hr"`: House data only.
 #'  * `"senate"`, `"s"`, `"sen"`: Senate data only.
@@ -34,7 +32,13 @@
 #'  that become law. LES 2.0 is only available for the 117th Congress.
 #'  Classic LES is available for the 93rd through 117th Congresses.
 #'
-#' @param local `r lifecycle::badge('experimental')` `r doc_arg_local("Center for Effective Lawmaking")`
+#' @param read_from_local_path `r lifecycle::badge('experimental')` A file path for
+#'  reading from a local file. If no `read_from_local_path` is specified,
+#'  `get_hvw_data()` will read data from the Center for Effective Lawmaking website.
+#'
+#' @param write_to_local_path `r lifecycle::badge('experimental')` A file path for
+#'  writing to a local file. `get_les()` will write a file to this local path
+#'  in addition to reading data into R.
 #'
 #' @returns A [tibble()].
 #'
@@ -60,19 +64,33 @@
 #' # LES 2.0 (117th Congress)
 #' get_les("house", les_2 = TRUE)
 #' get_les("senate", les_2 = TRUE)
-get_les <- function(chamber, les_2 = FALSE, local = TRUE, local_dir = ".") {
-  # TODO: pass a sheet_type instead of les_2?
-  full_path <- build_file_path(data_source = "les", chamber = chamber, sheet_type = les_2,
-                               local = local, local_dir = local_dir)
+get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL, write_to_local_path = NULL) {
+  if (is.null(read_from_local_path)) {
+    # TODO: pass a sheet_type instead of les_2?
+    full_path <- build_file_path(data_source = "les", chamber = chamber, sheet_type = les_2)
 
-  # check that online connection is working
-  # TODO: fuller error handling with `get_online_data()`
-  if (R.utils::isUrl(full_path) & !crul::ok(full_path, info = F)) {
-    stop("ERROR: Could not connect to Center for Effective Lawmaking website")
+    # check that online connection is working
+    # TODO: fuller error handling with `get_online_data()`
+    if (R.utils::isUrl(full_path) & !crul::ok(full_path, info = F)) {
+      stop("ERROR: Could not connect to Center for Effective Lawmaking website")
+    }
+
+    df <- haven::read_dta(full_path)
+  } else {
+    # local reading
+    df <- read_local_file(path = read_from_local_path, show_col_types = FALSE)
   }
 
-  haven::read_dta(full_path) |>
+  # fix column types
+  df <- df |>
     fix_les_coltypes(les_2 = les_2)
+
+  # write to local file
+  if (!is.null(write_to_local_path)) {
+    write_local_file(df = df, path = write_to_local_path)
+  }
+
+  df
 }
 
 fix_les_coltypes <- function(df, les_2) {

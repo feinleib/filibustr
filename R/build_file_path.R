@@ -12,9 +12,7 @@ build_file_path <- function(data_source, chamber = "all", congress = NULL,
                                         local = local, local_dir = local_dir),
     hvw = build_hvw_url(chamber_code = chamber_code),
     lhy = build_hvw_url(chamber_code = chamber_code),
-    les = build_les_file_path(les_2 = sheet_type,
-                              chamber_code = chamber_code,
-                              local = local, local_dir = local_dir),
+    les = build_les_url(les_2 = sheet_type, chamber_code = chamber_code),
     "source not implemented"
   )
 
@@ -60,7 +58,7 @@ build_hvw_url <- function(chamber_code) {
   paste0(source, "/", file)
 }
 
-build_les_file_path <- function(chamber_code, les_2 = FALSE, local = TRUE, local_dir = ".") {
+build_les_url <- function(chamber_code, les_2 = FALSE) {
   # no "all" option for LES
   if (!(chamber_code %in% c("H", "S"))) {
     cli::cli_abort(c(
@@ -69,10 +67,7 @@ build_les_file_path <- function(chamber_code, les_2 = FALSE, local = TRUE, local
     ))
   }
 
-  les_source <- "https://thelawmakers.org/wp-content/uploads/2023/04"
-  source <- ifelse(local,
-                   local_dir,
-                   les_source)
+  source <- "https://thelawmakers.org/wp-content/uploads/2023/04"
   chamber_name <- ifelse(chamber_code == "H",
                          "House",
                          "Senate")
