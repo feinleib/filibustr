@@ -60,6 +60,7 @@ get_hvw_data <- function(chamber, read_from_local_path = NULL, write_to_local_pa
   }
 
   # no filtering by `chamber` since the House and Senate sheets don't join
+
   # fix column types
   df <- df |>
     fix_hvw_coltypes(chamber = chamber)
@@ -91,7 +92,7 @@ fix_hvw_coltypes <- function(df, chamber) {
                                           "freshman", "post1994"),
                                 .fns = as.logical))
 
-  if (chamber_code == "s") {
+  if (chamber_code == "S") {
     df <- df |>
       dplyr::mutate(dplyr::across(.cols = c("cabc":"cpass", "sabc":"spass",
                                             "ssabc":"sspass", "cgnum", "allbill":"alllaw",
@@ -99,7 +100,7 @@ fix_hvw_coltypes <- function(df, chamber) {
                                   .fns = as.integer)) |>
       dplyr::mutate(dplyr::across(.cols = "up_for_reelection",
                                   .fns = as.logical))
-  } else if (chamber_code == "hr") {
+  } else if (chamber_code == "H") {
     df <- df |>
       dplyr::mutate(dplyr::across(.cols = c("thomas_num", "cd", "ss_bills":"ss_law",
                                             "s_bills":"s_law", "c_bills":"c_law",
