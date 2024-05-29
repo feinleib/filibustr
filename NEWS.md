@@ -9,6 +9,7 @@
 * `get_voteview_members()`: fix factor levels in the `state_abbrev` column.
 * New `get_voteview_cast_codes()` provides the cast codes used in 
   Voteview's member votes data (#13).
+* Removed dependency on {tidyselect}.
 
 # filibustr 0.2.1 (2024-05-02)
 

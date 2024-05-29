@@ -24,8 +24,7 @@ Imports:
     rlang,
     rvest,
     stringr,
-    tidyr,
-    tidyselect
+    tidyr
 URL: https://github.com/feinleib/filibustr
 BugReports: https://github.com/feinleib/filibustr/issues
 Suggests: 
