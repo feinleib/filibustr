@@ -69,14 +69,14 @@ fix_hvw_coltypes <- function(df, chamber, read_from_local_path) {
 
   df <- df |>
     dplyr::mutate(dplyr::across(.cols = c("congress", "icpsr", "year", "elected",
-                                          "seniority", "maj_leader", "min_leader",
-                                          "deleg_size", "icpsr_2", "name", "party",
+                                          "seniority", "deleg_size", "icpsr_2",
+                                          "name", "party",
                                           dplyr::starts_with("count_"),
                                           "cong", "time", "majsize", "majmargin"),
                                 .fns = as.integer)) |>
     dplyr::mutate(dplyr::across(.cols = c("dem", "majority", "female", "afam", "latino",
-                                          "chair", "subchr", "state_leg", "power",
-                                          "freshman", "post1994"),
+                                          "chair", "subchr", "state_leg", "maj_leader",
+                                          "min_leader", "power", "freshman", "post1994"),
                                 .fns = as.logical))
 
   # convert state abbreviations to factor
