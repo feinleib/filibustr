@@ -36,10 +36,6 @@
 #'  reading from a local file. If no `read_from_local_path` is specified,
 #'  `get_hvw_data()` will read data from the Center for Effective Lawmaking website.
 #'
-#' @param write_to_local_path `r lifecycle::badge('experimental')` A file path for
-#'  writing to a local file. `get_les()` will write a file to this local path
-#'  in addition to reading data into R.
-#'
 #' @returns A [tibble()].
 #'
 #' @details
@@ -64,7 +60,7 @@
 #' # LES 2.0 (117th Congress)
 #' get_les("house", les_2 = TRUE)
 #' get_les("senate", les_2 = TRUE)
-get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL, write_to_local_path = NULL) {
+get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL) {
   if (is.null(read_from_local_path)) {
     # TODO: pass a sheet_type instead of les_2?
     full_path <- build_file_path(data_source = "les", chamber = chamber, sheet_type = les_2)
@@ -84,11 +80,6 @@ get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL, write_t
   # fix column types
   df <- df |>
     fix_les_coltypes(les_2 = les_2)
-
-  # write to local file
-  if (!is.null(write_to_local_path)) {
-    write_local_file(df = df, path = write_to_local_path)
-  }
 
   df
 }
