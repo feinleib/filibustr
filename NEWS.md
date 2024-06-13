@@ -5,7 +5,7 @@
   specify the file path using the `read_from_local_path` argument. To write to 
   a local file, use the `write_to_local_path` argument (#4, #17).
 * Improved error messages with `cli::cli_abort()` (#9).
-* `get_les()` now uses more specific column types (#10).
+* `get_les()` and `get_hvw_data()` now use more specific column types (#10).
 * `get_voteview_members()`: fix factor levels in the `state_abbrev` column.
 * New `get_voteview_cast_codes()` provides the cast codes used in 
   Voteview's member votes data (#13).
