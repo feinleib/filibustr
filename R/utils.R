@@ -74,11 +74,16 @@ write_local_file <- function(df, path, ...) {
 
 # extracts the file ending from a file path
 extract_file_ending <- function(path) {
+  # just pass back NULL values
+  if (is.null(path)) {
+    return(path)
+  }
+
   ending <- stringr::str_extract(string = path,
                                  pattern = "(?<=\\.)[:alpha:]+$") |>
     tolower()
 
-  if (is.na(ending)) {
+  if (isTRUE(is.na(ending))) {
     cli::cli_abort(c(
       "Can't extract file ending from `path` {path}.",
       "i" = "`path` must end with a file extension of 1+ letters coming after a period."
