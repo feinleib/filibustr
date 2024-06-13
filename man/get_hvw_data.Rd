@@ -4,7 +4,7 @@
 \alias{get_hvw_data}
 \title{Get replication data from Harbridge-Yong, Volden, and Wiseman (2023)}
 \usage{
-get_hvw_data(chamber, read_from_local_path = NULL, write_to_local_path = NULL)
+get_hvw_data(chamber, read_from_local_path = NULL)
 }
 \arguments{
 \item{chamber}{Which chamber to get data for. Options are:
@@ -24,10 +24,6 @@ You \emph{must} specify either House or Senate data, since there is no "default"
 \item{read_from_local_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} A file path for
 reading from a local file. If no \code{read_from_local_path} is specified,
 \code{get_hvw_data()} will read data from the Harvard Dataverse website.}
-
-\item{write_to_local_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} A file path for
-writing to a local file. \code{get_hvw_data()} will write a file to this local path
-in addition to reading data into R.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.

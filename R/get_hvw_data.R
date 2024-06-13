@@ -37,10 +37,6 @@
 #'  reading from a local file. If no `read_from_local_path` is specified,
 #'  `get_hvw_data()` will read data from the Harvard Dataverse website.
 #'
-#' @param write_to_local_path `r lifecycle::badge('experimental')` A file path for
-#'  writing to a local file. `get_hvw_data()` will write a file to this local path
-#'  in addition to reading data into R.
-#'
 #' @returns A [tibble()].
 #' @export
 #'
@@ -48,7 +44,7 @@
 #' get_hvw_data("senate")
 #' @examplesIf interactive()
 #' get_hvw_data("house")
-get_hvw_data <- function(chamber, read_from_local_path = NULL, write_to_local_path = NULL) {
+get_hvw_data <- function(chamber, read_from_local_path = NULL) {
   if (is.null(read_from_local_path)) {
     # online reading
     url <- build_file_path(data_source = "hvw", chamber = chamber)
@@ -63,24 +59,15 @@ get_hvw_data <- function(chamber, read_from_local_path = NULL, write_to_local_pa
 
   # fix column types
   df <- df |>
-    fix_hvw_coltypes(chamber = chamber)
-
-  # write to local file
-  if (!is.null(write_to_local_path)) {
-    write_local_file(df = df, path = write_to_local_path)
-  }
+    fix_hvw_coltypes(chamber = chamber, read_from_local_path = read_from_local_path)
 
   df
 }
 
-fix_hvw_coltypes <- function(df, chamber) {
+fix_hvw_coltypes <- function(df, chamber, read_from_local_path) {
   chamber_code <- match_chamber(chamber)
 
   df <- df |>
-    dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c("state", "st_name")),
-                                .fns = ~ factor(.x, levels = datasets::state.abb))) |>
-    dplyr::mutate(dplyr::across(.cols = "expectation",
-                                .fns = as.factor)) |>
     dplyr::mutate(dplyr::across(.cols = c("congress", "icpsr", "year", "elected",
                                           "seniority", "maj_leader", "min_leader",
                                           "deleg_size", "icpsr_2", "name", "party",
@@ -92,6 +79,22 @@ fix_hvw_coltypes <- function(df, chamber) {
                                           "freshman", "post1994"),
                                 .fns = as.logical))
 
+  # convert state abbreviations to factor
+  # (using `haven::as_factor()` if applicable)
+  if (isTRUE(extract_file_ending(read_from_local_path) == "dta")) {
+    df <- df |>
+      dplyr::mutate(dplyr::across(.cols = c(dplyr::any_of(c("state", "st_name")),
+                                            "expectation"),
+                                  .fns = haven::as_factor))
+  } else {
+    df <- df |>
+      dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c("state", "st_name")),
+                                  .fns = ~ factor(.x, levels = datasets::state.abb))) |>
+      dplyr::mutate(dplyr::across(.cols = "expectation",
+                                  .fns = as.factor))
+  }
+
+  # batches of chamber-specific columns (easier than `dplyr::any_of()`)
   if (chamber_code == "S") {
     df <- df |>
       dplyr::mutate(dplyr::across(.cols = c("cabc":"cpass", "sabc":"spass",
