@@ -5,11 +5,15 @@
   specify the file path using the `read_from_local_path` argument. To write to 
   a local file, use the `write_to_local_path` argument (#4, #17).
 * Improved error messages with `cli::cli_abort()` (#9).
-* `get_les()` and `get_hvw_data()` now use more specific column types (#10).
 * `get_voteview_members()`: fix factor levels in the `state_abbrev` column.
 * New `get_voteview_cast_codes()` provides the cast codes used in 
   Voteview's member votes data (#13).
 * Removed dependency on {tidyselect}.
+* `get_les()` and `get_hvw_data()` now use more specific column types, such as integer for count
+  data and logical for binary data (#10).
+   * NOTE: state abbreviations (`state`, `st_name`) and LES scores relative to expectation
+     (`expectation`, `expectation1`, `expectation2`) are now factor variables.
+* In `get_les()`, 0- or 1-character strings for `bioname` are converted to `NA`.
 
 # filibustr 0.2.1 (2024-05-02)
 
