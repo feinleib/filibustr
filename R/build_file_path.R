@@ -33,9 +33,7 @@ build_file_path <- function(data_source, chamber = "all", congress = NULL,
 build_voteview_file_path <- function(sheet_type, chamber_code = "HS", congress_code = "all",
                                      local = TRUE, local_dir = ".") {
   voteview_source <- paste0("https://voteview.com/static/data/out/", sheet_type)
-  source <- ifelse(local,
-                   local_dir,
-                   voteview_source)
+  source <- if (local) local_dir else voteview_source
 
   paste0(source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
 }
@@ -49,11 +47,8 @@ build_hvw_url <- function(chamber_code) {
     ))
   }
 
-  # online files
   source <- "https://dataverse.harvard.edu/api/access/datafile"
-  file <- ifelse(chamber_code == "H",
-                 "6299608",
-                 "6299605")
+  file <- if (chamber_code == "H") "6299608" else "6299605"
 
   paste0(source, "/", file)
 }
@@ -68,12 +63,8 @@ build_les_url <- function(chamber_code, les_2 = FALSE) {
   }
 
   source <- "https://thelawmakers.org/wp-content/uploads/2023/04"
-  chamber_name <- ifelse(chamber_code == "H",
-                         "House",
-                         "Senate")
-  sheet_type <- ifelse(les_2,
-                       "117ReducedLES2",
-                       "93to117ReducedClassic")
+  chamber_name <- if (chamber_code == "H") "House" else "Senate"
+  sheet_type <- if (les_2) "117ReducedLES2" else "93to117ReducedClassic"
 
   paste0(source, "/CEL", chamber_name, sheet_type, ".dta")
 }
@@ -122,10 +113,12 @@ match_chamber <- function(chamber) {
 #'
 #' @noRd
 match_congress <- function(congress) {
-  ifelse(test = is.numeric(congress) &&
-           congress >= 1 &&
-           congress <= current_congress(),
-         yes = stringr::str_pad(string = as.integer(congress),
-                                width = 3, side = "left", pad = 0),
-         no = "all")
+  if (is.numeric(congress) &&
+      congress >= 1 &&
+      congress <= current_congress()) {
+    stringr::str_pad(string = as.integer(congress),
+                     width = 3, side = "left", pad = 0)
+  } else {
+    "all"
+  }
 }

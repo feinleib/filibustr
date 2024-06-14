@@ -82,7 +82,8 @@ get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL) {
     fix_les_coltypes(read_from_local_path = read_from_local_path) |>
     # convert 0/1-character `bioname` values to NA
     dplyr::mutate(dplyr::across(.cols = "bioname",
-                                .fns = ~ ifelse(nchar(.x) <= 1, NA, .x)))
+                                .fns = ~ dplyr::if_else(nchar(.x) <= 1, NA, .x,
+                                                        ptype = character(1))))
 
   df
 }
