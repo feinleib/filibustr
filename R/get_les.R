@@ -77,19 +77,19 @@ get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL) {
     df <- read_local_file(path = read_from_local_path, show_col_types = FALSE)
   }
 
-  # fix column types
   df <- df |>
-    fix_les_coltypes()
+    # fix column types
+    fix_les_coltypes(read_from_local_path = read_from_local_path) |>
+    # convert 0/1-character `bioname` values to NA
+    dplyr::mutate(dplyr::across(.cols = "bioname",
+                                .fns = ~ ifelse(nchar(.x) <= 1, NA, .x)))
 
   df
 }
 
-fix_les_coltypes <- function(df) {
+fix_les_coltypes <- function(df, read_from_local_path) {
   df <- df |>
     # using `any_of()` because of colname differences between S and HR sheets
-    dplyr::mutate(dplyr::across(
-      .cols = dplyr::any_of(c("state", "st_name")),
-      .fns = ~ factor(.x, levels = datasets::state.abb))) |>
     dplyr::mutate(dplyr::across(
       .cols = c("congress", "icpsr", "year", "elected",
                 "votepct", "seniority", "votepct_sq", "deleg_size",
@@ -106,10 +106,23 @@ fix_les_coltypes <- function(df) {
       .cols = c("dem", "majority", "female", "afam", "latino",
                 "chair", "subchr", "state_leg", "maj_leader",
                 "min_leader", "power", "freshman", dplyr::any_of("speaker")),
-      .fns = as.logical)) |>
-    # LES vs. expectation: factor
-    dplyr::mutate(dplyr::across(.cols = dplyr::matches("expectation[12]"),
-                                .fns = factor))
+      .fns = as.logical))
+
+  # convert state and expectation to factors (using haven function if applicable)
+  if (isTRUE(extract_file_ending(read_from_local_path) == "dta")) {
+    df <- df |>
+      # no need to specify levels if it's already coming from saved data
+      dplyr::mutate(dplyr::across(.cols = c(dplyr::any_of(c("state", "st_name")),
+                                            dplyr::matches("expectation[12]")),
+                                  .fns = haven::as_factor))
+  } else {
+    df <- df |>
+      dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c("state", "st_name")),
+                                  .fns = ~ factor(.x, levels = datasets::state.abb))) |>
+      # LES vs. expectation
+      dplyr::mutate(dplyr::across(.cols = dplyr::matches("expectation[12]"),
+                                  .fns = factor))
+  }
 
   df
 }
