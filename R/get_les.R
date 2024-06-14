@@ -79,12 +79,12 @@ get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL) {
 
   # fix column types
   df <- df |>
-    fix_les_coltypes(les_2 = les_2)
+    fix_les_coltypes()
 
   df
 }
 
-fix_les_coltypes <- function(df, les_2) {
+fix_les_coltypes <- function(df) {
   df <- df |>
     # using `any_of()` because of colname differences between S and HR sheets
     dplyr::mutate(dplyr::across(
