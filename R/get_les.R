@@ -91,37 +91,25 @@ fix_les_coltypes <- function(df, les_2) {
       .cols = dplyr::any_of(c("state", "st_name")),
       .fns = ~ factor(.x, levels = datasets::state.abb))) |>
     dplyr::mutate(dplyr::across(
-      .cols = dplyr::any_of(c("congress", "cgnum", "icpsr", "year", "elected",
-                              "votepct", "seniority", "votepct_sq", "sensq",
-                              "deleg_size", "party_code", "born", "died",
-                              "thomas_num", "cd")),
+      .cols = c("congress", "icpsr", "year", "elected",
+                "votepct", "seniority", "votepct_sq", "deleg_size",
+                "party_code", "born", "died",
+                dplyr::any_of(c("cgnum", "sensq", "thomas_num", "cd")),
+                # bill progress columns (cbill, sslaw, etc.)
+                dplyr::matches(stringr::regex("^[:lower:]{1,3}bill[12]$")),
+                dplyr::matches(stringr::regex("^[:lower:]{1,3}aic[12]$")),
+                dplyr::matches(stringr::regex("^[:lower:]{1,3}abc[12]$")),
+                dplyr::matches(stringr::regex("^[:lower:]{1,3}pass[12]$")),
+                dplyr::matches(stringr::regex("^[:lower:]{1,3}law[12]$"))),
       .fns = as.integer)) |>
     dplyr::mutate(dplyr::across(
-      .cols = dplyr::any_of(c("dem", "majority", "female", "afam", "latino",
-                              "chair", "subchr", "state_leg", "maj_leader",
-                              "min_leader", "power", "freshman", "speaker")),
-      .fns = as.logical))
-
-  # bill progress columns have different names in the LES2 sheets
-  if (les_2) {
-    df <- df |>
-      dplyr::mutate(dplyr::across(
-        .cols = dplyr::any_of(c("cbill2", "caic2", "cabc2", "cpass2", "claw2",
-                                "sbill2", "saic2", "sabc2", "spass2", "slaw2",
-                                "ssbill2", "ssaic2", "ssabc2", "sspass2", "sslaw2",
-                                "expectation2", "allbill2", "allaic2",
-                                "allabc2", "allpass2", "alllaw2")),
-        .fns = as.integer))
-  } else {
-    df <- df |>
-      dplyr::mutate(dplyr::across(
-        .cols = dplyr::any_of(c("cbill1", "caic1", "cabc1", "cpass1", "claw1",
-                                "sbill1", "saic1", "sabc1", "spass1", "slaw1",
-                                "ssbill1", "ssaic1", "ssabc1", "sspass1", "sslaw1",
-                                "expectation1", "allbill1", "allaic1",
-                                "allabc1", "allpass1", "alllaw1")),
-        .fns = as.integer))
-  }
+      .cols = c("dem", "majority", "female", "afam", "latino",
+                "chair", "subchr", "state_leg", "maj_leader",
+                "min_leader", "power", "freshman", dplyr::any_of("speaker")),
+      .fns = as.logical)) |>
+    # LES vs. expectation: factor
+    dplyr::mutate(dplyr::across(.cols = dplyr::matches("expectation[12]"),
+                                .fns = factor))
 
   df
 }
