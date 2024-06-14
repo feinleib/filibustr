@@ -77,3 +77,57 @@ test_that("column types", {
   expect_length(dplyr::select(hr_2, dplyr::where(is.character)), 3)
   expect_length(dplyr::select(hr_2, dplyr::where(is.logical)), 13)
 })
+
+test_that("LES local reading and writing", {
+  ## create temp file paths
+  tmp_csv <- tempfile(fileext = ".csv")
+  tmp_tab <- tempfile(fileext = ".tab")
+  tmp_tsv <- tempfile(fileext = ".tsv")
+  tmp_dta <- tempfile(fileext = ".dta")
+
+  ## download data from online
+  s1_online <- get_les("s", les_2 = FALSE)
+  expect_s3_class(s1_online, "tbl_df")
+  readr::write_csv(s1_online, tmp_csv)
+
+  h1_online <- get_les("hr", les_2 = FALSE)
+  expect_s3_class(h1_online, "tbl_df")
+  readr::write_tsv(h1_online, tmp_tab)
+
+  s2_online <- get_les("s", les_2 = TRUE)
+  expect_s3_class(s1_online, "tbl_df")
+  readr::write_tsv(s2_online, tmp_tsv)
+
+  h2_online <- get_les("hr", les_2 = TRUE)
+  expect_s3_class(h1_online, "tbl_df")
+  haven::write_dta(h2_online, tmp_dta)
+
+  ## check that local data matches
+  s1_local <- get_les("s", les_2 = FALSE, read_from_local_path = tmp_csv)
+  expect_s3_class(s1_local, "tbl_df")
+  expect_equal(s1_local, haven::zap_label(haven::zap_formats(s1_online)))
+
+  h1_local <- get_les("hr", les_2 = FALSE, read_from_local_path = tmp_tab)
+  expect_s3_class(h1_local, "tbl_df")
+  expect_equal(h1_local, haven::zap_label(haven::zap_formats(h1_online)))
+
+  s2_local <- get_les("s", les_2 = TRUE, read_from_local_path = tmp_tsv)
+  expect_s3_class(s2_local, "tbl_df")
+  expect_equal(s2_local, haven::zap_label(haven::zap_formats(s2_online)))
+
+  h2_local <- get_les("hr", les_2 = TRUE, read_from_local_path = tmp_dta)
+  expect_s3_class(h2_local, "tbl_df")
+  # don't need to zap label/formats since we saved data in a DTA file
+  expect_equal(h2_local, h2_online)
+
+  ## test that re-written data matches
+  readr::write_csv(h1_local, tmp_csv)
+  h1_rewritten <- get_les("hr", les_2 = FALSE, read_from_local_path = tmp_csv)
+  expect_s3_class(h1_rewritten, "tbl_df")
+  expect_equal(h1_rewritten, h1_local)
+
+  haven::write_dta(s2_local, tmp_dta)
+  s2_rewritten <- get_les("s", les_2 = TRUE, read_from_local_path = tmp_dta)
+  expect_s3_class(s2_rewritten, "tbl_df")
+  expect_equal(haven::zap_formats(s2_rewritten), s2_local)
+})
