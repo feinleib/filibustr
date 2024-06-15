@@ -28,7 +28,7 @@ doc_arg_local <- function(data_source) {
 #' get_online_data("https://dataverse.harvard.edu/api/access/datafile/6299608", "Harvard Dataverse")
 #'
 #' @noRd
-get_online_data <- function(url, source_name) {
+get_online_data <- function(url, source_name, return_format = "string") {
   error_body <- function(response) {
     paste("ERROR", response$status_code,
           "when retrieving online data from the", source_name, "website.")
@@ -40,8 +40,14 @@ get_online_data <- function(url, source_name) {
     httr2::req_error(body = error_body) |>
     httr2::req_perform()
 
-  # return response body as UTF-8 string
-  httr2::resp_body_string(response)
+  # return response body
+  if (return_format == "raw") {
+    # raw bytes
+    return(httr2::resp_body_raw(response))
+  } else {
+    # default: UTF-8 string
+    return(httr2::resp_body_string(response))
+  }
 }
 
 read_local_file <- function(path, show_col_types) {
