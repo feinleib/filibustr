@@ -62,16 +62,13 @@
 #' get_les("senate", les_2 = TRUE)
 get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL) {
   if (is.null(read_from_local_path)) {
+    # online reading
     # TODO: pass a sheet_type instead of les_2?
     url <- build_file_path(data_source = "les", chamber = chamber, sheet_type = les_2)
-
-    # check that online connection is working
-    # TODO: fuller error handling with `get_online_data()`
-    if (R.utils::isUrl(url) && !crul::ok(url, info = F)) {
-      cli::cli_abort("Could not connect to Center for Effective Lawmaking website.")
-    }
-
-    df <- haven::read_dta(url)
+    online_file <- get_online_data(url = url,
+                                   source_name = "Center for Effective Lawmaking",
+                                   return_format = "raw")
+    df <- haven::read_dta(online_file)
   } else {
     # local reading
     df <- read_local_file(path = read_from_local_path, show_col_types = FALSE)
