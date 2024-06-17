@@ -50,7 +50,7 @@ test_that("match congress number", {
 test_that("invalid data sources for `build_file_path()`", {
   expect_error(build_file_path(), "argument \"data_source\" is missing, with no default")
   expect_error(build_file_path(data_source = ""), "Invalid data source name: ")
-  expect_error(build_file_path(data_source = "not a source"), "Invalid data source name: not a source")
+  expect_error(build_file_path(data_source = "not a source"), "Invalid data source name: \"not a source\"")
 })
 
 # Voteview ---------------------------------------

@@ -15,7 +15,10 @@ build_file_path <- function(data_source, chamber = "all", congress = NULL, sheet
   )
 
   if (file_path == "source not implemented") {
-    stop("Invalid data source name: ", data_source)
+    cli::cli_abort(c(
+      "Invalid data source name: \"{data_source}\"",
+      "i" = "Expected data sources (case-insensitive): Voteview, HVW, LHY, LES"
+    ))
   }
 
   file_path
