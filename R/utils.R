@@ -50,12 +50,12 @@ get_online_data <- function(url, source_name, return_format = "string") {
   }
 }
 
-read_local_file <- function(path, show_col_types) {
+read_local_file <- function(path, ...) {
   file_ending <- extract_file_ending(path = path)
   switch(file_ending,
-         csv = readr::read_csv(file = path, show_col_types = show_col_types),
-         tsv = readr::read_tsv(file = path, show_col_types = show_col_types),
-         tab = readr::read_tsv(file = path, show_col_types = show_col_types),
+         csv = readr::read_csv(file = path, ...),
+         tsv = readr::read_tsv(file = path, ...),
+         tab = readr::read_tsv(file = path, ...),
          dta = haven::read_dta(file = path),
          cli::cli_abort(c(
            "Invalid `path` provided:",
