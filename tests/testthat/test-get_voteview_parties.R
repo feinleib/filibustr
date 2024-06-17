@@ -13,6 +13,14 @@ test_that("filter parties by congress", {
   expect_length(parties_99_101, 9)
   expect_equal(nrow(parties_99_101), 15)
   expect_equal(unique(parties_99_101$congress), 99:101)
+  expect_equal(levels(parties_99_101$party_name),
+               c("Republican", "Democrat"))
 
-  curr_parties <- get_voteview_parties(congress = current_congress())
+  parties_117 <- get_voteview_parties(congress = 117)
+  expect_s3_class(parties_117, "tbl_df")
+  expect_length(parties_117, 9)
+  expect_equal(nrow(parties_117), 7)
+  expect_equal(unique(parties_117$congress), 117)
+  expect_equal(levels(parties_117$party_name),
+               c("Democrat", "Republican", "Independent"))
 })
