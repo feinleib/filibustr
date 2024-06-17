@@ -54,51 +54,34 @@ test_that("invalid data sources for `build_file_path()`", {
 })
 
 # Voteview ---------------------------------------
-test_that("`build_voteview_file_path()`: online paths", {
+test_that("`build_voteview_url()`: online paths", {
   # sheet_type
-  expect_equal(build_voteview_file_path(sheet_type = "members", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "members"),
                "https://voteview.com/static/data/out/members/HSall_members.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "votes", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "votes"),
                "https://voteview.com/static/data/out/votes/HSall_votes.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "parties", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "parties"),
                "https://voteview.com/static/data/out/parties/HSall_parties.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "rollcalls", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "rollcalls"),
                "https://voteview.com/static/data/out/rollcalls/HSall_rollcalls.csv")
 
   # chamber_code
-  expect_equal(build_voteview_file_path(sheet_type = "votes", chamber_code = "HS", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "votes", chamber_code = "HS"),
                "https://voteview.com/static/data/out/votes/HSall_votes.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "votes", chamber_code = "S", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "votes", chamber_code = "S"),
                "https://voteview.com/static/data/out/votes/Sall_votes.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "votes", chamber_code = "H", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "votes", chamber_code = "H"),
                "https://voteview.com/static/data/out/votes/Hall_votes.csv")
 
   # congress_code
-  expect_equal(build_voteview_file_path(sheet_type = "parties", congress_code = "001", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "parties", congress_code = "001"),
                "https://voteview.com/static/data/out/parties/HS001_parties.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "parties", congress_code = "090", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "parties", congress_code = "090"),
                "https://voteview.com/static/data/out/parties/HS090_parties.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "parties", congress_code = "118", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "parties", congress_code = "118"),
                "https://voteview.com/static/data/out/parties/HS118_parties.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "parties", congress_code = "all", local = FALSE),
+  expect_equal(build_voteview_url(sheet_type = "parties", congress_code = "all"),
                "https://voteview.com/static/data/out/parties/HSall_parties.csv")
-})
-
-test_that("`build_voteview_file_path()`: local paths", {
-  # basics
-  expect_equal(build_voteview_file_path(sheet_type = "members", local = TRUE),
-               "./HSall_members.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "parties", congress_code = "105", local = TRUE),
-               "./HS105_parties.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "votes", chamber_code = "S", local = TRUE),
-               "./Sall_votes.csv")
-
-  # local_dir
-  expect_equal(build_voteview_file_path(sheet_type = "rollcalls", local = TRUE, local_dir = "dir"),
-               "dir/HSall_rollcalls.csv")
-  expect_equal(build_voteview_file_path(sheet_type = "votes", chamber_code = "H", congress_code = "042",
-                                        local = TRUE, local_dir = "../other_dir/subdir"),
-               "../other_dir/subdir/H042_votes.csv")
 })
 
 test_that("`build_file_path()` for Voteview", {
@@ -115,8 +98,6 @@ test_that("`build_file_path()` for Voteview", {
                "https://voteview.com/static/data/out/rollcalls/Sall_rollcalls.csv")
   expect_equal(build_file_path(data_source = "voteview", sheet_type = "votes", chamber = "hr", congress = 90),
                "https://voteview.com/static/data/out/votes/H090_votes.csv")
-
-  # TODO: specify local path
 })
 
 # Harbridge-Yong, Volden, and Wiseman ------------

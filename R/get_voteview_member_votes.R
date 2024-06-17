@@ -17,9 +17,6 @@
 #' @examplesIf interactive()
 #' get_voteview_member_votes()
 #'
-#' # Force to get data from Voteview website
-#' get_voteview_member_votes(local = FALSE)
-#'
 #' # Get data for only one chamber
 #' get_voteview_member_votes(chamber = "house")
 #' get_voteview_member_votes(chamber = "senate")
@@ -32,24 +29,31 @@
 #' # Get data for a set of Congresses
 #' get_voteview_member_votes(congress = 1:3)
 #'
-get_voteview_member_votes <- function(chamber = "all", congress = NULL,
-                                      local = TRUE, local_dir = ".") {
+get_voteview_member_votes <- function(chamber = "all",
+                                      congress = NULL,
+                                      read_from_local_path = NULL) {
   # join multiple congresses
-  if (length(congress) > 1 & is.numeric(congress)) {
-    list_of_dfs <- lapply(congress,
-                          function(.cong) get_voteview_member_votes(local = local,
-                                                                    local_dir = local_dir,
-                                                                    chamber = chamber,
-                                                                    congress = .cong))
+  if (length(congress) > 1 && is.numeric(congress)) {
+    list_of_dfs <- lapply(congress, function(.cong) {
+      get_voteview_member_votes(chamber = chamber,
+                                congress = .cong,
+                                read_from_local_path = read_from_local_path)
+    })
     return(dplyr::bind_rows(list_of_dfs))
   }
 
-  full_path <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
-                               sheet_type = "votes", local = local, local_dir = local_dir)
+  if (is.null(read_from_local_path)) {
+    # online reading
+    url <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
+                           sheet_type = "votes")
+    online_file <- get_online_data(url = url, source_name = "Voteview")
+    df <- readr::read_csv(online_file, col_types = "ifiddd", na = c("", "N/A"))
+  } else {
+    # local reading
+    df <- read_local_file(path = read_from_local_path, col_types = "ifiddd", na = c("", "N/A"))
+  }
 
-  # TODO: error handling with `get_online_data()`
-
-  readr::read_csv(full_path, col_types = "ifiddd", na = c("", "N/A")) |>
+  df |>
     dplyr::mutate(dplyr::across(.cols = c("icpsr", "cast_code"),
                                 .fns = as.integer))
 }

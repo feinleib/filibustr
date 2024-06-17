@@ -1,15 +1,13 @@
-build_file_path <- function(data_source, chamber = "all", congress = NULL,
-                            sheet_type = NULL, local = TRUE, local_dir = ".") {
+build_file_path <- function(data_source, chamber = "all", congress = NULL, sheet_type = NULL) {
   chamber_code <- match_chamber(chamber)
 
   congress_code <- match_congress(congress)
 
   file_path <- switch(
     tolower(data_source),
-    voteview = build_voteview_file_path(sheet_type = sheet_type,
-                                        chamber_code = chamber_code,
-                                        congress_code = congress_code,
-                                        local = local, local_dir = local_dir),
+    voteview = build_voteview_url(sheet_type = sheet_type,
+                                  chamber_code = chamber_code,
+                                  congress_code = congress_code),
     hvw = build_hvw_url(chamber_code = chamber_code),
     lhy = build_hvw_url(chamber_code = chamber_code),
     les = build_les_url(les_2 = sheet_type, chamber_code = chamber_code),
@@ -20,20 +18,11 @@ build_file_path <- function(data_source, chamber = "all", congress = NULL,
     stop("Invalid data source name: ", data_source)
   }
 
-  # if local file doesn't exist, fall back to online
-  if (local && !file.exists(file_path)) {
-    file_path <- build_file_path(data_source = data_source,
-                                 chamber = chamber, congress = congress,
-                                 sheet_type = sheet_type, local = FALSE)
-  }
-
   file_path
 }
 
-build_voteview_file_path <- function(sheet_type, chamber_code = "HS", congress_code = "all",
-                                     local = TRUE, local_dir = ".") {
-  voteview_source <- paste0("https://voteview.com/static/data/out/", sheet_type)
-  source <- if (local) local_dir else voteview_source
+build_voteview_url <- function(sheet_type, chamber_code = "HS", congress_code = "all") {
+  source <- paste0("https://voteview.com/static/data/out/", sheet_type)
 
   paste0(source, "/", chamber_code, congress_code, "_", sheet_type, ".csv")
 }

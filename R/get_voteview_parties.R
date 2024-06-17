@@ -15,9 +15,6 @@
 #' @examplesIf interactive()
 #' get_voteview_parties()
 #'
-#' # Force to get data from Voteview website
-#' get_voteview_parties(local = FALSE)
-#'
 #' # get parties for only one chamber
 #' # NOTE: the President is included in all data
 #' get_voteview_parties(chamber = "house")
@@ -32,23 +29,27 @@
 #' # get parties for a set of Congresses
 #' get_voteview_parties(congress = 1:10)
 #'
-get_voteview_parties <- function(chamber = "all", congress = NULL, local = TRUE, local_dir = ".") {
+get_voteview_parties <- function(chamber = "all", congress = NULL, read_from_local_path = NULL) {
   # join multiple congresses
-  if (length(congress) > 1 & is.numeric(congress)) {
-    list_of_dfs <- lapply(congress, function(.cong) get_voteview_parties(local = local,
-                                                                         local_dir = local_dir,
-                                                                         chamber = chamber,
-                                                                         congress = .cong))
+  if (length(congress) > 1 && is.numeric(congress)) {
+    list_of_dfs <- lapply(congress, function(.cong) {
+      get_voteview_parties(chamber = chamber,
+                           congress = .cong,
+                           read_from_local_path = read_from_local_path)
+      })
     return(dplyr::bind_rows(list_of_dfs))
   }
 
-  full_path <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
-                               sheet_type = "parties", local = local, local_dir = local_dir)
-
-  # request data from online
-  if (R.utils::isUrl(full_path)) {
-    full_path <- get_online_data(url = full_path, source_name = "Voteview")
+  if (is.null(read_from_local_path)) {
+    # online reading
+    url <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
+                           sheet_type = "parties")
+    online_file <- get_online_data(url = url, source_name = "Voteview")
+    df <- readr::read_csv(online_file, col_types = "ififidddd")
+  } else {
+    # local reading
+    df <- read_local_file(path = read_from_local_path, col_types = "ififidddd")
   }
 
-  readr::read_csv(full_path, col_types = "ififidddd")
+  df
 }

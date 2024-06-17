@@ -22,10 +22,9 @@
 #'  If specified, Congress numbers cannot be greater than the [current_congress()]
 #'  (i.e., you cannot try to get future data).
 #'
-#' @param local `r lifecycle::badge('experimental')` `r doc_arg_local("Voteview")`
-#'
-#' @param local_dir `r lifecycle::badge('experimental')` The directory containing
-#'  the local file. Defaults to the working directory.
+#' @param read_from_local_path `r lifecycle::badge('experimental')` (Optional) A file path
+#'  for reading from a local file. If no `read_from_local_path` is specified, will read
+#'  data from the Voteview website.
 #'
 #' @returns A [tibble()].
 #'
@@ -47,9 +46,6 @@
 #' @examplesIf interactive()
 #' get_voteview_members()
 #'
-#' # Force to get data from Voteview website
-#' get_voteview_members(local = FALSE)
-#'
 #' # Get data for only one chamber
 #' # NOTE: the President is included in all data
 #' get_voteview_members(chamber = "house")
@@ -64,26 +60,29 @@
 #' # Get data for a set of Congresses
 #' get_voteview_members(congress = 1:10)
 #'
-get_voteview_members <- function(chamber = "all", congress = NULL, local = TRUE, local_dir = ".") {
+get_voteview_members <- function(chamber = "all", congress = NULL, read_from_local_path = NULL) {
   # join multiple congresses
-  if (length(congress) > 1 & is.numeric(congress)) {
-    list_of_dfs <- lapply(congress, function(.cong) get_voteview_members(local = local,
-                                                                         local_dir = local_dir,
-                                                                         chamber = chamber,
-                                                                         congress = .cong))
+  if (length(congress) > 1 && is.numeric(congress)) {
+    list_of_dfs <- lapply(congress, function(.cong) {
+      get_voteview_members(chamber = chamber,
+                           congress = .cong,
+                           read_from_local_path = read_from_local_path)
+    })
     return(dplyr::bind_rows(list_of_dfs))
   }
 
-  full_path <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
-                               sheet_type = "members", local = local, local_dir = local_dir)
-
-  # request data from online
-  if (R.utils::isUrl(full_path)) {
-    full_path <- get_online_data(url = full_path, source_name = "Voteview")
+  if (is.null(read_from_local_path)) {
+    # online reading
+    url <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
+                           sheet_type = "members")
+    online_file <- get_online_data(url = url, source_name = "Voteview")
+    df <- readr::read_csv(online_file, col_types = "ifiinfiiiccnnnnnni")
+  } else {
+    # local reading
+    df <- read_local_file(path = read_from_local_path, col_types = "ifiinfiiiccnnnnnni")
   }
 
-  readr::read_csv(full_path,
-                  col_types = "ifiinfiiiccnnnnnni") |>
+  df |>
     # fix order of state abbreviations
     dplyr::mutate(dplyr::across(.cols = "state_abbrev",
                                 .fns = ~ factor(.x, levels = c(datasets::state.abb, "USA"))))

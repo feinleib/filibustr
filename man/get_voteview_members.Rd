@@ -7,8 +7,7 @@
 get_voteview_members(
   chamber = "all",
   congress = NULL,
-  local = TRUE,
-  local_dir = "."
+  read_from_local_path = NULL
 )
 }
 \arguments{
@@ -31,10 +30,9 @@ Optional; will retrieve data for all Congresses by default.
 If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}
 (i.e., you cannot try to get future data).}
 
-\item{local}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Whether to read the data from a local file, as opposed to the Voteview website. Default is \code{TRUE}. If the local file does not exist, will fall back to reading from online.}
-
-\item{local_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} The directory containing
-the local file. Defaults to the working directory.}
+\item{read_from_local_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} (Optional) A file path
+for reading from a local file. If no \code{read_from_local_path} is specified, will read
+data from the Voteview website.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.
@@ -61,9 +59,6 @@ and Luke Sonnet (2023). \emph{Voteview: Congressional Roll-Call Votes Database}.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_voteview_members()
-
-# Force to get data from Voteview website
-get_voteview_members(local = FALSE)
 
 # Get data for only one chamber
 # NOTE: the President is included in all data

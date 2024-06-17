@@ -1,5 +1,5 @@
 test_that("download from Voteview", {
-  online_voteview_members <- get_voteview_members(local = FALSE)
+  online_voteview_members <- get_voteview_members()
   expect_s3_class(online_voteview_members, "tbl_df")
   expect_length(online_voteview_members, 22)
   expect_equal(levels(online_voteview_members$chamber),
@@ -23,13 +23,6 @@ test_that("filter by chamber", {
   # TODO: how to correctly test for a warning? This still produces a warning in the test.
   # expect_warning(get_voteview_members(chamber = "not a chamber"),
   #                "Invalid `chamber` argument \\(\"not a chamber\"\\) provided\\. Using `chamber = \"all\"`\\.")
-})
-
-test_that("online fallback", {
-  expect_equal(get_voteview_members(local_dir = "fake_folder_DNE"),
-               get_voteview_members(local = FALSE))
-  expect_equal(get_voteview_members(),
-               get_voteview_members(local = FALSE))
 })
 
 test_that("filter by congress", {
