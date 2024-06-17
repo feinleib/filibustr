@@ -8,7 +8,7 @@
 * `get_voteview_members()`: fix factor levels in the `state_abbrev` column.
 * New `get_voteview_cast_codes()` provides the cast codes used in 
   Voteview's member votes data (#13).
-* Removed dependency on {tidyselect}.
+* Removed dependencies on {R.utils} and {tidyselect}.
 * `get_les()` and `get_hvw_data()` now use more specific column types, such as integer for count
   data and logical for binary data (#10).
    * NOTE: state abbreviations (`state`, `st_name`) and LES scores relative to expectation

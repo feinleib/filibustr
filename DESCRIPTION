@@ -18,7 +18,6 @@ Imports:
     haven,
     httr2,
     lifecycle,
-    R.utils,
     readr,
     rlang,
     rvest,
