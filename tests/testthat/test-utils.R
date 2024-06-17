@@ -1,24 +1,3 @@
-test_that("documentation for `local` arg", {
-  expect_equal(
-    doc_arg_local("Voteview"),
-    paste("Whether to read the data from a local file, as opposed to the Voteview website.",
-          "Default is `TRUE`.",
-          "If the local file does not exist, will fall back to reading from online.")
-  )
-  expect_equal(
-    doc_arg_local("Harvard Dataverse"),
-    paste("Whether to read the data from a local file, as opposed to the Harvard Dataverse website.",
-          "Default is `TRUE`.",
-          "If the local file does not exist, will fall back to reading from online.")
-  )
-  expect_equal(
-    doc_arg_local("Center for Effective Lawmaking"),
-    paste("Whether to read the data from a local file, as opposed to the Center for Effective Lawmaking website.",
-          "Default is `TRUE`.",
-          "If the local file does not exist, will fall back to reading from online.")
-  )
-})
-
 test_that("get_online_data(): Voteview members", {
   vv_resp_members_s117 <- get_online_data(
     "https://voteview.com/static/data/out/members/S117_members.csv", "Voteview")

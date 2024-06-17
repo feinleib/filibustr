@@ -4,14 +4,6 @@ read_html_table <- function(url, css) {
     rvest::html_table()
 }
 
-# TODO: can remove this function when I finish removing all the `local` arguments
-doc_arg_local <- function(data_source) {
-  paste("Whether to read the data from a local file, as opposed to the", data_source, "website.",
-        "Default is `TRUE`.",
-        "If the local file does not exist, will fall back to reading from online.")
-}
-
-
 #' Retrieve data from an Internet resource
 #'
 #' Performs a web request, with retries in the case of HTTP errors.
