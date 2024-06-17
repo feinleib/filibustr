@@ -43,17 +43,20 @@ get_online_data <- function(url, source_name, return_format = "string") {
 }
 
 read_local_file <- function(path, ...) {
-  file_ending <- extract_file_ending(path = path)
+  file_ending <- extract_file_ending(path = path, call = rlang::caller_env())
   switch(file_ending,
          csv = readr::read_csv(file = path, ...),
          tsv = readr::read_tsv(file = path, ...),
          tab = readr::read_tsv(file = path, ...),
          dta = haven::read_dta(file = path),
-         cli::cli_abort(c(
-           "Invalid `path` provided:",
-           "x" = "{path}",
-           "i" = "File must be in one of the following formats: .csv, .dta, .tab, .tsv"
-         )))
+         cli::cli_abort(
+           c(
+             "Invalid {.arg path} provided:",
+             "x" = "{.arg {path}}",
+             "i" = "File must be in one of the following formats: .csv, .dta, .tab, .tsv"
+           ),
+           call = rlang::caller_env()
+         ))
 }
 
 write_local_file <- function(df, path, ...) {
@@ -64,14 +67,14 @@ write_local_file <- function(df, path, ...) {
          tab = readr::write_tsv(x = df, file = path, ...),
          dta = haven::write_dta(data = df, path = path, label = NULL),
          cli::cli_abort(c(
-           "Invalid `path` provided:",
-           "x" = "{path}",
+           "Invalid {.arg path} provided:",
+           "x" = "{.arg {path}}",
            "i" = "File must be in one of the following formats: .csv, .dta, .tab, .tsv"
          )))
 }
 
 # extracts the file ending from a file path
-extract_file_ending <- function(path) {
+extract_file_ending <- function(path, call = rlang::caller_env()) {
   # just pass back NULL values
   if (is.null(path)) {
     return(path)
@@ -83,9 +86,10 @@ extract_file_ending <- function(path) {
 
   if (isTRUE(is.na(ending))) {
     cli::cli_abort(c(
-      "Can't extract file ending from `path` {path}.",
-      "i" = "`path` must end with a file extension of 1+ letters coming after a period."
-    ))
+      "Can't extract file ending from {.arg path {path}}.",
+      "i" = "{.arg path} must end with a file extension of 1+ letters coming after a period."
+    ),
+    call = call)
   }
 
   ending

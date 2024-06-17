@@ -16,8 +16,9 @@ build_url <- function(data_source, chamber = "all", congress = NULL, sheet_type 
 
   if (url == "source not implemented") {
     cli::cli_abort(c(
-      "Invalid data source name: \"{data_source}\"",
-      "i" = "Expected data sources (case-insensitive): Voteview, HVW, LHY, LES"
+      "Invalid data source name: {.arg {data_source}}",
+      "i" = paste("Expected data sources (case-insensitive):",
+                  "{.arg Voteview},", "{.arg HVW},", "{.arg LHY},", "{.arg LES}")
     ))
   }
 
@@ -34,9 +35,11 @@ build_hvw_url <- function(chamber_code) {
   # no "all" option for HVW
   if (!(chamber_code %in% c("H", "S"))) {
     cli::cli_abort(c(
-      "Invalid `chamber` argument (\"{chamber_code}\") provided for `get_hvw_data()`.",
-      "i" = "`chamber` must be either House or Senate, not both."
-    ))
+      paste("Invalid {.arg chamber} argument ({.arg {chamber_code}})",
+            "provided for {.code get_hvw_data()}."),
+      "i" = "{.arg chamber} must be either House or Senate, not both."
+    ),
+    call = rlang::caller_env(2))
   }
 
   source <- "https://dataverse.harvard.edu/api/access/datafile"
@@ -49,9 +52,10 @@ build_les_url <- function(chamber_code, les_2 = FALSE) {
   # no "all" option for LES
   if (!(chamber_code %in% c("H", "S"))) {
     cli::cli_abort(c(
-      "Invalid `chamber` argument (\"{chamber_code}\") provided for `get_les()`.",
-      "i" = "`chamber` must be either House or Senate, not both."
-    ))
+      "Invalid {.arg chamber} argument ({.arg {chamber_code}}) provided for {.code get_les()}.",
+      "i" = "{.arg chamber} must be either House or Senate, not both."
+    ),
+    call = rlang::caller_env(2))
   }
 
   source <- "https://thelawmakers.org/wp-content/uploads/2023/04"
@@ -70,7 +74,9 @@ match_chamber <- function(chamber) {
 
   # Warn for invalid chamber argument
   if (chamber_code == "HS_default") {
-    cli::cli_warn("Invalid `chamber` argument (\"{chamber}\") provided. Using `chamber = \"all\"`.")
+    cli::cli_warn(paste("Invalid {.arg chamber} argument ({.arg {chamber}}) provided.",
+                        "Using {.arg chamber = \"all\"}."),
+                  call = rlang::caller_env())
     chamber_code <- "HS"
   }
 

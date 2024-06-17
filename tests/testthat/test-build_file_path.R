@@ -50,7 +50,7 @@ test_that("match congress number", {
 test_that("invalid data sources for `build_url()`", {
   expect_error(build_url(), "argument \"data_source\" is missing, with no default")
   expect_error(build_url(data_source = ""), "Invalid data source name: ")
-  expect_error(build_url(data_source = "not a source"), "Invalid data source name: \"not a source\"")
+  expect_error(build_url(data_source = "not a source"), "Invalid data source name: `not a source`")
 })
 
 # Voteview ---------------------------------------
@@ -111,11 +111,11 @@ test_that("`build_hvw_url()`: online paths", {
 test_that("`build_hvw_url()`: invalid `chamber_code` errors", {
   # any `chamber_code` beside "H" or "S" is an error
   expect_error(build_hvw_url(chamber_code = "HS"),
-               "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_hvw_data\\(\\)`.")
+               "Invalid `chamber` argument \\(`HS`\\) provided for `get_hvw_data\\(\\)`.")
   expect_error(build_hvw_url(chamber_code = "HS"),
                "Invalid `chamber` argument")
   expect_error(build_hvw_url(chamber_code = "something else"),
-               "Invalid `chamber` argument \\(\"something else\"\\) provided for `get_hvw_data\\(\\)`.")
+               "Invalid `chamber` argument \\(`something else`\\) provided for `get_hvw_data\\(\\)`.")
 })
 
 test_that("`build_url()` for HVW", {
@@ -132,7 +132,7 @@ test_that("`build_url()` for HVW", {
 
   # need to specify a chamber
   expect_error(build_url(data_source = "hvw"),
-               "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_hvw_data\\(\\)`.")
+               "Invalid `chamber` argument \\(`HS`\\) provided for `get_hvw_data\\(\\)`.")
 })
 
 # LES --------------------------------------------
@@ -153,9 +153,9 @@ test_that("`build_les_url()`: online paths", {
 test_that("`build_les_url()`: invalid `chamber_code` errors", {
   # any `chamber_code` beside "H" or "S" is an error
   expect_error(build_les_url(chamber_code = "HS"),
-               "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_les\\(\\)`.")
+               "Invalid `chamber` argument \\(`HS`\\) provided for `get_les\\(\\)`.")
   expect_error(build_les_url(chamber_code = "foo"),
-               "Invalid `chamber` argument \\(\"foo\"\\) provided for `get_les\\(\\)`.")
+               "Invalid `chamber` argument \\(`foo`\\) provided for `get_les\\(\\)`.")
 })
 
 test_that("`build_url()` for LES", {
@@ -168,5 +168,5 @@ test_that("`build_url()` for LES", {
 
   # need to specify a chamber
   expect_error(build_url(data_source = "les"),
-               "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_les\\(\\)`.")
+               "Invalid `chamber` argument \\(`HS`\\) provided for `get_les\\(\\)`.")
 })
