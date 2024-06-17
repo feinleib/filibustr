@@ -42,8 +42,8 @@ get_voteview_parties <- function(chamber = "all", congress = NULL, read_from_loc
 
   if (is.null(read_from_local_path)) {
     # online reading
-    url <- build_file_path(data_source = "voteview", chamber = chamber, congress = congress,
-                           sheet_type = "parties")
+    url <- build_url(data_source = "voteview", chamber = chamber, congress = congress,
+                     sheet_type = "parties")
     online_file <- get_online_data(url = url, source_name = "Voteview")
     df <- readr::read_csv(online_file, col_types = "ififidddd")
   } else {

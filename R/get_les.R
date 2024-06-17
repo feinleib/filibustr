@@ -63,8 +63,8 @@
 get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL) {
   if (is.null(read_from_local_path)) {
     # online reading
-    # TODO: pass a sheet_type instead of les_2?
-    url <- build_file_path(data_source = "les", chamber = chamber, sheet_type = les_2)
+    # using `les_2` in place of a true `sheet_type`
+    url <- build_url(data_source = "les", chamber = chamber, sheet_type = les_2)
     online_file <- get_online_data(url = url,
                                    source_name = "Center for Effective Lawmaking",
                                    return_format = "raw")

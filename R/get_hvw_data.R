@@ -47,7 +47,7 @@
 get_hvw_data <- function(chamber, read_from_local_path = NULL) {
   if (is.null(read_from_local_path)) {
     # online reading
-    url <- build_file_path(data_source = "hvw", chamber = chamber)
+    url <- build_url(data_source = "hvw", chamber = chamber)
     online_file <- get_online_data(url = url, source_name = "Harvard Dataverse")
     df <- readr::read_tsv(file = online_file, show_col_types = FALSE)
   } else {

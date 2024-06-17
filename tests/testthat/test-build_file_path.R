@@ -47,10 +47,10 @@ test_that("match congress number", {
   expect_equal(match_congress("all"), "all")
 })
 
-test_that("invalid data sources for `build_file_path()`", {
-  expect_error(build_file_path(), "argument \"data_source\" is missing, with no default")
-  expect_error(build_file_path(data_source = ""), "Invalid data source name: ")
-  expect_error(build_file_path(data_source = "not a source"), "Invalid data source name: \"not a source\"")
+test_that("invalid data sources for `build_url()`", {
+  expect_error(build_url(), "argument \"data_source\" is missing, with no default")
+  expect_error(build_url(data_source = ""), "Invalid data source name: ")
+  expect_error(build_url(data_source = "not a source"), "Invalid data source name: \"not a source\"")
 })
 
 # Voteview ---------------------------------------
@@ -84,19 +84,19 @@ test_that("`build_voteview_url()`: online paths", {
                "https://voteview.com/static/data/out/parties/HSall_parties.csv")
 })
 
-test_that("`build_file_path()` for Voteview", {
+test_that("`build_url()` for Voteview", {
   # expected usage
-  expect_equal(build_file_path(data_source = "voteview", sheet_type = "parties"),
+  expect_equal(build_url(data_source = "voteview", sheet_type = "parties"),
                "https://voteview.com/static/data/out/parties/HSall_parties.csv")
-  expect_equal(build_file_path(data_source = "voteview", sheet_type = "rollcalls"),
+  expect_equal(build_url(data_source = "voteview", sheet_type = "rollcalls"),
                "https://voteview.com/static/data/out/rollcalls/HSall_rollcalls.csv")
 
   # specify chamber, congress
-  expect_equal(build_file_path(data_source = "voteview", sheet_type = "members", congress = 117),
+  expect_equal(build_url(data_source = "voteview", sheet_type = "members", congress = 117),
                "https://voteview.com/static/data/out/members/HS117_members.csv")
-  expect_equal(build_file_path(data_source = "voteview", sheet_type = "rollcalls", chamber = "senate"),
+  expect_equal(build_url(data_source = "voteview", sheet_type = "rollcalls", chamber = "senate"),
                "https://voteview.com/static/data/out/rollcalls/Sall_rollcalls.csv")
-  expect_equal(build_file_path(data_source = "voteview", sheet_type = "votes", chamber = "hr", congress = 90),
+  expect_equal(build_url(data_source = "voteview", sheet_type = "votes", chamber = "hr", congress = 90),
                "https://voteview.com/static/data/out/votes/H090_votes.csv")
 })
 
@@ -118,20 +118,20 @@ test_that("`build_hvw_url()`: invalid `chamber_code` errors", {
                "Invalid `chamber` argument \\(\"something else\"\\) provided for `get_hvw_data\\(\\)`.")
 })
 
-test_that("`build_file_path()` for HVW", {
+test_that("`build_url()` for HVW", {
   # hvw and lhy are equivalent
-  expect_equal(build_file_path(data_source = "hvw", chamber = "hr"),
+  expect_equal(build_url(data_source = "hvw", chamber = "hr"),
                "https://dataverse.harvard.edu/api/access/datafile/6299608")
-  expect_equal(build_file_path(data_source = "lhy", chamber = "hr"),
+  expect_equal(build_url(data_source = "lhy", chamber = "hr"),
                "https://dataverse.harvard.edu/api/access/datafile/6299608")
 
-  expect_equal(build_file_path(data_source = "hvw", chamber = "s"),
+  expect_equal(build_url(data_source = "hvw", chamber = "s"),
                "https://dataverse.harvard.edu/api/access/datafile/6299605")
-  expect_equal(build_file_path(data_source = "lhy", chamber = "s"),
+  expect_equal(build_url(data_source = "lhy", chamber = "s"),
                "https://dataverse.harvard.edu/api/access/datafile/6299605")
 
   # need to specify a chamber
-  expect_error(build_file_path(data_source = "hvw"),
+  expect_error(build_url(data_source = "hvw"),
                "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_hvw_data\\(\\)`.")
 })
 
@@ -158,15 +158,15 @@ test_that("`build_les_url()`: invalid `chamber_code` errors", {
                "Invalid `chamber` argument \\(\"foo\"\\) provided for `get_les\\(\\)`.")
 })
 
-test_that("`build_file_path()` for LES", {
+test_that("`build_url()` for LES", {
   # basics
-  # NOTE: `sheet_type` in `build_file_path()` refers to `les_2` for LES data
-  expect_equal(build_file_path(data_source = "les", chamber = "sen", sheet_type = FALSE),
+  # NOTE: `sheet_type` in `build_url()` refers to `les_2` for LES data
+  expect_equal(build_url(data_source = "les", chamber = "sen", sheet_type = FALSE),
                "https://thelawmakers.org/wp-content/uploads/2023/04/CELSenate93to117ReducedClassic.dta")
-  expect_equal(build_file_path(data_source = "les", chamber = "house", sheet_type = TRUE),
+  expect_equal(build_url(data_source = "les", chamber = "house", sheet_type = TRUE),
                "https://thelawmakers.org/wp-content/uploads/2023/04/CELHouse117ReducedLES2.dta")
 
   # need to specify a chamber
-  expect_error(build_file_path(data_source = "les"),
+  expect_error(build_url(data_source = "les"),
                "Invalid `chamber` argument \\(\"HS\"\\) provided for `get_les\\(\\)`.")
 })

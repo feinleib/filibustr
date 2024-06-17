@@ -1,9 +1,9 @@
-build_file_path <- function(data_source, chamber = "all", congress = NULL, sheet_type = NULL) {
+build_url <- function(data_source, chamber = "all", congress = NULL, sheet_type = NULL) {
   chamber_code <- match_chamber(chamber)
 
   congress_code <- match_congress(congress)
 
-  file_path <- switch(
+  url <- switch(
     tolower(data_source),
     voteview = build_voteview_url(sheet_type = sheet_type,
                                   chamber_code = chamber_code,
@@ -14,14 +14,14 @@ build_file_path <- function(data_source, chamber = "all", congress = NULL, sheet
     "source not implemented"
   )
 
-  if (file_path == "source not implemented") {
+  if (url == "source not implemented") {
     cli::cli_abort(c(
       "Invalid data source name: \"{data_source}\"",
       "i" = "Expected data sources (case-insensitive): Voteview, HVW, LHY, LES"
     ))
   }
 
-  file_path
+  url
 }
 
 build_voteview_url <- function(sheet_type, chamber_code = "HS", congress_code = "all") {
