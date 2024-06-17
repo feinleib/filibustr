@@ -36,7 +36,7 @@ get_online_data <- function(url, source_name, return_format = "string") {
 
   response <- httr2::request(url) |>
     httr2::req_user_agent("filibustr R package (https://cran.r-project.org/package=filibustr)") |>
-    httr2::req_retry() |>
+    httr2::req_retry(max_tries = 3) |>
     httr2::req_error(body = error_body) |>
     httr2::req_perform()
 
