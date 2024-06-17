@@ -1,9 +1,8 @@
 # filibustr (development version)
 
-* BREAKING CHANGE: Redesigned the interface for reading from local files, and 
-  added the ability to write to local files. Now, to read from a local file, 
-  specify the file path using the `read_from_local_path` argument. To write to 
-  a local file, use the `write_to_local_path` argument (#4, #17).
+* BREAKING CHANGE: Redesigned the interface for reading from local files. 
+  Now, to read from a local file, specify the file path using the 
+  `read_from_local_path` argument (#17).
 * Improved error messages with `cli::cli_abort()` (#9).
 * `get_voteview_members()`: fix factor levels in the `state_abbrev` column.
 * New `get_voteview_cast_codes()` provides the cast codes used in 
