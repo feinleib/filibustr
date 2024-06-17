@@ -33,9 +33,9 @@
 #'
 #'  You *must* specify either House or Senate data, since there is no "default" option.
 #'
-#' @param read_from_local_path `r lifecycle::badge('experimental')` A file path for
-#'  reading from a local file. If no `read_from_local_path` is specified,
-#'  `get_hvw_data()` will read data from the Harvard Dataverse website.
+#' @param read_from_local_path `r lifecycle::badge('experimental')` (Optional) A file path
+#'  for reading from a local file. If no `read_from_local_path` is specified,  will read
+#'  data from the Harvard Dataverse website.
 #'
 #' @returns A [tibble()].
 #' @export
