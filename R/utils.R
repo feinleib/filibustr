@@ -98,3 +98,24 @@ extract_file_ending <- function(path) {
 
   ending
 }
+
+# convert state and expectation to factors (using `haven::as_factor()` if applicable)
+# used in `fix_hvw_coltypes()` and `fix_les_coltypes()`
+create_factor_columns <- function(df, read_from_local_path) {
+  if (isTRUE(extract_file_ending(read_from_local_path) == "dta")) {
+    df <- df |>
+      # no need to specify levels if data is already coming from saved DTA file
+      dplyr::mutate(dplyr::across(.cols = c(dplyr::any_of(c("state", "st_name")),
+                                            dplyr::matches("expectation[12]?$")),
+                                  .fns = haven::as_factor))
+  } else {
+    df <- df |>
+      dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c("state", "st_name")),
+                                  .fns = ~ factor(.x, levels = datasets::state.abb))) |>
+      # LES vs. expectation (`expectation`/`expectation1`/`expectation2`)
+      dplyr::mutate(dplyr::across(.cols = dplyr::matches("expectation[12]?$"),
+                                  .fns = as.factor))
+  }
+
+  df
+}

@@ -79,20 +79,7 @@ fix_hvw_coltypes <- function(df, chamber, read_from_local_path) {
                                           "min_leader", "power", "freshman", "post1994"),
                                 .fns = as.logical))
 
-  # convert state abbreviations to factor
-  # (using `haven::as_factor()` if applicable)
-  if (isTRUE(extract_file_ending(read_from_local_path) == "dta")) {
-    df <- df |>
-      dplyr::mutate(dplyr::across(.cols = c(dplyr::any_of(c("state", "st_name")),
-                                            "expectation"),
-                                  .fns = haven::as_factor))
-  } else {
-    df <- df |>
-      dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c("state", "st_name")),
-                                  .fns = ~ factor(.x, levels = datasets::state.abb))) |>
-      dplyr::mutate(dplyr::across(.cols = "expectation",
-                                  .fns = as.factor))
-  }
+  df <- df |> create_factor_columns(read_from_local_path = read_from_local_path)
 
   # batches of chamber-specific columns (easier than `dplyr::any_of()`)
   if (chamber_code == "S") {
