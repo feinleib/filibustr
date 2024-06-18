@@ -54,3 +54,15 @@ test_that("filter by congress", {
   expect_equal(nrow(members_90_95), 3276)
 })
 
+test_that("column types", {
+  members_98 <- get_voteview_members(congress = 98)
+  expect_s3_class(members_98, "tbl_df")
+  expect_equal(nrow(members_98), 542)
+  expect_length(members_98, 22)
+
+  expect_length(dplyr::select(members_98, dplyr::where(is.double)), 6)
+  expect_length(dplyr::select(members_98, dplyr::where(is.integer)), 11)
+  expect_length(dplyr::select(members_98, dplyr::where(is.character)), 2)
+  expect_length(dplyr::select(members_98, dplyr::where(is.factor)), 2)
+  expect_length(dplyr::select(members_98, dplyr::where(is.logical)), 1)
+})

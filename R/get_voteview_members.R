@@ -76,14 +76,16 @@ get_voteview_members <- function(chamber = "all", congress = NULL, read_from_loc
     url <- build_url(data_source = "voteview", chamber = chamber, congress = congress,
                      sheet_type = "members")
     online_file <- get_online_data(url = url, source_name = "Voteview")
-    df <- readr::read_csv(online_file, col_types = "ifiinfiiiccnnnnnni")
+    df <- readr::read_csv(online_file, col_types = "ifiinfiiiccnnnnnniilnn")
   } else {
     # local reading
-    df <- read_local_file(path = read_from_local_path, col_types = "ifiinfiiiccnnnnnni")
+    df <- read_local_file(path = read_from_local_path, col_types = "ifiinfiiiccnnnnnniilnn")
   }
 
   df |>
     # fix order of state abbreviations
     dplyr::mutate(dplyr::across(.cols = "state_abbrev",
-                                .fns = ~ factor(.x, levels = c(datasets::state.abb, "USA"))))
+                                .fns = ~ factor(.x, levels = c(datasets::state.abb, "USA")))) |>
+    dplyr::mutate(dplyr::across(.cols = c("district_code", "born", "died"),
+                                .fns = as.integer))
 }
