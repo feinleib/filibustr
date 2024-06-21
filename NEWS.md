@@ -1,21 +1,22 @@
 # filibustr (development version)
 
 * BREAKING CHANGE: Redesigned the interface for reading from local files. 
-  Now, to read from a local file, specify the file path using the 
-  `read_from_local_path` argument (#17).
+  Now, to read from a local file, specify the file path using 
+  `read_from_local_path` (#17).
    * A given function call will now consistently read data from *either* online 
      or a local file, not try both. There is no longer an "online fallback" if 
      a local file is not found.
 * Improved error messages with `cli::cli_abort()` (#9).
 * When reading data from online, now try up to 3 times in case of HTTP errors.
-* New `get_voteview_cast_codes()` provides the cast codes used in 
-  Voteview's member votes data (#13).
+* New `get_voteview_cast_codes()` provides the cast codes used in Voteview's 
+  member votes data (#13).
 * Removed dependencies on {R.utils} and {tidyselect}.
 * `get_les()`, `get_hvw_data()`, and `get_voteview_members()` now use more 
-  specific column types, such as integer for count data and logical for binary
+  specific column types, such as integer for count data and logical for binary 
   data (#10).
-   * NOTE: state abbreviations (`state`, `st_name`) and LES scores relative to expectation
-     (`expectation`, `expectation1`, `expectation2`) are now factor variables.
+   * NOTE: state abbreviations (columns `state`, `st_name`) and LES scores 
+     relative to expectation (columns `expectation`, `expectation1`, 
+     `expectation2`) are now factor variables.
 * `get_voteview_members()`: fix factor levels in the `state_abbrev` column.
 * In `get_les()`, 0- or 1-character strings for `bioname` are converted to `NA`.
 
