@@ -22,33 +22,3 @@ test_that("get_online_data(): Voteview parties", {
   expect_equal(unique(parties_df$chamber), c("President", "House", "Senate"))
   expect_equal(unique(parties_df$congress), 1:118)
 })
-
-test_that("extract_file_ending(): expected operation", {
-  expect_identical(extract_file_ending("folder/file.csv"), "csv")
-  # capitalization doesn't matter
-  expect_identical(extract_file_ending("folder/file.csV"), "csv")
-  expect_identical(extract_file_ending("folder/file.CSV"), "csv")
-
-  # various file formats
-  expect_identical(extract_file_ending("~/folder/table.tsv"), "tsv")
-  expect_identical(extract_file_ending("~/folder/table.tab"), "tab")
-  expect_identical(extract_file_ending("~/dir/subdir/info.dta"), "dta")
-  expect_identical(extract_file_ending("not_a_file.abc"), "abc")
-
-  # extension length doesn't matter
-  expect_identical(extract_file_ending("utils.R"), "r")
-  expect_identical(extract_file_ending("utils.Rproj"), "rproj")
-})
-
-test_that("extract_file_ending(): errors", {
-  # no period-before-letters pattern
-  expect_error(extract_file_ending("filecsv"), "Can't extract file ending")
-  expect_error(extract_file_ending("file.,csv"), "Can't extract file ending")
-
-  # a double dot doesn't cause errors, though
-  expect_identical(extract_file_ending("A sentence for a file name..csv"), "csv")
-
-  # must end in letters
-  expect_error(extract_file_ending("file.csv."), "Can't extract file ending")
-  expect_error(extract_file_ending("file.csv123"), "Can't extract file ending")
-})

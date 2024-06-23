@@ -43,7 +43,7 @@ get_online_data <- function(url, source_name, return_format = "string") {
 }
 
 read_local_file <- function(path, ...) {
-  file_ending <- extract_file_ending(path = path, call = rlang::caller_env())
+  file_ending <- tools::file_ext(x = path)
   switch(file_ending,
          csv = readr::read_csv(file = path, ...),
          tsv = readr::read_tsv(file = path, ...),
@@ -59,32 +59,10 @@ read_local_file <- function(path, ...) {
          ))
 }
 
-# extracts the file ending from a file path
-extract_file_ending <- function(path, call = rlang::caller_env()) {
-  # just pass back NULL values
-  if (is.null(path)) {
-    return(path)
-  }
-
-  ending <- stringr::str_extract(string = path,
-                                 pattern = "(?<=\\.)[:alpha:]+$") |>
-    tolower()
-
-  if (isTRUE(is.na(ending))) {
-    cli::cli_abort(c(
-      "Can't extract file ending from {.arg path {path}}.",
-      "i" = "{.arg path} must end with a file extension of 1+ letters coming after a period."
-    ),
-    call = call)
-  }
-
-  ending
-}
-
 # convert state and expectation to factors (using `haven::as_factor()` if applicable)
 # used in `fix_hvw_coltypes()` and `fix_les_coltypes()`
 create_factor_columns <- function(df, read_from_local_path) {
-  if (isTRUE(extract_file_ending(read_from_local_path) == "dta")) {
+  if (isTRUE(tools::file_ext(read_from_local_path) == "dta")) {
     df <- df |>
       # no need to specify levels if data is already coming from saved DTA file
       dplyr::mutate(dplyr::across(.cols = c(dplyr::any_of(c("state", "st_name")),
