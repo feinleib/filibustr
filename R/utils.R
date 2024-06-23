@@ -59,20 +59,6 @@ read_local_file <- function(path, ...) {
          ))
 }
 
-write_local_file <- function(df, path, ...) {
-  file_ending <- extract_file_ending(path = path)
-  switch(file_ending,
-         csv = readr::write_csv(x = df, file = path, ...),
-         tsv = readr::write_tsv(x = df, file = path, ...),
-         tab = readr::write_tsv(x = df, file = path, ...),
-         dta = haven::write_dta(data = df, path = path, label = NULL),
-         cli::cli_abort(c(
-           "Invalid {.arg path} provided:",
-           "x" = "{.arg {path}}",
-           "i" = "File must be in one of the following formats: .csv, .dta, .tab, .tsv"
-         )))
-}
-
 # extracts the file ending from a file path
 extract_file_ending <- function(path, call = rlang::caller_env()) {
   # just pass back NULL values
