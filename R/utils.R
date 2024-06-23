@@ -6,12 +6,16 @@ read_html_table <- function(url, css) {
 
 #' Retrieve data from an Internet resource
 #'
-#' Performs a web request, with retries in the case of HTTP errors.
+#' Performs a web request, retrying up to 3 times in the case of HTTP errors.
 #' Returns the body of the HTTP response.
 #'
 #' @param url The URL to GET data from.
 #' @param data_source The name of the data source.
 #'  This name is used to make the error message more informative.
+#' @param return_format The desired format for the response body.
+#'  Supported options include `"string"` and `"raw"`, which correspond to
+#'  [httr2::resp_body_string()] (UTF-8 string) and [httr2::resp_body_raw()]
+#'  (raw bytes), respectively. Default is `"string"`.
 #'
 #' @return An HTTP response body, as a UTF-8 string.
 #'
