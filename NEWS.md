@@ -10,7 +10,6 @@
 * When reading data from online, now try up to 3 times in case of HTTP errors.
 * New `get_voteview_cast_codes()` provides the cast codes used in Voteview's 
   member votes data (#13).
-* Removed dependencies on {R.utils} and {tidyselect}.
 * `get_les()`, `get_hvw_data()`, and `get_voteview_members()` now use more 
   specific column types, such as integer for count data and logical for binary 
   data (#10).
@@ -19,6 +18,8 @@
      `expectation2`) are now factor variables.
 * `get_voteview_members()`: fix factor levels in the `state_abbrev` column.
 * In `get_les()`, 0- or 1-character strings for `bioname` are converted to `NA`.
+* Removed dependencies: {crul}, {R.utils}, {tidyselect}.
+* New dependencies: {cli}, {tools}.
 
 # filibustr 0.2.1 (2024-05-02)
 
