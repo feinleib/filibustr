@@ -82,10 +82,27 @@ get_voteview_members <- function(chamber = "all", congress = NULL, read_from_loc
     df <- read_local_file(path = read_from_local_path, col_types = "ifiinfiiiccnnnnnniilnn")
   }
 
-  df |>
-    # fix order of state abbreviations
-    dplyr::mutate(dplyr::across(.cols = "state_abbrev",
-                                .fns = ~ factor(.x, levels = c(datasets::state.abb, "USA")))) |>
+  df <- df |>
     dplyr::mutate(dplyr::across(.cols = c("district_code", "born", "died"),
                                 .fns = as.integer))
+
+
+  if (isTRUE(tools::file_ext(read_from_local_path) == "dta")) {
+    # fixes for coming from .dta files
+    df <- df |>
+      # no need to specify levels if data is already coming from saved DTA file
+      dplyr::mutate(dplyr::across(.cols = c("chamber", "state_abbrev"),
+                                  .fns = haven::as_factor),
+                    dplyr::across(.cols = "conditional",
+                                  .fns = as.logical),
+                    dplyr::across(.cols = "bioguide_id",
+                                  .fns = ~ dplyr::na_if(.x, "")))
+  } else {
+    # fix order of state abbreviations
+    df <- df |>
+      dplyr::mutate(dplyr::across(.cols = "state_abbrev",
+                                  .fns = ~ factor(.x, levels = c(datasets::state.abb, "USA"))))
+  }
+
+  df
 }
