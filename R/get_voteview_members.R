@@ -6,7 +6,7 @@
 #' Congress (i.e., each member is listed once for every two years in office).
 #'
 #' @param chamber Which chamber to get data for. Options are:
-#'  * `"all"`, `"congress"`: Both House and Senate data (the default).
+#'  * `"all"`, `"congress"`, `"hs"`: Both House and Senate data (the default).
 #'  * `"house"`, `"h"`, `"hr"`: House data only.
 #'  * `"senate"`, `"s"`, `"sen"`: Senate data only.
 #'  These options are case-insensitive. If you explicitly pass a different value,
@@ -38,7 +38,7 @@
 #' Please cite this dataset as:
 #'
 #' Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
-#' and Luke Sonnet (2023). *Voteview: Congressional Roll-Call Votes Database*.
+#' and Luke Sonnet (2024). *Voteview: Congressional Roll-Call Votes Database*.
 #' <https://voteview.com/>
 #'
 #' @export

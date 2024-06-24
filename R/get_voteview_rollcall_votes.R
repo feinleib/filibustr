@@ -3,11 +3,10 @@
 #' `get_voteview_rollcall_votes()` returns a tibble with information on recorded
 #' (roll call) votes in the House and Senate.
 #'
-#' @inheritParams get_voteview_members
-#' @inherit get_voteview_members details
+#' @inherit get_voteview_members
 #'
 #' @param chamber Which chamber to get data for. Options are:
-#'  * `"all"`, `"congress"`: Both House and Senate data (the default).
+#'  * `"all"`, `"congress"`, `"hs"`: Both House and Senate data (the default).
 #'  * `"house"`, `"h"`, `"hr"`: House data only.
 #'  * `"senate"`, `"s"`, `"sen"`: Senate data only.
 #'  These options are case-insensitive. If you explicitly pass a different value,

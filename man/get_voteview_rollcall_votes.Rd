@@ -13,7 +13,7 @@ get_voteview_rollcall_votes(
 \arguments{
 \item{chamber}{Which chamber to get data for. Options are:
 \itemize{
-\item \code{"all"}, \code{"congress"}: Both House and Senate data (the default).
+\item \code{"all"}, \code{"congress"}, \code{"hs"}: Both House and Senate data (the default).
 \item \code{"house"}, \code{"h"}, \code{"hr"}: House data only.
 \item \code{"senate"}, \code{"s"}, \code{"sen"}: Senate data only.
 These options are case-insensitive. If you explicitly pass a different value,
@@ -44,7 +44,7 @@ See the
 Please cite this dataset as:
 
 Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
-and Luke Sonnet (2023). \emph{Voteview: Congressional Roll-Call Votes Database}.
+and Luke Sonnet (2024). \emph{Voteview: Congressional Roll-Call Votes Database}.
 \url{https://voteview.com/}
 }
 \examples{

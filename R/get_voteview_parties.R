@@ -6,8 +6,7 @@
 #' Each row is one party in one chamber for each Congress (i.e., each party is listed
 #' once for every two years).
 #'
-#' @inheritParams get_voteview_members
-#' @inherit get_voteview_members details
+#' @inherit get_voteview_members
 #'
 #' @returns A [tibble()].
 #' @export

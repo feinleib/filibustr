@@ -5,6 +5,8 @@ test_that("match chamber", {
   expect_equal(match_chamber("ALL"), "HS")
   expect_equal(match_chamber("congress"), "HS")
   expect_equal(match_chamber("coNGrEsS"), "HS")
+  expect_equal(match_chamber("hs"), "HS")
+  expect_equal(match_chamber("HS"), "HS")
 
   # house
   expect_equal(match_chamber("h"), "H")

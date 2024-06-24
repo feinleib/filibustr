@@ -67,7 +67,7 @@ build_les_url <- function(chamber_code, les_2 = FALSE) {
 
 match_chamber <- function(chamber) {
   chamber_code <- dplyr::case_match(tolower(chamber),
-                                    c("all", "congress") ~ "HS",
+                                    c("all", "congress", "hs") ~ "HS",
                                     c("house", "h", "hr") ~ "H",
                                     c("senate", "s", "sen") ~ "S",
                                     .default = "HS_default")
