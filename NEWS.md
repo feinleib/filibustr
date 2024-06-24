@@ -1,8 +1,8 @@
 # filibustr (development version)
 
 * BREAKING CHANGE: Redesigned the interface for reading from local files. 
-  Now, to read from a local file, specify the file path using 
-  `read_from_local_path` (#17).
+  Now, to read from a local file, specify the file path using `local_path` 
+  (#17).
    * A given function call will now consistently read data from *either* online 
      or a local file, not try both. There is no longer an "online fallback" if 
      a local file is not found.

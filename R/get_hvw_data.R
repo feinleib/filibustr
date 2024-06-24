@@ -33,8 +33,8 @@
 #'
 #'  You *must* specify either House or Senate data, since there is no "default" option.
 #'
-#' @param read_from_local_path `r lifecycle::badge('experimental')` (Optional) A file path
-#'  for reading from a local file. If no `read_from_local_path` is specified,  will read
+#' @param local_path `r lifecycle::badge('experimental')` (Optional) A file path
+#'  for reading from a local file. If no `local_path` is specified,  will read
 #'  data from the Harvard Dataverse website.
 #'
 #' @returns A [tibble()].
@@ -44,27 +44,27 @@
 #' get_hvw_data("senate")
 #' @examplesIf interactive()
 #' get_hvw_data("house")
-get_hvw_data <- function(chamber, read_from_local_path = NULL) {
-  if (is.null(read_from_local_path)) {
+get_hvw_data <- function(chamber, local_path = NULL) {
+  if (is.null(local_path)) {
     # online reading
     url <- build_url(data_source = "hvw", chamber = chamber)
     online_file <- get_online_data(url = url, source_name = "Harvard Dataverse")
     df <- readr::read_tsv(file = online_file, show_col_types = FALSE)
   } else {
     # local reading
-    df <- read_local_file(path = read_from_local_path, show_col_types = FALSE)
+    df <- read_local_file(path = local_path, show_col_types = FALSE)
   }
 
   # no filtering by `chamber` since the House and Senate sheets don't join
 
   # fix column types
   df <- df |>
-    fix_hvw_coltypes(chamber = chamber, read_from_local_path = read_from_local_path)
+    fix_hvw_coltypes(chamber = chamber, local_path = local_path)
 
   df
 }
 
-fix_hvw_coltypes <- function(df, chamber, read_from_local_path) {
+fix_hvw_coltypes <- function(df, chamber, local_path) {
   chamber_code <- match_chamber(chamber)
 
   df <- df |>
@@ -79,7 +79,7 @@ fix_hvw_coltypes <- function(df, chamber, read_from_local_path) {
                                           "min_leader", "power", "freshman", "post1994"),
                                 .fns = as.logical))
 
-  df <- df |> create_factor_columns(read_from_local_path = read_from_local_path)
+  df <- df |> create_factor_columns(local_path = local_path)
 
   # batches of chamber-specific columns (easier than `dplyr::any_of()`)
   if (chamber_code == "S") {

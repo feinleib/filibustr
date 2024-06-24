@@ -22,8 +22,8 @@
 #'  If specified, Congress numbers cannot be greater than the [current_congress()]
 #'  (i.e., you cannot try to get future data).
 #'
-#' @param read_from_local_path `r lifecycle::badge('experimental')` (Optional) A file path
-#'  for reading from a local file. If no `read_from_local_path` is specified, will read
+#' @param local_path `r lifecycle::badge('experimental')` (Optional) A file path
+#'  for reading from a local file. If no `local_path` is specified, will read
 #'  data from the Voteview website.
 #'
 #' @returns A [tibble()].
@@ -60,18 +60,18 @@
 #' # Get data for a set of Congresses
 #' get_voteview_members(congress = 1:10)
 #'
-get_voteview_members <- function(chamber = "all", congress = NULL, read_from_local_path = NULL) {
+get_voteview_members <- function(chamber = "all", congress = NULL, local_path = NULL) {
   # join multiple congresses (for online downloads)
-  if (length(congress) > 1 && is.numeric(congress) && is.null(read_from_local_path)) {
+  if (length(congress) > 1 && is.numeric(congress) && is.null(local_path)) {
     list_of_dfs <- lapply(congress, function(.cong) {
       get_voteview_members(chamber = chamber,
                            congress = .cong,
-                           read_from_local_path = read_from_local_path)
+                           local_path = local_path)
     })
     return(dplyr::bind_rows(list_of_dfs))
   }
 
-  if (is.null(read_from_local_path)) {
+  if (is.null(local_path)) {
     # online reading
     url <- build_url(data_source = "voteview", chamber = chamber, congress = congress,
                      sheet_type = "members")
@@ -79,10 +79,10 @@ get_voteview_members <- function(chamber = "all", congress = NULL, read_from_loc
     df <- readr::read_csv(online_file, col_types = "ifiinfiiiccnnnnnniilnn")
   } else {
     # local reading
-    df <- read_local_file(path = read_from_local_path, col_types = "ifiinfiiiccnnnnnniilnn")
+    df <- read_local_file(path = local_path, col_types = "ifiinfiiiccnnnnnniilnn")
   }
 
-  if (isTRUE(tools::file_ext(read_from_local_path) == "dta")) {
+  if (isTRUE(tools::file_ext(local_path) == "dta")) {
     # fixes for coming from .dta files
     df <- df |>
       # no need to specify levels if data is already coming from saved DTA file

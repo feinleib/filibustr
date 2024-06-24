@@ -32,8 +32,8 @@
 #'  that become law. LES 2.0 is only available for the 117th Congress.
 #'  Classic LES is available for the 93rd through 117th Congresses.
 #'
-#' @param read_from_local_path `r lifecycle::badge('experimental')` (Optional) A file path
-#'  for reading from a local file. If no `read_from_local_path` is specified, will read
+#' @param local_path `r lifecycle::badge('experimental')` (Optional) A file path
+#'  for reading from a local file. If no `local_path` is specified, will read
 #'  data from the Center for Effective Lawmaking website.
 #'
 #' @returns A [tibble()].
@@ -60,8 +60,8 @@
 #' # LES 2.0 (117th Congress)
 #' get_les("house", les_2 = TRUE)
 #' get_les("senate", les_2 = TRUE)
-get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL) {
-  if (is.null(read_from_local_path)) {
+get_les <- function(chamber, les_2 = FALSE, local_path = NULL) {
+  if (is.null(local_path)) {
     # online reading
     # using `les_2` in place of a true `sheet_type`
     url <- build_url(data_source = "les", chamber = chamber, sheet_type = les_2)
@@ -71,12 +71,12 @@ get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL) {
     df <- haven::read_dta(online_file)
   } else {
     # local reading
-    df <- read_local_file(path = read_from_local_path, show_col_types = FALSE)
+    df <- read_local_file(path = local_path, show_col_types = FALSE)
   }
 
   df <- df |>
     # fix column types
-    fix_les_coltypes(read_from_local_path = read_from_local_path) |>
+    fix_les_coltypes(local_path = local_path) |>
     # convert 0/1-character `bioname` values to NA
     dplyr::mutate(dplyr::across(.cols = "bioname",
                                 .fns = ~ dplyr::if_else(nchar(.x) <= 1, NA, .x,
@@ -85,7 +85,7 @@ get_les <- function(chamber, les_2 = FALSE, read_from_local_path = NULL) {
   df
 }
 
-fix_les_coltypes <- function(df, read_from_local_path) {
+fix_les_coltypes <- function(df, local_path) {
   df <- df |>
     # using `any_of()` because of colname differences between S and HR sheets
     dplyr::mutate(dplyr::across(
@@ -106,7 +106,7 @@ fix_les_coltypes <- function(df, read_from_local_path) {
                 "min_leader", "power", "freshman", dplyr::any_of("speaker")),
       .fns = as.logical))
 
-  df <- df |> create_factor_columns(read_from_local_path = read_from_local_path)
+  df <- df |> create_factor_columns(local_path = local_path)
 
   df
 }

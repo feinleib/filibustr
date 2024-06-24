@@ -4,11 +4,7 @@
 \alias{get_voteview_member_votes}
 \title{Get data on the votes of individual members of Congress}
 \usage{
-get_voteview_member_votes(
-  chamber = "all",
-  congress = NULL,
-  read_from_local_path = NULL
-)
+get_voteview_member_votes(chamber = "all", congress = NULL, local_path = NULL)
 }
 \arguments{
 \item{chamber}{Which chamber to get data for. Options are:
@@ -26,8 +22,8 @@ Optional; will retrieve data for all Congresses by default.
 If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}
 (i.e., you cannot try to get future data).}
 
-\item{read_from_local_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} (Optional) A file path
-for reading from a local file. If no \code{read_from_local_path} is specified, will read
+\item{local_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} (Optional) A file path
+for reading from a local file. If no \code{local_path} is specified, will read
 data from the Voteview website.}
 }
 \value{

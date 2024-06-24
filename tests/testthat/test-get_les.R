@@ -103,31 +103,31 @@ test_that("LES local reading and writing", {
   haven::write_dta(h2_online, tmp_dta)
 
   ## check that local data matches
-  s1_local <- get_les("s", les_2 = FALSE, read_from_local_path = tmp_csv)
+  s1_local <- get_les("s", les_2 = FALSE, local_path = tmp_csv)
   expect_s3_class(s1_local, "tbl_df")
   expect_equal(s1_local, haven::zap_label(haven::zap_formats(s1_online)))
 
-  h1_local <- get_les("hr", les_2 = FALSE, read_from_local_path = tmp_tab)
+  h1_local <- get_les("hr", les_2 = FALSE, local_path = tmp_tab)
   expect_s3_class(h1_local, "tbl_df")
   expect_equal(h1_local, haven::zap_label(haven::zap_formats(h1_online)))
 
-  s2_local <- get_les("s", les_2 = TRUE, read_from_local_path = tmp_tsv)
+  s2_local <- get_les("s", les_2 = TRUE, local_path = tmp_tsv)
   expect_s3_class(s2_local, "tbl_df")
   expect_equal(s2_local, haven::zap_label(haven::zap_formats(s2_online)))
 
-  h2_local <- get_les("hr", les_2 = TRUE, read_from_local_path = tmp_dta)
+  h2_local <- get_les("hr", les_2 = TRUE, local_path = tmp_dta)
   expect_s3_class(h2_local, "tbl_df")
   # don't need to zap label/formats since we saved data in a DTA file
   expect_equal(h2_local, h2_online)
 
   ## test that re-written data matches
   readr::write_csv(h1_local, tmp_csv)
-  h1_rewritten <- get_les("hr", les_2 = FALSE, read_from_local_path = tmp_csv)
+  h1_rewritten <- get_les("hr", les_2 = FALSE, local_path = tmp_csv)
   expect_s3_class(h1_rewritten, "tbl_df")
   expect_equal(h1_rewritten, h1_local)
 
   haven::write_dta(s2_local, tmp_dta)
-  s2_rewritten <- get_les("s", les_2 = TRUE, read_from_local_path = tmp_dta)
+  s2_rewritten <- get_les("s", les_2 = TRUE, local_path = tmp_dta)
   expect_s3_class(s2_rewritten, "tbl_df")
   expect_equal(haven::zap_formats(s2_rewritten), s2_local)
 })

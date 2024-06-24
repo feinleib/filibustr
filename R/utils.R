@@ -65,8 +65,8 @@ read_local_file <- function(path, ...) {
 
 # convert state and expectation to factors (using `haven::as_factor()` if applicable)
 # used in `fix_hvw_coltypes()` and `fix_les_coltypes()`
-create_factor_columns <- function(df, read_from_local_path) {
-  if (isTRUE(tools::file_ext(read_from_local_path) == "dta")) {
+create_factor_columns <- function(df, local_path) {
+  if (isTRUE(tools::file_ext(local_path) == "dta")) {
     df <- df |>
       # no need to specify levels if data is already coming from saved DTA file
       dplyr::mutate(dplyr::across(.cols = c(dplyr::any_of(c("state", "st_name")),

@@ -58,24 +58,24 @@ test_that("HVW local reading and writing", {
   readr::write_tsv(hr_online, tmp_tsv)
 
   ## check that local data matches
-  sen_local <- get_hvw_data("s", read_from_local_path = tmp_csv)
+  sen_local <- get_hvw_data("s", local_path = tmp_csv)
   expect_s3_class(sen_local, "tbl_df")
   expect_equal(nrow(sen_local), 2228)
   expect_equal(sen_online, sen_local)
   readr::write_tsv(sen_local, tmp_tab)
 
-  hr_local <- get_hvw_data("hr", read_from_local_path = tmp_tsv)
+  hr_local <- get_hvw_data("hr", local_path = tmp_tsv)
   expect_s3_class(hr_local, "tbl_df")
   expect_equal(hr_online, hr_local)
   readr::write_tsv(hr_local, tmp_tsv)
 
   ## test that re-written data matches
-  sen_rewritten <- get_hvw_data("s", read_from_local_path = tmp_tab)
+  sen_rewritten <- get_hvw_data("s", local_path = tmp_tab)
   expect_equal(sen_online, sen_rewritten)
 
   # writing house data in previous senate file
   readr::write_csv(hr_local, tmp_csv)
-  hr_in_sen_file <- get_hvw_data("hr", read_from_local_path = tmp_csv)
+  hr_in_sen_file <- get_hvw_data("hr", local_path = tmp_csv)
   expect_equal(hr_online, hr_in_sen_file)
 })
 
@@ -95,7 +95,7 @@ test_that("HVW data with Stata dta files", {
   # Issues to check for:
   # - `state` column reading from dta as null
   # - dta formats
-  sen_from_dta <- get_hvw_data("s", read_from_local_path = tmp_dta)
+  sen_from_dta <- get_hvw_data("s", local_path = tmp_dta)
   expect_s3_class(sen_from_dta, "tbl_df")
   expect_length(sen_from_dta, 104)
   expect_equal(nrow(sen_from_dta), 2228)
