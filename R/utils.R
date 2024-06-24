@@ -84,8 +84,8 @@ create_factor_columns <- function(df, read_from_local_path) {
   df
 }
 
-# filter (Voteview) data by chamber and congress
-filter_chamber_congress <- function(df, chamber, congress) {
+# filter (Voteview) data by chamber
+filter_chamber <- function(df, chamber) {
   # filter chamber
   chamber_code <- match_chamber(chamber = chamber)
   if (chamber_code == "H") {
@@ -96,13 +96,18 @@ filter_chamber_congress <- function(df, chamber, congress) {
       dplyr::filter(chamber != "House")
   }
 
-  # filter Congress number
-  if (is.numeric(congress) &&
-      # only filtering if there is at least one valid Congress number
-      max(congress) >= 1 &&
-      min(congress) <= current_congress()) {
-    df <- df |>
-      dplyr::filter(congress %in% {{ congress }})
+  df
+}
+
+# filter (Voteview) data by Congress number
+filter_congress <- function(df, congress) {
+  if (is.numeric(congress)) {
+    # only filtering if there is at least one valid Congress number
+    if (max(congress) >= 1 &&
+        min(congress) <= current_congress()) {
+      df <- df |>
+        dplyr::filter(congress %in% {{ congress }})
+    }
   }
 
   df

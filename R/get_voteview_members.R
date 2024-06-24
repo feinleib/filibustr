@@ -100,7 +100,8 @@ get_voteview_members <- function(chamber = "all", congress = NULL, read_from_loc
   }
 
   df <- df |>
-    filter_chamber_congress(chamber = chamber, congress = congress) |>
+    filter_congress(congress = congress) |>
+    filter_chamber(chamber = chamber) |>
     dplyr::mutate(dplyr::across(.cols = c("district_code", "born", "died"),
                                 .fns = as.integer))
 
