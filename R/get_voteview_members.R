@@ -61,8 +61,8 @@
 #' get_voteview_members(congress = 1:10)
 #'
 get_voteview_members <- function(chamber = "all", congress = NULL, read_from_local_path = NULL) {
-  # join multiple congresses
-  if (length(congress) > 1 && is.numeric(congress)) {
+  # join multiple congresses (for online downloads)
+  if (length(congress) > 1 && is.numeric(congress) && is.null(read_from_local_path)) {
     list_of_dfs <- lapply(congress, function(.cong) {
       get_voteview_members(chamber = chamber,
                            congress = .cong,
@@ -82,11 +82,6 @@ get_voteview_members <- function(chamber = "all", congress = NULL, read_from_loc
     df <- read_local_file(path = read_from_local_path, col_types = "ifiinfiiiccnnnnnniilnn")
   }
 
-  df <- df |>
-    dplyr::mutate(dplyr::across(.cols = c("district_code", "born", "died"),
-                                .fns = as.integer))
-
-
   if (isTRUE(tools::file_ext(read_from_local_path) == "dta")) {
     # fixes for coming from .dta files
     df <- df |>
@@ -103,6 +98,11 @@ get_voteview_members <- function(chamber = "all", congress = NULL, read_from_loc
       dplyr::mutate(dplyr::across(.cols = "state_abbrev",
                                   .fns = ~ factor(.x, levels = c(datasets::state.abb, "USA"))))
   }
+
+  df <- df |>
+    filter_chamber_congress(chamber = chamber, congress = congress) |>
+    dplyr::mutate(dplyr::across(.cols = c("district_code", "born", "died"),
+                                .fns = as.integer))
 
   df
 }

@@ -88,12 +88,6 @@ test_that("local read/write", {
   expect_equal(nrow(hr_117_online), 457)
   haven::write_dta(hr_117_online, tmp_dta)
 
-  s_70_73_online <- get_voteview_members(chamber = "s", congress = 70:73)
-  expect_s3_class(s_70_73_online, "tbl_df")
-  expect_length(s_70_73_online, 22)
-  expect_equal(nrow(s_70_73_online), 425)
-  readr::write_tsv(s_70_73_online, tmp_tsv)
-
   # check that local data matches
   all_members_local <- get_voteview_members(chamber = "all", read_from_local_path = tmp_csv)
   expect_s3_class(all_members_local, "tbl_df")
@@ -103,4 +97,52 @@ test_that("local read/write", {
                                        read_from_local_path = tmp_dta)
   expect_s3_class(hr_117_local, "tbl_df")
   expect_equal(haven::zap_labels(haven::zap_formats(hr_117_local)), hr_117_online)
+})
+
+test_that("local read filtering", {
+  ## create filepaths
+  tmp_csv <- tempfile(fileext = ".csv")
+  tmp_tsv <- tempfile(fileext = ".tsv")
+  tmp_dta <- tempfile(fileext = ".dta")
+
+  ## download and save from online
+  members_70_73 <- get_voteview_members(chamber = "all", congress = 70:73)
+  expect_s3_class(members_70_73, "tbl_df")
+  expect_length(members_70_73, 22)
+  expect_equal(nrow(members_70_73), 2226)
+  readr::write_tsv(members_70_73, tmp_tsv)
+
+  ## read whole file from local
+  local_members_70_73 <- get_voteview_members(chamber = "all", congress = 70:73,
+                                              read_from_local_path = tmp_tsv)
+  expect_s3_class(local_members_70_73, "tbl_df")
+  expect_equal(local_members_70_73, members_70_73)
+
+  ## filter by chamber
+  sen_70_73 <- get_voteview_members(chamber = "s", congress = 70:73,
+                                    read_from_local_path = tmp_tsv)
+  expect_s3_class(sen_70_73, "tbl_df")
+  expect_equal(nrow(sen_70_73), 425)
+  expect_equal(sen_70_73, dplyr::filter(members_70_73, chamber != "House"))
+
+  # shouldn't need `congress` arg for this file
+  sen_70_73_v2 <- get_voteview_members(chamber = "s",
+                                       read_from_local_path = tmp_tsv)
+  expect_equal(sen_70_73_v2, sen_70_73)
+
+  ## filter by congress
+  members_73 <- get_voteview_members(congress = 73,
+                                     read_from_local_path = tmp_tsv)
+  expect_equal(nrow(members_73), 551)
+  expect_equal(members_73, dplyr::filter(members_70_73, congress == 73))
+
+
+  ## filter by both
+  hr_70_71 <- get_voteview_members(chamber = "hr", congress = 70:71,
+                                   read_from_local_path = tmp_tsv)
+  expect_s3_class(hr_70_71, "tbl_df")
+  expect_equal(nrow(hr_70_71), 903)
+  expect_equal(hr_70_71, dplyr::filter(members_70_73,
+                                       chamber != "Senate",
+                                       congress %in% 70:71))
 })
