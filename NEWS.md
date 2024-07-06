@@ -10,6 +10,8 @@
 * When reading data from online, now try up to 3 times in case of HTTP errors.
 * New `get_voteview_cast_codes()` provides the cast codes used in Voteview's 
   member votes data (#13).
+* New `read_html_table()` for reading HTML tables from online. It's a nice
+  shortcut for a common {rvest} workflow that otherwise takes 3 functions.
 * `get_les()`, `get_hvw_data()`, and `get_voteview_members()` now use more 
   specific column types, such as integer for count data and logical for binary 
   data (#10).
