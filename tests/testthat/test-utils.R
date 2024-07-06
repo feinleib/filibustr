@@ -28,6 +28,8 @@ test_that("read_html_table()", {
 })
 
 test_that("get_online_data(): Voteview members", {
+  skip_if_offline()
+
   vv_resp_members_s117 <- get_online_data(
     "https://voteview.com/static/data/out/members/S117_members.csv", "Voteview")
   expect_type(vv_resp_members_s117, "character")
@@ -41,6 +43,8 @@ test_that("get_online_data(): Voteview members", {
 })
 
 test_that("get_online_data(): Voteview parties", {
+  skip_if_offline()
+
   vv_resp_parties <- get_online_data(
     "https://voteview.com/static/data/out/parties/HSall_parties.csv", "Voteview")
   expect_type(vv_resp_parties, "character")
@@ -53,6 +57,8 @@ test_that("get_online_data(): Voteview parties", {
 })
 
 test_that("filter_chamber()", {
+  skip_if_offline()
+
   # testing with `get_voteview_members()`
   members_94 <- get_voteview_members(congress = 94)
   expect_s3_class(members_94, "tbl_df")
