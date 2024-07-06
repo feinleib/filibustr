@@ -14,7 +14,7 @@
   shortcut for a common {rvest} workflow that otherwise takes 3 functions.
   `read_html_table()` was previously an internal function, but it's so useful
   that I think it should be exported, even though it's not a core functionality
-  of {filibustr}.
+  of {filibustr} (#20).
 * `get_les()`, `get_hvw_data()`, and `get_voteview_members()` now use more 
   specific column types, such as integer for count data and logical for binary 
   data (#10).
