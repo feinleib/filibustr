@@ -125,9 +125,13 @@ filter_chamber <- function(df, chamber) {
 
 # filter (Voteview) data by Congress number
 filter_congress <- function(df, congress) {
-  # check for invalid Congress numbers
-  match_congress(congress = congress, call = rlang::caller_env())
+  if (!is.null(congress)) {
+    # check for invalid Congress numbers
+    match_congress(congress = congress, call = rlang::caller_env())
 
-  df |>
-    dplyr::filter(congress %in% {{ congress }})
+    df <- df |>
+      dplyr::filter(congress %in% {{ congress }})
+  }
+
+  df
 }
