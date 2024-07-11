@@ -1,7 +1,7 @@
 build_url <- function(data_source, chamber = "all", congress = NULL, sheet_type = NULL) {
   chamber_code <- match_chamber(chamber)
 
-  congress_code <- match_congress(congress)
+  congress_code <- match_congress(congress, call = rlang::caller_env())
 
   url <- switch(
     tolower(data_source),
@@ -88,7 +88,9 @@ match_chamber <- function(chamber) {
 #' Get a Congress number as a three-digit string.
 #' This is the format of Congress numbers in Voteview data file names.
 #'
-#' If an invalid Congress number (or none) is given, this will return `"all"`.
+#' If no Congress number is given, this will return `"all"`.
+#' Any argument that is not a valid Congress number (i.e., the integers 1 to
+#' `r current_congress()`) is an error.
 #'
 #' @param congress A Congress number.
 #'
@@ -99,7 +101,7 @@ match_chamber <- function(chamber) {
 #' @returns A three-character string.
 #'
 #' Either three digits between `"001"` and ``r paste0('"', current_congress(), '"')``,
-#' or `"all"` in case of an invalid Congress number.
+#' or `"all"` if no Congress is specified.
 #'
 #' @examples
 #' match_congress(118)
@@ -110,13 +112,28 @@ match_chamber <- function(chamber) {
 #' match_congress("not a valid number")
 #'
 #' @noRd
-match_congress <- function(congress) {
-  if (is.numeric(congress) &&
-      congress >= 1 &&
-      congress <= current_congress()) {
-    stringr::str_pad(string = as.integer(congress),
-                     width = 3, side = "left", pad = 0)
-  } else {
-    "all"
+match_congress <- function(congress = NULL, call = rlang::caller_env()) {
+  if (length(congress) > 1) {
+    return(sapply(congress,
+                  function(.x) match_congress(congress = .x, call = call)))
   }
+
+  # default: all
+  if (is.null(congress)) {
+    return("all")
+  }
+
+  # error for invalid `congress`
+  if (!is.numeric(congress) ||
+      !all(congress %in% 1:current_congress())) {
+    cli::cli_abort(c(
+      "Invalid {.arg congress} argument ({.val {congress}}) provided.",
+      "i" = "{.arg congress} must be a whole number between {.val {1}} and {.val {current_congress()}}."
+    ),
+    call = call)
+  }
+
+  # valid Congress numbers: pad with zeros to 3 characters
+  stringr::str_pad(string = as.integer(congress),
+                   width = 3, side = "left", pad = 0)
 }

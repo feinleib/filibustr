@@ -6,6 +6,8 @@
    * A given function call will now consistently read data from *either* online 
      or a local file, not try both. There is no longer an "online fallback" if 
      a local file is not found.
+* In the Voteview functions, an invalid `congress` is now an error, instead of 
+  silently returning data for all Congresses.
 * Improved error messages with `cli::cli_abort()` (#9).
 * When reading data from online, now try up to 3 times in case of HTTP errors.
 * New `get_voteview_cast_codes()` provides the cast codes used in Voteview's 

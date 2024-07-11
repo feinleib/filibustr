@@ -43,10 +43,10 @@ test_that("match congress number", {
   expect_equal(match_congress(1), "001")
 
   # invalid congress numbers
-  expect_equal(match_congress(0), "all")
-  expect_equal(match_congress(-2), "all")
-  expect_equal(match_congress("five"), "all")
-  expect_equal(match_congress("all"), "all")
+  expect_error(match_congress(0), "Invalid `congress` argument")
+  expect_error(match_congress(-2), "Invalid `congress` argument")
+  expect_error(match_congress("five"), "Invalid `congress` argument")
+  expect_error(match_congress("all"), "Invalid `congress` argument")
 })
 
 test_that("invalid data sources for `build_url()`", {

@@ -40,7 +40,7 @@ test_that("filter by congress", {
                c("President", "House", "Senate"))
   expect_equal(unique(members_1$congress), 1)
 
-  sens_all_congresses <- get_voteview_members(congress = 200, chamber = "sen")
+  sens_all_congresses <- get_voteview_members(congress = NULL, chamber = "sen")
   expect_s3_class(sens_all_congresses, "tbl_df")
   expect_equal(levels(sens_all_congresses$chamber),
                c("President", "Senate"))
@@ -54,6 +54,9 @@ test_that("filter by congress", {
   expect_equal(levels(members_90_95$chamber),
                c("President", "House", "Senate"))
   expect_equal(nrow(members_90_95), 3276)
+
+  # invalid `congress`
+  expect_error(get_voteview_members(congress = 200), "Invalid `congress` argument")
 })
 
 test_that("column types", {
