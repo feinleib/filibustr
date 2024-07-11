@@ -125,14 +125,9 @@ filter_chamber <- function(df, chamber) {
 
 # filter (Voteview) data by Congress number
 filter_congress <- function(df, congress) {
-  if (is.numeric(congress)) {
-    # only filtering if there is at least one valid Congress number
-    if (max(congress) >= 1 &&
-        min(congress) <= current_congress()) {
-      df <- df |>
-        dplyr::filter(congress %in% {{ congress }})
-    }
-  }
+  # check for invalid Congress numbers
+  match_congress(congress = congress, call = rlang::caller_env())
 
-  df
+  df |>
+    dplyr::filter(congress %in% {{ congress }})
 }
