@@ -115,4 +115,6 @@ test_that("filter_congress()", {
   # multiple congresses
 
   # all congresses
+  expect_equal(filter_congress(all_members, NULL), all_members)
+  expect_equal(filter_congress(all_members, 1:current_congress()), all_members)
 })
