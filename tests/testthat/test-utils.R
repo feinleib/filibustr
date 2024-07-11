@@ -90,3 +90,29 @@ test_that("filter_chamber()", {
   expect_equal(filter_chamber(members_94, "h"), hr_94)
   expect_equal(filter_chamber(members_94, "house"), hr_94)
 })
+
+test_that("filter_congress()", {
+  skip_if_offline()
+
+  # base sheet: all members
+  all_members <- get_voteview_members()
+  expect_s3_class(all_members, "tbl_df")
+  expect_gt(nrow(all_members), 50400)
+
+  # single congress
+  members_1 <- filter_congress(all_members, 1)
+  expect_s3_class(members_1, "tbl_df")
+  expect_equal(nrow(members_1), 90)
+  expect_equal(levels(members_1$chamber), c("President", "House", "Senate"))
+  expect_equal(unique(members_1$congress), 1)
+
+  members_117 <- filter_congress(all_members, 117)
+  expect_s3_class(members_117, "tbl_df")
+  expect_equal(nrow(members_117), 559)
+  expect_equal(levels(members_117$chamber), c("President", "House", "Senate"))
+  expect_equal(unique(members_117$congress), 117)
+
+  # multiple congresses
+
+  # all congresses
+})
