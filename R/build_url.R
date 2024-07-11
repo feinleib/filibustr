@@ -74,8 +74,8 @@ match_chamber <- function(chamber) {
 
   # Warn for invalid chamber argument
   if (chamber_code == "HS_default") {
-    cli::cli_warn(paste("Invalid {.arg chamber} argument ({.arg {chamber}}) provided.",
-                        "Using {.arg chamber = \"all\"}."),
+    cli::cli_warn(paste("Invalid {.arg chamber} argument ({.val {chamber}}) provided.",
+                        "Using {.arg chamber = {.val all}}."),
                   call = rlang::caller_env())
     chamber_code <- "HS"
   }
