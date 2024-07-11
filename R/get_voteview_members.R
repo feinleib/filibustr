@@ -99,9 +99,13 @@ get_voteview_members <- function(chamber = "all", congress = NULL, local_path = 
                                   .fns = ~ factor(.x, levels = c(datasets::state.abb, "USA"))))
   }
 
+  if (!is.null(local_path)) {
+    df <- df |>
+      filter_congress(congress = congress) |>
+      filter_chamber(chamber = chamber)
+  }
+
   df <- df |>
-    filter_congress(congress = congress) |>
-    filter_chamber(chamber = chamber) |>
     dplyr::mutate(dplyr::across(.cols = c("district_code", "born", "died"),
                                 .fns = as.integer))
 
