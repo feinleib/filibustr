@@ -125,6 +125,7 @@ test_that("filter_congress()", {
   members_various <- filter_congress(all_members, c(5, 1, 100, 117, 95))
   expect_s3_class(members_various, "tbl_df")
   expect_equal(nrow(members_various), 1901)
+  # row order not impacted by order of Congress numbers in `congress` arg
   expect_equal(unique(members_various$congress), c(1, 5, 95, 100, 117))
   expect_equal(dplyr::filter(members_various, congress == 1),
                members_1)
@@ -136,7 +137,7 @@ test_that("filter_congress()", {
   expect_equal(filter_congress(all_members, 1:current_congress()), all_members)
 })
 
-test_that("filter_congress() errors", {
+test_that("filter_congress() error: invalid Congress number", {
   skip_if_offline()
 
   all_house <- get_voteview_members(chamber = "hr")
@@ -152,4 +153,34 @@ test_that("filter_congress() errors", {
   expect_error(filter_congress(all_house, "-1"), "Invalid `congress` argument")
   expect_error(filter_congress(all_house, "word"), "Invalid `congress` argument")
   expect_error(filter_congress(all_house, FALSE), "Invalid `congress` argument")
+})
+
+test_that("filter_congress() error: Congress numbers not found", {
+  skip_if_offline()
+
+  all_sens <- get_voteview_members("s")
+  expect_s3_class(all_sens, "tbl_df")
+  expect_gt(nrow(all_sens), 10000)
+  expect_equal(unique(all_sens$congress), 1:current_congress())
+
+  # filter that dataset
+  sens_100s <- filter_congress(all_sens, 100:109)
+  expect_s3_class(sens_100s, "tbl_df")
+  expect_equal(nrow(sens_100s), 1025)
+  expect_equal(unique(sens_100s$congress), 100:109)
+
+  # can filter with number in dataset
+  expect_s3_class(filter_congress(sens_100s, 108), "tbl_df")
+
+  # valid congress number that isn't in the dataset
+  expect_s3_class(filter_congress(all_sens, 110), "tbl_df")
+  expect_error(filter_congress(sens_100s, 110), "Congress number .+ was not found")
+
+  # pluralization
+  expect_error(filter_congress(sens_100s, 110:112), "Congress numbers .+ were not found")
+
+  # ok if only some congress numbers are missing
+  sens_108_not112 <- filter_congress(sens_100s, 108:112)
+  expect_s3_class(sens_108_not112, "tbl_df")
+  expect_equal(nrow(sens_108_not112), 203)
 })
