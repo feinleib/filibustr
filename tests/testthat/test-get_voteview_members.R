@@ -160,4 +160,14 @@ test_that("local read filtering", {
   expect_equal(hr_70_71, dplyr::filter(members_70_73,
                                        chamber != "Senate",
                                        congress %in% 70:71))
+
+  ## passing congress numbers not in the file
+  # at least one congress is present: ok
+  mems_73_not74 <- get_voteview_members(congress = 73:74, local_path = tmp_tsv)
+  expect_s3_class(mems_73_not74, "tbl_df")
+  expect_equal(nrow(mems_73_not74), 551)
+
+  # none present: error
+  expect_error(get_voteview_members(congress = c(10, 20, 5, 55, 100), local_path = tmp_tsv),
+               "Congress numbers .+ were not found in data")
 })
