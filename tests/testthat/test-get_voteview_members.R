@@ -1,4 +1,6 @@
 test_that("download from Voteview", {
+  skip_if_offline()
+
   online_voteview_members <- get_voteview_members()
   expect_s3_class(online_voteview_members, "tbl_df")
   expect_length(online_voteview_members, 22)
@@ -10,6 +12,8 @@ test_that("download from Voteview", {
 })
 
 test_that("filter by chamber", {
+  skip_if_offline()
+
   hr <- get_voteview_members(chamber = "house")
   expect_length(hr, 22)
   expect_equal(levels(hr$chamber), c("President", "House"))
@@ -28,6 +32,8 @@ test_that("filter by chamber", {
 })
 
 test_that("filter by congress", {
+  skip_if_offline()
+
   members_110 <- get_voteview_members(congress = 110, chamber = "s")
   expect_s3_class(members_110, "tbl_df")
   expect_equal(levels(members_110$chamber),
@@ -60,6 +66,8 @@ test_that("filter by congress", {
 })
 
 test_that("column types", {
+  skip_if_offline()
+
   members_98 <- get_voteview_members(congress = 98)
   expect_s3_class(members_98, "tbl_df")
   expect_equal(nrow(members_98), 542)
@@ -73,6 +81,8 @@ test_that("column types", {
 })
 
 test_that("local read/write", {
+  skip_if_offline()
+
   # create filepaths
   tmp_csv <- tempfile(fileext = ".csv")
   tmp_tsv <- tempfile(fileext = ".tsv")
@@ -103,6 +113,8 @@ test_that("local read/write", {
 })
 
 test_that("local read filtering", {
+  skip_if_offline()
+
   ## create filepaths
   tmp_csv <- tempfile(fileext = ".csv")
   tmp_tsv <- tempfile(fileext = ".tsv")
