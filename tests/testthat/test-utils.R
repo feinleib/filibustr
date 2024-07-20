@@ -113,6 +113,23 @@ test_that("filter_congress()", {
   expect_equal(unique(members_117$congress), 117)
 
   # multiple congresses
+  # continuous
+  members_114_117 <- filter_congress(all_members, 114:117)
+  expect_s3_class(members_114_117, "tbl_df")
+  expect_equal(nrow(members_114_117), 2211)
+  expect_equal(unique(members_114_117$congress), 114:117)
+  expect_equal(dplyr::filter(members_114_117, congress == 117),
+               members_117)
+
+  # discontinuous
+  members_various <- filter_congress(all_members, c(5, 1, 100, 117, 95))
+  expect_s3_class(members_various, "tbl_df")
+  expect_equal(nrow(members_various), 1901)
+  expect_equal(unique(members_various$congress), c(1, 5, 95, 100, 117))
+  expect_equal(dplyr::filter(members_various, congress == 1),
+               members_1)
+  expect_equal(dplyr::filter(members_various, congress == 117),
+               members_117)
 
   # all congresses
   expect_equal(filter_congress(all_members, NULL), all_members)
