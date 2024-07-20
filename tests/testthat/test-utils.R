@@ -135,3 +135,21 @@ test_that("filter_congress()", {
   expect_equal(filter_congress(all_members, NULL), all_members)
   expect_equal(filter_congress(all_members, 1:current_congress()), all_members)
 })
+
+test_that("filter_congress() errors", {
+  skip_if_offline()
+
+  all_house <- get_voteview_members(chamber = "hr")
+
+  expect_error(filter_congress(all_house, -1), "Invalid `congress` argument")
+  expect_error(filter_congress(all_house, 0), "Invalid `congress` argument")
+  expect_error(filter_congress(all_house, current_congress() + 1),
+               "Invalid `congress` argument")
+  # error if any congress number is invalid
+  expect_error(filter_congress(all_house, c(1, 5, 500)), "Invalid `congress` argument")
+
+  # other types
+  expect_error(filter_congress(all_house, "-1"), "Invalid `congress` argument")
+  expect_error(filter_congress(all_house, "word"), "Invalid `congress` argument")
+  expect_error(filter_congress(all_house, FALSE), "Invalid `congress` argument")
+})
