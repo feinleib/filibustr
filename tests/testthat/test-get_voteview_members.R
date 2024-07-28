@@ -115,10 +115,8 @@ test_that("local read/write", {
 test_that("local read filtering", {
   skip_if_offline()
 
-  ## create filepaths
-  tmp_csv <- tempfile(fileext = ".csv")
+  ## create filepath
   tmp_tsv <- tempfile(fileext = ".tsv")
-  tmp_dta <- tempfile(fileext = ".dta")
 
   ## download and save from online
   members_70_73 <- get_voteview_members(chamber = "all", congress = 70:73)
