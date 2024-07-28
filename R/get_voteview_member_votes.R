@@ -30,8 +30,8 @@
 #' get_voteview_member_votes(congress = 1:3)
 #'
 get_voteview_member_votes <- function(chamber = "all", congress = NULL, local_path = NULL) {
-  # join multiple congresses
-  if (length(congress) > 1 && is.numeric(congress)) {
+  # join multiple congresses (for online downloads)
+  if (length(congress) > 1 && is.numeric(congress) && is.null(local_path)) {
     list_of_dfs <- lapply(congress, function(.cong) {
       get_voteview_member_votes(chamber = chamber,
                                 congress = .cong,
@@ -49,6 +49,12 @@ get_voteview_member_votes <- function(chamber = "all", congress = NULL, local_pa
   } else {
     # local reading
     df <- read_local_file(path = local_path, col_types = "ifiddd", na = c("", "N/A"))
+  }
+
+  if (!is.null(local_path)) {
+    df <- df |>
+      filter_congress(congress = congress) |>
+      filter_chamber(chamber = chamber)
   }
 
   df |>
