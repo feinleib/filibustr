@@ -1,5 +1,6 @@
 test_that("download from Voteview", {
   skip("Skipping slow online member-votes downloads.")
+  skip_if_offline()
 
   online_votes <- get_voteview_member_votes()
   expect_s3_class(online_votes, "tbl_df")
@@ -11,6 +12,8 @@ test_that("download from Voteview", {
 })
 
 test_that("filter votes by chamber", {
+  skip_if_offline()
+
   s_votes <- get_voteview_member_votes(chamber = "s")
   expect_s3_class(s_votes, "tbl_df")
   expect_length(s_votes, 6)
@@ -30,6 +33,8 @@ test_that("filter votes by chamber", {
 })
 
 test_that("filter votes by congress", {
+  skip_if_offline()
+
   votes_1_5 <- get_voteview_member_votes(congress = 1:5)
   expect_s3_class(votes_1_5, "tbl_df")
   expect_length(votes_1_5, 6)
