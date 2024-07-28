@@ -57,3 +57,19 @@ test_that("filter votes by congress", {
   expect_equal(unique(s_votes_117$congress), 117)
   expect_equal(nrow(s_votes_117), 95152)
 })
+
+test_that("column types", {
+  skip_if_offline()
+
+  mem_votes_100 <- get_voteview_member_votes(congress = 100)
+  expect_s3_class(mem_votes_100, "tbl_df")
+  expect_length(mem_votes_100, 6)
+  expect_equal(nrow(mem_votes_100), 487335)
+
+  expect_type(mem_votes_100$congress, "integer")
+  expect_s3_class(mem_votes_100$chamber, "factor")
+  expect_type(mem_votes_100$rollnumber, "integer")
+  expect_type(mem_votes_100$icpsr, "integer")
+  expect_type(mem_votes_100$cast_code, "integer")
+  expect_type(mem_votes_100$prob, "double")
+})
