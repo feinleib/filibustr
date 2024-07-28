@@ -124,19 +124,20 @@ filter_chamber <- function(df, chamber) {
 }
 
 # filter (Voteview) data by Congress number
-filter_congress <- function(df, congress) {
+filter_congress <- function(df, congress, call = rlang::caller_env()) {
   if (!is.null(congress)) {
     # check for invalid Congress numbers
-    match_congress(congress = congress, call = rlang::caller_env())
+    match_congress(congress = congress, call = call)
 
     # check that Congress numbers are present in data
     # NOTE: only error if no data is present. Ok if only some Congress numbers are present
     if (!any(congress %in% unique(df$congress))) {
       len <- length(congress)
       cli::cli_abort(
-        # pluralize based on the length of `congress`, not its value
+        # `qty()`: pluralize based on the length of `congress`, not its value
         paste("Congress {cli::qty(length(congress))} number{?s} ({.val {congress}})",
-              "{cli::qty(length(congress))} {?was/were} not found in data.")
+              "{cli::qty(length(congress))} {?was/were} not found in data."),
+        call = call
       )
     }
 
