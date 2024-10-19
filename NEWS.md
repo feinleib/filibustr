@@ -14,12 +14,12 @@
   member votes data (#13).
 * New `read_html_table()` for reading HTML tables from online. It's a nice
   shortcut for a common {rvest} workflow that otherwise takes 3 functions.
-  `read_html_table()` was previously an internal function, but it's so useful
-  that I think it should be exported, even though it's not a core functionality
-  of {filibustr} (#20).
-* `get_les()`, `get_hvw_data()`, and `get_voteview_members()` now use more 
-  specific column types, such as integer for count data and logical for binary 
-  data (#10).
+  `read_html_table()` was previously an internal function, but it's useful 
+  enough that I think it should be exported, even if it's not a core 
+  functionality of {filibustr} (#20).
+* `get_les()`, `get_hvw_data()`, `get_voteview_members()`, and 
+  `get_voteview_member_votes()` now use more specific column types, such as 
+  integer for count data and logical for binary data (#10).
    * NOTE: state abbreviations (columns `state`, `st_name`) and LES scores 
      relative to expectation (columns `expectation`, `expectation1`, 
      `expectation2`) are now factor variables.
