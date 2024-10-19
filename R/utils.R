@@ -120,7 +120,9 @@ filter_chamber <- function(df, chamber) {
       dplyr::filter(chamber != "House")
   }
 
-  df
+  # remove filtered-out chambers
+  # so filtered local files are identical to single-chamber online downloads
+  df |> dplyr::mutate(chamber = droplevels(chamber))
 }
 
 # filter (Voteview) data by Congress number

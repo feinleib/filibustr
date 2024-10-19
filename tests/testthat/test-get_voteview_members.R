@@ -136,7 +136,9 @@ test_that("local read filtering", {
                                     local_path = tmp_tsv)
   expect_s3_class(sen_70_73, "tbl_df")
   expect_equal(nrow(sen_70_73), 425)
-  expect_equal(sen_70_73, dplyr::filter(members_70_73, chamber != "House"))
+  expect_equal(sen_70_73,
+               dplyr::filter(members_70_73, chamber != "House") |>
+                 dplyr::mutate(chamber = droplevels(chamber)))
 
   # shouldn't need `congress` arg for this file
   sen_70_73_v2 <- get_voteview_members(chamber = "s",
@@ -155,9 +157,11 @@ test_that("local read filtering", {
                                    local_path = tmp_tsv)
   expect_s3_class(hr_70_71, "tbl_df")
   expect_equal(nrow(hr_70_71), 903)
-  expect_equal(hr_70_71, dplyr::filter(members_70_73,
-                                       chamber != "Senate",
-                                       congress %in% 70:71))
+  expect_equal(hr_70_71,
+               dplyr::filter(members_70_73,
+                             chamber != "Senate",
+                             congress %in% 70:71) |>
+                 dplyr::mutate(chamber = droplevels(chamber)))
 
   ## passing congress numbers not in the file
   # at least one congress is present: ok

@@ -76,7 +76,9 @@ test_that("filter_chamber()", {
   sen_94 <- filter_chamber(members_94, chamber = "s")
   expect_s3_class(sen_94, "tbl_df")
   expect_equal(nrow(sen_94), 102)
-  expect_equal(sen_94, dplyr::filter(members_94, chamber != "House"))
+  expect_equal(sen_94,
+               dplyr::filter(members_94, chamber != "House") |>
+                 dplyr::mutate(chamber = droplevels(chamber)))
 
   expect_equal(filter_chamber(members_94, "senate"), sen_94)
   expect_equal(filter_chamber(members_94, "sen"), sen_94)
@@ -85,7 +87,9 @@ test_that("filter_chamber()", {
   hr_94 <- filter_chamber(members_94, chamber = "hr")
   expect_s3_class(hr_94, "tbl_df")
   expect_equal(nrow(hr_94), 442)
-  expect_equal(hr_94, dplyr::filter(members_94, chamber != "Senate"))
+  expect_equal(hr_94,
+               dplyr::filter(members_94, chamber != "Senate") |>
+                 dplyr::mutate(chamber = droplevels(chamber)))
 
   expect_equal(filter_chamber(members_94, "h"), hr_94)
   expect_equal(filter_chamber(members_94, "house"), hr_94)
