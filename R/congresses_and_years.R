@@ -33,14 +33,17 @@ current_congress <- function() {
 #' congress_in_year(2022)
 congress_in_year <- function(year) {
   if (!(is.numeric(year) | inherits(year, "Date"))) {
-    stop("Must provide the year as a number or Date object.")
+    cli::cli_abort("Must provide the year as a number or Date object.")
   }
   # handle Date objects
   if (inherits(year, "Date")) {
     year <- as.numeric(format(year, "%Y"))
   }
   if (year < 1789) {
-    stop("The provided year (", year, ") is too early. The first Congress started in 1789.")
+    cli::cli_abort(c(
+      "The provided year ({.arg {year}}) is too early.",
+      "i" = "The first Congress started in 1789."
+    ))
   }
   floor((year - 1787) / 2)
 }
@@ -62,15 +65,19 @@ congress_in_year <- function(year) {
 #' year_of_congress(118)
 year_of_congress <- function(congress) {
   if (!(is.numeric(congress) && congress == as.integer(congress))) {
-    stop("Must provide the Congress number as a positive whole number.")
+    cli::cli_abort("Must provide the Congress number as a positive whole number.")
   }
   if (congress < 1) {
-    stop("Invalid Congress number (", congress, "). ",
-         "The Congress number must be a positive whole number.")
+    cli::cli_abort(c(
+      "Invalid Congress number: {.arg {congress}}",
+      "i" = "The Congress number must be a positive whole number."
+    ))
   }
   if (congress >= 1789) {
-    warning("That Congress number looks more like a year. ",
-            "Did you mean `congress_in_year(", congress, ")`?")
+    cli::cli_warn(c(
+      "That Congress number ({.arg {congress}}) looks more like a year.",
+      "i" = "Did you mean {.code congress_in_year({congress})}?"
+    ))
   }
   1787 + 2 * congress
 }

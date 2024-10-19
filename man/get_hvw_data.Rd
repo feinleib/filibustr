@@ -4,7 +4,7 @@
 \alias{get_hvw_data}
 \title{Get replication data from Harbridge-Yong, Volden, and Wiseman (2023)}
 \usage{
-get_hvw_data(chamber, local = TRUE, local_dir = ".")
+get_hvw_data(chamber, local_path = NULL)
 }
 \arguments{
 \item{chamber}{Which chamber to get data for. Options are:
@@ -21,10 +21,9 @@ or the same variable names, so it is not trivial to join the two tables.
 
 You \emph{must} specify either House or Senate data, since there is no "default" option.}
 
-\item{local}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Whether to read the data from a local file, as opposed to the Harvard Dataverse website. Default is \code{TRUE}. If the local file does not exist, will fall back to reading from online.}
-
-\item{local_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} The directory containing
-the local file. Defaults to the working directory.}
+\item{local_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} (Optional) A file path
+for reading from a local file. If no \code{local_path} is specified,  will read
+data from the Harvard Dataverse website.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.

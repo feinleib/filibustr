@@ -1,31 +1,40 @@
-# test_that("download from Voteview", {
-#   online_votes <- get_voteview_member_votes(local = FALSE)
-#   expect_s3_class(online_votes, "tbl_df")
-#   expect_length(online_votes, 6)
-#   expect_equal(levels(online_votes$chamber), c("House", "Senate"))
-#   expect_equal(unique(online_votes$congress), 1:current_congress())
-#   expect_gte(min(online_votes$prob, na.rm = TRUE), 0)
-#   expect_lte(max(online_votes$prob, na.rm = TRUE), 100)
-# })
+test_that("download from Voteview", {
+  skip("Skipping slow online member-votes downloads.")
+  skip_if_offline()
 
-# test_that("filter votes by chamber", {
-#   s_votes <- get_voteview_member_votes(chamber = "s")
-#   expect_s3_class(s_votes, "tbl_df")
-#   expect_length(s_votes, 6)
-#   expect_equal(levels(s_votes$chamber), "Senate")
-#   expect_equal(unique(s_votes$congress), 1:current_congress())
-#
-#   hr_votes <- get_voteview_member_votes(chamber = "hr")
-#   expect_s3_class(hr_votes, "tbl_df")
-#   expect_length(hr_votes, 6)
-#   expect_equal(levels(hr_votes$chamber), "House")
-#   expect_equal(unique(hr_votes$congress), 1:current_congress())
-#
-#   # 4x more members per House vote, so this will hold
-#   expect_lt(nrow(s_votes), nrow(hr_votes))
-# })
+  online_votes <- get_voteview_member_votes()
+  expect_s3_class(online_votes, "tbl_df")
+  expect_length(online_votes, 6)
+  expect_equal(levels(online_votes$chamber), c("House", "Senate"))
+  expect_equal(unique(online_votes$congress), 1:current_congress())
+  expect_gte(min(online_votes$prob, na.rm = TRUE), 0)
+  expect_lte(max(online_votes$prob, na.rm = TRUE), 100)
+})
+
+test_that("filter votes by chamber", {
+  skip_if_offline()
+
+  s_votes <- get_voteview_member_votes(chamber = "s")
+  expect_s3_class(s_votes, "tbl_df")
+  expect_length(s_votes, 6)
+  expect_equal(levels(s_votes$chamber), "Senate")
+  expect_equal(unique(s_votes$congress), 1:current_congress())
+
+  skip("Skipping slow online member-votes downloads.")
+
+  hr_votes <- get_voteview_member_votes(chamber = "hr")
+  expect_s3_class(hr_votes, "tbl_df")
+  expect_length(hr_votes, 6)
+  expect_equal(levels(hr_votes$chamber), "House")
+  expect_equal(unique(hr_votes$congress), 1:current_congress())
+
+  # 4x more members per House vote, so this will hold
+  expect_gt(nrow(hr_votes), nrow(s_votes))
+})
 
 test_that("filter votes by congress", {
+  skip_if_offline()
+
   votes_1_5 <- get_voteview_member_votes(congress = 1:5)
   expect_s3_class(votes_1_5, "tbl_df")
   expect_length(votes_1_5, 6)
@@ -47,4 +56,59 @@ test_that("filter votes by congress", {
   expect_equal(levels(s_votes_117$chamber), "Senate")
   expect_equal(unique(s_votes_117$congress), 117)
   expect_equal(nrow(s_votes_117), 95152)
+})
+
+test_that("column types", {
+  skip_if_offline()
+
+  mem_votes_100 <- get_voteview_member_votes(congress = 100)
+  expect_s3_class(mem_votes_100, "tbl_df")
+  expect_length(mem_votes_100, 6)
+  expect_equal(nrow(mem_votes_100), 487335)
+
+  expect_type(mem_votes_100$congress, "integer")
+  expect_s3_class(mem_votes_100$chamber, "factor")
+  expect_type(mem_votes_100$rollnumber, "integer")
+  expect_type(mem_votes_100$icpsr, "integer")
+  expect_type(mem_votes_100$cast_code, "integer")
+  expect_type(mem_votes_100$prob, "double")
+})
+
+test_that("local read/write", {
+  skip_if_offline()
+
+  # create filepaths
+  tmp_csv <- tempfile(fileext = ".csv")
+  tmp_tsv <- tempfile(fileext = ".tsv")
+  tmp_dta <- tempfile(fileext = ".dta")
+
+  # download online data
+  sen_mvotes_104 <- get_voteview_member_votes(chamber = "s", congress = 104)
+  expect_s3_class(sen_mvotes_104, "tbl_df")
+  expect_length(sen_mvotes_104, 6)
+  expect_equal(nrow(sen_mvotes_104), 92677)
+  expect_equal(levels(sen_mvotes_104$chamber), "Senate")
+
+  haven::write_dta(sen_mvotes_104, tmp_dta)
+
+  all_mvotes_103_104 <- get_voteview_member_votes(chamber = "all", congress = 103:104)
+  expect_s3_class(all_mvotes_103_104, "tbl_df")
+  expect_length(all_mvotes_103_104, 6)
+  expect_equal(nrow(all_mvotes_103_104), 1216398)
+  expect_equal(levels(all_mvotes_103_104$chamber), c("House", "Senate"))
+
+  readr::write_csv(all_mvotes_103_104, tmp_csv)
+
+  # check that local data matches
+  local_sen_mvotes_104 <- get_voteview_member_votes(chamber = "s", congress = 104,
+                                                    local_path = tmp_dta)
+  expect_s3_class(local_sen_mvotes_104, "tbl_df")
+  # dta vs csv
+  expect_identical(haven::zap_formats(local_sen_mvotes_104), sen_mvotes_104)
+
+  csv_sen_mvotes_104 <- get_voteview_member_votes(chamber = "s", congress = 104,
+                                                  local_path = tmp_csv)
+  expect_s3_class(csv_sen_mvotes_104, "tbl_df")
+  # csv vs online
+  expect_identical(csv_sen_mvotes_104, sen_mvotes_104)
 })

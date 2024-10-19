@@ -21,5 +21,5 @@ get_senate_cloture_votes <- function() {
     # remove "Total" row
     dplyr::slice_head(n = -1) |>
     # fix data types
-    dplyr::mutate(dplyr::across(!tidyselect::any_of("years"), as.integer))
+    dplyr::mutate(dplyr::across(!dplyr::any_of("years"), as.integer))
 }

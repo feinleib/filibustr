@@ -1,5 +1,5 @@
 test_that("download from Voteview", {
-  online_rollcalls <- get_voteview_rollcall_votes(local = FALSE)
+  online_rollcalls <- get_voteview_rollcall_votes()
   expect_s3_class(online_rollcalls, "tbl_df")
   expect_length(online_rollcalls, 18)
   expect_equal(levels(online_rollcalls$chamber), c("House", "Senate"))
@@ -20,7 +20,7 @@ test_that("filter rollcalls by chamber", {
   expect_equal(unique(hr_votes$congress), 1:current_congress())
 
   # House has more recorded votes
-  expect_lt(nrow(s_votes), nrow(hr_votes))
+  expect_gt(nrow(hr_votes), nrow(s_votes))
 })
 
 test_that("filter rollcalls by congress", {

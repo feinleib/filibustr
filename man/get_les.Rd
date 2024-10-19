@@ -4,7 +4,7 @@
 \alias{get_les}
 \title{Get Legislative Effectiveness Scores data}
 \usage{
-get_les(chamber, les_2 = FALSE, local = TRUE, local_dir = ".")
+get_les(chamber, les_2 = FALSE, local_path = NULL)
 }
 \arguments{
 \item{chamber}{Which chamber to get data for. Options are:
@@ -38,10 +38,9 @@ from their sponsored bills is included in other legislators' bills
 that become law. LES 2.0 is only available for the 117th Congress.
 Classic LES is available for the 93rd through 117th Congresses.}
 
-\item{local}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Whether to read the data from a local file, as opposed to the Center for Effective Lawmaking website. Default is \code{TRUE}. If the local file does not exist, will fall back to reading from online.}
-
-\item{local_dir}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} The directory containing
-the local file. Defaults to the working directory.}
+\item{local_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} (Optional) A file path
+for reading from a local file. If no \code{local_path} is specified, will read
+data from the Center for Effective Lawmaking website.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.

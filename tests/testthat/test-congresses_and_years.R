@@ -21,16 +21,13 @@ test_that("years to congress numbers", {
                regexp = "Must provide the year as a number or Date object.",
                fixed = TRUE)
   expect_error(congress_in_year(1788),
-               regexp = paste("The provided year (1788) is too early.",
-                              "The first Congress started in 1789."),
+               regexp = "The provided year (`1788`) is too early.",
                fixed = TRUE)
   expect_error(congress_in_year(110),
-               regexp = paste("The provided year (110) is too early.",
-                              "The first Congress started in 1789."),
+               regexp = "The provided year (`110`) is too early.",
                fixed = TRUE)
   expect_error(congress_in_year(as.Date("1492-09-01")),
-               regexp = paste("The provided year (1492) is too early.",
-                              "The first Congress started in 1789."),
+               regexp = "The provided year (`1492`) is too early.",
                fixed = TRUE)
 })
 
@@ -51,22 +48,18 @@ test_that("congress numbers to years", {
                regexp = "Must provide the Congress number as a positive whole number.",
                fixed = TRUE)
   expect_error(year_of_congress(0),
-               regexp = paste("Invalid Congress number (0).",
-                              "The Congress number must be a positive whole number."),
+               regexp = "Invalid Congress number: `0`",
                fixed = TRUE)
   expect_error(year_of_congress(-50),
-               regexp = paste("Invalid Congress number (-50).",
-                              "The Congress number must be a positive whole number."),
+               regexp = "Invalid Congress number: `-50`",
                fixed = TRUE)
 
   # warnings
   expect_warning(expect_equal(year_of_congress(1789), 5365),
-                 regexp = paste("That Congress number looks more like a year.",
-                                "Did you mean `congress_in_year(1789)`?"),
+                 regexp = "That Congress number (`1789`) looks more like a year.",
                  fixed = TRUE)
   expect_warning(expect_equal(year_of_congress(2010), 5807),
-                 regexp = paste("That Congress number looks more like a year.",
-                                "Did you mean `congress_in_year(2010)`?"),
+                 regexp = "That Congress number (`2010`) looks more like a year.",
                  fixed = TRUE)
 })
 
