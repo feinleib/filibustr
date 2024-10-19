@@ -45,19 +45,26 @@ get_voteview_member_votes <- function(chamber = "all", congress = NULL, local_pa
     url <- build_url(data_source = "voteview", chamber = chamber, congress = congress,
                      sheet_type = "votes")
     online_file <- get_online_data(url = url, source_name = "Voteview")
-    df <- readr::read_csv(online_file, col_types = "ifiddd", na = c("", "N/A"))
+    df <- readr::read_csv(online_file, col_types = "ifiddd", na = c("", "NA", "N/A"))
   } else {
     # local reading
-    df <- read_local_file(path = local_path, col_types = "ifiddd", na = c("", "N/A"))
+    df <- read_local_file(path = local_path, col_types = "ifiddd", na = c("", "NA", "N/A"))
   }
 
   if (!is.null(local_path)) {
+    # fixes for coming from .dta files
+    if (isTRUE(tools::file_ext(local_path) == "dta")) {
+      df <- df |>
+        dplyr::mutate(dplyr::across(.cols = "chamber",
+                                    .fns = haven::as_factor))
+    }
+
     df <- df |>
       filter_congress(congress = congress) |>
       filter_chamber(chamber = chamber)
   }
 
   df |>
-    dplyr::mutate(dplyr::across(.cols = c("icpsr", "cast_code"),
+    dplyr::mutate(dplyr::across(.cols = dplyr::where(is.numeric) & !"prob",
                                 .fns = as.integer))
 }
