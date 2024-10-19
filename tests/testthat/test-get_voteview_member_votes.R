@@ -73,3 +73,42 @@ test_that("column types", {
   expect_type(mem_votes_100$cast_code, "integer")
   expect_type(mem_votes_100$prob, "double")
 })
+
+test_that("local read/write", {
+  skip_if_offline()
+
+  # create filepaths
+  tmp_csv <- tempfile(fileext = ".csv")
+  tmp_tsv <- tempfile(fileext = ".tsv")
+  tmp_dta <- tempfile(fileext = ".dta")
+
+  # download online data
+  sen_mvotes_104 <- get_voteview_member_votes(chamber = "s", congress = 104)
+  expect_s3_class(sen_mvotes_104, "tbl_df")
+  expect_length(sen_mvotes_104, 6)
+  expect_equal(nrow(sen_mvotes_104), 92677)
+  expect_equal(levels(sen_mvotes_104$chamber), "Senate")
+
+  haven::write_dta(sen_mvotes_104, tmp_dta)
+
+  all_mvotes_103_104 <- get_voteview_member_votes(chamber = "all", congress = 103:104)
+  expect_s3_class(all_mvotes_103_104, "tbl_df")
+  expect_length(all_mvotes_103_104, 6)
+  expect_equal(nrow(all_mvotes_103_104), 1216398)
+  expect_equal(levels(all_mvotes_103_104$chamber), c("House", "Senate"))
+
+  readr::write_csv(all_mvotes_103_104, tmp_csv)
+
+  # check that local data matches
+  local_sen_mvotes_104 <- get_voteview_member_votes(chamber = "s", congress = 104,
+                                                    local_path = tmp_dta)
+  expect_s3_class(local_sen_mvotes_104, "tbl_df")
+  # dta vs csv
+  expect_identical(haven::zap_formats(local_sen_mvotes_104), sen_mvotes_104)
+
+  csv_sen_mvotes_104 <- get_voteview_member_votes(chamber = "s", congress = 104,
+                                                  local_path = tmp_csv)
+  expect_s3_class(csv_sen_mvotes_104, "tbl_df")
+  # csv vs online
+  expect_identical(csv_sen_mvotes_104, sen_mvotes_104)
+})
