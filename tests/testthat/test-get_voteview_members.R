@@ -11,8 +11,8 @@ test_that("download from Voteview", {
   # allow Congresses to be 1:(current_congress() - 1) in January of odd years
   # since Voteview may not have votes from the new Congress yet
   if (is_odd_year_january()) {
-    expect_true(identical(unique(online_voteview_members$congress), 1:current_congress()) ||
-                  identical(unique(online_voteview_members$congress), 1:(current_congress() - 1)))
+    expect_true(all.equal(unique(online_voteview_members$congress), 1:current_congress()) ||
+                  all.equal(unique(online_voteview_members$congress), 1:(current_congress() - 1)))
   } else {
     expect_equal(unique(online_voteview_members$congress), 1:current_congress())
   }
@@ -25,8 +25,8 @@ test_that("filter by chamber", {
   expect_length(hr, 22)
   expect_equal(levels(hr$chamber), c("President", "House"))
   if (is_odd_year_january()) {
-    expect_true(identical(unique(hr$congress), 1:current_congress()) ||
-                  identical(unique(hr$congress), 1:(current_congress() - 1)))
+    expect_true(all.equal(unique(hr$congress), 1:current_congress()) ||
+                  all.equal(unique(hr$congress), 1:(current_congress() - 1)))
   } else {
     expect_equal(unique(hr$congress), 1:current_congress())
   }
@@ -35,8 +35,8 @@ test_that("filter by chamber", {
   expect_length(s, 22)
   expect_equal(levels(s$chamber), c("President", "Senate"))
   if (is_odd_year_january()) {
-    expect_true(identical(unique(s$congress), 1:current_congress()) ||
-                  identical(unique(s$congress), 1:(current_congress() - 1)))
+    expect_true(all.equal(unique(s$congress), 1:current_congress()) ||
+                  all.equal(unique(s$congress), 1:(current_congress() - 1)))
   } else {
     expect_equal(unique(s$congress), 1:current_congress())
   }
@@ -68,8 +68,8 @@ test_that("filter by congress", {
   expect_equal(levels(sens_all_congresses$chamber),
                c("President", "Senate"))
   if (is_odd_year_january()) {
-    expect_true(identical(unique(sens_all_congresses$congress), 1:current_congress()) ||
-                  identical(unique(sens_all_congresses$congress), 1:(current_congress() - 1)))
+    expect_true(all.equal(unique(sens_all_congresses$congress), 1:current_congress()) ||
+                  all.equal(unique(sens_all_congresses$congress), 1:(current_congress() - 1)))
   } else {
     expect_equal(unique(sens_all_congresses$congress), 1:current_congress())
   }

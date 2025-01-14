@@ -9,8 +9,8 @@ test_that("download from Voteview", {
   # allow Congresses to be 1:(current_congress() - 1) in January of odd years
   # since Voteview may not have votes from the new Congress yet
   if (is_odd_year_january()) {
-    expect_true(identical(unique(online_votes$congress), 1:current_congress()) ||
-                  identical(unique(online_votes$congress), 1:(current_congress() - 1)))
+    expect_true(all.equal(unique(online_votes$congress), 1:current_congress()) ||
+                  all.equal(unique(online_votes$congress), 1:(current_congress() - 1)))
   } else {
     expect_equal(unique(online_votes$congress), 1:current_congress())
   }
@@ -26,8 +26,8 @@ test_that("filter votes by chamber", {
   expect_length(s_votes, 6)
   expect_equal(levels(s_votes$chamber), "Senate")
   if (is_odd_year_january()) {
-    expect_true(identical(unique(s_votes$congress), 1:current_congress()) ||
-                  identical(unique(s_votes$congress), 1:(current_congress() - 1)))
+    expect_true(all.equal(unique(s_votes$congress), 1:current_congress()) ||
+                  all.equal(unique(s_votes$congress), 1:(current_congress() - 1)))
   } else {
     expect_equal(unique(s_votes$congress), 1:current_congress())
   }
@@ -39,8 +39,8 @@ test_that("filter votes by chamber", {
   expect_length(hr_votes, 6)
   expect_equal(levels(hr_votes$chamber), "House")
   if (is_odd_year_january()) {
-    expect_true(identical(unique(hr_votes$congress), 1:current_congress()) ||
-                  identical(unique(hr_votes$congress), 1:(current_congress() - 1)))
+    expect_true(all.equal(unique(hr_votes$congress), 1:current_congress()) ||
+                  all.equal(unique(hr_votes$congress), 1:(current_congress() - 1)))
   } else {
     expect_equal(unique(hr_votes$congress), 1:current_congress())
   }

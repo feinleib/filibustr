@@ -53,7 +53,14 @@ test_that("get_online_data(): Voteview parties", {
   expect_s3_class(parties_df, "tbl_df")
   expect_length(parties_df, 9)
   expect_equal(unique(parties_df$chamber), c("President", "House", "Senate"))
-  expect_equal(unique(parties_df$congress), 1:118)
+  # allow Congresses to be 1:(current_congress() - 1) in January of odd years
+  # since Voteview may not have votes from the new Congress yet
+  if (is_odd_year_january()) {
+    expect_true(all.equal(unique(parties_df$congress), 1:current_congress()) ||
+                  all.equal(unique(parties_df$congress), 1:(current_congress() - 1)))
+  } else {
+    expect_equal(unique(parties_df$congress), 1:current_congress())
+  }
 })
 
 test_that("filter_chamber()", {
@@ -165,11 +172,9 @@ test_that("filter_congress() error: Congress numbers not found", {
   all_sens <- get_voteview_members("s")
   expect_s3_class(all_sens, "tbl_df")
   expect_gt(nrow(all_sens), 10000)
-  # allow Congresses to be 1:(current_congress() - 1) in January of odd years
-  # since Voteview may not have votes from the new Congress yet
   if (is_odd_year_january()) {
-    expect_true(identical(unique(all_sens$congress), 1:current_congress()) ||
-                  identical(unique(all_sens$congress), 1:(current_congress() - 1)))
+    expect_true(all.equal(unique(all_sens$congress), 1:current_congress()) ||
+                  all.equal(unique(all_sens$congress), 1:(current_congress() - 1)))
   } else {
     expect_equal(unique(all_sens$congress), 1:current_congress())
   }
