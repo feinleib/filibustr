@@ -19,12 +19,12 @@ test_that("read_html_table()", {
   # A table from Baseball Reference: Steve Garvey stats
   br_table <- read_html_table(
     url = "https://www.baseball-reference.com/players/g/garvest01.shtml",
-    css = "#batting_standard"
+    css = "#players_standard_batting"
   )
 
   expect_s3_class(br_table, "tbl_df")
-  expect_length(br_table, 30)
-  expect_equal(nrow(br_table), 27)
+  expect_length(br_table, 33)
+  expect_equal(nrow(br_table), 24)
 })
 
 test_that("get_online_data(): Voteview members", {
