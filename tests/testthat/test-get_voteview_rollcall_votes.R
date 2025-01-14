@@ -69,3 +69,27 @@ test_that("filter rollcalls by congress", {
   expect_equal(unique(s_rollcalls_117$congress), 117)
   expect_equal(nrow(s_rollcalls_117), 949)
 })
+
+test_that("rollcalls column types", {
+  skip_if_offline()
+
+  hr_votes_31 <- get_voteview_rollcall_votes(chamber = "hr", congress = 31)
+  expect_s3_class(hr_votes_31, "tbl_df")
+  expect_length(hr_votes_31, 18)
+  expect_equal(nrow(hr_votes_31), 572)
+
+  expect_length(dplyr::select(hr_votes_31, dplyr::where(is.character)), 5)
+  expect_length(dplyr::select(hr_votes_31, dplyr::where(is.double)), 6)
+  expect_length(dplyr::select(hr_votes_31, dplyr::where(is.factor)), 1)
+  expect_length(dplyr::select(hr_votes_31, dplyr::where(is.integer)), 6)
+
+  votes_109 <- get_voteview_rollcall_votes(congress = 109)
+  expect_s3_class(votes_109, "tbl_df")
+  expect_length(votes_109, 18)
+  expect_equal(nrow(votes_109), 1855)
+
+  expect_length(dplyr::select(votes_109, dplyr::where(is.character)), 5)
+  expect_length(dplyr::select(votes_109, dplyr::where(is.double)), 6)
+  expect_length(dplyr::select(votes_109, dplyr::where(is.factor)), 1)
+  expect_length(dplyr::select(votes_109, dplyr::where(is.integer)), 6)
+})

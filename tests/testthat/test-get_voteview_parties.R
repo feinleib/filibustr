@@ -35,3 +35,16 @@ test_that("filter parties by congress", {
   expect_equal(levels(parties_117$party_name),
                c("Democrat", "Republican", "Independent"))
 })
+
+test_that("parties column types", {
+  skip_if_offline()
+
+  parties_25 <- get_voteview_parties(congress = 25)
+  expect_s3_class(parties_25, "tbl_df")
+  expect_length(parties_25, 9)
+  expect_equal(nrow(parties_25), 8)
+
+  expect_length(dplyr::select(parties_25, dplyr::where(is.double)), 4)
+  expect_length(dplyr::select(parties_25, dplyr::where(is.integer)), 3)
+  expect_length(dplyr::select(parties_25, dplyr::where(is.factor)), 2)
+})
