@@ -77,3 +77,13 @@ test_that("current congress", {
   # (this will fail in the year 2187)
   expect_lt(curr_cong, 200)
 })
+
+test_that("odd-year January", {
+  expect_true(is_odd_year_january(as.Date("2001-01-01")))
+  expect_true(is_odd_year_january(as.Date("1775-01-25")))
+  expect_true(is_odd_year_january(as.Date("9999-01-31")))
+
+  expect_false(is_odd_year_january(as.Date("2021-02-01")))
+  expect_false(is_odd_year_january(as.Date("2008-01-10")))
+  expect_false(is_odd_year_january(as.Date("9999-12-31")))
+})
