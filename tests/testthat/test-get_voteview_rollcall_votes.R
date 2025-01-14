@@ -3,7 +3,14 @@ test_that("download from Voteview", {
   expect_s3_class(online_rollcalls, "tbl_df")
   expect_length(online_rollcalls, 18)
   expect_equal(levels(online_rollcalls$chamber), c("House", "Senate"))
-  expect_equal(unique(online_rollcalls$congress), 1:current_congress())
+  # allow Congresses to be 1:(current_congress() - 1) in January of odd years
+  # since Voteview may not have votes from the new Congress yet
+  if (is_odd_year_january()) {
+    expect_true(identical(unique(online_rollcalls$congress), 1:current_congress()) ||
+                  identical(unique(online_rollcalls$congress), 1:(current_congress() - 1)))
+  } else {
+    expect_equal(unique(online_rollcalls$congress), 1:current_congress())
+  }
 })
 
 test_that("filter rollcalls by chamber", {
@@ -11,13 +18,23 @@ test_that("filter rollcalls by chamber", {
   expect_s3_class(s_votes, "tbl_df")
   expect_length(s_votes, 18)
   expect_equal(levels(s_votes$chamber), "Senate")
-  expect_equal(unique(s_votes$congress), 1:current_congress())
+  if (is_odd_year_january()) {
+    expect_true(identical(unique(s_votes$congress), 1:current_congress()) ||
+                  identical(unique(s_votes$congress), 1:(current_congress() - 1)))
+  } else {
+    expect_equal(unique(s_votes$congress), 1:current_congress())
+  }
 
   hr_votes <- get_voteview_rollcall_votes(chamber = "hr")
   expect_s3_class(hr_votes, "tbl_df")
   expect_length(hr_votes, 18)
   expect_equal(levels(hr_votes$chamber), "House")
-  expect_equal(unique(hr_votes$congress), 1:current_congress())
+  if (is_odd_year_january()) {
+    expect_true(identical(unique(hr_votes$congress), 1:current_congress()) ||
+                  identical(unique(hr_votes$congress), 1:(current_congress() - 1)))
+  } else {
+    expect_equal(unique(hr_votes$congress), 1:current_congress())
+  }
 
   # House has more recorded votes
   expect_gt(nrow(hr_votes), nrow(s_votes))

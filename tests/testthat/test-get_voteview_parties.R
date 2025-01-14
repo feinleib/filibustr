@@ -4,7 +4,14 @@ test_that("all parties data", {
   expect_length(all_parties, 9)
   expect_equal(levels(all_parties$chamber),
                c("President", "House", "Senate"))
-  expect_equal(unique(all_parties$congress), 1:current_congress())
+  # allow Congresses to be 1:(current_congress() - 1) in January of odd years
+  # since Voteview may not have votes from the new Congress yet
+  if (is_odd_year_january()) {
+    expect_true(identical(unique(all_parties$congress), 1:current_congress()) ||
+                  identical(unique(all_parties$congress), 1:(current_congress() - 1)))
+  } else {
+    expect_equal(unique(all_parties$congress), 1:current_congress())
+  }
 })
 
 test_that("filter parties by congress", {

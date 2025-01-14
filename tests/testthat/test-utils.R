@@ -165,7 +165,14 @@ test_that("filter_congress() error: Congress numbers not found", {
   all_sens <- get_voteview_members("s")
   expect_s3_class(all_sens, "tbl_df")
   expect_gt(nrow(all_sens), 10000)
-  expect_equal(unique(all_sens$congress), 1:current_congress())
+  # allow Congresses to be 1:(current_congress() - 1) in January of odd years
+  # since Voteview may not have votes from the new Congress yet
+  if (is_odd_year_january()) {
+    expect_true(identical(unique(all_sens$congress), 1:current_congress()) ||
+                  identical(unique(all_sens$congress), 1:(current_congress() - 1)))
+  } else {
+    expect_equal(unique(all_sens$congress), 1:current_congress())
+  }
 
   # filter that dataset
   sens_100s <- filter_congress(all_sens, 100:109)

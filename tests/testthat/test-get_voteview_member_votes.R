@@ -6,7 +6,14 @@ test_that("download from Voteview", {
   expect_s3_class(online_votes, "tbl_df")
   expect_length(online_votes, 6)
   expect_equal(levels(online_votes$chamber), c("House", "Senate"))
-  expect_equal(unique(online_votes$congress), 1:current_congress())
+  # allow Congresses to be 1:(current_congress() - 1) in January of odd years
+  # since Voteview may not have votes from the new Congress yet
+  if (is_odd_year_january()) {
+    expect_true(identical(unique(online_votes$congress), 1:current_congress()) ||
+                  identical(unique(online_votes$congress), 1:(current_congress() - 1)))
+  } else {
+    expect_equal(unique(online_votes$congress), 1:current_congress())
+  }
   expect_gte(min(online_votes$prob, na.rm = TRUE), 0)
   expect_lte(max(online_votes$prob, na.rm = TRUE), 100)
 })
@@ -18,7 +25,12 @@ test_that("filter votes by chamber", {
   expect_s3_class(s_votes, "tbl_df")
   expect_length(s_votes, 6)
   expect_equal(levels(s_votes$chamber), "Senate")
-  expect_equal(unique(s_votes$congress), 1:current_congress())
+  if (is_odd_year_january()) {
+    expect_true(identical(unique(s_votes$congress), 1:current_congress()) ||
+                  identical(unique(s_votes$congress), 1:(current_congress() - 1)))
+  } else {
+    expect_equal(unique(s_votes$congress), 1:current_congress())
+  }
 
   skip("Skipping slow online member-votes downloads.")
 
@@ -26,7 +38,12 @@ test_that("filter votes by chamber", {
   expect_s3_class(hr_votes, "tbl_df")
   expect_length(hr_votes, 6)
   expect_equal(levels(hr_votes$chamber), "House")
-  expect_equal(unique(hr_votes$congress), 1:current_congress())
+  if (is_odd_year_january()) {
+    expect_true(identical(unique(hr_votes$congress), 1:current_congress()) ||
+                  identical(unique(hr_votes$congress), 1:(current_congress() - 1)))
+  } else {
+    expect_equal(unique(hr_votes$congress), 1:current_congress())
+  }
 
   # 4x more members per House vote, so this will hold
   expect_gt(nrow(hr_votes), nrow(s_votes))

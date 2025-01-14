@@ -81,3 +81,23 @@ year_of_congress <- function(congress) {
   }
   1787 + 2 * congress
 }
+
+#' Test whether a date is in January of an odd year
+#'
+#' `is_odd_year_january()` is a simple test that returns `TRUE` if a date is in
+#' January of an odd year. That is the start of a new Congress, when the data
+#' sources might not yet have any data from the new Congress.
+#'
+#' @param date A `Date` object. Defaults to [Sys.Date()].
+#'
+#' @returns A logical, which is `TRUE` if the given date is in January of an odd
+#'  year.
+#'
+#' @examples
+#' is_odd_year_january()
+#' is_odd_year_january(as.Date("2000-01-01"))
+#'
+#' @noRd
+is_odd_year_january <- function(date = Sys.Date()) {
+  format(date, "%m") == "01" && as.numeric(format(date, "%Y")) %% 2 == 1
+}
