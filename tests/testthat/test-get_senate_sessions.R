@@ -1,4 +1,6 @@
 test_that("senate sessions", {
+  skip_if_offline()
+
   session_dates <- get_senate_sessions()
   expect_s3_class(session_dates, "tbl_df")
   expect_length(session_dates, 4)

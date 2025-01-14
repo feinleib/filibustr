@@ -1,4 +1,6 @@
 test_that("download from Voteview", {
+  skip_if_offline()
+
   online_rollcalls <- get_voteview_rollcall_votes()
   expect_s3_class(online_rollcalls, "tbl_df")
   expect_length(online_rollcalls, 18)
@@ -14,6 +16,8 @@ test_that("download from Voteview", {
 })
 
 test_that("filter rollcalls by chamber", {
+  skip_if_offline()
+
   s_votes <- get_voteview_rollcall_votes(chamber = "s")
   expect_s3_class(s_votes, "tbl_df")
   expect_length(s_votes, 18)
@@ -41,6 +45,8 @@ test_that("filter rollcalls by chamber", {
 })
 
 test_that("filter rollcalls by congress", {
+  skip_if_offline()
+
   rollcalls_1_10 <- get_voteview_rollcall_votes(congress = 1:10)
   expect_s3_class(rollcalls_1_10, "tbl_df")
   expect_length(rollcalls_1_10, 18)

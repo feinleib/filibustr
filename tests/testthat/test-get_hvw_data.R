@@ -1,4 +1,6 @@
 test_that("HVW house data", {
+  skip_if_offline()
+
   house_data <- get_hvw_data("house")
 
   # data checks
@@ -14,6 +16,8 @@ test_that("HVW house data", {
 })
 
 test_that("HVW senate data", {
+  skip_if_offline()
+
   senate_data <- get_hvw_data("senate")
 
   # data checks
@@ -35,6 +39,8 @@ test_that("HVW chamber errors", {
 })
 
 test_that("HVW local reading and writing", {
+  skip_if_offline()
+
   ## create temp file paths
   tmp_csv <- tempfile(fileext = ".csv")
   tmp_tsv <- tempfile(fileext = ".tsv")
@@ -80,6 +86,8 @@ test_that("HVW local reading and writing", {
 })
 
 test_that("HVW data with Stata dta files", {
+  skip_if_offline()
+
   tmp_dta <- tempfile(fileext = ".dta")
 
   sen_to_dta <- get_hvw_data("s")
@@ -107,6 +115,8 @@ test_that("HVW data with Stata dta files", {
 })
 
 test_that("basic dta example", {
+  skip_if_offline()
+
   tmp_dta <- tempfile(fileext = ".dta")
 
   # read data from online

@@ -1,4 +1,6 @@
 test_that("cloture votes", {
+  skip_if_offline()
+
   cloture_votes <- get_senate_cloture_votes()
   expect_s3_class(cloture_votes, "tbl_df")
   expect_length(cloture_votes, 5)

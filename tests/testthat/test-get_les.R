@@ -1,4 +1,6 @@
 test_that("LES classic House data", {
+  skip_if_offline()
+
   hr_classic <- get_les("house", les_2 = FALSE)
 
   # data checks
@@ -13,6 +15,8 @@ test_that("LES classic House data", {
 })
 
 test_that("LES classic Senate data", {
+  skip_if_offline()
+
   s_classic <- get_les("senate", les_2 = FALSE)
 
   # data checks
@@ -27,6 +31,8 @@ test_that("LES classic Senate data", {
 })
 
 test_that("LES 2.0 House data", {
+  skip_if_offline()
+
   hr_2 <- get_les("hr", les_2 = TRUE)
 
   # data checks
@@ -41,6 +47,8 @@ test_that("LES 2.0 House data", {
 })
 
 test_that("LES 2.0 Senate data", {
+  skip_if_offline()
+
   s_2 <- get_les("sen", les_2 = TRUE)
 
   # data checks
@@ -55,6 +63,8 @@ test_that("LES 2.0 Senate data", {
 })
 
 test_that("column types", {
+  skip_if_offline()
+
   # Senate, LES Classic
   s_1 <- get_les("s", les_2 = FALSE)
   expect_s3_class(s_1, "tbl_df")
@@ -79,6 +89,8 @@ test_that("column types", {
 })
 
 test_that("LES local reading and writing", {
+  skip_if_offline()
+
   ## create temp file paths
   tmp_csv <- tempfile(fileext = ".csv")
   tmp_tab <- tempfile(fileext = ".tab")

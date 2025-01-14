@@ -1,4 +1,6 @@
 test_that("all parties data", {
+  skip_if_offline()
+
   all_parties <- get_voteview_parties()
   expect_s3_class(all_parties, "tbl_df")
   expect_length(all_parties, 9)
@@ -15,6 +17,8 @@ test_that("all parties data", {
 })
 
 test_that("filter parties by congress", {
+  skip_if_offline()
+
   parties_99_101 <- get_voteview_parties(congress = 99:101)
   expect_s3_class(parties_99_101, "tbl_df")
   expect_length(parties_99_101, 9)
