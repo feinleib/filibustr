@@ -132,6 +132,10 @@ test_that("local read/write", {
                                        local_path = tmp_dta)
   expect_s3_class(hr_117_local, "tbl_df")
   expect_equal(haven::zap_labels(haven::zap_formats(hr_117_local)), hr_117_online)
+
+  # invalid filetype error
+  tmp_pdf <- tempfile(fileext = ".pdf")
+  expect_error(get_voteview_members(local_path = tmp_pdf), regexp = "Invalid `path` provided:")
 })
 
 test_that("local read filtering", {
