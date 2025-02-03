@@ -129,3 +129,63 @@ test_that("local read/write", {
   # csv vs online
   expect_identical(csv_sen_mvotes_104, sen_mvotes_104)
 })
+
+test_that("local read filtering", {
+  skip_if_offline()
+
+  ## create filepath
+  tmp_csv <- tempfile(fileext = ".csv")
+
+  ## download and save from online
+  memvotes_20_22 <- get_voteview_member_votes(congress = 20:22)
+  expect_s3_class(memvotes_20_22, "tbl_df")
+  expect_length(memvotes_20_22, 6)
+  expect_equal(nrow(memvotes_20_22), 250526)
+  readr::write_csv(memvotes_20_22, tmp_csv)
+
+  ## read whole file from local
+  local_memvotes_20_22 <- get_voteview_member_votes(congress = 20:22, local_path = tmp_csv)
+  expect_s3_class(local_memvotes_20_22, "tbl_df")
+  expect_equal(local_memvotes_20_22, memvotes_20_22)
+
+  ## filter by chamber
+  hr_memvotes_20_22 <- get_voteview_member_votes(congress = 20:22, chamber = "hr",
+                                                 local_path = tmp_csv)
+  expect_s3_class(hr_memvotes_20_22, "tbl_df")
+  expect_equal(nrow(hr_memvotes_20_22), 205790)
+  expect_equal(hr_memvotes_20_22,
+               dplyr::filter(memvotes_20_22, chamber != "Senate") |>
+                 dplyr::mutate(chamber = droplevels(chamber)))
+
+  # shouldn't need `congress` arg for this file
+  hr_memvotes_20_22_v2 <- get_voteview_member_votes(chamber = "hr",
+                                                    local_path = tmp_csv)
+  expect_equal(hr_memvotes_20_22_v2, hr_memvotes_20_22)
+
+  ## filter by congress
+  memvotes_21 <- get_voteview_member_votes(chamber = "all", congress = 21,
+                                           local_path = tmp_csv)
+  expect_equal(nrow(memvotes_21), 71001)
+  expect_equal(memvotes_21, dplyr::filter(memvotes_20_22, congress == 21))
+
+  ## filter by both
+  s_memvotes_21_22 <- get_voteview_member_votes(chamber = "sen", congress = 21:22,
+                                                local_path = tmp_csv)
+  expect_s3_class(s_memvotes_21_22, "tbl_df")
+  expect_equal(nrow(s_memvotes_21_22), 33396)
+  expect_equal(s_memvotes_21_22,
+               dplyr::filter(memvotes_20_22,
+                             chamber != "House",
+                             congress %in% 21:22) |>
+                 dplyr::mutate(chamber = droplevels(chamber)))
+
+  ## passing congress numbers not in the file
+  # at least one congress is present: ok
+  memvotes_20_not10s <- get_voteview_member_votes(congress = 10:20, local_path = tmp_csv)
+  expect_s3_class(memvotes_20_not10s, "tbl_df")
+  expect_equal(nrow(memvotes_20_not10s), 60954)
+
+  # none present: error
+  expect_error(get_voteview_member_votes(congress = 10:19, local_path = tmp_csv),
+               "Congress numbers .+ were not found in data")
+})
