@@ -54,6 +54,13 @@ get_voteview_rollcall_votes <- function(chamber = "all", congress = NULL, local_
     df <- read_local_file(path = local_path, col_types = "ifiDddiidddddccccc")
   }
 
+  # filter local files
+  if (!is.null(local_path)) {
+    df <- df |>
+      filter_congress(congress = congress) |>
+      filter_chamber(chamber = chamber)
+  }
+
   df |>
     dplyr::mutate(dplyr::across(.cols = c("session", "clerk_rollnumber"),
                                 .fns = as.integer))
