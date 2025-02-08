@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_voteview_parties.R
 \name{get_voteview_parties}
 \alias{get_voteview_parties}
-\title{Get ICPSR party codes from Voteview}
+\title{Get data on congressional parties from Voteview}
 \usage{
 get_voteview_parties(chamber = "all", congress = NULL, local_path = NULL)
 }
@@ -34,8 +34,10 @@ data from the Voteview website.}
 A \code{\link[=tibble]{tibble()}}.
 }
 \description{
-\code{get_voteview_parties()} returns a tibble associating ICPSR party codes with more
-information on the party.
+\code{get_voteview_parties()} returns a tibble with information on the parties (aka caucuses)
+in each Congress. The party information includes a party's ICPSR code, number of
+members, and DW-NOMINATE scores.
+
 The parties of the President, Senate, and House are listed in the data.
 Each row is one party in one chamber for each Congress (i.e., each party is listed
 once for every two years).
