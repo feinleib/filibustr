@@ -53,5 +53,23 @@ get_voteview_parties <- function(chamber = "all", congress = NULL, local_path = 
     df <- read_local_file(path = local_path, col_types = "ififidddd")
   }
 
+  # local file fixes
+  if (isTRUE(tools::file_ext(local_path) == "dta")) {
+    # fixes for coming from .dta files
+    df <- df |>
+      # no need to specify levels if data is already coming from saved DTA file
+      dplyr::mutate(dplyr::across(.cols = c("chamber", "party_name"),
+                                  .fns = haven::as_factor),
+                    dplyr::across(.cols = c("congress", "party_code", "n_members"),
+                                  .fns = as.integer))
+  }
+
+  # filter local files
+  if (!is.null(local_path)) {
+    df <- df |>
+      filter_congress(congress = congress) |>
+      filter_chamber(chamber = chamber)
+  }
+
   df
 }
