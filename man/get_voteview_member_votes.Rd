@@ -42,8 +42,8 @@ See the
 Please cite this dataset as:
 
 Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
-and Luke Sonnet (2024). \emph{Voteview: Congressional Roll-Call Votes Database}.
-\url{https://voteview.com/}
+and Luke Sonnet (2025).
+\emph{Voteview: Congressional Roll-Call Votes Database}. \url{https://voteview.com/}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

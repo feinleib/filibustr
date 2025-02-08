@@ -38,8 +38,8 @@
 #' Please cite this dataset as:
 #'
 #' Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
-#' and Luke Sonnet (2024). *Voteview: Congressional Roll-Call Votes Database*.
-#' <https://voteview.com/>
+#' and Luke Sonnet (`r format(Sys.Date(), "%Y")`).
+#' *Voteview: Congressional Roll-Call Votes Database*. <https://voteview.com/>
 #'
 #' @export
 #'
