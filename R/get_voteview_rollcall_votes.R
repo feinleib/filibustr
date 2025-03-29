@@ -54,6 +54,19 @@ get_voteview_rollcall_votes <- function(chamber = "all", congress = NULL, local_
     df <- read_local_file(path = local_path, col_types = "ifiDddiidddddccccc")
   }
 
+  # fixes for coming from .dta files
+  if (isTRUE(tools::file_ext(local_path) == "dta")) {
+    df <- df |>
+      dplyr::mutate(dplyr::across(.cols = "chamber",
+                                  .fns = haven::as_factor),
+                    dplyr::across(.cols = c("congress", "rollnumber",
+                                            "yea_count", "nay_count"),
+                                  .fns = as.integer),
+                    # convert empty strings to NAs
+                    dplyr::across(.cols = dplyr::where(is.character),
+                                  .fns = \(str) dplyr::na_if(str, "")))
+  }
+
   # filter local files
   if (!is.null(local_path)) {
     df <- df |>
