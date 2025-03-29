@@ -113,15 +113,15 @@ test_that("local read filtering", {
                                      local_path = tmp_dta)
   expect_s3_class(hr_parties, "tbl_df")
   expect_equal(nrow(hr_parties), 521)
-  expect_equal(hr_parties,
-               dplyr::filter(hr_parties, chamber != "Senate") |>
+  expect_equal(haven::zap_formats(hr_parties),
+               dplyr::filter(all_parties, chamber != "Senate") |>
                  dplyr::mutate(chamber = droplevels(chamber)))
 
   ## filter by congress
   parties_50s <- get_voteview_parties(congress = 50:59,
                                       local_path = tmp_csv)
   expect_equal(nrow(parties_50s), 83)
-  expect_equal(parties_50s, dplyr::filter(parties_50s, congress %in% 50:59))
+  expect_equal(parties_50s, dplyr::filter(all_parties, congress %in% 50:59))
 
   ## filter by both
   s_parties_117 <- get_voteview_parties(chamber = "sen", congress = 117,
@@ -129,7 +129,7 @@ test_that("local read filtering", {
   expect_s3_class(s_parties_117, "tbl_df")
   expect_equal(nrow(s_parties_117), 5)
   expect_equal(haven::zap_labels(haven::zap_formats(s_parties_117)),
-               dplyr::filter(local_parties2,
+               dplyr::filter(all_parties,
                              chamber != "House",
                              congress == 117) |>
                  dplyr::mutate(chamber = droplevels(chamber)))
