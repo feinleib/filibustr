@@ -15,7 +15,7 @@
 Here is some example usage of the `local_path` argument, including the ability 
 to filter local files:
 
-```R
+``` r
 ## download large dataset
 all_members <- get_voteview_members()
 nrow(all_members)                       # 51036
