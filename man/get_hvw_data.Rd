@@ -21,9 +21,8 @@ or the same variable names, so it is not trivial to join the two tables.
 
 You \emph{must} specify either House or Senate data, since there is no "default" option.}
 
-\item{local_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} (Optional) A file path
-for reading from a local file. If no \code{local_path} is specified,  will read
-data from the Harvard Dataverse website.}
+\item{local_path}{(Optional) A file path for reading from a local file.
+If no \code{local_path} is specified,  will read data from the Harvard Dataverse website.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.

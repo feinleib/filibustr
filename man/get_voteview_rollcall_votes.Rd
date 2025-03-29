@@ -20,15 +20,14 @@ These options are case-insensitive. If you explicitly pass a different value,
 it will default to "all" with a warning.
 }}
 
-\item{congress}{A whole number (to get data for a single Congress), or
+\item{congress}{(Optional) A whole number (to get data for a single Congress), or
 a numeric vector (to get data for a set of congresses).
-Optional; will retrieve data for all Congresses by default.
+If not specified, will retrieve data for all Congresses by default.
 If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}
 (i.e., you cannot try to get future data).}
 
-\item{local_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} (Optional) A file path
-for reading from a local file. If no \code{local_path} is specified, will read
-data from the Voteview website.}
+\item{local_path}{(Optional) A file path for reading from a local file. If no
+\code{local_path} is specified, will read data from the Voteview website.}
 }
 \value{
 A \code{\link[=tibble]{tibble()}}.

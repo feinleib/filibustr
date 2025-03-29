@@ -5,7 +5,7 @@
 #' Senators, Representatives, and Presidents. Each row is one member in one
 #' Congress (i.e., each member is listed once for every two years in office).
 #'
-#' @param chamber Which chamber to get data for. Options are:
+#' @param chamber (Optional) Which chamber to get data for. Options are:
 #'  * `"all"`, `"congress"`, `"hs"`: Both House and Senate data (the default).
 #'  * `"house"`, `"h"`, `"hr"`: House data only.
 #'  * `"senate"`, `"s"`, `"sen"`: Senate data only.
@@ -16,15 +16,14 @@
 #' and `"senate"` data will duplicate data on the presidents. The recommended way to get
 #' all data is to use the default argument, `"all"`.
 #'
-#' @param congress A whole number (to get data for a single Congress), or
+#' @param congress (Optional) A whole number (to get data for a single Congress), or
 #'  a numeric vector (to get data for a set of congresses).
-#'  Optional; will retrieve data for all Congresses by default.
+#'  If not specified, will retrieve data for all Congresses by default.
 #'  If specified, Congress numbers cannot be greater than the [current_congress()]
 #'  (i.e., you cannot try to get future data).
 #'
-#' @param local_path `r lifecycle::badge('experimental')` (Optional) A file path
-#'  for reading from a local file. If no `local_path` is specified, will read
-#'  data from the Voteview website.
+#' @param local_path (Optional) A file path for reading from a local file. If no
+#'  `local_path` is specified, will read data from the Voteview website.
 #'
 #' @returns A [tibble()].
 #'
