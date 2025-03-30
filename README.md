@@ -224,7 +224,8 @@ with congressional data.
 
 If you notice any bugs, or have suggestions for new features, please
 submit an issue on the [Issues
-page](https://github.com/feinleib/filibustr/issues) of this repository!
+page](https://github.com/feinleib/filibustr/issues) of this package’s
+GitHub repository!
 
 ## Data sources
 
