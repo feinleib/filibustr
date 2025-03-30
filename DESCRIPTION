@@ -25,7 +25,7 @@ Imports:
     stringr,
     tidyr,
     tools
-URL: https://github.com/feinleib/filibustr
+URL: https://github.com/feinleib/filibustr, https://feinleib.github.io/filibustr/
 BugReports: https://github.com/feinleib/filibustr/issues
 Suggests: 
     testthat (>= 3.0.0)
