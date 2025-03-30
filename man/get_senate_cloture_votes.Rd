@@ -7,7 +7,7 @@
 get_senate_cloture_votes()
 }
 \value{
-A \code{\link[=tibble]{tibble()}} with the number of cloture motions, cloture votes, and
+A tibble with the number of cloture motions, cloture votes, and
 successful cloture votes in each Congress.
 }
 \description{

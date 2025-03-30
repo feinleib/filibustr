@@ -13,7 +13,7 @@
 #'  These options are case-insensitive. If you explicitly pass a different value,
 #'  it will default to "all" with a warning.
 #'
-#' @returns A [tibble()].
+#' @returns A tibble.
 #' @export
 #'
 #' @examplesIf interactive()

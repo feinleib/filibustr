@@ -11,7 +11,7 @@
 #'
 #' @inherit get_voteview_members
 #'
-#' @returns A [tibble()].
+#' @returns A tibble.
 #' @export
 #'
 #' @examplesIf interactive()

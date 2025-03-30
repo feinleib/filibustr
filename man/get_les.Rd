@@ -43,7 +43,7 @@ If no \code{local_path} is specified, will read data from the Center for
 Effective Lawmaking website.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}}.
+A tibble.
 }
 \description{
 \code{get_les()} returns

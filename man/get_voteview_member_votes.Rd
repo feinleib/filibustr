@@ -28,7 +28,7 @@ If specified, Congress numbers cannot be greater than the \code{\link[=current_c
 \code{local_path} is specified, will read data from the Voteview website.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}}.
+A tibble.
 }
 \description{
 \code{get_voteview_member_votes()} returns a tibble that lists how each member

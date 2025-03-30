@@ -25,7 +25,7 @@ You \emph{must} specify either House or Senate data, since there is no "default"
 If no \code{local_path} is specified,  will read data from the Harvard Dataverse website.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}}.
+A tibble.
 }
 \description{
 \code{get_hvw_data()} returns replication data from:

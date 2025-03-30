@@ -7,7 +7,7 @@
 get_senate_sessions()
 }
 \value{
-A \code{\link[=tibble]{tibble()}} with the \code{begin_date} and \code{adjourn_date} of each
+A tibble with the \code{begin_date} and \code{adjourn_date} of each
 session of the Senate.
 }
 \description{
@@ -36,6 +36,7 @@ The \code{session} column is type factor, with the following levels:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{levels(get_senate_sessions()$session)
 #> [1] "1" "2" "3" "4" "S"
+# Note: That's a letter S, not a number 5!
 }\if{html}{\out{</div>}}
 
 The Senate has had just 2 sessions in each Congress since 1941, so if you

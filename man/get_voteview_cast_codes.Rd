@@ -7,12 +7,13 @@
 get_voteview_cast_codes()
 }
 \value{
-A \code{\link[=tibble]{tibble()}}.
+A tibble.
 }
 \description{
 \code{get_voteview_cast_codes()} returns a tibble with definitions
 of the 10 cast codes used in Voteview's member votes data
-(i.e., the data from \code{\link[=get_voteview_member_votes]{get_voteview_member_votes()}}).
+(i.e., the \code{cast_code} column in the data frames from
+\code{\link[=get_voteview_member_votes]{get_voteview_member_votes()}}).
 }
 \details{
 For more information on these cast codes, visit Voteview's

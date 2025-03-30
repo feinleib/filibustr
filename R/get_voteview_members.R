@@ -27,7 +27,7 @@
 #' @param local_path (Optional) A file path for reading from a local file. If no
 #'  `local_path` is specified, will read data from the Voteview website.
 #'
-#' @returns A [tibble()].
+#' @returns A tibble.
 #'
 #' The tibble includes data on the member's office, party, and ideology.
 #' See [Voteview](https://voteview.com/data) for descriptions of specific columns.

@@ -23,6 +23,7 @@
 #' The `session` column is type factor, with the following levels:
 #' ```{r session levels}
 #' levels(get_senate_sessions()$session)
+#' # Note: That's a letter S, not a number 5!
 #' ```
 #'
 #' The Senate has had just 2 sessions in each Congress since 1941, so if you
@@ -31,7 +32,7 @@
 #' be dealing with special sessions (denoted `"S"`), not just numbered
 #' sessions.
 #'
-#' @returns A [tibble()] with the `begin_date` and `adjourn_date` of each
+#' @returns A tibble with the `begin_date` and `adjourn_date` of each
 #'  session of the Senate.
 #' @export
 #'

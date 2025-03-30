@@ -2,7 +2,8 @@
 #'
 #' `get_voteview_cast_codes()` returns a tibble with definitions
 #' of the 10 cast codes used in Voteview's member votes data
-#' (i.e., the data from [get_voteview_member_votes()]).
+#' (i.e., the `cast_code` column in the data frames from
+#' [get_voteview_member_votes()]).
 #'
 #' For more information on these cast codes, visit Voteview's
 #' [article](https://voteview.com/articles/data_help_votes) on the
@@ -10,7 +11,7 @@
 #'
 #' @seealso [get_voteview_member_votes()], which uses these cast codes.
 #'
-#' @returns A [tibble()].
+#' @returns A tibble.
 #' @export
 #'
 #' @examples

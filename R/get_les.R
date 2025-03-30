@@ -36,7 +36,7 @@
 #'  If no `local_path` is specified, will read data from the Center for
 #'  Effective Lawmaking website.
 #'
-#' @returns A [tibble()].
+#' @returns A tibble.
 #'
 #' @details
 #' See the [Center for Effective Lawmaking](https://thelawmakers.org)

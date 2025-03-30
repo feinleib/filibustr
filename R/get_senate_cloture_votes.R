@@ -7,7 +7,7 @@
 #' The data is sourced from the official Senate website, specifically
 #' <https://www.senate.gov/legislative/cloture/clotureCounts.htm>.
 #'
-#' @returns A [tibble()] with the number of cloture motions, cloture votes, and
+#' @returns A tibble with the number of cloture motions, cloture votes, and
 #'  successful cloture votes in each Congress.
 #' @export
 #'
