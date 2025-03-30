@@ -59,29 +59,7 @@ There are four functions that retrieve data from
 - `get_voteview_member_votes()`: individual members’ votes on recorded
   votes
 
-These functions share a common interface. Here are their arguments:
-
-- `chamber`: (Optional) Which chamber to get data for. Options are:
-  - `"all"`, `"congress"`, `"hs"`: Both House and Senate data (the
-    default).
-  - `"house"`, `"h"`, `"hr"`: House data only.
-  - `"senate"`, `"s"`, `"sen"`: Senate data only. These options are
-    case-insensitive. If you explicitly pass a different value, it will
-    default to “all” with a warning.
-
-**Note:** For `get_voteview_members()` and `get_voteview_parties()`,
-presidents are included in all datasets. Therefore, reading *both*
-`"house"` and `"senate"` data will duplicate data on the presidents. The
-recommended way to get all data is to use the default argument, `"all"`.
-
-- `congress`: (Optional) A whole number (to get data for a single
-  Congress), or a numeric vector (to get data for a set of congresses).
-  If not specified, will retrieve data for all Congresses by default. If
-  specified, Congress numbers cannot be greater than the
-  `current_congress()` (i.e., you cannot try to get future data).
-- `local_path`: (Optional) A file path for reading from a local file. If
-  no `local_path` is specified, will read data from the Voteview
-  website.
+These functions share a common interface and arguments.
 
 **Note:** Especially when working with large datasets, reading data from
 Voteview can take a long time. If you are repeatedly loading the same
@@ -117,28 +95,11 @@ get_voteview_parties()
 
 ### Legislative Effectiveness Scores
 
-The function `get_les()` retrieves Legislative Effectiveness Scores Data
+The function `get_les()` retrieves Legislative Effectiveness Scores data
 from the [Center for Effective Lawmaking](https://thelawmakers.org).
-
-`get_les()` takes the following arguments:
-
-- `chamber`: Which chamber to get data for. See the **Voteview** section
-  above for more info on this argument.
-
-**Note:** Unlike the Voteview functions, there is no “all” option for
-`chamber`. You *must* specify either House or Senate data, since there
-is no “default” option.
 
 There are non-trivial differences between the House and Senate datasets,
 so take care when joining House and Senate data.
-
-- `les_2`: Whether to use LES 2.0 (instead of Classic Legislative
-  Effectiveness Scores). LES 2.0 credits lawmakers when language from
-  their sponsored bills is included in other legislators’ bills that
-  become law. LES 2.0 is only available for the 117th Congress. Classic
-  LES is available for the 93rd through 117th Congresses.
-
-- `local_path`: Same as the Voteview functions.
 
 Here is an example table returned by `get_les()`.
 
@@ -174,19 +135,8 @@ The function `get_hvw_data()` retrives replication data for
 [Harbridge-Yong, Volden, and Wiseman
 (2023)](https://doi.org/10.1086/723805).
 
-`get_hvw_data()` takes the following arguments:
-
-- `chamber`: Which chamber to get data for. See the **Voteview** section
-  above for more info on this argument.
-
-**Note:** Unlike the Voteview functions, there is no “all” option for
-`chamber`. You *must* specify either House or Senate data, since there
-is no “default” option.
-
 The House and Senate data do not have the same number of variables, or
 the same variable names, so it is not trivial to join the two tables.
-
-- `local_path`: Same as the Voteview functions.
 
 Here are the tables returned by `get_hvw_data()`:
 
@@ -257,11 +207,12 @@ table from the Senate website.
 This package also provides some smaller utility functions for working
 with congressional data.
 
-- `year_of_congress()` returns the starting year for a given Congress.
-- `congress_in_year()` returns the Congress number for a given year.
-- `current_congress()` returns the number of the current Congress, which
-  is currently 119. `current_congress()` is equivalent to
-  `congress_in_year(Sys.Date())`.
+- 3 functions dealing with years and Congress numbers:
+  - `year_of_congress()` returns the starting year for a given Congress.
+  - `congress_in_year()` returns the Congress number for a given year.
+  - `current_congress()` returns the number of the current Congress,
+    which is currently 119. `current_congress()` is equivalent to
+    `congress_in_year(Sys.Date())`.
 - `get_voteview_cast_codes()` returns a key to the `cast_code` column in
   `get_voteview_member_votes()`.
 - `read_html_table()` is a general-use function to read a data table at
