@@ -10,7 +10,7 @@
 #'  (<https://selectorgadget.com/>) is a useful tool for finding the code for the
 #'  CSS element you need. See [rvest::html_element()] for more information.
 #'
-#' @return A [tibble()].
+#' @return A tibble.
 #' @export
 #'
 #' @examples

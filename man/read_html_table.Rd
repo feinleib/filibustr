@@ -16,7 +16,7 @@ SelectorGadget
 CSS element you need. See \code{\link[rvest:html_element]{rvest::html_element()}} for more information.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}}.
+A tibble.
 }
 \description{
 \code{read_html_table()} returns an HTML table at a specified URL and CSS element
