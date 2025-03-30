@@ -40,7 +40,6 @@ install.packages("filibustr")
 
 You can install the development version of filibustr from [GitHub](https://github.com/) with:
 
-
 ``` r
 # install.packages("devtools")
 devtools::install_github("feinleib/filibustr")
@@ -59,20 +58,18 @@ There are four functions that retrieve data from [Voteview](https://voteview.com
 
 These functions share a common interface. Here are their arguments:
 
-* `chamber`: Which chamber to get data for. Options are:
-  * `"all"`, `"congress"`: Both House and Senate data (the default).
+* `chamber`: (Optional) Which chamber to get data for. Options are:
+  * `"all"`, `"congress"`, `"hs"`: Both House and Senate data (the default).
   * `"house"`, `"h"`, `"hr"`: House data only.
   * `"senate"`, `"s"`, `"sen"`: Senate data only.
 These options are case-insensitive. If you explicitly pass a different value, it will default to "all" with a warning.
 
 **Note:** For `get_voteview_members()` and `get_voteview_parties()`, presidents are included in all datasets. Therefore, reading *both* `"house"` and `"senate"` data will duplicate data on the presidents. The recommended way to get all data is to use the default argument, `"all"`.
 
-* `congress`: A whole number (to get data for a single Congress), or a numeric vector (to get data for a set of congresses). Optional; will retrieve data for all Congresses by default. If specified, Congress numbers cannot be greater than the `current_congress()` (i.e., you cannot try to get future data).
+* `congress`: (Optional) A whole number (to get data for a single Congress), or a numeric vector (to get data for a set of congresses). If not specified, will retrieve data for all Congresses by default. If specified, Congress numbers cannot be greater than the `current_congress()` (i.e., you cannot try to get future data).
+* `local_path`: (Optional) A file path for reading from a local file. If no `local_path` is specified, will read data from the Voteview website.
 
-* `local`: `r lifecycle::badge('experimental')` `r filibustr:::doc_arg_local("Voteview")`
-* `local_dir`: `r lifecycle::badge('experimental')` The directory containing the local file. Defaults to the working directory.
-
-**Note:** Especially when working with large datasets, reading data from Voteview can take a long time. If you are repeatedly loading the same static dataset (i.e., not including information from the current Congress), it may be useful to download the dataset as a CSV from Voteview so you can read that local file instead of having to use the web interface.
+**Note:** Especially when working with large datasets, reading data from Voteview can take a long time. If you are repeatedly loading the same static dataset (i.e., not including information from the current Congress), it may be useful to download the dataset as a CSV/DTA file so you can read that local file using `local_path` instead of having to download data from online.
 
 For demonstration, here is the table returned by `get_voteview_parties()`.
 
@@ -96,7 +93,7 @@ There are non-trivial differences between the House and Senate datasets, so take
 
 * `les_2`: Whether to use LES 2.0 (instead of Classic Legislative Effectiveness Scores).  LES 2.0 credits lawmakers when language from their sponsored bills is included in other legislators' bills that become law. LES 2.0 is only available for the 117th Congress. Classic LES is available for the 93rd through 117th Congresses.
 
-* `local`, `local_dir`: Same as the Voteview functions.
+* `local_path`: Same as the Voteview functions.
 
 Here is an example table returned by `get_les()`.
 
@@ -118,7 +115,7 @@ The function `get_hvw_data()` retrives replication data for [Harbridge-Yong, Vol
 
 The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables.
 
-* `local`, `local_dir`: Same as the Voteview functions.
+* `local_path`: Same as the Voteview functions.
 
 Here are the tables returned by `get_hvw_data()`:
 
@@ -134,7 +131,7 @@ get_hvw_data("senate")
 The following functions retrieve data tables from [Senate.gov](https://www.senate.gov).
 
 * `get_senate_sessions()`: The start and end dates of each legislative session of the Senate. ([table link](https://www.senate.gov/legislative/DatesofSessionsofCongress.htm))
-* `get_senate_cloture_votes()`: Senate action on cloture motions and cloture votes. ([table link](https://www.senate.gov/legislative/cloture/clotureCounts.htm))
+* `get_senate_cloture_votes()`: Senate actions on cloture motions and cloture votes. ([table link](https://www.senate.gov/legislative/cloture/clotureCounts.htm))
 
 These functions take no arguments, and they always return the full data table from the Senate website.
 
@@ -145,6 +142,12 @@ This package also provides some smaller utility functions for working with congr
 * `year_of_congress()` returns the starting year for a given Congress.
 * `congress_in_year()` returns the Congress number for a given year.
 * `current_congress()` returns the number of the current Congress, which is currently `r current_congress()`. `current_congress()` is equivalent to `congress_in_year(Sys.Date())`.
+* `get_voteview_cast_codes()` returns a key to the `cast_code` column in `get_voteview_member_votes()`.
+* `read_html_table()` is a general-use function to read a data table at a specified URL and CSS element. (It's what powers the Senate.gov functions!)
+
+## Feedback and contributions
+
+If you notice any bugs, or have suggestions for new features, please submit an issue on the [Issues page](https://github.com/feinleib/filibustr/issues) of this repository!
 
 ## Data sources
 
@@ -154,4 +157,3 @@ This package uses data from the following websites and research:
 * Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin, and Luke Sonnet (2023). *Voteview: Congressional Roll-Call Votes Database.* <https://voteview.com/>
 * U.S. Senate. <https://www.senate.gov/>
 * Volden, C., & Wiseman, A. E. (2023). *Legislative Effectiveness Scores* [dataset]. Center for Effective Lawmaking. <https://thelawmakers.org/>
-
