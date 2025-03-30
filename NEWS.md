@@ -49,8 +49,8 @@ range(house_117$congress)               # 117 117
 
 * In the Voteview functions, an invalid `congress` now produces an error, 
   instead of silently returning data for all Congresses.
-* Returned data frames now use more specific column types, such as integer for 
-  count data and logical for binary data (#10).
+* In `get_les()`, returned data frames now use more specific column types, such 
+  as integer for count data and logical for binary data (#10).
    * NOTE: state abbreviations (columns `state`, `st_name`) and LES scores 
      relative to expectation (columns `expectation`, `expectation1`, 
      `expectation2`) are now factor variables.
@@ -58,6 +58,8 @@ range(house_117$congress)               # 117 117
 * In `get_les()`, 0- or 1-character strings for `bioname` are converted to `NA`.
   
 ## New features
+* {filibustr} now has a documentation website! You can visit it at 
+  <https://feinleib.github.io/filibustr/> (#18).
 * New `get_voteview_cast_codes()` provides the cast codes used in Voteview's 
   member votes data (#13).
 * New `read_html_table()` for reading HTML tables from online. It's a nice
