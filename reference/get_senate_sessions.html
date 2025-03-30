@@ -47,7 +47,7 @@ ending (adjournment) dates of each legislative session of the Senate.</p>
 
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code>tibble()</code> with the <code>begin_date</code> and <code>adjourn_date</code> of each
+    <p>A tibble with the <code>begin_date</code> and <code>adjourn_date</code> of each
 session of the Senate.</p>
     </div>
     <div class="section level2">
@@ -66,7 +66,8 @@ common in earlier years.</em></p>
 <p><strong>The <code>session</code> column</strong></p>
 <p>The <code>session</code> column is type factor, with the following levels:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_senate_sessions.html">get_senate_sessions</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">session</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "1" "2" "3" "4" "S"</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; [1] "1" "2" "3" "4" "S"</span></span>
+<span><span class="co"># Note: That's a letter S, not a number 5!</span></span></code></pre><p></p></div>
 <p>The Senate has had just 2 sessions in each Congress since 1941, so if you
 are just working with more recent data, you could convert this column to
 numeric. However, if you are working with pre-1941 data, you will likely
