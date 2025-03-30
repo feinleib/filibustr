@@ -2,7 +2,7 @@
 
 0 errors | 0 warnings | 1 note
 
-* checking CRAN incoming feasibility ... [13s] NOTE
+* checking CRAN incoming feasibility ... [11s] NOTE
 Maintainer: 'Max Feinleib <mhfeinleib@gmail.com>'
 
 New submission
