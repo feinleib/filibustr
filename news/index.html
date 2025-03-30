@@ -73,7 +73,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">house_117</span><span class="op">$</span><span class="va">chamber</span><span class="op">)</span>               <span class="co"># "President" "House"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">house_117</span><span class="op">$</span><span class="va">congress</span><span class="op">)</span>               <span class="co"># 117 117</span></span></code></pre></div>
 <ul><li>In the Voteview functions, an invalid <code>congress</code> now produces an error, instead of silently returning data for all Congresses.</li>
-<li>Returned data frames now use more specific column types, such as integer for count data and logical for binary data (<a href="https://github.com/feinleib/filibustr/issues/10" class="external-link">#10</a>).
+<li>In <code><a href="../reference/get_les.html">get_les()</a></code>, returned data frames now use more specific column types, such as integer for count data and logical for binary data (<a href="https://github.com/feinleib/filibustr/issues/10" class="external-link">#10</a>).
 <ul><li>NOTE: state abbreviations (columns <code>state</code>, <code>st_name</code>) and LES scores relative to expectation (columns <code>expectation</code>, <code>expectation1</code>, <code>expectation2</code>) are now factor variables.</li>
 </ul></li>
 <li>
@@ -82,7 +82,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li>New <code><a href="../reference/get_voteview_cast_codes.html">get_voteview_cast_codes()</a></code> provides the cast codes used in Voteview’s member votes data (<a href="https://github.com/feinleib/filibustr/issues/13" class="external-link">#13</a>).</li>
+<ul><li>{filibustr} now has a documentation website! You can visit it at <a href="https://feinleib.github.io/filibustr/" class="uri">https://feinleib.github.io/filibustr/</a> (<a href="https://github.com/feinleib/filibustr/issues/18" class="external-link">#18</a>).</li>
+<li>New <code><a href="../reference/get_voteview_cast_codes.html">get_voteview_cast_codes()</a></code> provides the cast codes used in Voteview’s member votes data (<a href="https://github.com/feinleib/filibustr/issues/13" class="external-link">#13</a>).</li>
 <li>New <code><a href="../reference/read_html_table.html">read_html_table()</a></code> for reading HTML tables from online. It’s a nice shortcut for a common {rvest} workflow that otherwise takes 3 functions. <code><a href="../reference/read_html_table.html">read_html_table()</a></code> was previously an internal function, but it’s useful enough that I think it should be exported, even if it’s not a core functionality of {filibustr} (<a href="https://github.com/feinleib/filibustr/issues/20" class="external-link">#20</a>).</li>
 </ul></div>
 <div class="section level3">
