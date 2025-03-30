@@ -4,15 +4,18 @@ Version: 0.2.1.9000
 Authors@R: 
     person("Max", "Feinleib", email = "mhfeinleib@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0002-9604-3533"))
-Description: Provides easy-to-understand and consistent interfaces for accessing data 
-    on the U.S. Congress. The functions in 'filibustr' streamline the process for 
-    importing data on Congress into R, removing the need to download and work from 
-    CSV files and the like. Data sources include 'Voteview' (<https://voteview.com/>), 
-    the U.S. Senate website (<https://www.senate.gov/>), and more.
+Description: Provides easy-to-understand and consistent interfaces for
+    accessing data on the U.S. Congress. The functions in 'filibustr'
+    streamline the process for importing data on Congress into R, removing
+    the need to download and work from CSV files and the like. Data
+    sources include 'Voteview' (<https://voteview.com/>), the U.S. Senate
+    website (<https://www.senate.gov/>), and more.
 License: MIT + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+URL: https://github.com/feinleib/filibustr,
+    https://feinleib.github.io/filibustr/
+BugReports: https://github.com/feinleib/filibustr/issues
+Depends: 
+    R (>= 4.1.0)
 Imports: 
     cli,
     dplyr,
@@ -25,8 +28,9 @@ Imports:
     stringr,
     tidyr,
     tools
-URL: https://github.com/feinleib/filibustr, https://feinleib.github.io/filibustr/
-BugReports: https://github.com/feinleib/filibustr/issues
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
