@@ -12,13 +12,15 @@ get_voteview_member_votes(chamber = "all", congress = NULL, local_path = NULL)
 \item \code{"all"}, \code{"congress"}, \code{"hs"}: Both House and Senate data (the default).
 \item \code{"house"}, \code{"h"}, \code{"hr"}: House data only.
 \item \code{"senate"}, \code{"s"}, \code{"sen"}: Senate data only.
+}
+
 These options are case-insensitive. If you explicitly pass a different value,
-it will default to "all" with a warning.
-}}
+it will default to "all" with a warning.}
 
 \item{congress}{(Optional) A whole number (to get data for a single Congress), or
 a numeric vector (to get data for a set of congresses).
-If not specified, will retrieve data for all Congresses by default.
+
+If not provided, will retrieve data for all Congresses by default.
 If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}
 (i.e., you cannot try to get future data).}
 

@@ -12,9 +12,10 @@ get_voteview_parties(chamber = "all", congress = NULL, local_path = NULL)
 \item \code{"all"}, \code{"congress"}, \code{"hs"}: Both House and Senate data (the default).
 \item \code{"house"}, \code{"h"}, \code{"hr"}: House data only.
 \item \code{"senate"}, \code{"s"}, \code{"sen"}: Senate data only.
+}
+
 These options are case-insensitive. If you explicitly pass a different value,
 it will default to "all" with a warning.
-}
 
 Note that presidents are included in all datasets. Therefore, reading \emph{both} \code{"house"}
 and \code{"senate"} data will duplicate data on the presidents. The recommended way to get
@@ -22,7 +23,8 @@ all data is to use the default argument, \code{"all"}.}
 
 \item{congress}{(Optional) A whole number (to get data for a single Congress), or
 a numeric vector (to get data for a set of congresses).
-If not specified, will retrieve data for all Congresses by default.
+
+If not provided, will retrieve data for all Congresses by default.
 If specified, Congress numbers cannot be greater than the \code{\link[=current_congress]{current_congress()}}
 (i.e., you cannot try to get future data).}
 

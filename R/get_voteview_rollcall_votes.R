@@ -9,6 +9,7 @@
 #'  * `"all"`, `"congress"`, `"hs"`: Both House and Senate data (the default).
 #'  * `"house"`, `"h"`, `"hr"`: House data only.
 #'  * `"senate"`, `"s"`, `"sen"`: Senate data only.
+#'
 #'  These options are case-insensitive. If you explicitly pass a different value,
 #'  it will default to "all" with a warning.
 #'
