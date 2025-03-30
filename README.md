@@ -215,8 +215,9 @@ with congressional data.
     `congress_in_year(Sys.Date())`.
 - `get_voteview_cast_codes()` returns a key to the `cast_code` column in
   `get_voteview_member_votes()`.
-- `read_html_table()` is a general-use function to read a data table at
-  a specified URL and CSS element. (It’s what powers the Senate.gov
+- `read_html_table()` is a general-use function for reading HTML tables
+  from online. It’s a nice shortcut for a common `rvest` workflow that
+  otherwise takes 3 functions. (It’s what powers the Senate.gov
   functions!)
 
 ## Feedback and contributions
