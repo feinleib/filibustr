@@ -11,8 +11,8 @@ Provides easy-to-understand and consistent interfaces for accessing data on the 
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/feinleib/filibustr}
   \item \url{https://feinleib.github.io/filibustr/}
+  \item \url{https://github.com/feinleib/filibustr}
   \item Report bugs at \url{https://github.com/feinleib/filibustr/issues}
 }
 
