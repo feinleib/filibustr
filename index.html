@@ -90,7 +90,7 @@
 <p><strong>Note:</strong> Especially when working with large datasets, reading data from Voteview can take a long time. If you are repeatedly loading the same static dataset (i.e., not including information from the current Congress), it may be useful to download the dataset as a CSV/DTA file so you can read that local file using <code>local_path</code> instead of having to download data from online.</p>
 <p>For demonstration, here is the table returned by <code><a href="reference/get_voteview_parties.html">get_voteview_parties()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feinleib/filibustr" class="external-link">filibustr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://feinleib.github.io/filibustr/">filibustr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/get_voteview_parties.html">get_voteview_parties</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 845 × 9</span></span>
@@ -117,7 +117,7 @@
 <p>There are non-trivial differences between the House and Senate datasets, so take care when joining House and Senate data.</p>
 <p>Here is an example table returned by <code><a href="reference/get_les.html">get_les()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feinleib/filibustr" class="external-link">filibustr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://feinleib.github.io/filibustr/">filibustr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/get_les.html">get_les</a></span><span class="op">(</span>chamber <span class="op">=</span> <span class="st">"senate"</span>, les_2 <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2,533 × 60</span></span>
@@ -148,7 +148,7 @@
 <p>The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables.</p>
 <p>Here are the tables returned by <code><a href="reference/get_hvw_data.html">get_hvw_data()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/feinleib/filibustr" class="external-link">filibustr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://feinleib.github.io/filibustr/">filibustr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/get_hvw_data.html">get_hvw_data</a></span><span class="op">(</span><span class="st">"house"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 9,825 × 109</span></span>
