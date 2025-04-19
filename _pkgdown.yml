@@ -2,3 +2,33 @@ url: https://feinleib.github.io/filibustr/
 template:
   bootstrap: 5
 
+reference:
+- title: Voteview
+  desc: Get data from [Voteview](https://voteview.com/data).
+  contents:
+  - get_voteview_members
+  - get_voteview_parties
+  - get_voteview_rollcall_votes
+  - get_voteview_member_votes
+  - get_voteview_cast_codes
+- title: Senate.gov
+  desc: Get data from [Senate.gov](https://www.senate.gov).
+  contents:
+  - starts_with("get_senate")
+- title: Other research sources
+  desc: >
+    Get data from [Legislative Effectiveness Scores](https://thelawmakers.org)
+    and [Harbridge-Yong, Volden, and Wiseman (2023)](https://doi.org/10.1086/723805).
+  contents:
+  - get_les
+  - get_hvw_data
+- title: Congresses and years
+  desc: Convert between Congress numbers and years.
+  contents:
+  - congress_in_year
+  - year_of_congress
+  - current_congress
+- title: Utilities
+  desc: Not specific to political science research, but useful anyways!
+  contents:
+  - read_html_table
