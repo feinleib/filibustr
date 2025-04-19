@@ -1,5 +1,9 @@
 # filibustr (development version)
 
+* In the `get_voteview_*()` functions, show a progress bar when downloading 
+  data from multiple Congresses (#21).
+* New dependency: {purrr}.
+
 # filibustr 0.3.0 (2025-03-30)
 
 ## Breaking changes
