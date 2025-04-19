@@ -22,6 +22,7 @@ Imports:
     haven,
     httr2,
     lifecycle,
+    purrr,
     readr,
     rlang,
     rvest,
