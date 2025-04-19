@@ -34,12 +34,15 @@
 get_voteview_parties <- function(chamber = "all", congress = NULL, local_path = NULL) {
   # join multiple congresses
   if (length(congress) > 1 && is.numeric(congress)) {
-    list_of_dfs <- lapply(congress, function(.cong) {
-      get_voteview_parties(chamber = chamber,
-                           congress = .cong,
-                           local_path = local_path)
-      })
-    return(dplyr::bind_rows(list_of_dfs))
+    return(
+      purrr::map(congress, function(.cong) {
+        get_voteview_parties(chamber = chamber,
+                             congress = .cong,
+                             local_path = local_path)
+      },
+      .progress = "Getting parties data") |>
+        purrr::list_rbind()
+    )
   }
 
   if (is.null(local_path)) {
