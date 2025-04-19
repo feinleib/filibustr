@@ -32,12 +32,15 @@
 get_voteview_member_votes <- function(chamber = "all", congress = NULL, local_path = NULL) {
   # join multiple congresses (for online downloads)
   if (length(congress) > 1 && is.numeric(congress) && is.null(local_path)) {
-    list_of_dfs <- lapply(congress, function(.cong) {
-      get_voteview_member_votes(chamber = chamber,
-                                congress = .cong,
-                                local_path = local_path)
-    })
-    return(dplyr::bind_rows(list_of_dfs))
+    return(
+      purrr::map(congress, function(.cong) {
+        get_voteview_member_votes(chamber = chamber,
+                                  congress = .cong,
+                                  local_path = local_path)
+      },
+      .progress = "Getting member-votes data") |>
+        purrr::list_rbind()
+    )
   }
 
   if (is.null(local_path)) {
