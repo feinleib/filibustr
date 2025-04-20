@@ -1,5 +1,6 @@
 # filibustr (development version)
 
+* Re-organized the function reference on the package's website (#27).
 * In the `get_voteview_*()` functions, show a progress bar when downloading 
   data from multiple Congresses (#21).
 * New dependency: {purrr}.
