@@ -35,9 +35,9 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="filibustr-development-version">filibustr (development version)<a class="anchor" aria-label="anchor" href="#filibustr-development-version"></a></h2>
 <ul><li>Re-organized the function reference on the package’s website (<a href="https://github.com/feinleib/filibustr/issues/27" class="external-link">#27</a>).</li>
-<li>In the <code>get_voteview_*()</code> functions, show a progress bar when downloading data from multiple Congresses (<a href="https://github.com/feinleib/filibustr/issues/21" class="external-link">#21</a>).</li>
+<li>In the <code>get_voteview_*()</code> functions, download data in parallel (using {furrr}) when downloading online data for multiple Congresses (<a href="https://github.com/feinleib/filibustr/issues/19" class="external-link">#19</a>, <a href="https://github.com/feinleib/filibustr/issues/21" class="external-link">#21</a>).</li>
 <li>When calling <code><a href="../reference/get_voteview_parties.html">get_voteview_parties()</a></code> and <code><a href="../reference/get_voteview_rollcall_votes.html">get_voteview_rollcall_votes()</a></code> with <code>length(congress) &gt; 1</code>, only do Congress-by-Congress reading when <code>local_path</code> is <code>NULL</code> (i.e., when reading data from online). This bug did not impact functional correctness - fixing it simply improves performance. <code><a href="../reference/get_voteview_members.html">get_voteview_members()</a></code> and <code><a href="../reference/get_voteview_member_votes.html">get_voteview_member_votes()</a></code> already used the correct behavior.</li>
-<li>New dependency: {purrr}.</li>
+<li>New dependencies: {furrr}, {future}, {purrr}.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="filibustr-030-2025-03-30">filibustr 0.3.0 (2025-03-30)<a class="anchor" aria-label="anchor" href="#filibustr-030-2025-03-30"></a></h2><p class="text-muted">CRAN release: 2025-03-31</p>
