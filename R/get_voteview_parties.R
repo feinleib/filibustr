@@ -35,13 +35,12 @@ get_voteview_parties <- function(chamber = "all", congress = NULL, local_path = 
   # join multiple congresses (for online downloads)
   if (length(congress) > 1 && is.numeric(congress) && is.null(local_path)) {
     return(
-      purrr::map(congress, function(.cong) {
-        get_voteview_parties(chamber = chamber,
-                             congress = .cong,
-                             local_path = local_path)
-      },
-      .progress = "Getting parties data") |>
-        purrr::list_rbind()
+      with(future::plan(future::multisession),
+           furrr::future_map(congress, function(.cong) {
+             get_voteview_parties(chamber = chamber,
+                                  congress = .cong)
+           }) |>
+             purrr::list_rbind())
     )
   }
 

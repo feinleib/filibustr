@@ -19,6 +19,8 @@ Depends:
 Imports: 
     cli,
     dplyr,
+    furrr,
+    future,
     haven,
     httr2,
     lifecycle,
