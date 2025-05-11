@@ -34,7 +34,7 @@
 #' get_voteview_rollcall_votes(congress = 1:10)
 #'
 get_voteview_rollcall_votes <- function(chamber = "all", congress = NULL, local_path = NULL) {
-  # join multiple congresses
+  # join multiple congresses (for online downloads)
   if (length(congress) > 1 && is.numeric(congress) && is.null(local_path)) {
     return(
       purrr::map(congress, function(.cong) {
