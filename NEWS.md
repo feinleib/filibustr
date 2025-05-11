@@ -13,6 +13,8 @@
   not impact functional correctness - fixing it simply improves performance. 
   `get_voteview_members()` and `get_voteview_member_votes()` already used the 
   correct behavior.
+* Improved website appearance and organized the function reference on the 
+  website (#26, #27).
 * New dependencies: {furrr}, {future}, {purrr}.
 
 # filibustr 0.3.0 (2025-03-30)
