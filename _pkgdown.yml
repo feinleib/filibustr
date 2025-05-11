@@ -3,7 +3,6 @@ url: https://feinleib.github.io/filibustr/
 template:
   bootstrap: 5
   bootswatch: flatly
-  light-switch: true
 
 reference:
 - title: Voteview
