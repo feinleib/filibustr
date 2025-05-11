@@ -10,7 +10,7 @@
 #'
 #' @details
 #' The replication data is available at the
-#' [Harvard Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/EARLA4&version=1.0).
+#' Harvard Dataverse (\doi{doi:10.7910/DVN/EARLA4}).
 #'
 #' The House and Senate data come from the files
 #' `HarbridgeYong_Volden_Wiseman_House_Replication.tab` and

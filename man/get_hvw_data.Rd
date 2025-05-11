@@ -37,7 +37,7 @@ The bipartisan path to effective lawmaking.
 }
 \details{
 The replication data is available at the
-\href{https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/EARLA4&version=1.0}{Harvard Dataverse}.
+Harvard Dataverse (\doi{doi:10.7910/DVN/EARLA4}).
 
 The House and Senate data come from the files
 \code{HarbridgeYong_Volden_Wiseman_House_Replication.tab} and
