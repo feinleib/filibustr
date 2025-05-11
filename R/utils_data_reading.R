@@ -56,3 +56,14 @@ read_local_file <- function(path, ...) {
            call = rlang::caller_env()
          ))
 }
+
+# get Voteview data for multiple Congresses, one-by-one
+# using future's `multisession` plan for parallelism
+multi_congress_read <- function(fun, chamber, congress) {
+  with(future::plan(future::multisession),
+       furrr::future_map(congress, function(.cong) {
+         fun(chamber = chamber, congress = .cong)
+       }
+       )) |>
+    purrr::list_rbind()
+}
