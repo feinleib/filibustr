@@ -1,4 +1,4 @@
-# filibustr (development version)
+# filibustr 0.4.0 (2025-05-11)
 
 ## New features
 * In the `get_voteview_*()` functions, download data in parallel 
