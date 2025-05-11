@@ -1,9 +1,12 @@
 # filibustr (development version)
 
+## New features
 * Re-organized the function reference on the package's website (#27).
 * In the `get_voteview_*()` functions, download data in parallel 
   (using {furrr}) when downloading online data for multiple Congresses 
   (#19, #21).
+
+## Minor improvements and bug fixes
 * When calling `get_voteview_parties()` and `get_voteview_rollcall_votes()` 
   with `length(congress) > 1`, only do Congress-by-Congress reading when 
   `local_path` is `NULL` (i.e., when reading data from online). This bug did 
