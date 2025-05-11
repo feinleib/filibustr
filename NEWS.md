@@ -1,3 +1,5 @@
+# filibustr (development version)
+
 # filibustr 0.4.0 (2025-05-11)
 
 ## New features
