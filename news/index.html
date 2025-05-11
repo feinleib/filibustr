@@ -36,6 +36,7 @@
 <h2 class="pkg-version" data-toc-text="development version" id="filibustr-development-version">filibustr (development version)<a class="anchor" aria-label="anchor" href="#filibustr-development-version"></a></h2>
 <ul><li>Re-organized the function reference on the package’s website (<a href="https://github.com/feinleib/filibustr/issues/27" class="external-link">#27</a>).</li>
 <li>In the <code>get_voteview_*()</code> functions, show a progress bar when downloading data from multiple Congresses (<a href="https://github.com/feinleib/filibustr/issues/21" class="external-link">#21</a>).</li>
+<li>When calling <code><a href="../reference/get_voteview_parties.html">get_voteview_parties()</a></code> and <code><a href="../reference/get_voteview_rollcall_votes.html">get_voteview_rollcall_votes()</a></code> with <code>length(congress) &gt; 1</code>, only do Congress-by-Congress reading when <code>local_path</code> is <code>NULL</code> (i.e., when reading data from online). This bug did not impact functional correctness - fixing it simply improves performance. <code><a href="../reference/get_voteview_members.html">get_voteview_members()</a></code> and <code><a href="../reference/get_voteview_member_votes.html">get_voteview_member_votes()</a></code> already used the correct behavior.</li>
 <li>New dependency: {purrr}.</li>
 </ul></div>
     <div class="section level2">
@@ -138,7 +139,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer></div>
