@@ -42,16 +42,15 @@
 <h2 class="pkg-version" data-toc-text="development version" id="filibustr-development-version">filibustr (development version)<a class="anchor" aria-label="anchor" href="#filibustr-development-version"></a></h2>
 <div class="section level3">
 <h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li>Re-organized the function reference on the package’s website (<a href="https://github.com/feinleib/filibustr/issues/27" class="external-link">#27</a>).</li>
-<li>In the <code>get_voteview_*()</code> functions, download data in parallel (using {furrr}) when downloading online data for multiple Congresses (<a href="https://github.com/feinleib/filibustr/issues/19" class="external-link">#19</a>, <a href="https://github.com/feinleib/filibustr/issues/21" class="external-link">#21</a>).</li>
+<ul><li>In the <code>get_voteview_*()</code> functions, download data in parallel (using {furrr}) when downloading online data for multiple Congresses (<a href="https://github.com/feinleib/filibustr/issues/19" class="external-link">#19</a>, <a href="https://github.com/feinleib/filibustr/issues/21" class="external-link">#21</a>).</li>
+<li>Improved website appearance (<a href="https://github.com/feinleib/filibustr/issues/26" class="external-link">#26</a>).</li>
+<li>Organized the function reference on the website (<a href="https://github.com/feinleib/filibustr/issues/27" class="external-link">#27</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="minor-improvements-and-bug-fixes-development-version">Minor improvements and bug fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-bug-fixes-development-version"></a></h3>
 <ul><li>When calling <code><a href="../reference/get_voteview_parties.html">get_voteview_parties()</a></code> and <code><a href="../reference/get_voteview_rollcall_votes.html">get_voteview_rollcall_votes()</a></code> with <code>length(congress) &gt; 1</code>, only do Congress-by-Congress reading when downloading data from online (i.e., when <code>local_path</code> is <code>NULL</code>).
 <ul><li>This bug did not impact functional correctness - fixing it simply improves performance. <code><a href="../reference/get_voteview_members.html">get_voteview_members()</a></code> and <code><a href="../reference/get_voteview_member_votes.html">get_voteview_member_votes()</a></code> already used the correct behavior.</li>
 </ul></li>
-<li>Improved website appearance (<a href="https://github.com/feinleib/filibustr/issues/26" class="external-link">#26</a>).</li>
-<li>Organized the function reference on the website (<a href="https://github.com/feinleib/filibustr/issues/27" class="external-link">#27</a>).</li>
 <li>New dependencies: {furrr}, {future}, {purrr}.</li>
 </ul></div>
 </div>
