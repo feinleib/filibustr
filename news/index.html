@@ -47,8 +47,11 @@
 </ul></div>
 <div class="section level3">
 <h3 id="minor-improvements-and-bug-fixes-development-version">Minor improvements and bug fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-bug-fixes-development-version"></a></h3>
-<ul><li>When calling <code><a href="../reference/get_voteview_parties.html">get_voteview_parties()</a></code> and <code><a href="../reference/get_voteview_rollcall_votes.html">get_voteview_rollcall_votes()</a></code> with <code>length(congress) &gt; 1</code>, only do Congress-by-Congress reading when <code>local_path</code> is <code>NULL</code> (i.e., when reading data from online). This bug did not impact functional correctness - fixing it simply improves performance. <code><a href="../reference/get_voteview_members.html">get_voteview_members()</a></code> and <code><a href="../reference/get_voteview_member_votes.html">get_voteview_member_votes()</a></code> already used the correct behavior.</li>
-<li>Improved website appearance and organized the function reference on the website (<a href="https://github.com/feinleib/filibustr/issues/26" class="external-link">#26</a>, <a href="https://github.com/feinleib/filibustr/issues/27" class="external-link">#27</a>).</li>
+<ul><li>When calling <code><a href="../reference/get_voteview_parties.html">get_voteview_parties()</a></code> and <code><a href="../reference/get_voteview_rollcall_votes.html">get_voteview_rollcall_votes()</a></code> with <code>length(congress) &gt; 1</code>, only do Congress-by-Congress reading when downloading data from online (i.e., when <code>local_path</code> is <code>NULL</code>).
+<ul><li>This bug did not impact functional correctness - fixing it simply improves performance. <code><a href="../reference/get_voteview_members.html">get_voteview_members()</a></code> and <code><a href="../reference/get_voteview_member_votes.html">get_voteview_member_votes()</a></code> already used the correct behavior.</li>
+</ul></li>
+<li>Improved website appearance (<a href="https://github.com/feinleib/filibustr/issues/26" class="external-link">#26</a>).</li>
+<li>Organized the function reference on the website (<a href="https://github.com/feinleib/filibustr/issues/27" class="external-link">#27</a>).</li>
 <li>New dependencies: {furrr}, {future}, {purrr}.</li>
 </ul></div>
 </div>
@@ -56,7 +59,8 @@
 <h2 class="pkg-version" data-toc-text="0.3.0" id="filibustr-030-2025-03-30">filibustr 0.3.0 (2025-03-30)<a class="anchor" aria-label="anchor" href="#filibustr-030-2025-03-30"></a></h2><p class="text-muted">CRAN release: 2025-03-31</p>
 <div class="section level3">
 <h3 id="breaking-changes-0-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h3>
-<ul><li>MAJOR CHANGE: Redesigned the interface for reading from local files. Now, to read from a local file, specify the file path using <code>local_path</code> (<a href="https://github.com/feinleib/filibustr/issues/17" class="external-link">#17</a>).
+<ul><li>
+<strong>MAJOR CHANGE:</strong> Redesigned the interface for reading from local files. Now, to read from a local file, specify the file path using <code>local_path</code> (<a href="https://github.com/feinleib/filibustr/issues/17" class="external-link">#17</a>).
 <ul><li>A given function call will now read data from <em>either</em> online or a local file, not try both. There is no longer an “online fallback” if a local file is not found.</li>
 <li>Filtering local files: when working with local files, you can download one big file, and filter that file to smaller datasets as needed - no need to make multiple slow downloads!</li>
 <li>The supported file types for local reading are: .csv, .dta, .tab, .tsv</li>
