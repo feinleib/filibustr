@@ -3,6 +3,12 @@
 * Re-organized the function reference on the package's website (#27).
 * In the `get_voteview_*()` functions, show a progress bar when downloading 
   data from multiple Congresses (#21).
+* When calling `get_voteview_parties()` and `get_voteview_rollcall_votes()` 
+  with `length(congress) > 1`, only do Congress-by-Congress reading when 
+  `local_path` is `NULL` (i.e., when reading data from online). This bug did 
+  not impact functional correctness - fixing it simply improves performance.
+  `get_voteview_members()` and `get_voteview_member_votes()` already used the 
+  correct behavior.
 * New dependency: {purrr}.
 
 # filibustr 0.3.0 (2025-03-30)

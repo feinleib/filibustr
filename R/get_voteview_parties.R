@@ -33,7 +33,7 @@
 #'
 get_voteview_parties <- function(chamber = "all", congress = NULL, local_path = NULL) {
   # join multiple congresses
-  if (length(congress) > 1 && is.numeric(congress)) {
+  if (length(congress) > 1 && is.numeric(congress) && is.null(local_path)) {
     return(
       purrr::map(congress, function(.cong) {
         get_voteview_parties(chamber = chamber,
