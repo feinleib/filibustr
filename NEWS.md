@@ -1,10 +1,11 @@
 # filibustr (development version)
 
 ## New features
-* Re-organized the function reference on the package's website (#27).
 * In the `get_voteview_*()` functions, download data in parallel 
   (using {furrr}) when downloading online data for multiple Congresses 
   (#19, #21).
+* Improved website appearance (#26).
+* Organized the function reference on the website (#27).
 
 ## Minor improvements and bug fixes
 * When calling `get_voteview_parties()` and `get_voteview_rollcall_votes()` 
@@ -13,8 +14,6 @@
   * This bug did not impact functional correctness - fixing it simply improves 
   performance. `get_voteview_members()` and `get_voteview_member_votes()` 
   already used the correct behavior.
-* Improved website appearance (#26).
-* Organized the function reference on the website (#27).
 * New dependencies: {furrr}, {future}, {purrr}.
 
 # filibustr 0.3.0 (2025-03-30)
