@@ -9,18 +9,18 @@
 ## Minor improvements and bug fixes
 * When calling `get_voteview_parties()` and `get_voteview_rollcall_votes()` 
   with `length(congress) > 1`, only do Congress-by-Congress reading when 
-  `local_path` is `NULL` (i.e., when reading data from online). This bug did 
-  not impact functional correctness - fixing it simply improves performance. 
-  `get_voteview_members()` and `get_voteview_member_votes()` already used the 
-  correct behavior.
-* Improved website appearance and organized the function reference on the 
-  website (#26, #27).
+  downloading data from online (i.e., when `local_path` is `NULL`).
+  * This bug did not impact functional correctness - fixing it simply improves 
+  performance. `get_voteview_members()` and `get_voteview_member_votes()` 
+  already used the correct behavior.
+* Improved website appearance (#26).
+* Organized the function reference on the website (#27).
 * New dependencies: {furrr}, {future}, {purrr}.
 
 # filibustr 0.3.0 (2025-03-30)
 
 ## Breaking changes
-* MAJOR CHANGE: Redesigned the interface for reading from local files. 
+* **MAJOR CHANGE:** Redesigned the interface for reading from local files. 
   Now, to read from a local file, specify the file path using `local_path` 
   (#17).
    * A given function call will now read data from *either* online or a local 
