@@ -5,15 +5,23 @@ create_factor_columns <- function(df, local_path) {
     df <- df |>
       # no need to specify levels if data is already coming from saved DTA file
       dplyr::mutate(dplyr::across(.cols = c(dplyr::any_of(c("state", "st_name")),
-                                            dplyr::matches("expectation[12]?$")),
+                                            dplyr::matches("^expectation[12]$")),
                                   .fns = haven::as_factor))
   } else {
     df <- df |>
-      dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c("state", "st_name")),
-                                  .fns = ~ factor(.x, levels = datasets::state.abb))) |>
-      # LES vs. expectation (`expectation`/`expectation1`/`expectation2`)
-      dplyr::mutate(dplyr::across(.cols = dplyr::matches("expectation[12]?$"),
-                                  .fns = as.factor))
+      dplyr::mutate(
+        dplyr::across(.cols = dplyr::any_of("state"),
+                      # Senate data (`state`) just has members from the states
+                      .fns = ~ factor(.x, levels = datasets::state.abb)),
+        dplyr::across(.cols = dplyr::any_of("st_name"),
+                      .fns = ~ factor(.x, levels = c(
+                        # House data (`st_name`) includes non-voting members
+                        datasets::state.abb, "AS", "DC", "GU", "MP", "PR", "VI"
+                      ))),
+        # LES vs. expectation (`expectation1`/`expectation2`)
+        dplyr::across(.cols = dplyr::matches("^expectation[12]$"),
+                      .fns = as.factor)
+      )
   }
 
   df
