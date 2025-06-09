@@ -1,91 +1,67 @@
-test_that("LES classic House data", {
+test_that("LES 93rd-118th House data", {
   skip_if_offline()
 
-  hr_classic <- get_les("house", les_2 = FALSE)
+  hr <- get_les("hr")
 
   # data checks
-  expect_s3_class(hr_classic, "tbl_df")
-  expect_length(hr_classic, 60)
-  expect_equal(nrow(hr_classic), 11158)
-  expect_equal(unique(hr_classic$congress), 93:117)
-  expect_equal(unique(hr_classic$year), seq(1973, 2021, 2))
+  expect_s3_class(hr, "tbl_df")
+  expect_length(hr, 88)
+  expect_equal(nrow(hr), 11606)
+  expect_equal(unique(hr$congress), 93:118)
+  # house data uses the first year of the Congress
+  expect_equal(unique(hr$year), seq(1973, 2023, 2))
+  # `st_name` includes non-voting members' territories
+  expect_identical(levels(hr$st_name),
+                   c(datasets::state.abb,
+                     "AS", "DC", "GU", "MP", "PR", "VI"))
 
   # chamber argument
-  expect_equal(hr_classic, get_les("hr", les_2 = FALSE))
+  expect_equal(hr, get_les("house"))
 })
 
-test_that("LES classic Senate data", {
+test_that("LES 93rd-118th Senate data", {
   skip_if_offline()
 
-  s_classic <- get_les("senate", les_2 = FALSE)
+  sen <- get_les("s")
 
   # data checks
-  expect_s3_class(s_classic, "tbl_df")
-  expect_length(s_classic, 60)
-  expect_equal(nrow(s_classic), 2533)
-  expect_equal(unique(s_classic$congress), 93:117)
-  expect_equal(unique(s_classic$year), seq(1972, 2020, 2))
+  expect_s3_class(sen, "tbl_df")
+  expect_length(sen, 88)
+  expect_equal(nrow(sen), 2635)
+  expect_equal(unique(sen$congress), 93:118)
+  # senate data uses the year of the election
+  expect_equal(unique(sen$year), seq(1972, 2022, 2))
+  # `state` just includes states
+  expect_identical(levels(sen$state), datasets::state.abb)
 
   # chamber argument
-  expect_equal(s_classic, get_les("s", les_2 = FALSE))
-})
-
-test_that("LES 2.0 House data", {
-  skip_if_offline()
-
-  hr_2 <- get_les("hr", les_2 = TRUE)
-
-  # data checks
-  expect_s3_class(hr_2, "tbl_df")
-  expect_length(hr_2, 60)
-  expect_equal(nrow(hr_2), 454)
-  expect_equal(unique(hr_2$congress), 117)
-  expect_equal(unique(hr_2$year), 2021)
-
-  # chamber argument
-  expect_equal(hr_2, get_les("h", les_2 = TRUE))
-})
-
-test_that("LES 2.0 Senate data", {
-  skip_if_offline()
-
-  s_2 <- get_les("sen", les_2 = TRUE)
-
-  # data checks
-  expect_s3_class(s_2, "tbl_df")
-  expect_length(s_2, 60)
-  expect_equal(nrow(s_2), 100)
-  expect_equal(unique(s_2$congress), 117)
-  expect_equal(unique(s_2$year), 2020)
-
-  # chamber argument
-  expect_equal(s_2, get_les("s", les_2 = TRUE))
+  expect_equal(sen, get_les("senate"))
 })
 
 test_that("column types", {
   skip_if_offline()
 
-  # Senate, LES Classic
-  s_1 <- get_les("s", les_2 = FALSE)
-  expect_s3_class(s_1, "tbl_df")
-  expect_length(s_1, 60)
-  expect_equal(nrow(s_1), 2533)
-  expect_length(dplyr::select(s_1, dplyr::where(is.integer)), 33)
-  expect_length(dplyr::select(s_1, dplyr::where(is.double)), 9)
-  expect_length(dplyr::select(s_1, dplyr::where(is.factor)), 2)
-  expect_length(dplyr::select(s_1, dplyr::where(is.character)), 4)
-  expect_length(dplyr::select(s_1, dplyr::where(is.logical)), 12)
+  # Senate data
+  sen <- get_les("sen")
+  expect_s3_class(sen, "tbl_df")
+  expect_length(sen, 88)
+  expect_equal(nrow(sen), 2635)
+  expect_length(dplyr::select(sen, dplyr::where(is.integer)), 54)
+  expect_length(dplyr::select(sen, dplyr::where(is.double)), 15)
+  expect_length(dplyr::select(sen, dplyr::where(is.factor)), 3)
+  expect_length(dplyr::select(sen, dplyr::where(is.character)), 4)
+  expect_length(dplyr::select(sen, dplyr::where(is.logical)), 12)
 
-  # House, LES 2
-  hr_2 <- get_les("hr", les_2 = TRUE)
-  expect_s3_class(hr_2, "tbl_df")
-  expect_length(hr_2, 60)
-  expect_equal(nrow(hr_2), 454)
-  expect_length(dplyr::select(hr_2, dplyr::where(is.integer)), 33)
-  expect_length(dplyr::select(hr_2, dplyr::where(is.double)), 9)
-  expect_length(dplyr::select(hr_2, dplyr::where(is.factor)), 2)
-  expect_length(dplyr::select(hr_2, dplyr::where(is.character)), 3)
-  expect_length(dplyr::select(hr_2, dplyr::where(is.logical)), 13)
+  # House data
+  hr <- get_les("h")
+  expect_s3_class(hr, "tbl_df")
+  expect_length(hr, 88)
+  expect_equal(nrow(hr), 11606)
+  expect_length(dplyr::select(hr, dplyr::where(is.integer)), 54)
+  expect_length(dplyr::select(hr, dplyr::where(is.double)), 15)
+  expect_length(dplyr::select(hr, dplyr::where(is.factor)), 3)
+  expect_length(dplyr::select(hr, dplyr::where(is.character)), 3)
+  expect_length(dplyr::select(hr, dplyr::where(is.logical)), 13)
 })
 
 test_that("LES local reading and writing", {
@@ -98,48 +74,42 @@ test_that("LES local reading and writing", {
   tmp_dta <- tempfile(fileext = ".dta")
 
   ## download data from online
-  s1_online <- get_les("s", les_2 = FALSE)
-  expect_s3_class(s1_online, "tbl_df")
-  readr::write_csv(s1_online, tmp_csv)
+  s_online <- get_les("s")
+  expect_s3_class(s_online, "tbl_df")
+  readr::write_csv(s_online, tmp_csv)
+  readr::write_tsv(s_online, tmp_tsv)
 
-  h1_online <- get_les("hr", les_2 = FALSE)
-  expect_s3_class(h1_online, "tbl_df")
-  readr::write_tsv(h1_online, tmp_tab)
-
-  s2_online <- get_les("s", les_2 = TRUE)
-  expect_s3_class(s1_online, "tbl_df")
-  readr::write_tsv(s2_online, tmp_tsv)
-
-  h2_online <- get_les("hr", les_2 = TRUE)
-  expect_s3_class(h1_online, "tbl_df")
-  haven::write_dta(h2_online, tmp_dta)
+  hr_online <- get_les("hr")
+  expect_s3_class(hr_online, "tbl_df")
+  readr::write_tsv(hr_online, tmp_tab)
+  haven::write_dta(hr_online, tmp_dta)
 
   ## check that local data matches
-  s1_local <- get_les("s", les_2 = FALSE, local_path = tmp_csv)
+  s1_local <- get_les("s", local_path = tmp_csv)
   expect_s3_class(s1_local, "tbl_df")
-  expect_equal(s1_local, haven::zap_label(haven::zap_formats(s1_online)))
+  expect_equal(s1_local, haven::zap_label(haven::zap_formats(s_online)))
 
-  h1_local <- get_les("hr", les_2 = FALSE, local_path = tmp_tab)
+  h1_local <- get_les("hr", local_path = tmp_tab)
   expect_s3_class(h1_local, "tbl_df")
-  expect_equal(h1_local, haven::zap_label(haven::zap_formats(h1_online)))
+  expect_equal(h1_local, haven::zap_label(haven::zap_formats(hr_online)))
 
-  s2_local <- get_les("s", les_2 = TRUE, local_path = tmp_tsv)
+  s2_local <- get_les("s", local_path = tmp_tsv)
   expect_s3_class(s2_local, "tbl_df")
-  expect_equal(s2_local, haven::zap_label(haven::zap_formats(s2_online)))
+  expect_equal(s2_local, haven::zap_label(haven::zap_formats(s_online)))
 
-  h2_local <- get_les("hr", les_2 = TRUE, local_path = tmp_dta)
+  h2_local <- get_les("hr", local_path = tmp_dta)
   expect_s3_class(h2_local, "tbl_df")
   # don't need to zap label/formats since we saved data in a DTA file
-  expect_equal(h2_local, h2_online)
+  expect_equal(h2_local, hr_online)
 
   ## test that re-written data matches
   readr::write_csv(h1_local, tmp_csv)
-  h1_rewritten <- get_les("hr", les_2 = FALSE, local_path = tmp_csv)
+  h1_rewritten <- get_les("hr", local_path = tmp_csv)
   expect_s3_class(h1_rewritten, "tbl_df")
   expect_equal(h1_rewritten, h1_local)
 
   haven::write_dta(s2_local, tmp_dta)
-  s2_rewritten <- get_les("s", les_2 = TRUE, local_path = tmp_dta)
+  s2_rewritten <- get_les("s", local_path = tmp_dta)
   expect_s3_class(s2_rewritten, "tbl_df")
   expect_equal(haven::zap_formats(s2_rewritten), s2_local)
 })

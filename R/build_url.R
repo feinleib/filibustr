@@ -10,7 +10,7 @@ build_url <- function(data_source, chamber = "all", congress = NULL, sheet_type 
                                   congress_code = congress_code),
     hvw = build_hvw_url(chamber_code = chamber_code),
     lhy = build_hvw_url(chamber_code = chamber_code),
-    les = build_les_url(les_2 = sheet_type, chamber_code = chamber_code),
+    les = build_les_url(chamber_code = chamber_code),
     "source not implemented"
   )
 
@@ -48,7 +48,7 @@ build_hvw_url <- function(chamber_code) {
   paste0(source, "/", file)
 }
 
-build_les_url <- function(chamber_code, les_2 = FALSE) {
+build_les_url <- function(chamber_code) {
   # no "all" option for LES
   if (!(chamber_code %in% c("H", "S"))) {
     cli::cli_abort(c(
@@ -58,11 +58,10 @@ build_les_url <- function(chamber_code, les_2 = FALSE) {
     call = rlang::caller_env(2))
   }
 
-  source <- "https://thelawmakers.org/wp-content/uploads/2023/04"
+  source <- "https://thelawmakers.org/wp-content/uploads/2025/03/CEL"
   chamber_name <- if (chamber_code == "H") "House" else "Senate"
-  sheet_type <- if (les_2) "117ReducedLES2" else "93to117ReducedClassic"
 
-  paste0(source, "/CEL", chamber_name, sheet_type, ".dta")
+  paste0(source, chamber_name, "93to118Reduced.dta")
 }
 
 match_chamber <- function(chamber) {
