@@ -4,9 +4,9 @@ create_factor_columns <- function(df, local_path) {
   if (isTRUE(tools::file_ext(local_path) == "dta")) {
     df <- df |>
       # no need to specify levels if data is already coming from saved DTA file
-      dplyr::mutate(dplyr::across(.cols = c(dplyr::any_of(c("state", "st_name")),
-                                            dplyr::matches("^expectation[12]$")),
-                                  .fns = haven::as_factor))
+      dplyr::mutate(dplyr::across(
+        .cols = dplyr::any_of(c("state", "st_name", "expectation1", "expectation2")),
+        .fns = haven::as_factor))
   } else {
     df <- df |>
       dplyr::mutate(
@@ -18,8 +18,8 @@ create_factor_columns <- function(df, local_path) {
                         # House data (`st_name`) includes non-voting members
                         datasets::state.abb, "AS", "DC", "GU", "MP", "PR", "VI"
                       ))),
-        # LES vs. expectation (`expectation1`/`expectation2`)
-        dplyr::across(.cols = dplyr::matches("^expectation[12]$"),
+        # LES vs. expectation
+        dplyr::across(.cols = dplyr::any_of(c("expectation1", "expectation2")),
                       .fns = as.factor)
       )
   }
