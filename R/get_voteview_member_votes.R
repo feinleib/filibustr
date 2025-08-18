@@ -14,7 +14,7 @@
 #' @returns A tibble.
 #' @export
 #'
-#' @examplesIf interactive()
+#' @examplesIf interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' get_voteview_member_votes()
 #'
 #' # Get data for only one chamber
@@ -25,7 +25,7 @@
 #' get_voteview_member_votes(congress = 110)
 #' get_voteview_member_votes(congress = current_congress())
 #'
-#' @examples
+#' @examplesIf !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' # Get data for a set of Congresses
 #' get_voteview_member_votes(congress = 1:3)
 #'

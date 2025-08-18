@@ -44,7 +44,7 @@
 #'
 #' @export
 #'
-#' @examplesIf interactive()
+#' @examplesIf interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' get_voteview_members()
 #'
 #' # Get data for only one chamber
@@ -52,12 +52,12 @@
 #' get_voteview_members(chamber = "house")
 #' get_voteview_members(chamber = "senate")
 #'
-#' @examples
+#' @examplesIf !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' # Get data for a specific Congress
 #' get_voteview_members(congress = 100)
 #' get_voteview_members(congress = current_congress())
 #'
-#' @examplesIf interactive()
+#' @examplesIf interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' # Get data for a set of Congresses
 #' get_voteview_members(congress = 1:10)
 #'

@@ -11,7 +11,7 @@
 #'  successful cloture votes in each Congress.
 #' @export
 #'
-#' @examples
+#' @examplesIf !is.null(curl::nslookup("www.senate.gov", error = FALSE))
 #' get_senate_cloture_votes()
 get_senate_cloture_votes <- function() {
   read_html_table(url = paste0("https://www.senate.gov",

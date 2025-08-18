@@ -16,7 +16,7 @@
 #' @returns A tibble.
 #' @export
 #'
-#' @examplesIf interactive()
+#' @examplesIf interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' get_voteview_rollcall_votes()
 #'
 #' # Get data for only one chamber
@@ -24,12 +24,12 @@
 #' get_voteview_rollcall_votes(chamber = "house")
 #' get_voteview_rollcall_votes(chamber = "senate")
 #'
-#' @examples
+#' @examplesIf !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' # Get data for a specific Congress
 #' get_voteview_rollcall_votes(congress = 100)
 #' get_voteview_rollcall_votes(congress = current_congress())
 #'
-#' @examplesIf interactive()
+#' @examplesIf interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' # Get data for a set of Congresses
 #' get_voteview_rollcall_votes(congress = 1:10)
 #'

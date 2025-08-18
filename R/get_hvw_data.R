@@ -39,9 +39,9 @@
 #' @returns A tibble.
 #' @export
 #'
-#' @examples
+#' @examplesIf !is.null(curl::nslookup("dataverse.harvard.edu", error = FALSE))
 #' get_hvw_data("senate")
-#' @examplesIf interactive()
+#' @examplesIf interactive() && !is.null(curl::nslookup("dataverse.harvard.edu", error = FALSE))
 #' get_hvw_data("house")
 get_hvw_data <- function(chamber, local_path = NULL) {
   if (is.null(local_path)) {

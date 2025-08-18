@@ -13,7 +13,7 @@
 #'
 #' @return An HTTP response body, as a UTF-8 string.
 #'
-#' @examples
+#' @examplesIf !is.null(curl::nslookup("dataverse.harvard.edu", error = FALSE))
 #' # used in `get_hvw_data()`:
 #' get_online_data("https://dataverse.harvard.edu/api/access/datafile/6299608", "Harvard Dataverse")
 #'

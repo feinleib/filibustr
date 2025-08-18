@@ -13,12 +13,13 @@
 #' @return A tibble.
 #' @export
 #'
-#' @examples
+#' @examplesIf !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' # The table used in `get_senate_cloture_votes()`
 #' # NOTE: `get_senate_cloture_votes()` performs some cleaning on this table
 #' read_html_table(url = "https://www.senate.gov/legislative/cloture/clotureCounts.htm",
 #'                 css = ".cloturecount")
 #'
+#' @examplesIf !is.null(curl::nslookup("www.baseball-reference.com", error = FALSE))
 #' # A table from Baseball Reference
 #' read_html_table(url = "https://www.baseball-reference.com/friv/rules-changes-stats.shtml",
 #'                 css = "#time_of_game")
