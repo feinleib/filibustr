@@ -49,8 +49,10 @@ These datasets have been dedicated to the public domain
 under \href{https://creativecommons.org/publicdomain/zero/1.0/}{CC0 1.0}.
 }
 \examples{
+\dontshow{if (!is.null(curl::nslookup("dataverse.harvard.edu", error = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_hvw_data("senate")
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive() && !is.null(curl::nslookup("dataverse.harvard.edu", error = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_hvw_data("house")
 \dontshow{\}) # examplesIf}
 }

@@ -51,12 +51,12 @@
 #'
 #' @export
 #'
-#' @examplesIf interactive()
+#' @examplesIf interactive() && !is.null(curl::nslookup("thelawmakers.org", error = FALSE))
 #' # Classic LES data (93rd-117th Congresses)
 #' get_les("house", les_2 = FALSE)
 #' get_les("senate", les_2 = FALSE)
 #'
-#' @examples
+#' @examplesIf !is.null(curl::nslookup("thelawmakers.org", error = FALSE))
 #' # LES 2.0 (117th Congress)
 #' get_les("house", les_2 = TRUE)
 #' get_les("senate", les_2 = TRUE)

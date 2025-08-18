@@ -14,7 +14,7 @@
 #' @returns A tibble.
 #' @export
 #'
-#' @examplesIf interactive()
+#' @examplesIf interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' get_voteview_parties()
 #'
 #' # get parties for only one chamber
@@ -22,12 +22,12 @@
 #' get_voteview_parties(chamber = "house")
 #' get_voteview_parties(chamber = "senate")
 #'
-#' @examples
+#' @examplesIf !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' # get parties for a specific Congress
 #' get_voteview_parties(congress = 100)
 #' get_voteview_parties(congress = current_congress())
 #'
-#' @examplesIf interactive()
+#' @examplesIf interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))
 #' # get parties for a set of Congresses
 #' get_voteview_parties(congress = 1:10)
 #'

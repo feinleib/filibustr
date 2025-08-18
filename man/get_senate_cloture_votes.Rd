@@ -20,5 +20,7 @@ The data is sourced from the official Senate website, specifically
 \url{https://www.senate.gov/legislative/cloture/clotureCounts.htm}.
 }
 \examples{
+\dontshow{if (!is.null(curl::nslookup("www.senate.gov", error = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 get_senate_cloture_votes()
+\dontshow{\}) # examplesIf}
 }
