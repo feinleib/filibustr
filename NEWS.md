@@ -1,4 +1,4 @@
-# filibustr (development version)
+# filibustr 0.4.1 (2025-08-18)
 
 * Ensure web resources are online when running examples in function 
   documentation (#36).
