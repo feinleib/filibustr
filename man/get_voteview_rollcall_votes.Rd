@@ -49,7 +49,7 @@ and Luke Sonnet (2025).
 \emph{Voteview: Congressional Roll-Call Votes Database}. \url{https://voteview.com/}
 }
 \examples{
-\dontshow{if (interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))) withAutoprint(\{ # examplesIf}
 get_voteview_rollcall_votes()
 
 # Get data for only one chamber
@@ -57,12 +57,12 @@ get_voteview_rollcall_votes()
 get_voteview_rollcall_votes(chamber = "house")
 get_voteview_rollcall_votes(chamber = "senate")
 \dontshow{\}) # examplesIf}
-\dontshow{if (!is.null(curl::nslookup("voteview.com", error = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!is.null(curl::nslookup("voteview.com", error = FALSE))) withAutoprint(\{ # examplesIf}
 # Get data for a specific Congress
 get_voteview_rollcall_votes(congress = 100)
 get_voteview_rollcall_votes(congress = current_congress())
 \dontshow{\}) # examplesIf}
-\dontshow{if (interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))) withAutoprint(\{ # examplesIf}
 # Get data for a set of Congresses
 get_voteview_rollcall_votes(congress = 1:10)
 \dontshow{\}) # examplesIf}

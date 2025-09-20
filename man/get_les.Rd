@@ -61,12 +61,12 @@ United States Congress: The lawmakers}. Cambridge University Press.
 \doi{doi:10.1017/CBO9781139032360}
 }
 \examples{
-\dontshow{if (interactive() && !is.null(curl::nslookup("thelawmakers.org", error = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive() && !is.null(curl::nslookup("thelawmakers.org", error = FALSE))) withAutoprint(\{ # examplesIf}
 # Classic LES data (93rd-117th Congresses)
 get_les("house", les_2 = FALSE)
 get_les("senate", les_2 = FALSE)
 \dontshow{\}) # examplesIf}
-\dontshow{if (!is.null(curl::nslookup("thelawmakers.org", error = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!is.null(curl::nslookup("thelawmakers.org", error = FALSE))) withAutoprint(\{ # examplesIf}
 # LES 2.0 (117th Congress)
 get_les("house", les_2 = TRUE)
 get_les("senate", les_2 = TRUE)
