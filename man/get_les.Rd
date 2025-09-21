@@ -4,7 +4,7 @@
 \alias{get_les}
 \title{Get Legislative Effectiveness Scores data}
 \usage{
-get_les(chamber, les_2 = lifecycle::deprecated(), local_path = NULL)
+get_les(chamber, les_2 = deprecated(), local_path = NULL)
 }
 \arguments{
 \item{chamber}{Which chamber to get data for. Options are:
@@ -32,12 +32,12 @@ Senate data. Thus, the \code{year} for House members is one after that of
 senators in the same Congress.
 }}
 
-\item{les_2}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is now ignored
-and will be removed in a future release. The 2025 LES dataset now includes
-both LES Classic and LES 2.0 scores in the same dataset. LES 2.0 credits
-lawmakers when language from their sponsored bills is included in other
-legislators' bills that become law. LES 2.0 is only available starting in
-the 117th Congress (2021-present).}
+\item{les_2}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is now
+unnecessary, as the 2025 LES dataset includes both LES Classic and LES 2.0
+scores in the same dataset. If provided, this argument will be ignored
+(with a deprecation warning). This argument will be removed in a future
+release.  See the \emph{\strong{LES Classic and LES 2.0}} section below for more
+information on the two methods.}
 
 \item{local_path}{(Optional) A file path for reading from a local file.
 If no \code{local_path} is specified, will read data from the Center for
@@ -60,6 +60,18 @@ The Legislative Effectiveness Score methodology was introduced in:
 Volden, C., & Wiseman, A. E. (2014). \emph{Legislative effectiveness in the
 United States Congress: The lawmakers}. Cambridge University Press.
 \doi{doi:10.1017/CBO9781139032360}
+\subsection{LES Classic and LES 2.0}{
+
+The Center for Effective Lawmaking created a new version of LES starting in
+the 117th Congress. LES 2.0 credits lawmakers when language from their
+sponsored bills is included in \emph{other legislators' bills} that advance
+through Congress and become law, not just their own sponsored bills.
+LES 2.0 is only available starting in the 117th Congress (2021-present).
+LES Classic goes back to the 93rd Congress (1973-present).
+
+See the LES \href{https://thelawmakers.org/methodology}{methodology} page for
+more information on these methods.
+}
 }
 \examples{
 \dontshow{if (!is.null(curl::nslookup("thelawmakers.org", error = FALSE))) withAutoprint(\{ # examplesIf}

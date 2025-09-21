@@ -26,12 +26,12 @@
 #'    Senate data. Thus, the `year` for House members is one after that of
 #'    senators in the same Congress.
 #'
-#' @param les_2 `r lifecycle::badge("deprecated")` This argument is now ignored
-#'  and will be removed in a future release. The 2025 LES dataset now includes
-#'  both LES Classic and LES 2.0 scores in the same dataset. LES 2.0 credits
-#'  lawmakers when language from their sponsored bills is included in other
-#'  legislators' bills that become law. LES 2.0 is only available starting in
-#'  the 117th Congress (2021-present).
+#' @param les_2 `r lifecycle::badge("deprecated")` This argument is now
+#'  unnecessary, as the 2025 LES dataset includes both LES Classic and LES 2.0
+#'  scores in the same dataset. If provided, this argument will be ignored
+#'  (with a deprecation warning). This argument will be removed in a future
+#'  release.  See the ***LES Classic and LES 2.0*** section below for more
+#'  information on the two methods.
 #'
 #' @param local_path (Optional) A file path for reading from a local file.
 #'  If no `local_path` is specified, will read data from the Center for
@@ -43,19 +43,39 @@
 #' See the [Center for Effective Lawmaking](https://thelawmakers.org)
 #' website for more information on their data.
 #'
-#'
 #' The Legislative Effectiveness Score methodology was introduced in:
 #'
 #' Volden, C., & Wiseman, A. E. (2014). *Legislative effectiveness in the
 #' United States Congress: The lawmakers*. Cambridge University Press.
 #' \doi{doi:10.1017/CBO9781139032360}
 #'
+#' ## LES Classic and LES 2.0
+#' The Center for Effective Lawmaking created a new version of LES starting in
+#' the 117th Congress. LES 2.0 credits lawmakers when language from their
+#' sponsored bills is included in *other legislators' bills* that advance
+#' through Congress and become law, not just their own sponsored bills.
+#' LES 2.0 is only available starting in the 117th Congress (2021-present).
+#' LES Classic goes back to the 93rd Congress (1973-present).
+#'
+#' See the LES [methodology](https://thelawmakers.org/methodology) page for
+#' more information on these methods.
+#'
 #' @export
 #'
 #' @examplesIf !is.null(curl::nslookup("thelawmakers.org", error = FALSE))
 #' get_les("house")
 #' get_les("senate")
-get_les <- function(chamber, les_2 = lifecycle::deprecated(), local_path = NULL) {
+get_les <- function(chamber, les_2 = deprecated(), local_path = NULL) {
+  # deprecation warning for `les_2` argument
+  if (lifecycle::is_present(les_2)) {
+    lifecycle::deprecate_soft("0.5.0", "get_les(les_2)",
+                              details = paste(
+                                "This argument is no longer necessary.",
+                                "The 2025 LES dataset includes both LES Classic",
+                                "and LES 2.0 scores in the same dataset."
+                              ))
+  }
+
   if (is.null(local_path)) {
     # online reading
     url <- build_url(data_source = "les", chamber = chamber)
