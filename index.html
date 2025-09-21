@@ -125,29 +125,27 @@
 <p>There are non-trivial differences between the House and Senate datasets, so take care when joining House and Senate data.</p>
 <p>Here is an example table returned by <code><a href="reference/get_les.html">get_les()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://feinleib.github.io/filibustr/">filibustr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/get_les.html">get_les</a></span><span class="op">(</span>chamber <span class="op">=</span> <span class="st">"senate"</span>, les_2 <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 2,533 × 60</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_les.html">get_les</a></span><span class="op">(</span>chamber <span class="op">=</span> <span class="st">"senate"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2,635 × 88</span></span>
 <span><span class="co">#&gt;    last     first state congress cgnum icpsr  year dem   majority elected female</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;lgl&gt; &lt;lgl&gt;      &lt;int&gt; &lt;lgl&gt; </span></span>
 <span><span class="co">#&gt;  1 Abourezk James SD          93     1 13000  1972 TRUE  TRUE        1972 FALSE </span></span>
-<span><span class="co">#&gt;  2 Aiken    Geor… VT          93     2    52  1972 FALSE FALSE       1940 FALSE </span></span>
-<span><span class="co">#&gt;  3 Allen    James AL          93     3 12100  1972 TRUE  TRUE        1968 FALSE </span></span>
-<span><span class="co">#&gt;  4 Baker    Howa… TN          93     4 11200  1972 FALSE FALSE       1966 FALSE </span></span>
-<span><span class="co">#&gt;  5 Bartlett Dewey OK          93     5 14100  1972 FALSE FALSE       1972 FALSE </span></span>
-<span><span class="co">#&gt;  6 Bayh     Birch IN          93     6 10800  1972 TRUE  TRUE        1962 FALSE </span></span>
-<span><span class="co">#&gt;  7 Beall    J.    MD          93     7 12002  1972 FALSE FALSE       1970 FALSE </span></span>
-<span><span class="co">#&gt;  8 Bellmon  Henry OK          93     8 12101  1972 FALSE FALSE       1968 FALSE </span></span>
-<span><span class="co">#&gt;  9 Bennett  Wall… UT          93     9   645  1972 FALSE FALSE       1950 FALSE </span></span>
-<span><span class="co">#&gt; 10 Bentsen  Lloyd TX          93    10   660  1972 TRUE  TRUE        1970 FALSE </span></span>
-<span><span class="co">#&gt; # ℹ 2,523 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 49 more variables: afam &lt;lgl&gt;, latino &lt;lgl&gt;, votepct &lt;int&gt;, chair &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt;  2 Allen    James AL          93     3 12100  1972 TRUE  TRUE        1968 FALSE </span></span>
+<span><span class="co">#&gt;  3 Bayh     Birch IN          93     6 10800  1972 TRUE  TRUE        1962 FALSE </span></span>
+<span><span class="co">#&gt;  4 Bentsen  Lloyd TX          93    10   660  1972 TRUE  TRUE        1970 FALSE </span></span>
+<span><span class="co">#&gt;  5 Bible    Alan  NV          93    11   688  1972 TRUE  TRUE        1954 FALSE </span></span>
+<span><span class="co">#&gt;  6 Biden    Jose… DE          93    12 14101  1972 TRUE  TRUE        1972 FALSE </span></span>
+<span><span class="co">#&gt;  7 Burdick  Quen… ND          93    16  1252  1972 TRUE  TRUE        1960 FALSE </span></span>
+<span><span class="co">#&gt;  8 Byrd     Robe… WV          93    18  1366  1972 TRUE  TRUE        1958 FALSE </span></span>
+<span><span class="co">#&gt;  9 Cannon   Howa… NV          93    19  1482  1972 TRUE  TRUE        1958 FALSE </span></span>
+<span><span class="co">#&gt; 10 Chiles   Lawt… FL          93    21 13101  1972 TRUE  TRUE        1970 FALSE </span></span>
+<span><span class="co">#&gt; # ℹ 2,625 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 77 more variables: afam &lt;lgl&gt;, latino &lt;lgl&gt;, votepct &lt;dbl&gt;, chair &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   subchr &lt;lgl&gt;, seniority &lt;int&gt;, state_leg &lt;lgl&gt;, state_leg_prof &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   maj_leader &lt;lgl&gt;, min_leader &lt;lgl&gt;, votepct_sq &lt;int&gt;, lagles &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   power &lt;lgl&gt;, freshman &lt;lgl&gt;, sensq &lt;int&gt;, deleg_size &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   party_code &lt;int&gt;, bioname &lt;chr&gt;, bioguide_id &lt;chr&gt;, born &lt;int&gt;, died &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   dwnom1 &lt;dbl&gt;, dwnom2 &lt;dbl&gt;, meddist &lt;dbl&gt;, majdist &lt;dbl&gt;, cbill1 &lt;int&gt;, …</span></span></code></pre></div>
+<span><span class="co">#&gt; #   maj_leader &lt;lgl&gt;, min_leader &lt;lgl&gt;, votepct_sq &lt;dbl&gt;, power &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   freshman &lt;lgl&gt;, sensq &lt;int&gt;, deleg_size &lt;int&gt;, party_code &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   bioname &lt;chr&gt;, bioguide_id &lt;chr&gt;, born &lt;int&gt;, died &lt;int&gt;, dwnom1 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   dwnom2 &lt;dbl&gt;, meddist &lt;dbl&gt;, majdist &lt;dbl&gt;, cbill1 &lt;int&gt;, caic1 &lt;int&gt;, …</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="harbridge-yong-volden-and-wiseman-2023">Harbridge-Yong, Volden, and Wiseman (2023)<a class="anchor" aria-label="anchor" href="#harbridge-yong-volden-and-wiseman-2023"></a>
@@ -156,9 +154,7 @@
 <p>The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables.</p>
 <p>Here are the tables returned by <code><a href="reference/get_hvw_data.html">get_hvw_data()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://feinleib.github.io/filibustr/">filibustr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/get_hvw_data.html">get_hvw_data</a></span><span class="op">(</span><span class="st">"house"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_hvw_data.html">get_hvw_data</a></span><span class="op">(</span><span class="st">"house"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 9,825 × 109</span></span>
 <span><span class="co">#&gt;    thomas_num thomas_name     icpsr congress  year st_name    cd dem   elected</span></span>
 <span><span class="co">#&gt;         &lt;int&gt; &lt;chr&gt;           &lt;int&gt;    &lt;int&gt; &lt;int&gt; &lt;fct&gt;   &lt;int&gt; &lt;lgl&gt;   &lt;int&gt;</span></span>

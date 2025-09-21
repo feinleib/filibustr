@@ -40,6 +40,19 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="filibustr-development-version">filibustr (development version)<a class="anchor" aria-label="anchor" href="#filibustr-development-version"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>Updated the LES dataset in <code><a href="../reference/get_les.html">get_les()</a></code> to include data from the 118th Congress (<a href="https://github.com/feinleib/filibustr/issues/30" class="external-link">#30</a>).
+<ul><li>Deprecated the <code>get_les(les_2)</code> argument. It is no longer applicable to the new format of the LES dataset, which includes both versions of LES in the same dataset.</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-improvements-and-bug-fixes-development-version">Minor improvements and bug fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-bug-fixes-development-version"></a></h3>
+<ul><li>In <code><a href="../reference/get_les.html">get_les()</a></code> and <code><a href="../reference/get_hvw_data.html">get_hvw_data()</a></code>, preserve the <code>st_name</code> column for non-voting members of the House (i.e., members from D.C. and U.S. territories) (<a href="https://github.com/feinleib/filibustr/issues/32" class="external-link">#32</a>).</li>
+<li>
+<code><a href="../reference/get_les.html">get_les()</a></code> and <code><a href="../reference/get_hvw_data.html">get_hvw_data()</a></code> see minor optimizations/speed improvements in their internal data cleaning processes.</li>
+<li>Updated Roxygen version to 7.3.3.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="filibustr-041-2025-08-19">filibustr 0.4.1 (2025-08-19)<a class="anchor" aria-label="anchor" href="#filibustr-041-2025-08-19"></a></h2><p class="text-muted">CRAN release: 2025-08-19</p>
