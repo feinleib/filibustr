@@ -77,9 +77,7 @@ There are non-trivial differences between the House and Senate datasets, so take
 Here is an example table returned by `get_les()`.
 
 ```{r LES example}
-library(filibustr)
-
-get_les(chamber = "senate", les_2 = FALSE)
+get_les(chamber = "senate")
 ```
 
 ### Harbridge-Yong, Volden, and Wiseman (2023)
@@ -91,8 +89,6 @@ The House and Senate data do not have the same number of variables, or the same 
 Here are the tables returned by `get_hvw_data()`:
 
 ```{r HVW example}
-library(filibustr)
-
 get_hvw_data("house")
 get_hvw_data("senate")
 ```
