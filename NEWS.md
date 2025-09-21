@@ -5,7 +5,7 @@
   Congress (#30).
   * Deprecated the `get_les(les_2)` argument. It is no longer applicable to the 
   new format of the LES dataset, which includes both versions of LES in the 
-  same dataset.
+  same dataset. This argument will be removed in a future release.
 
 ## Minor improvements and bug fixes
 * In `get_les()` and `get_hvw_data()`, preserve the `st_name` column for 
