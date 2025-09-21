@@ -46,7 +46,7 @@ be dealing with special sessions (denoted \code{"S"}), not just numbered
 sessions.
 }
 \examples{
-\dontshow{if (!is.null(curl::nslookup("www.senate.gov", error = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (!is.null(curl::nslookup("www.senate.gov", error = FALSE))) withAutoprint(\{ # examplesIf}
 get_senate_sessions()
 \dontshow{\}) # examplesIf}
 }

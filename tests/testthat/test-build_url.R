@@ -140,16 +140,10 @@ test_that("`build_url()` for HVW", {
 # LES --------------------------------------------
 test_that("`build_les_url()`: online paths", {
   # classic LES
-  expect_equal(build_les_url(chamber_code = "H", les_2 = FALSE),
-               "https://thelawmakers.org/wp-content/uploads/2023/04/CELHouse93to117ReducedClassic.dta")
-  expect_equal(build_les_url(chamber_code = "S", les_2 = FALSE),
-               "https://thelawmakers.org/wp-content/uploads/2023/04/CELSenate93to117ReducedClassic.dta")
-
-  # LES 2
-  expect_equal(build_les_url(chamber_code = "H", les_2 = TRUE),
-               "https://thelawmakers.org/wp-content/uploads/2023/04/CELHouse117ReducedLES2.dta")
-  expect_equal(build_les_url(chamber_code = "S", les_2 = TRUE),
-               "https://thelawmakers.org/wp-content/uploads/2023/04/CELSenate117ReducedLES2.dta")
+  expect_equal(build_les_url(chamber_code = "H"),
+               "https://thelawmakers.org/wp-content/uploads/2025/03/CELHouse93to118Reduced.dta")
+  expect_equal(build_les_url(chamber_code = "S"),
+               "https://thelawmakers.org/wp-content/uploads/2025/03/CELSenate93to118Reduced.dta")
 })
 
 test_that("`build_les_url()`: invalid `chamber_code` errors", {
@@ -162,11 +156,11 @@ test_that("`build_les_url()`: invalid `chamber_code` errors", {
 
 test_that("`build_url()` for LES", {
   # basics
-  # NOTE: `sheet_type` in `build_url()` refers to `les_2` for LES data
+  # NOTE: `sheet_type` is not used for LES
   expect_equal(build_url(data_source = "les", chamber = "sen", sheet_type = FALSE),
-               "https://thelawmakers.org/wp-content/uploads/2023/04/CELSenate93to117ReducedClassic.dta")
+               "https://thelawmakers.org/wp-content/uploads/2025/03/CELSenate93to118Reduced.dta")
   expect_equal(build_url(data_source = "les", chamber = "house", sheet_type = TRUE),
-               "https://thelawmakers.org/wp-content/uploads/2023/04/CELHouse117ReducedLES2.dta")
+               "https://thelawmakers.org/wp-content/uploads/2025/03/CELHouse93to118Reduced.dta")
 
   # need to specify a chamber
   expect_error(build_url(data_source = "les"),

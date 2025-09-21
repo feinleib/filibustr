@@ -159,3 +159,15 @@ test_that("basic dta example", {
   expect_equal(as.character(sort(unique(from_dta$state))),
                state.abb)
 })
+
+test_that("HVW House data includes non-voting members", {
+  skip_if_offline()
+
+  hvw_hr <- get_hvw_data("hr")
+
+  expect_s3_class(hvw_hr$st_name, "factor")
+  expect_length(levels(hvw_hr$st_name), 56)
+  expect_identical(levels(hvw_hr$st_name), c(state.abb,
+                                             "AS", "DC", "GU", "MP", "PR", "VI"))
+  expect_contains(hvw_hr$st_name, c("AS", "DC", "GU", "MP", "PR", "VI"))
+})

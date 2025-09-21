@@ -104,29 +104,27 @@ so take care when joining House and Senate data.
 Here is an example table returned by `get_les()`.
 
 ``` r
-library(filibustr)
-
-get_les(chamber = "senate", les_2 = FALSE)
-#> # A tibble: 2,533 × 60
+get_les(chamber = "senate")
+#> # A tibble: 2,635 × 88
 #>    last     first state congress cgnum icpsr  year dem   majority elected female
 #>    <chr>    <chr> <fct>    <int> <int> <int> <int> <lgl> <lgl>      <int> <lgl> 
 #>  1 Abourezk James SD          93     1 13000  1972 TRUE  TRUE        1972 FALSE 
-#>  2 Aiken    Geor… VT          93     2    52  1972 FALSE FALSE       1940 FALSE 
-#>  3 Allen    James AL          93     3 12100  1972 TRUE  TRUE        1968 FALSE 
-#>  4 Baker    Howa… TN          93     4 11200  1972 FALSE FALSE       1966 FALSE 
-#>  5 Bartlett Dewey OK          93     5 14100  1972 FALSE FALSE       1972 FALSE 
-#>  6 Bayh     Birch IN          93     6 10800  1972 TRUE  TRUE        1962 FALSE 
-#>  7 Beall    J.    MD          93     7 12002  1972 FALSE FALSE       1970 FALSE 
-#>  8 Bellmon  Henry OK          93     8 12101  1972 FALSE FALSE       1968 FALSE 
-#>  9 Bennett  Wall… UT          93     9   645  1972 FALSE FALSE       1950 FALSE 
-#> 10 Bentsen  Lloyd TX          93    10   660  1972 TRUE  TRUE        1970 FALSE 
-#> # ℹ 2,523 more rows
-#> # ℹ 49 more variables: afam <lgl>, latino <lgl>, votepct <int>, chair <lgl>,
+#>  2 Allen    James AL          93     3 12100  1972 TRUE  TRUE        1968 FALSE 
+#>  3 Bayh     Birch IN          93     6 10800  1972 TRUE  TRUE        1962 FALSE 
+#>  4 Bentsen  Lloyd TX          93    10   660  1972 TRUE  TRUE        1970 FALSE 
+#>  5 Bible    Alan  NV          93    11   688  1972 TRUE  TRUE        1954 FALSE 
+#>  6 Biden    Jose… DE          93    12 14101  1972 TRUE  TRUE        1972 FALSE 
+#>  7 Burdick  Quen… ND          93    16  1252  1972 TRUE  TRUE        1960 FALSE 
+#>  8 Byrd     Robe… WV          93    18  1366  1972 TRUE  TRUE        1958 FALSE 
+#>  9 Cannon   Howa… NV          93    19  1482  1972 TRUE  TRUE        1958 FALSE 
+#> 10 Chiles   Lawt… FL          93    21 13101  1972 TRUE  TRUE        1970 FALSE 
+#> # ℹ 2,625 more rows
+#> # ℹ 77 more variables: afam <lgl>, latino <lgl>, votepct <dbl>, chair <lgl>,
 #> #   subchr <lgl>, seniority <int>, state_leg <lgl>, state_leg_prof <dbl>,
-#> #   maj_leader <lgl>, min_leader <lgl>, votepct_sq <int>, lagles <dbl>,
-#> #   power <lgl>, freshman <lgl>, sensq <int>, deleg_size <int>,
-#> #   party_code <int>, bioname <chr>, bioguide_id <chr>, born <int>, died <int>,
-#> #   dwnom1 <dbl>, dwnom2 <dbl>, meddist <dbl>, majdist <dbl>, cbill1 <int>, …
+#> #   maj_leader <lgl>, min_leader <lgl>, votepct_sq <dbl>, power <lgl>,
+#> #   freshman <lgl>, sensq <int>, deleg_size <int>, party_code <int>,
+#> #   bioname <chr>, bioguide_id <chr>, born <int>, died <int>, dwnom1 <dbl>,
+#> #   dwnom2 <dbl>, meddist <dbl>, majdist <dbl>, cbill1 <int>, caic1 <int>, …
 ```
 
 ### Harbridge-Yong, Volden, and Wiseman (2023)
@@ -141,8 +139,6 @@ the same variable names, so it is not trivial to join the two tables.
 Here are the tables returned by `get_hvw_data()`:
 
 ``` r
-library(filibustr)
-
 get_hvw_data("house")
 #> # A tibble: 9,825 × 109
 #>    thomas_num thomas_name     icpsr congress  year st_name    cd dem   elected
