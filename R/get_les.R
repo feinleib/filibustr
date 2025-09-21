@@ -71,13 +71,18 @@ get_les <- function(chamber, les_2 = lifecycle::deprecated(), local_path = NULL)
                           col_types = readr::cols(lagles2 = readr::col_double()))
   }
 
+  # save column labels
+  var_labels <- labelled::var_label(df)
+
   df <- df |>
     # fix column types
     fix_les_coltypes(local_path = local_path) |>
     # convert 0/1-character `bioname` values to NA
     dplyr::mutate(dplyr::across(.cols = "bioname",
                                 .fns = ~ dplyr::if_else(nchar(.x) <= 1, NA, .x,
-                                                        ptype = character(1))))
+                                                        ptype = character(1)))) |>
+    # restore dropped column labels
+    labelled::set_variable_labels(.labels = as.list(var_labels))
 
   df
 }
