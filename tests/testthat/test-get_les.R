@@ -113,3 +113,24 @@ test_that("LES local reading and writing", {
   expect_s3_class(s2_rewritten, "tbl_df")
   expect_equal(haven::zap_formats(s2_rewritten), s2_local)
 })
+
+test_that("LES column labels", {
+  skip_if_offline()
+
+  les_s <- get_les("sen")
+  les_hr <- get_les("hr")
+
+  # labels are non-null for all columns
+  expect_length(labelled::var_label(les_s) |> purrr::keep(~ !is.null(.x)), length(les_s))
+  expect_length(labelled::var_label(les_hr) |> purrr::keep(~ !is.null(.x)), length(les_hr))
+
+  # labels are strings for all columns
+  expect_identical(purrr::map_chr(labelled::var_label(les_s), typeof),
+                   setNames(rep("character", length(les_s)), colnames(les_s)))
+  expect_identical(purrr::map_chr(labelled::var_label(les_hr), typeof),
+                   setNames(rep("character", length(les_hr)), colnames(les_hr)))
+
+  # labels are positive-length strings
+  expect_true(all(labelled::var_label(les_s) |> purrr::map_int(stringr::str_length) > 0))
+  expect_true(all(labelled::var_label(les_hr) |> purrr::map_int(stringr::str_length) > 0))
+})

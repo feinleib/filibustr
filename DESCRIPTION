@@ -23,6 +23,7 @@ Imports:
     future,
     haven,
     httr2,
+    labelled,
     lifecycle,
     purrr,
     readr,

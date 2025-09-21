@@ -8,11 +8,14 @@
   same dataset. This argument will be removed in a future release.
 
 ## Minor improvements and bug fixes
+* In `get_les()`, preserve column labels from the source .dta file. Inspired by 
+  @shannonpileggi; sample code from @lefkiospaikousis (#35).
 * In `get_les()` and `get_hvw_data()`, preserve the `st_name` column for 
   non-voting members of the House (i.e., members from D.C. and U.S. 
   territories) (#32).
 * `get_les()` and `get_hvw_data()` see minor optimizations/speed improvements 
   in their internal data cleaning processes.
+* New dependency: {labelled}.
 * Updated Roxygen version to 7.3.3.
 
 # filibustr 0.4.1 (2025-08-19)
