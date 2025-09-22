@@ -51,7 +51,7 @@ from the Center for Effective Lawmaking.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_les</span><span class="op">(</span><span class="va">chamber</span>, les_2 <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span>, local_path <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_les</span><span class="op">(</span><span class="va">chamber</span>, les_2 <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>, local_path <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -78,12 +78,12 @@ senators in the same Congress.</p></li>
 
 
 <dt id="arg-les-">les_2<a class="anchor" aria-label="anchor" href="#arg-les-"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument is now ignored
-and will be removed in a future release. The 2025 LES dataset now includes
-both LES Classic and LES 2.0 scores in the same dataset. LES 2.0 credits
-lawmakers when language from their sponsored bills is included in other
-legislators' bills that become law. LES 2.0 is only available starting in
-the 117th Congress (2021-present).</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument is now
+unnecessary, as the 2025 LES dataset includes both LES Classic and LES 2.0
+scores in the same dataset. If provided, this argument will be ignored
+(with a deprecation warning). This argument will be removed in a future
+release.  See the <em><strong>LES Classic and LES 2.0</strong></em> section below for more
+information on the two methods.</p></dd>
 
 
 <dt id="arg-local-path">local_path<a class="anchor" aria-label="anchor" href="#arg-local-path"></a></dt>
@@ -103,7 +103,20 @@ website for more information on their data.</p>
 <p>The Legislative Effectiveness Score methodology was introduced in:</p>
 <p>Volden, C., &amp; Wiseman, A. E. (2014). <em>Legislative effectiveness in the
 United States Congress: The lawmakers</em>. Cambridge University Press.
-<a href="https://doi.org/10.1017/CBO9781139032360" class="external-link">doi:10.1017/CBO9781139032360</a></p>
+<a href="https://doi.org/10.1017/CBO9781139032360" class="external-link">doi:10.1017/CBO9781139032360</a></p><div class="section">
+<h3 id="les-classic-and-les-">LES Classic and LES 2.0<a class="anchor" aria-label="anchor" href="#les-classic-and-les-"></a></h3>
+
+
+<p>The Center for Effective Lawmaking created a new version of LES starting in
+the 117th Congress. LES 2.0 credits lawmakers when language from their
+sponsored bills is included in <em>other legislators' bills</em> that advance
+through Congress and become law, not just their own sponsored bills.
+LES 2.0 is only available starting in the 117th Congress (2021-present).
+LES Classic goes back to the 93rd Congress (1973-present).</p>
+<p>See the LES <a href="https://thelawmakers.org/methodology" class="external-link">methodology</a> page for
+more information on these methods.</p>
+</div>
+
     </div>
 
     <div class="section level2">
