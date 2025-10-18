@@ -4,16 +4,27 @@
 \alias{read_html_table}
 \title{Scrape an online HTML table}
 \usage{
-read_html_table(url, css)
+read_html_table(url, css, live = FALSE, live_wait = 0)
 }
 \arguments{
 \item{url}{A string giving the URL to read from.}
 
 \item{css}{A string giving the CSS element to select.
 
-SelectorGadget
-(\url{https://selectorgadget.com/}) is a useful tool for finding the code for the
-CSS element you need. See \code{\link[rvest:html_element]{rvest::html_element()}} for more information.}
+SelectorGadget (\url{https://selectorgadget.com/}) is a useful tool for finding
+the code for the CSS element you need. See \code{\link[rvest:html_element]{rvest::html_element()}} for more information.}
+
+\item{live}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} If \code{live = TRUE}, will read
+the table with \code{\link[rvest:read_html_live]{rvest::read_html_live()}}, which can read tables that are
+dynamically generated using JavaScript.
+
+This functionality uses the \href{https://rstudio.github.io/chromote/}{chromote}
+package, which requires that you have a copy of
+\href{https://www.google.com/chrome/}{Google Chrome} installed on your machine.}
+
+\item{live_wait}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}} Optionally, set a wait
+time (in seconds) before trying to read a dynamically-generated table. This
+argument is ignored if \code{live} is not \code{TRUE}.}
 }
 \value{
 A tibble.
@@ -33,5 +44,13 @@ read_html_table(url = "https://www.senate.gov/legislative/cloture/clotureCounts.
 # A table from Baseball Reference
 read_html_table(url = "https://www.baseball-reference.com/friv/rules-changes-stats.shtml",
                 css = "#time_of_game")
+\dontshow{\}) # examplesIf}
+\dontshow{if (interactive() && !is.null(curl::nslookup("www.wbsc.org", error = FALSE))) withAutoprint(\{ # examplesIf}
+# Read dynamically-generated tables with `live = TRUE`
+# and use `live_wait` if the table takes time to generate
+read_html_table(url = "https://www.wbsc.org/en/events/2024-premier12/stats",
+                css = "#table-stats_wrapper",
+                live = TRUE,      # the table on this site is dynamically generated
+                live_wait = 0.5)  # wait 0.5 seconds before reading table
 \dontshow{\}) # examplesIf}
 }

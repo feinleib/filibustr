@@ -6,6 +6,18 @@
   * Deprecated the `get_les(les_2)` argument. It is no longer applicable to the 
   new format of the LES dataset, which includes both versions of LES in the 
   same dataset. This argument will be removed in a future release.
+  
+## New features
+* `read_html_table()` gains a new argument `live` to read dynamically-generated 
+  HTML tables using `rvest::read_html_live()` (#37). The argument `live_wait` 
+  enables you to add wait time before reading the table. Example usage:
+  
+```r
+read_html_table(url = "https://www.wbsc.org/en/events/2024-premier12/stats",
+                css = "#table-stats_wrapper",
+                live = TRUE,      # the table on this site is dynamically generated
+                live_wait = 0.5)  # wait 0.5 seconds before reading table
+```
 
 ## Minor improvements and bug fixes
 * In `get_les()`, preserve column labels from the source .dta file. Inspired by 
