@@ -8,7 +8,7 @@
     same dataset. This argument will be removed in a future release.
 * In the `get_voteview_*()` functions, downloading online data from 
   multiple Congresses now uses {purrr} and {mirai} for parallelism, not {furrr} 
-  and {future}.
+  and {future} (#34, #42).
   * Data will be downloaded in parallel only if the {mirai} and {carrier} 
     packages are installed.
   * To speed up data reading by using parallel downloads, use 
