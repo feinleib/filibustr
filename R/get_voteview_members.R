@@ -34,41 +34,13 @@
 #'
 #' @section Parallel downloads with \CRANpkg{mirai}:
 #' If you have installed the packages \CRANpkg{mirai} and \CRANpkg{carrier}, then the Voteview
-#' functions can use [purrr::in_parallel()] when downloading Voteview data from
-#' multiple Congresses.
+#' functions can download Voteview data from multiple Congresses in parallel.
 #'
 #' To download Voteview data in parallel, use [mirai::daemons()] to create
 #' parallel processes. If you are downloading Voteview data for many
 #' Congresses, this can provide a significant speed-up.
 #'
-#' Example usage:
-#'
-#' ```{r parallel downloads from Voteview, eval=FALSE}
-#' ## install {mirai} and {carrier} to enable parallel downloads
-#' # install.packages("mirai")
-#' # install.packages("carrier")
-#'
-#' ## detect the number of cores available on your machine
-#' parallel::detectCores()
-#'
-#' ## launch multiple processes
-#' # launch a specific number of processes
-#' mirai::daemons(4)
-#' # launch a process on all available cores (leaving one free)
-#' mirai::daemons(parallel::detectCores() - 1)
-#'
-#' ## download Voteview data for multiple congresses
-#' # Goal: with N processes, this can be up to
-#' # N times faster than sequential downloads
-#' get_voteview_rollcall_votes(congress = 95:118)
-#' get_voteview_members(congress = 95:118)
-#'
-#' ## Good practice: close the connections when you're done using them
-#' mirai::daemons(0)
-#' ```
-#'
-#' See the \CRANpkg{mirai} package documentation for additional options for
-#' parallel processing.
+#' See `vignette("parallel-downloads")` for full usage details.
 #'
 #' @details
 #' See the
