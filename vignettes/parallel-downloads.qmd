@@ -70,7 +70,7 @@ Once you've set up your parallel processes, **just call the Voteview functions l
 
 **Reminder:** parallel processing only impacts downloads where `length(congress) > 1`.
 
-```{r download Voteview data}
+```{r download Voteview data, eval = !is.null(curl::nslookup("voteview.com", error = FALSE))}
 #| cache: true
 
 # download Voteview data from multiple Congresses
