@@ -38,6 +38,9 @@ get_voteview_members(congress = 95:118)
 mirai::daemons(0)
 ```
 
+See `vignette("parallel-downloads", package = "filibustr")` for more on 
+downloading data in parallel.
+
 ## Minor improvements and bug fixes
 * In `get_les()`, preserve column labels from the source .dta file. Inspired by 
   @shannonpileggi; sample code from @lefkiospaikousis (#35).
@@ -47,7 +50,7 @@ mirai::daemons(0)
 * `get_les()` and `get_hvw_data()` see minor optimizations/speed improvements 
   in their internal data cleaning processes.
 * New dependency: {labelled}.
-* New suggested dependencies: {carrier}, {mirai}.
+* New suggested dependencies: {carrier}, {knitr}, {mirai}, {quarto}.
 * Removed dependencies: {furrr}, {future}.
 * Updated Roxygen version to 7.3.3.
 

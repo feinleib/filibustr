@@ -33,9 +33,12 @@ Imports:
 Suggests: 
     carrier (>= 0.3.0),
     curl,
+    knitr,
     mirai (>= 2.5.1),
+    quarto,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
+VignetteBuilder: quarto
