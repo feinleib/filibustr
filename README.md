@@ -231,9 +231,9 @@ This package uses data from the following websites and research:
   Bipartisan Path to Effective Lawmaking. *The Journal of Politics*,
   *85*(3), 1048–1063. <https://doi.org/10.1086/723805>
 - Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron
-  Rudkin, and Luke Sonnet (2023). *Voteview: Congressional Roll-Call
+  Rudkin, and Luke Sonnet (2025). *Voteview: Congressional Roll-Call
   Votes Database.* <https://voteview.com/>
 - U.S. Senate. <https://www.senate.gov/>
-- Volden, C., & Wiseman, A. E. (2023). *Legislative Effectiveness
+- Volden, C., & Wiseman, A. E. (2025). *Legislative Effectiveness
   Scores* \[dataset\]. Center for Effective Lawmaking.
   <https://thelawmakers.org/>
