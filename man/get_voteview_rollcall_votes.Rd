@@ -48,6 +48,18 @@ Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
 and Luke Sonnet (2025).
 \emph{Voteview: Congressional Roll-Call Votes Database}. \url{https://voteview.com/}
 }
+\section{Parallel downloads with \CRANpkg{mirai}}{
+
+If you have installed the packages \CRANpkg{mirai} and \CRANpkg{carrier}, then the Voteview
+functions can download Voteview data from multiple Congresses in parallel.
+
+To download Voteview data in parallel, use \code{\link[mirai:daemons]{mirai::daemons()}} to create
+parallel processes. If you are downloading Voteview data for many
+Congresses, this can provide a significant speed-up.
+
+See \code{vignette("parallel-downloads")} for full usage details.
+}
+
 \examples{
 \dontshow{if (interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))) withAutoprint(\{ # examplesIf}
 get_voteview_rollcall_votes()

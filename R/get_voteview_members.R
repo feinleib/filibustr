@@ -32,6 +32,16 @@
 #' The tibble includes data on the member's office, party, and ideology.
 #' See [Voteview](https://voteview.com/data) for descriptions of specific columns.
 #'
+#' @section Parallel downloads with \CRANpkg{mirai}:
+#' If you have installed the packages \CRANpkg{mirai} and \CRANpkg{carrier}, then the Voteview
+#' functions can download Voteview data from multiple Congresses in parallel.
+#'
+#' To download Voteview data in parallel, use [mirai::daemons()] to create
+#' parallel processes. If you are downloading Voteview data for many
+#' Congresses, this can provide a significant speed-up.
+#'
+#' See `vignette("parallel-downloads")` for full usage details.
+#'
 #' @details
 #' See the
 #' [Voteview](https://voteview.com/data) website for more information on their data.

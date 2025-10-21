@@ -58,12 +58,19 @@ read_local_file <- function(path, ...) {
 }
 
 # get Voteview data for multiple Congresses, one-by-one
-# using future's `multisession` plan for parallelism
+# using {purrr}'s parallelism through {mirai}
+# if {mirai} and {carrier} are installed
 multi_congress_read <- function(fun, chamber, congress) {
-  with(future::plan(future::multisession),
-       furrr::future_map(congress, function(.cong) {
-         fun(chamber = chamber, congress = .cong)
-       }
-       )) |>
+  .f <- if (rlang::is_installed(c("carrier", "mirai"), version = c("0.3.0",  "2.5.1"))) {
+    purrr::in_parallel(
+      function(.cong) fun(chamber = chamber, congress = .cong),
+      fun = fun,
+      chamber = chamber
+    )
+  } else {
+    function(.cong) fun(chamber = chamber, congress = .cong)
+  }
+
+  purrr::map(congress, .f = .f) |>
     purrr::list_rbind()
 }

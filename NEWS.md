@@ -4,8 +4,42 @@
 * Updated the LES dataset in `get_les()` to include data from the 118th 
   Congress (#30).
   * Deprecated the `get_les(les_2)` argument. It is no longer applicable to the 
-  new format of the LES dataset, which includes both versions of LES in the 
-  same dataset. This argument will be removed in a future release.
+    new format of the LES dataset, which includes both versions of LES in the 
+    same dataset. This argument will be removed in a future release.
+* In the `get_voteview_*()` functions, downloading online data from 
+  multiple Congresses now uses {purrr} and {mirai} for parallelism, not {furrr} 
+  and {future} (#34, #42).
+  * Data will be downloaded in parallel only if the {mirai} and {carrier} 
+    packages are installed.
+  * To speed up data reading by using parallel downloads, use 
+    `mirai::daemons()`:
+  
+``` r
+## install {mirai} and {carrier} to enable parallel downloads
+# install.packages("mirai")
+# install.packages("carrier")
+
+## detect the number of cores available on your machine
+parallel::detectCores()
+
+## launch multiple processes
+# launch a specific number of processes
+mirai::daemons(4)
+# launch a process on all available cores (leaving one free)
+mirai::daemons(parallel::detectCores() - 1)
+
+## download Voteview data for multiple congresses
+# Goal: with N processes, this can be up to
+# N times faster than sequential downloads
+get_voteview_rollcall_votes(congress = 95:118)
+get_voteview_members(congress = 95:118)
+
+## Good practice: close the connections when you're done using them
+mirai::daemons(0)
+```
+
+See `vignette("parallel-downloads", package = "filibustr")` for more on 
+downloading data in parallel.
 
 ## Minor improvements and bug fixes
 * In `get_les()`, preserve column labels from the source .dta file. Inspired by 
@@ -16,6 +50,8 @@
 * `get_les()` and `get_hvw_data()` see minor optimizations/speed improvements 
   in their internal data cleaning processes.
 * New dependency: {labelled}.
+* New suggested dependencies: {carrier}, {knitr}, {mirai}, {quarto}.
+* Removed dependencies: {furrr}, {future}.
 * Updated Roxygen version to 7.3.3.
 
 # filibustr 0.4.1 (2025-08-19)

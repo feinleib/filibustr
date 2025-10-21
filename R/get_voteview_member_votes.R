@@ -7,6 +7,7 @@
 #'
 #' @inheritParams get_voteview_rollcall_votes
 #' @inherit get_voteview_members details
+#' @inherit get_voteview_members sections
 #'
 #' @seealso [get_voteview_cast_codes()] for a dictionary of
 #' the cast codes in this data.
