@@ -13,7 +13,7 @@
     packages are installed.
   * To speed up data reading by using parallel downloads, use 
     `mirai::daemons()`:
-  
+
 ``` r
 ## install {mirai} and {carrier} to enable parallel downloads
 # install.packages("mirai")
@@ -49,6 +49,7 @@ downloading data in parallel.
   territories) (#32).
 * `get_les()` and `get_hvw_data()` see minor optimizations/speed improvements 
   in their internal data cleaning processes.
+* Updated data source publication dates.
 * New dependency: {labelled}.
 * New suggested dependencies: {carrier}, {knitr}, {mirai}, {quarto}.
 * Removed dependencies: {furrr}, {future}.

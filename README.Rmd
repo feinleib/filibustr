@@ -122,6 +122,6 @@ If you notice any bugs, or have suggestions for new features, please submit an i
 This package uses data from the following websites and research:
 
 * Harbridge-Yong, L., Volden, C., & Wiseman, A. E. (2023). The Bipartisan Path to Effective Lawmaking. *The Journal of Politics*, *85*(3), 1048–1063. <https://doi.org/10.1086/723805>
-* Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin, and Luke Sonnet (2023). *Voteview: Congressional Roll-Call Votes Database.* <https://voteview.com/>
+* Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin, and Luke Sonnet (`r format(Sys.Date(), "%Y")`). *Voteview: Congressional Roll-Call Votes Database.* <https://voteview.com/>
 * U.S. Senate. <https://www.senate.gov/>
-* Volden, C., & Wiseman, A. E. (2023). *Legislative Effectiveness Scores* [dataset]. Center for Effective Lawmaking. <https://thelawmakers.org/>
+* Volden, C., & Wiseman, A. E. (2025). *Legislative Effectiveness Scores* [dataset]. Center for Effective Lawmaking. <https://thelawmakers.org/>
