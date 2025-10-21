@@ -8,9 +8,10 @@ knitr:
   opts_chunk:
     collapse: true
     comment: '#>'
+    eval: false
 ---
 
-```{r library(filibustr)}
+```{r call library}
 library(filibustr)
 ```
 
@@ -41,8 +42,6 @@ rlang::check_installed(c("carrier", "mirai"), version = c("0.3.0",  "2.5.1"))
 parallel processes (`{mirai}` calls these "daemons").
 
 ```{r set parallel processes}
-#| eval: false
-
 # detect the number of cores available on your machine
 parallel::detectCores()
 
@@ -70,9 +69,7 @@ Once you've set up your parallel processes, **just call the Voteview functions l
 
 **Reminder:** parallel processing only impacts downloads where `length(congress) > 1`.
 
-```{r download Voteview data, eval = !is.null(curl::nslookup("voteview.com", error = FALSE))}
-#| cache: true
-
+```{r download Voteview data}
 # download Voteview data from multiple Congresses
 get_voteview_members(congress = 95:118)
 
@@ -83,8 +80,6 @@ When you're done with all your parallel processing, you can close the daemon con
 The connections will close automatically when your session ends otherwise.
 
 ```{r close daemons}
-#| eval: false
-
 mirai::daemons(0)
 ```
 
