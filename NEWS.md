@@ -50,9 +50,9 @@ downloading data in parallel.
 * `get_les()` and `get_hvw_data()` see minor optimizations/speed improvements 
   in their internal data cleaning processes.
 * Updated data source publication dates.
-* New dependency: {labelled}.
-* New suggested dependencies: {carrier}, {knitr}, {mirai}, {quarto}.
-* Removed dependencies: {furrr}, {future}.
+* New dependency: `labelled`.
+* New suggested dependencies: `carrier`, `knitr`, `mirai`, `quarto`.
+* Removed dependencies: `furrr`, `future`.
 * Updated Roxygen version to 7.3.3.
 
 # filibustr 0.4.1 (2025-08-19)
