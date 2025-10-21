@@ -22,6 +22,10 @@ Congress (i.e., each member is listed once for every two years in office)."></he
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/parallel-downloads.html">Download Voteview data in parallel</a></li>
+  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -99,6 +103,17 @@ See <a href="https://voteview.com/data" class="external-link">Voteview</a> for d
 <p>Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
 and Luke Sonnet (2025).
 <em>Voteview: Congressional Roll-Call Votes Database</em>. <a href="https://voteview.com/" class="external-link">https://voteview.com/</a></p>
+    </div>
+    <div class="section level2">
+    <h2 id="parallel-downloads-with-mirai">Parallel downloads with <a href="https://CRAN.R-project.org/package=mirai" class="external-link"><span class="pkg">mirai</span></a><a class="anchor" aria-label="anchor" href="#parallel-downloads-with-mirai"></a></h2>
+
+
+<p>If you have installed the packages <a href="https://CRAN.R-project.org/package=mirai" class="external-link"><span class="pkg">mirai</span></a> and <a href="https://CRAN.R-project.org/package=carrier" class="external-link"><span class="pkg">carrier</span></a>, then the Voteview
+functions can download Voteview data from multiple Congresses in parallel.</p>
+<p>To download Voteview data in parallel, use <code><a href="https://mirai.r-lib.org/reference/daemons.html" class="external-link">mirai::daemons()</a></code> to create
+parallel processes. If you are downloading Voteview data for many
+Congresses, this can provide a significant speed-up.</p>
+<p>See <code><a href="../articles/parallel-downloads.html">vignette("parallel-downloads")</a></code> for full usage details.</p>
     </div>
 
     <div class="section level2">
