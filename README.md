@@ -66,7 +66,10 @@ Voteview can take a long time. If you are repeatedly loading the same
 static dataset (i.e., not including information from the current
 Congress), it may be useful to download the dataset as a CSV/DTA file so
 you can read that local file using `local_path` instead of having to
-download data from online.
+download data from online. You may also use `mirai` to download Voteview
+data in parallel. See
+`vignette("parallel-downloads", package = "filibustr")` for more info on
+parallel data downloads.
 
 For demonstration, here is the table returned by
 `get_voteview_parties()`.
