@@ -51,15 +51,14 @@ downloading data in parallel.
   in their internal data cleaning processes.
 * Updated data source publication dates.
 * New dependency: {labelled}.
-* New suggested dependencies: {carrier}, {knitr}, {mirai}, {quarto}.
+* New suggested packages: {carrier}, {knitr}, {mirai}, {quarto}.
 * Removed dependencies: {furrr}, {future}.
-* Updated Roxygen version to 7.3.3.
 
 # filibustr 0.4.1 (2025-08-19)
 
 * Ensure web resources are online when running examples in function 
   documentation (#36).
-* New suggested dependency: {curl}.
+* New suggested packages: {curl}.
 
 # filibustr 0.4.0 (2025-05-11)
 
