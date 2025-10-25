@@ -13,12 +13,12 @@ coverage](https://codecov.io/gh/feinleib/filibustr/branch/main/graph/badge.svg)]
 status](https://www.r-pkg.org/badges/version/filibustr)](https://CRAN.R-project.org/package=filibustr)
 <!-- badges: end -->
 
-The `filibustr` package provides data utilities for research on the U.S.
-Congress. This package provides a uniform interface for accessing data
-from sources such as Voteview, the Legislative Effectiveness Scores, and
-more. Accessing your data using these functions removes many of the
-manual steps involved with importing data. This has two primary
-benefits:
+The [`filibustr`](https://feinleib.github.io/filibustr/) package
+provides data utilities for research on the U.S. Congress. This package
+provides a uniform interface for accessing data from sources such as
+Voteview, the Legislative Effectiveness Scores, and more. Accessing your
+data using these functions removes many of the manual steps involved
+with importing data. This has two primary benefits:
 
 - **Speeding up your workflow** and enabling you to quickly experiment
   with a variety of data choices.
