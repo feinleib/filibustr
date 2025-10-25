@@ -65,7 +65,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The <code>filibustr</code> package provides data utilities for research on the U.S. Congress. This package provides a uniform interface for accessing data from sources such as Voteview, the Legislative Effectiveness Scores, and more. Accessing your data using these functions removes many of the manual steps involved with importing data. This has two primary benefits:</p>
+<p>The <a href="https://feinleib.github.io/filibustr/"><code>filibustr</code></a> package provides data utilities for research on the U.S. Congress. This package provides a uniform interface for accessing data from sources such as Voteview, the Legislative Effectiveness Scores, and more. Accessing your data using these functions removes many of the manual steps involved with importing data. This has two primary benefits:</p>
 <ul>
 <li>
 <strong>Speeding up your workflow</strong> and enabling you to quickly experiment with a variety of data choices.</li>
@@ -101,7 +101,6 @@
 <code><a href="reference/get_voteview_member_votes.html">get_voteview_member_votes()</a></code>: individual members’ votes on recorded votes</li>
 </ul>
 <p>These functions share a common interface and arguments.</p>
-<p><strong>Note:</strong> Especially when working with large datasets, reading data from Voteview can take a long time. If you are repeatedly loading the same static dataset (i.e., not including information from the current Congress), it may be useful to download the dataset as a CSV/DTA file so you can read that local file using <code>local_path</code> instead of having to download data from online.</p>
 <p>For demonstration, here is the table returned by <code><a href="reference/get_voteview_parties.html">get_voteview_parties()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://feinleib.github.io/filibustr/">filibustr</a></span><span class="op">)</span></span>
@@ -123,12 +122,16 @@
 <span><span class="co">#&gt; # ℹ 835 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 3 more variables: nominate_dim2_median &lt;dbl&gt;, nominate_dim1_mean &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   nominate_dim2_mean &lt;dbl&gt;</span></span></code></pre></div>
+<p><strong>Note:</strong> Especially when working with large datasets, reading data from Voteview can take a long time. Here are two strategies to speed up your data import:</p>
+<ul>
+<li>If you are repeatedly loading the same static dataset (i.e., not including information from the current Congress), it may be useful to download the dataset as a CSV/DTA file so you can read that local file using <code>local_path</code> instead of having to download data from online.</li>
+<li>You may use <code>mirai</code> to download Voteview data in parallel. See <code><a href="articles/parallel-downloads.html">vignette("parallel-downloads", package = "filibustr")</a></code> for more info on parallel data downloads.</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="legislative-effectiveness-scores">Legislative Effectiveness Scores<a class="anchor" aria-label="anchor" href="#legislative-effectiveness-scores"></a>
 </h3>
 <p>The function <code><a href="reference/get_les.html">get_les()</a></code> retrieves Legislative Effectiveness Scores data from the <a href="https://thelawmakers.org" class="external-link">Center for Effective Lawmaking</a>.</p>
-<p>There are non-trivial differences between the House and Senate datasets, so take care when joining House and Senate data.</p>
 <p>Here is an example table returned by <code><a href="reference/get_les.html">get_les()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_les.html">get_les</a></span><span class="op">(</span>chamber <span class="op">=</span> <span class="st">"senate"</span><span class="op">)</span></span>
@@ -152,12 +155,12 @@
 <span><span class="co">#&gt; #   freshman &lt;lgl&gt;, sensq &lt;int&gt;, deleg_size &lt;int&gt;, party_code &lt;int&gt;,</span></span>
 <span><span class="co">#&gt; #   bioname &lt;chr&gt;, bioguide_id &lt;chr&gt;, born &lt;int&gt;, died &lt;int&gt;, dwnom1 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   dwnom2 &lt;dbl&gt;, meddist &lt;dbl&gt;, majdist &lt;dbl&gt;, cbill1 &lt;int&gt;, caic1 &lt;int&gt;, …</span></span></code></pre></div>
+<p>There are non-trivial differences between the House and Senate datasets, so take care when joining House and Senate data.</p>
 </div>
 <div class="section level3">
 <h3 id="harbridge-yong-volden-and-wiseman-2023">Harbridge-Yong, Volden, and Wiseman (2023)<a class="anchor" aria-label="anchor" href="#harbridge-yong-volden-and-wiseman-2023"></a>
 </h3>
 <p>The function <code><a href="reference/get_hvw_data.html">get_hvw_data()</a></code> retrives replication data for <a href="https://doi.org/10.1086/723805" class="external-link">Harbridge-Yong, Volden, and Wiseman (2023)</a>.</p>
-<p>The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables.</p>
 <p>Here are the tables returned by <code><a href="reference/get_hvw_data.html">get_hvw_data()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_hvw_data.html">get_hvw_data</a></span><span class="op">(</span><span class="st">"house"</span><span class="op">)</span></span>
@@ -202,6 +205,7 @@
 <span><span class="co">#&gt; #   latino &lt;lgl&gt;, votepct &lt;dbl&gt;, dwnom1 &lt;dbl&gt;, chair &lt;lgl&gt;, subchr &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   seniority &lt;int&gt;, state_leg &lt;lgl&gt;, state_leg_prof &lt;dbl&gt;, maj_leader &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   min_leader &lt;lgl&gt;, allbill &lt;int&gt;, allaic &lt;int&gt;, allabc &lt;int&gt;, …</span></span></code></pre></div>
+<p>The House and Senate data do not have the same number of variables, or the same variable names, so it is not trivial to join the two tables.</p>
 </div>
 <div class="section level3">
 <h3 id="senategov">Senate.gov<a class="anchor" aria-label="anchor" href="#senategov"></a>
