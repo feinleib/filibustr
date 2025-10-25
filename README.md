@@ -13,12 +13,12 @@ coverage](https://codecov.io/gh/feinleib/filibustr/branch/main/graph/badge.svg)]
 status](https://www.r-pkg.org/badges/version/filibustr)](https://CRAN.R-project.org/package=filibustr)
 <!-- badges: end -->
 
-The `filibustr` package provides data utilities for research on the U.S.
-Congress. This package provides a uniform interface for accessing data
-from sources such as Voteview, the Legislative Effectiveness Scores, and
-more. Accessing your data using these functions removes many of the
-manual steps involved with importing data. This has two primary
-benefits:
+The [`filibustr`](https://feinleib.github.io/filibustr/) package
+provides data utilities for research on the U.S. Congress. This package
+provides a uniform interface for accessing data from sources such as
+Voteview, the Legislative Effectiveness Scores, and more. Accessing your
+data using these functions removes many of the manual steps involved
+with importing data. This has two primary benefits:
 
 - **Speeding up your workflow** and enabling you to quickly experiment
   with a variety of data choices.
@@ -61,13 +61,6 @@ There are four functions that retrieve data from
 
 These functions share a common interface and arguments.
 
-**Note:** Especially when working with large datasets, reading data from
-Voteview can take a long time. If you are repeatedly loading the same
-static dataset (i.e., not including information from the current
-Congress), it may be useful to download the dataset as a CSV/DTA file so
-you can read that local file using `local_path` instead of having to
-download data from online.
-
 For demonstration, here is the table returned by
 `get_voteview_parties()`.
 
@@ -93,13 +86,22 @@ get_voteview_parties()
 #> #   nominate_dim2_mean <dbl>
 ```
 
+**Note:** Especially when working with large datasets, reading data from
+Voteview can take a long time. Here are two strategies to speed up your
+data import:
+
+- If you are repeatedly loading the same static dataset (i.e., not
+  including information from the current Congress), it may be useful to
+  download the dataset as a CSV/DTA file so you can read that local file
+  using `local_path` instead of having to download data from online.
+- You may use `mirai` to download Voteview data in parallel. See
+  `vignette("parallel-downloads", package = "filibustr")` for more info
+  on parallel data downloads.
+
 ### Legislative Effectiveness Scores
 
 The function `get_les()` retrieves Legislative Effectiveness Scores data
 from the [Center for Effective Lawmaking](https://thelawmakers.org).
-
-There are non-trivial differences between the House and Senate datasets,
-so take care when joining House and Senate data.
 
 Here is an example table returned by `get_les()`.
 
@@ -127,14 +129,14 @@ get_les(chamber = "senate")
 #> #   dwnom2 <dbl>, meddist <dbl>, majdist <dbl>, cbill1 <int>, caic1 <int>, …
 ```
 
+There are non-trivial differences between the House and Senate datasets,
+so take care when joining House and Senate data.
+
 ### Harbridge-Yong, Volden, and Wiseman (2023)
 
 The function `get_hvw_data()` retrives replication data for
 [Harbridge-Yong, Volden, and Wiseman
 (2023)](https://doi.org/10.1086/723805).
-
-The House and Senate data do not have the same number of variables, or
-the same variable names, so it is not trivial to join the two tables.
 
 Here are the tables returned by `get_hvw_data()`:
 
@@ -182,6 +184,9 @@ get_hvw_data("senate")
 #> #   seniority <int>, state_leg <lgl>, state_leg_prof <dbl>, maj_leader <lgl>,
 #> #   min_leader <lgl>, allbill <int>, allaic <int>, allabc <int>, …
 ```
+
+The House and Senate data do not have the same number of variables, or
+the same variable names, so it is not trivial to join the two tables.
 
 ### Senate.gov
 
