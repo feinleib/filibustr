@@ -60,8 +60,10 @@ read_local_file <- function(path, ...) {
 # get Voteview data for multiple Congresses, one-by-one
 # using {purrr}'s parallelism through {mirai}
 # if {mirai} and {carrier} are installed
+# and mirai daemons are set up
 multi_congress_read <- function(fun, chamber, congress) {
-  .f <- if (rlang::is_installed(c("carrier", "mirai"), version = c("0.3.0",  "2.5.1"))) {
+  .f <- if (rlang::is_installed(c("carrier", "mirai"), version = c("0.3.0",  "2.5.1")) &&
+            !is.null(mirai::info())) {
     purrr::in_parallel(
       function(.cong) fun(chamber = chamber, congress = .cong),
       fun = fun,
