@@ -1,4 +1,4 @@
-# filibustr (development version)
+# filibustr 0.5.0 (2025-10-26)
 
 ## Breaking changes
 * Updated the LES dataset in `get_les()` to include data from the 118th 
