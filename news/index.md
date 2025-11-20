@@ -1,6 +1,6 @@
 # Changelog
 
-## filibustr (development version)
+## filibustr 0.5.1 (2025-11-20)
 
 - Fixes for CRAN.
 
