@@ -26,12 +26,12 @@ as a dataframe.
 \dontshow{if (!is.null(curl::nslookup("voteview.com", error = FALSE))) withAutoprint(\{ # examplesIf}
 # The table used in `get_senate_cloture_votes()`
 # NOTE: `get_senate_cloture_votes()` performs some cleaning on this table
-read_html_table(url = "https://www.senate.gov/legislative/cloture/clotureCounts.htm",
+read_html_table("https://www.senate.gov/legislative/cloture/clotureCounts.htm",
                 css = ".cloturecount")
 \dontshow{\}) # examplesIf}
 \dontshow{if (!is.null(curl::nslookup("www.baseball-reference.com", error = FALSE))) withAutoprint(\{ # examplesIf}
 # A table from Baseball Reference
-read_html_table(url = "https://www.baseball-reference.com/friv/rules-changes-stats.shtml",
-                css = "#time_of_game")
+read_html_table("https://www.baseball-reference.com/awards/hof.shtml",
+                css = "#div_hof")
 \dontshow{\}) # examplesIf}
 }
