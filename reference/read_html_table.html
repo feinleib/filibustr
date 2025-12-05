@@ -84,7 +84,7 @@ CSS element you need. See <code><a href="https://rvest.tidyverse.org/reference/h
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 56 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Congress Years     `Motions Filed` `Votes on Cloture` `Cloture Invoked`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 119      2025-2026 195             195                168              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 119      2025-2026 203             200                172              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 118      2023-2024 266             241                227              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 117      2021-2022 336             289                270              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 116      2019-2020 328             298                270              </span>
@@ -95,23 +95,11 @@ CSS element you need. See <code><a href="https://rvest.tidyverse.org/reference/h
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 111      2009-2010 137             91                 63               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 110      2007-2008 139             112                61               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 46 more rows</span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive() &amp;&amp; !is.null(curl::nslookup("www.baseball-reference.com", error = FALSE))</span></span></span>
 <span class="r-in"><span><span class="co"># A table from Baseball Reference</span></span></span>
-<span class="r-in"><span><span class="fu">read_html_table</span><span class="op">(</span><span class="st">"https://www.baseball-reference.com/awards/hof.shtml"</span>,</span></span>
-<span class="r-in"><span>                css <span class="op">=</span> <span class="st">"#div_hof"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 351 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Year Name          ``          `Voted By` `Inducted As` Votes `% of Ballots`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>025 Dick Allen    1942-2020   Classic B… Player           13 81.3%         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>025 Dave Parker   1951-2025   Classic B… Player           14 87.5%         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>025 CC Sabathia   1980-Living BBWAA      Player          342 86.8%         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>025 Ichiro Suzuki 1973-Living BBWAA      Player          393 99.7%         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>025 Billy Wagner  1971-Living BBWAA      Player          325 82.5%         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>024 Adrian Beltré 1979-Living BBWAA      Player          366 95.1%         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>024 Todd Helton   1973-Living BBWAA      Player          307 79.7%         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>024 Jim Leyland   1944-Living Contempor… Manager          15 93.8%         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>024 Joe Mauer     1983-Living BBWAA      Player          293 76.1%         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>023 Fred McGriff  1963-Living Contempor… Player           16 100.0%        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 341 more rows</span></span>
+<span class="r-in"><span><span class="fu">read_html_table</span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://www.baseball-reference.com/friv/rules-changes-stats.shtml"</span>,</span></span>
+<span class="r-in"><span>                css <span class="op">=</span> <span class="st">"#time_of_game"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

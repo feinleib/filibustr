@@ -108,7 +108,7 @@ get_voteview_rollcall_votes(congress = 100)
 #> #   nominate_log_likelihood <dbl>, bill_number <chr>, vote_result <chr>,
 #> #   vote_desc <chr>, vote_question <chr>, dtl_desc <chr>
 get_voteview_rollcall_votes(congress = current_congress())
-#> # A tibble: 902 × 18
+#> # A tibble: 927 × 18
 #>    congress chamber rollnumber date       session clerk_rollnumber yea_count
 #>       <int> <fct>        <int> <date>       <int>            <int>     <int>
 #>  1      119 House            1 2025-01-03       1                2       218
@@ -121,7 +121,7 @@ get_voteview_rollcall_votes(congress = current_congress())
 #>  8      119 House            8 2025-01-13       1                9       405
 #>  9      119 House            9 2025-01-14       1               10       426
 #> 10      119 House           10 2025-01-14       1               11       208
-#> # ℹ 892 more rows
+#> # ℹ 917 more rows
 #> # ℹ 11 more variables: nay_count <int>, nominate_mid_1 <dbl>,
 #> #   nominate_mid_2 <dbl>, nominate_spread_1 <dbl>, nominate_spread_2 <dbl>,
 #> #   nominate_log_likelihood <dbl>, bill_number <chr>, vote_result <chr>,

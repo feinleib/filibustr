@@ -27,7 +27,7 @@ get_senate_cloture_votes()
 #> # A tibble: 55 × 5
 #>    congress years     motions_filed votes_on_cloture cloture_invoked
 #>       <int> <chr>             <int>            <int>           <int>
-#>  1      119 2025-2026           195              195             168
+#>  1      119 2025-2026           203              200             172
 #>  2      118 2023-2024           266              241             227
 #>  3      117 2021-2022           336              289             270
 #>  4      116 2019-2020           328              298             270

@@ -109,8 +109,8 @@ get_voteview_parties(congress = current_congress())
 #> # A tibble: 5 × 9
 #>   congress chamber party_code party_name  n_members nominate_dim1_median
 #>      <int> <fct>        <int> <fct>           <int>                <dbl>
-#> 1      119 House          100 Democrat          220               -0.396
-#> 2      119 House          200 Republican        224                0.526
+#> 1      119 House          100 Democrat          220               -0.395
+#> 2      119 House          200 Republican        224                0.528
 #> 3      119 Senate         100 Democrat           45               -0.356
 #> 4      119 Senate         200 Republican         55                0.561
 #> 5      119 Senate         328 Independent         2               -0.356
