@@ -48,7 +48,7 @@ test_that("filter_congress()", {
   # single congress
   members_1 <- filter_congress(all_members, 1)
   expect_s3_class(members_1, "tbl_df")
-  expect_equal(nrow(members_1), 90)
+  expect_equal(nrow(members_1), 96)
   expect_equal(levels(members_1$chamber), c("President", "House", "Senate"))
   expect_equal(unique(members_1$congress), 1)
 
@@ -70,7 +70,7 @@ test_that("filter_congress()", {
   # discontinuous
   members_various <- filter_congress(all_members, c(5, 1, 100, 117, 95))
   expect_s3_class(members_various, "tbl_df")
-  expect_equal(nrow(members_various), 1901)
+  expect_equal(nrow(members_various), 1907)
   # row order not impacted by order of Congress numbers in `congress` arg
   expect_equal(unique(members_various$congress), c(1, 5, 95, 100, 117))
   expect_equal(dplyr::filter(members_various, congress == 1),
