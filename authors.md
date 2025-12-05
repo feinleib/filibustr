@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/feinleib/filibustr/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/feinleib/filibustr/blob/v0.5.1/DESCRIPTION)
 
 Feinleib M (2025). *filibustr: Data Utilities for Congressional
 Research*. R package version 0.5.1,

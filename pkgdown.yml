@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   parallel-downloads: parallel-downloads.html
-last_built: 2025-12-05T04:56Z
+last_built: 2025-12-05T13:01Z
 urls:
   reference: https://feinleib.github.io/filibustr/reference
   article: https://feinleib.github.io/filibustr/articles
