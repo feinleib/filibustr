@@ -1,6 +1,6 @@
 # Changelog
 
-## filibustr (development version)
+## filibustr 0.5.2 (2026-04-05)
 
 - Fix for CRAN.
 - Updated data source publication dates.
