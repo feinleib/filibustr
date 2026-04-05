@@ -38,7 +38,7 @@
 #'
 #' @importFrom rlang .data
 #'
-#' @examplesIf !is.null(curl::nslookup("www.senate.gov", error = FALSE))
+#' @examplesIf interactive() && !is.null(curl::nslookup("www.senate.gov", error = FALSE))
 #' get_senate_sessions()
 get_senate_sessions <- function() {
   session_dates <- read_html_table(url = paste0("https://www.senate.gov",

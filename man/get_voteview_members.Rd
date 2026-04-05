@@ -50,7 +50,7 @@ See the
 Please cite this dataset as:
 
 Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron Rudkin,
-and Luke Sonnet (2025).
+and Luke Sonnet (2026).
 \emph{Voteview: Congressional Roll-Call Votes Database}. \url{https://voteview.com/}
 }
 \section{Parallel downloads with \CRANpkg{mirai}}{
