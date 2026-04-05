@@ -23,7 +23,7 @@ A tibble.
 as a dataframe.
 }
 \examples{
-\dontshow{if (!is.null(curl::nslookup("voteview.com", error = FALSE))) withAutoprint(\{ # examplesIf}
+\dontshow{if (interactive() && !is.null(curl::nslookup("senate.gov", error = FALSE))) withAutoprint(\{ # examplesIf}
 # The table used in `get_senate_cloture_votes()`
 # NOTE: `get_senate_cloture_votes()` performs some cleaning on this table
 read_html_table("https://www.senate.gov/legislative/cloture/clotureCounts.htm",

@@ -13,7 +13,7 @@
 #' @return A tibble.
 #' @export
 #'
-#' @examplesIf !is.null(curl::nslookup("voteview.com", error = FALSE))
+#' @examplesIf interactive() && !is.null(curl::nslookup("senate.gov", error = FALSE))
 #' # The table used in `get_senate_cloture_votes()`
 #' # NOTE: `get_senate_cloture_votes()` performs some cleaning on this table
 #' read_html_table("https://www.senate.gov/legislative/cloture/clotureCounts.htm",
