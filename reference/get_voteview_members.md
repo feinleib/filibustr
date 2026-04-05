@@ -64,7 +64,7 @@ information on their data.
 Please cite this dataset as:
 
 Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron
-Rudkin, and Luke Sonnet (2025). *Voteview: Congressional Roll-Call Votes
+Rudkin, and Luke Sonnet (2026). *Voteview: Congressional Roll-Call Votes
 Database*. <https://voteview.com/>
 
 ## Parallel downloads with [mirai](https://CRAN.R-project.org/package=mirai)
@@ -118,7 +118,7 @@ get_voteview_members(congress = 100)
 #> #   nominate_number_of_errors <int>, conditional <lgl>,
 #> #   nokken_poole_dim1 <dbl>, nokken_poole_dim2 <dbl>
 get_voteview_members(congress = current_congress())
-#> # A tibble: 546 × 22
+#> # A tibble: 547 × 22
 #>    congress chamber icpsr state_icpsr district_code state_abbrev party_code
 #>       <int> <fct>   <int>       <int>         <int> <fct>             <int>
 #>  1      119 House   20301          41             3 AL                  200
@@ -131,7 +131,7 @@ get_voteview_members(congress = current_congress())
 #>  8      119 House   22503          81             1 AK                  200
 #>  9      119 House   21995          93             0 NA                  200
 #> 10      119 House   20305          61             7 AZ                  100
-#> # ℹ 536 more rows
+#> # ℹ 537 more rows
 #> # ℹ 15 more variables: occupancy <int>, last_means <int>, bioname <chr>,
 #> #   bioguide_id <chr>, born <int>, died <int>, nominate_dim1 <dbl>,
 #> #   nominate_dim2 <dbl>, nominate_log_likelihood <dbl>,

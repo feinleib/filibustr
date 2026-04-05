@@ -62,7 +62,7 @@ information on their data.
 Please cite this dataset as:
 
 Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron
-Rudkin, and Luke Sonnet (2025). *Voteview: Congressional Roll-Call Votes
+Rudkin, and Luke Sonnet (2026). *Voteview: Congressional Roll-Call Votes
 Database*. <https://voteview.com/>
 
 ## Parallel downloads with [mirai](https://CRAN.R-project.org/package=mirai)
@@ -109,10 +109,10 @@ get_voteview_parties(congress = current_congress())
 #> # A tibble: 5 × 9
 #>   congress chamber party_code party_name  n_members nominate_dim1_median
 #>      <int> <fct>        <int> <fct>           <int>                <dbl>
-#> 1      119 House          100 Democrat          220               -0.395
-#> 2      119 House          200 Republican        224                0.528
+#> 1      119 House          100 Democrat          220               -0.394
+#> 2      119 House          200 Republican        225                0.531
 #> 3      119 Senate         100 Democrat           45               -0.356
-#> 4      119 Senate         200 Republican         55                0.561
+#> 4      119 Senate         200 Republican         55                0.56 
 #> 5      119 Senate         328 Independent         2               -0.356
 #> # ℹ 3 more variables: nominate_dim2_median <dbl>, nominate_dim1_mean <dbl>,
 #> #   nominate_dim2_mean <dbl>

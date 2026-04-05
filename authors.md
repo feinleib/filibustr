@@ -10,14 +10,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/feinleib/filibustr/blob/main/DESCRIPTION)
 
-Feinleib M (2025). *filibustr: Data Utilities for Congressional
+Feinleib M (2026). *filibustr: Data Utilities for Congressional
 Research*. R package version 0.5.1.9000,
 <https://feinleib.github.io/filibustr/>.
 
     @Manual{,
       title = {filibustr: Data Utilities for Congressional Research},
       author = {Max Feinleib},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.5.1.9000},
       url = {https://feinleib.github.io/filibustr/},
     }

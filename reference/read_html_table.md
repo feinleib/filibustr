@@ -38,7 +38,7 @@ read_html_table("https://www.senate.gov/legislative/cloture/clotureCounts.htm",
 #> # A tibble: 56 × 5
 #>    Congress Years     `Motions Filed` `Votes on Cloture` `Cloture Invoked`
 #>    <chr>    <chr>     <chr>           <chr>              <chr>            
-#>  1 119      2025-2026 203             200                172              
+#>  1 119      2025-2026 243             244                202              
 #>  2 118      2023-2024 266             241                227              
 #>  3 117      2021-2022 336             289                270              
 #>  4 116      2019-2020 328             298                270              

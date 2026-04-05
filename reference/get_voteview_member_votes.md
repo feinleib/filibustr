@@ -55,7 +55,7 @@ information on their data.
 Please cite this dataset as:
 
 Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron
-Rudkin, and Luke Sonnet (2025). *Voteview: Congressional Roll-Call Votes
+Rudkin, and Luke Sonnet (2026). *Voteview: Congressional Roll-Call Votes
 Database*. <https://voteview.com/>
 
 ## Parallel downloads with [mirai](https://CRAN.R-project.org/package=mirai)
