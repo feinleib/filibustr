@@ -62,7 +62,7 @@ get_voteview_parties()
 #>       <int> <fct>          <int> <fct>                <int>                <dbl>
 #>  1        1 President       5000 Pro-Administrat…         1               NA    
 #>  2        1 House           4000 Anti-Administra…        29                0.018
-#>  3        1 House           5000 Pro-Administrat…        31                0.576
+#>  3        1 House           5000 Pro-Administrat…        37                0.577
 #>  4        1 Senate          4000 Anti-Administra…         9               -0.238
 #>  5        1 Senate          5000 Pro-Administrat…        20                0.427
 #>  6        2 President       5000 Pro-Administrat…         1               NA    
@@ -235,7 +235,7 @@ This package uses data from the following websites and research:
   Bipartisan Path to Effective Lawmaking. *The Journal of Politics*,
   *85*(3), 1048–1063. <https://doi.org/10.1086/723805>
 - Lewis, Jeffrey B., Keith Poole, Howard Rosenthal, Adam Boche, Aaron
-  Rudkin, and Luke Sonnet (2025). *Voteview: Congressional Roll-Call
+  Rudkin, and Luke Sonnet (2026). *Voteview: Congressional Roll-Call
   Votes Database.* <https://voteview.com/>
 - U.S. Senate. <https://www.senate.gov/>
 - Volden, C., & Wiseman, A. E. (2025). *Legislative Effectiveness
