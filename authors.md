@@ -8,16 +8,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/feinleib/filibustr/blob/v0.5.2/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/feinleib/filibustr/blob/main/DESCRIPTION)
 
 Feinleib M (2026). *filibustr: Data Utilities for Congressional
-Research*. R package version 0.5.2,
+Research*. R package version 0.5.2.9000,
 <https://feinleib.github.io/filibustr/>.
 
     @Manual{,
       title = {filibustr: Data Utilities for Congressional Research},
       author = {Max Feinleib},
       year = {2026},
-      note = {R package version 0.5.2},
+      note = {R package version 0.5.2.9000},
       url = {https://feinleib.github.io/filibustr/},
     }

@@ -1,6 +1,8 @@
 # Changelog
 
-## filibustr 0.5.2 (2026-04-05)
+## filibustr (development version)
+
+## filibustr 0.5.2 (2026-04-06)
 
 CRAN release: 2026-04-06
 
