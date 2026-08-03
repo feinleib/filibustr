@@ -45,7 +45,7 @@ get_voteview_member_votes <- function(chamber = "all", congress = NULL, local_pa
     url <- build_url(data_source = "voteview", chamber = chamber, congress = congress,
                      sheet_type = "votes")
     online_file <- get_online_data(url = url, source_name = "Voteview")
-    df <- readr::read_csv(online_file, col_types = "ifiddd", na = c("", "NA", "N/A"))
+    df <- readr::read_csv(I(online_file), col_types = "ifiddd", na = c("", "NA", "N/A"))
   } else {
     # local reading
     df <- read_local_file(path = local_path, col_types = "ifiddd", na = c("", "NA", "N/A"))

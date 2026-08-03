@@ -9,6 +9,8 @@
 * Removed an internal use of `dplyr::case_match()`, which is deprecated as of
   dplyr 1.2.0 (#63). This silences a deprecation warning that could appear when
   calling any `get_*()` function.
+* Fixed a warning in Voteview functions caused by reading literal data without
+  `I()`.
 
 # filibustr 0.5.2 (2026-04-06)
 * Fix for CRAN.

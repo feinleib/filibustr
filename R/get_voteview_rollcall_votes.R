@@ -48,7 +48,7 @@ get_voteview_rollcall_votes <- function(chamber = "all", congress = NULL, local_
     url <- build_url(data_source = "voteview", chamber = chamber, congress = congress,
                      sheet_type = "rollcalls")
     online_file <- get_online_data(url = url, source_name = "Voteview")
-    df <- readr::read_csv(online_file, col_types = "ifiDddiidddddccccc")
+    df <- readr::read_csv(I(online_file), col_types = "ifiDddiidddddccccc")
   } else {
     # local reading
     df <- read_local_file(path = local_path, col_types = "ifiDddiidddddccccc")
