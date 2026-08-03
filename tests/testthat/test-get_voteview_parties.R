@@ -95,7 +95,7 @@ test_that("local read filtering", {
   all_parties <- get_voteview_parties()
   expect_s3_class(all_parties, "tbl_df")
   expect_length(all_parties, 9)
-  expect_equal(nrow(all_parties), 845)
+  expect_equal(nrow(all_parties), 848)
   haven::write_dta(all_parties, tmp_dta)
   readr::write_csv(all_parties, tmp_csv)
 
@@ -112,7 +112,7 @@ test_that("local read filtering", {
   hr_parties <- get_voteview_parties(chamber = "hr",
                                      local_path = tmp_dta)
   expect_s3_class(hr_parties, "tbl_df")
-  expect_equal(nrow(hr_parties), 521)
+  expect_equal(nrow(hr_parties), 524)
   expect_equal(haven::zap_formats(hr_parties),
                dplyr::filter(all_parties, chamber != "Senate") |>
                  dplyr::mutate(chamber = droplevels(chamber)))

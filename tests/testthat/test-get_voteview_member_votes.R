@@ -72,7 +72,7 @@ test_that("filter votes by congress", {
   expect_length(s_votes_117, 6)
   expect_equal(levels(s_votes_117$chamber), "Senate")
   expect_equal(unique(s_votes_117$congress), 117)
-  expect_equal(nrow(s_votes_117), 95152)
+  expect_equal(nrow(s_votes_117), 95238)
 })
 
 test_that("column types", {
