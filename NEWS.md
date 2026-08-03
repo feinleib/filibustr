@@ -3,6 +3,9 @@
   the Center for Effective Lawmaking in June 2025 (#53). The revision corrects
   the `cd`, `female`, and `afam` columns for a small number of legislators. The
   Senate data is unchanged.
+* Removed an internal use of `dplyr::case_match()`, which is deprecated as of
+  dplyr 1.2.0 (#63). This silences a deprecation warning that could appear when
+  calling any `get_*()` function.
 
 # filibustr 0.5.2 (2026-04-06)
 * Fix for CRAN.

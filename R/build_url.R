@@ -70,11 +70,13 @@ build_les_url <- function(chamber_code) {
 }
 
 match_chamber <- function(chamber) {
-  chamber_code <- dplyr::case_match(tolower(chamber),
-                                    c("all", "congress", "hs") ~ "HS",
-                                    c("house", "h", "hr") ~ "H",
-                                    c("senate", "s", "sen") ~ "S",
-                                    .default = "HS_default")
+  # `switch()` avoids requiring dplyr (>= 1.2.0) for `recode_values()`.
+  # It is not vectorized, but `chamber` must be length 1 anyway.
+  chamber_code <- switch(tolower(chamber),
+                         all = , congress = , hs = "HS",
+                         house = , h = , hr = "H",
+                         senate = , s = , sen = "S",
+                         "HS_default")
 
   # Warn for invalid chamber argument
   if (chamber_code == "HS_default") {
