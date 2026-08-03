@@ -5,7 +5,7 @@ test_that("get_online_data(): Voteview members", {
     "https://voteview.com/static/data/out/members/S117_members.csv", "Voteview")
   expect_type(vv_resp_members_s117, "character")
   # check that CSV format works
-  members_s117_df <- readr::read_csv(vv_resp_members_s117, show_col_types = FALSE)
+  members_s117_df <- readr::read_csv(I(vv_resp_members_s117), show_col_types = FALSE)
   expect_s3_class(members_s117_df, "tbl_df")
   expect_length(members_s117_df, 22)
   expect_equal(nrow(members_s117_df), 104)
@@ -20,7 +20,7 @@ test_that("get_online_data(): Voteview parties", {
     "https://voteview.com/static/data/out/parties/HSall_parties.csv", "Voteview")
   expect_type(vv_resp_parties, "character")
   # check that CSV format works
-  parties_df <- readr::read_csv(vv_resp_parties, show_col_types = FALSE)
+  parties_df <- readr::read_csv(I(vv_resp_parties), show_col_types = FALSE)
   expect_s3_class(parties_df, "tbl_df")
   expect_length(parties_df, 9)
   expect_equal(unique(parties_df$chamber), c("President", "House", "Senate"))
