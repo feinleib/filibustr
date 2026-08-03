@@ -1,4 +1,8 @@
 # filibustr (development version)
+* `get_les("house")` now downloads the revised House LES data file published by
+  the Center for Effective Lawmaking in June 2025 (#53). The revision corrects
+  the `cd`, `female`, and `afam` columns for a small number of legislators. The
+  Senate data is unchanged.
 
 # filibustr 0.5.2 (2026-04-06)
 * Fix for CRAN.

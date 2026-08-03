@@ -58,10 +58,15 @@ build_les_url <- function(chamber_code) {
     call = rlang::caller_env(2))
   }
 
-  source <- "https://thelawmakers.org/wp-content/uploads/2025/03/CEL"
-  chamber_name <- if (chamber_code == "H") "House" else "Senate"
-
-  paste0(source, chamber_name, "93to118Reduced.dta")
+  # the House and Senate files no longer share a URL pattern:
+  # the House data was revised in June 2025, the Senate data was not
+  if (chamber_code == "H") {
+    paste0("https://thelawmakers.org/wp-content/uploads/2025/06/",
+           "CELHouse93to118Reduced-REVISED-06.26.2025.dta")
+  } else {
+    paste0("https://thelawmakers.org/wp-content/uploads/2025/03/",
+           "CELSenate93to118Reduced.dta")
+  }
 }
 
 match_chamber <- function(chamber) {

@@ -140,8 +140,10 @@ test_that("`build_url()` for HVW", {
 # LES --------------------------------------------
 test_that("`build_les_url()`: online paths", {
   # classic LES
+  # NOTE: the House data was revised in June 2025, the Senate data was not
   expect_equal(build_les_url(chamber_code = "H"),
-               "https://thelawmakers.org/wp-content/uploads/2025/03/CELHouse93to118Reduced.dta")
+               paste0("https://thelawmakers.org/wp-content/uploads/2025/06/",
+                      "CELHouse93to118Reduced-REVISED-06.26.2025.dta"))
   expect_equal(build_les_url(chamber_code = "S"),
                "https://thelawmakers.org/wp-content/uploads/2025/03/CELSenate93to118Reduced.dta")
 })
@@ -160,7 +162,8 @@ test_that("`build_url()` for LES", {
   expect_equal(build_url(data_source = "les", chamber = "sen", sheet_type = FALSE),
                "https://thelawmakers.org/wp-content/uploads/2025/03/CELSenate93to118Reduced.dta")
   expect_equal(build_url(data_source = "les", chamber = "house", sheet_type = TRUE),
-               "https://thelawmakers.org/wp-content/uploads/2025/03/CELHouse93to118Reduced.dta")
+               paste0("https://thelawmakers.org/wp-content/uploads/2025/06/",
+                      "CELHouse93to118Reduced-REVISED-06.26.2025.dta"))
 
   # need to specify a chamber
   expect_error(build_url(data_source = "les"),
