@@ -6,6 +6,9 @@
 * Fixed a parsing failure in `get_voteview_members()` and `get_voteview_parties()`
   that set `party_code` to `NA` for members and parties in the 115th-117th
   Congresses. `party_code` is now complete again.
+* `get_voteview_member_votes()` no longer emits a parsing warning. Voteview
+  wrote some missing `prob` values as the string `"N/A"` repeated 100 times,
+  which is now recognized as missing. The returned data is unchanged.
 * Removed an internal use of `dplyr::case_match()`, which is deprecated as of
   dplyr 1.2.0 (#63). This silences a deprecation warning that could appear when
   calling any `get_*()` function.
