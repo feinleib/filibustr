@@ -41,6 +41,9 @@ get_voteview_parties <- function(chamber = "all", congress = NULL, local_path = 
     )
   }
 
+  # NOTE: `party_code` is read as a double because Voteview writes some values
+  # in decimal form (e.g., "200.0"), which the integer parser rejects (returning
+  # `NA` with a warning). It is converted back to an integer below.
   if (is.null(local_path)) {
     # online reading
     url <- build_url(data_source = "voteview", chamber = chamber, congress = congress,
@@ -49,7 +52,7 @@ get_voteview_parties <- function(chamber = "all", congress = NULL, local_path = 
     df <- readr::read_csv(online_file, col_types = "ififidddd")
   } else {
     # local reading
-    df <- read_local_file(path = local_path, col_types = "ififidddd")
+    df <- read_local_file(path = local_path, col_types = "ifdfidddd")
   }
 
   # local file fixes
@@ -59,7 +62,7 @@ get_voteview_parties <- function(chamber = "all", congress = NULL, local_path = 
       # no need to specify levels if data is already coming from saved DTA file
       dplyr::mutate(dplyr::across(.cols = c("chamber", "party_name"),
                                   .fns = haven::as_factor),
-                    dplyr::across(.cols = c("congress", "party_code", "n_members"),
+                    dplyr::across(.cols = c("congress", "n_members"),
                                   .fns = as.integer))
   }
 
@@ -69,6 +72,9 @@ get_voteview_parties <- function(chamber = "all", congress = NULL, local_path = 
       filter_congress(congress = congress) |>
       filter_chamber(chamber = chamber)
   }
+
+  df <- df |>
+    dplyr::mutate(dplyr::across(.cols = "party_code", .fns = as.integer))
 
   df
 }

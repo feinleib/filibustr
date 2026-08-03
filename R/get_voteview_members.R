@@ -81,6 +81,9 @@ get_voteview_members <- function(chamber = "all", congress = NULL, local_path = 
     )
   }
 
+  # NOTE: `party_code` is read as a double because Voteview writes some values
+  # in decimal form (e.g., "200.0"), which the integer parser rejects (returning
+  # `NA` with a warning). It is converted back to an integer below.
   if (is.null(local_path)) {
     # online reading
     url <- build_url(data_source = "voteview", chamber = chamber, congress = congress,
@@ -89,7 +92,7 @@ get_voteview_members <- function(chamber = "all", congress = NULL, local_path = 
     df <- readr::read_csv(online_file, col_types = "ifiinfiiiccnnnnnniilnn")
   } else {
     # local reading
-    df <- read_local_file(path = local_path, col_types = "ifiinfiiiccnnnnnniilnn")
+    df <- read_local_file(path = local_path, col_types = "ifiinfdiiccnnnnnniilnn")
   }
 
   if (isTRUE(tools::file_ext(local_path) == "dta")) {
@@ -116,7 +119,7 @@ get_voteview_members <- function(chamber = "all", congress = NULL, local_path = 
   }
 
   df <- df |>
-    dplyr::mutate(dplyr::across(.cols = c("district_code", "born", "died"),
+    dplyr::mutate(dplyr::across(.cols = c("party_code", "district_code", "born", "died"),
                                 .fns = as.integer))
 
   df
