@@ -14,6 +14,7 @@
   calling any `get_*()` function.
 * Fixed a warning in `get_voteview_*()` and `get_hvw_data()` caused by reading
   literal data without `I()`.
+* Dependency bump: Now requires {testthat} >= 3.1.5.
 
 # filibustr 0.5.2 (2026-04-06)
 * Fix for CRAN.

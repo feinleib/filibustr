@@ -1,7 +1,9 @@
 test_that("all parties data", {
   skip_if_offline()
 
-  all_parties <- get_voteview_parties()
+  # expect no warnings when downloading
+  # (`expect_no_warning()` would ignore deprecation warnings)
+  expect_no_condition(all_parties <- get_voteview_parties(), class = "warning")
   expect_s3_class(all_parties, "tbl_df")
   expect_length(all_parties, 9)
   expect_equal(levels(all_parties$chamber),

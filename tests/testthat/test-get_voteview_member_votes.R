@@ -29,7 +29,9 @@ test_that("download from Voteview", {
 test_that("filter votes by chamber", {
   skip_if_offline()
 
-  s_votes <- get_voteview_member_votes(chamber = "s")
+  # expect no warnings when downloading
+  # (`expect_no_warning()` would ignore deprecation warnings)
+  expect_no_condition(s_votes <- get_voteview_member_votes(chamber = "s"), class = "warning")
   expect_s3_class(s_votes, "tbl_df")
   expect_length(s_votes, 6)
   expect_equal(levels(s_votes$chamber), "Senate")
@@ -68,7 +70,9 @@ test_that("filter votes by chamber", {
 test_that("filter votes by congress", {
   skip_if_offline()
 
-  votes_1_5 <- get_voteview_member_votes(congress = 1:5)
+  # expect no warnings when downloading
+  # (the 1st-5th Congresses contain repeated "N/A" `prob` values)
+  expect_no_condition(votes_1_5 <- get_voteview_member_votes(congress = 1:5), class = "warning")
   expect_s3_class(votes_1_5, "tbl_df")
   expect_length(votes_1_5, 6)
   expect_equal(levels(votes_1_5$chamber), c("House", "Senate"))

@@ -1,7 +1,9 @@
 test_that("download from Voteview", {
   skip_if_offline()
 
-  online_voteview_members <- get_voteview_members()
+  # expect no warnings when downloading
+  # (`expect_no_warning()` would ignore deprecation warnings)
+  expect_no_condition(online_voteview_members <- get_voteview_members(), class = "warning")
   expect_s3_class(online_voteview_members, "tbl_df")
   expect_length(online_voteview_members, 22)
   # floor on all-time members length
