@@ -106,14 +106,16 @@ get_voteview_parties(congress = 100)
 #> # ℹ 3 more variables: nominate_dim2_median <dbl>, nominate_dim1_mean <dbl>,
 #> #   nominate_dim2_mean <dbl>
 get_voteview_parties(congress = current_congress())
-#> # A tibble: 5 × 9
-#>   congress chamber party_code party_name  n_members nominate_dim1_median
-#>      <int> <fct>        <int> <fct>           <int>                <dbl>
-#> 1      119 House          100 Democrat          220               -0.394
-#> 2      119 House          200 Republican        225                0.531
-#> 3      119 Senate         100 Democrat           45               -0.356
-#> 4      119 Senate         200 Republican         55                0.56 
-#> 5      119 Senate         328 Independent         2               -0.356
+#> # A tibble: 7 × 9
+#>   congress chamber   party_code party_name  n_members nominate_dim1_median
+#>      <int> <fct>          <int> <fct>           <int>                <dbl>
+#> 1      119 President        200 Republican          1                0.403
+#> 2      119 House            100 Democrat          222               -0.396
+#> 3      119 House            200 Republican        227                0.53 
+#> 4      119 House            328 Independent         1                0.158
+#> 5      119 Senate           100 Democrat           45               -0.356
+#> 6      119 Senate           200 Republican         57               NA    
+#> 7      119 Senate           328 Independent         2               -0.358
 #> # ℹ 3 more variables: nominate_dim2_median <dbl>, nominate_dim1_mean <dbl>,
 #> #   nominate_dim2_mean <dbl>
 if (FALSE) { # interactive() && !is.null(curl::nslookup("voteview.com", error = FALSE))

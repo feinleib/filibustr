@@ -2,6 +2,34 @@
 
 ## filibustr (development version)
 
+- `get_les("house")` now downloads the revised House LES data file
+  published by the Center for Effective Lawmaking in June 2025
+  ([\#53](https://github.com/feinleib/filibustr/issues/53)). The
+  revision corrects the `cd`, `female`, and `afam` columns for a small
+  number of legislators. The Senate data is unchanged.
+- Fixed a parsing failure in
+  [`get_voteview_members()`](https://feinleib.github.io/filibustr/reference/get_voteview_members.md)
+  and
+  [`get_voteview_parties()`](https://feinleib.github.io/filibustr/reference/get_voteview_parties.md)
+  that set `party_code` to `NA` for members and parties in the
+  115th-117th Congresses. `party_code` is now complete again.
+- Fixed a parsing failure in
+  [`get_voteview_member_votes()`](https://feinleib.github.io/filibustr/reference/get_voteview_member_votes.md).
+  Voteview wrote some missing `prob` values as the string `"N/A"`
+  repeated 100 times, which is now recognized as missing. The returned
+  data is unchanged.
+- Removed an internal use of
+  [`dplyr::case_match()`](https://dplyr.tidyverse.org/reference/case_match.html),
+  which is deprecated as of dplyr 1.2.0
+  ([\#63](https://github.com/feinleib/filibustr/issues/63)). This
+  silences a deprecation warning that could appear when calling any
+  `get_*()` function.
+- Fixed a warning in `get_voteview_*()` and
+  [`get_hvw_data()`](https://feinleib.github.io/filibustr/reference/get_hvw_data.md)
+  caused by reading literal data without
+  [`I()`](https://rdrr.io/r/base/AsIs.html).
+- Dependency bump: Now requires {testthat} \>= 3.1.5.
+
 ## filibustr 0.5.2 (2026-04-06)
 
 CRAN release: 2026-04-06
@@ -40,6 +68,7 @@ CRAN release: 2025-10-26
     [`mirai::daemons()`](https://mirai.r-lib.org/reference/daemons.html):
 
 ``` r
+
 ## install {mirai} and {carrier} to enable parallel downloads
 # install.packages("mirai")
 # install.packages("carrier")
@@ -155,6 +184,7 @@ Here is some example usage of the `local_path` argument, including the
 ability to filter local files:
 
 ``` r
+
 ## download large dataset
 all_members <- get_voteview_members()
 nrow(all_members)                       # 51036

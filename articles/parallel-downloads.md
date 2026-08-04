@@ -1,6 +1,7 @@
 # Download Voteview data in parallel
 
 ``` r
+
 library(filibustr)
 ```
 
@@ -39,6 +40,7 @@ packages, run this code.** It will prompt you to install any packages
 you’re missing.
 
 ``` r
+
 rlang::check_installed(c("carrier", "mirai"), version = c("0.3.0",  "2.5.1"))
 ```
 
@@ -50,6 +52,7 @@ to create parallel processes ([mirai](https://mirai.r-lib.org) calls
 these “daemons”).
 
 ``` r
+
 # detect the number of cores available on your machine
 parallel::detectCores()
 
@@ -96,6 +99,7 @@ parallel!
 `length(congress) > 1`.
 
 ``` r
+
 # download Voteview data from multiple Congresses
 get_voteview_members(congress = 95:118)
 
@@ -107,6 +111,7 @@ daemon connections with `mirai::daemons(0)` if you’d like. The
 connections will close automatically when your session ends otherwise.
 
 ``` r
+
 mirai::daemons(0)
 ```
 

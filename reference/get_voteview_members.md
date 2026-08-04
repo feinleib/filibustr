@@ -118,20 +118,20 @@ get_voteview_members(congress = 100)
 #> #   nominate_number_of_errors <int>, conditional <lgl>,
 #> #   nokken_poole_dim1 <dbl>, nokken_poole_dim2 <dbl>
 get_voteview_members(congress = current_congress())
-#> # A tibble: 547 × 22
-#>    congress chamber icpsr state_icpsr district_code state_abbrev party_code
-#>       <int> <fct>   <int>       <int>         <int> <fct>             <int>
-#>  1      119 House   20301          41             3 AL                  200
-#>  2      119 House   21102          41             7 AL                  100
-#>  3      119 House   21500          41             6 AL                  200
-#>  4      119 House   22140          41             1 AL                  200
-#>  5      119 House   22366          41             5 AL                  200
-#>  6      119 House   22515          41             2 AL                  100
-#>  7      119 House   29701          41             4 AL                  200
-#>  8      119 House   22503          81             1 AK                  200
-#>  9      119 House   21995          93             0 NA                  200
-#> 10      119 House   20305          61             7 AZ                  100
-#> # ℹ 537 more rows
+#> # A tibble: 555 × 22
+#>    congress chamber   icpsr state_icpsr district_code state_abbrev party_code
+#>       <int> <fct>     <int>       <int>         <int> <fct>             <int>
+#>  1      119 President 99912          99             0 USA                 200
+#>  2      119 House     20301          41             3 AL                  200
+#>  3      119 House     21102          41             7 AL                  100
+#>  4      119 House     21500          41             6 AL                  200
+#>  5      119 House     22140          41             1 AL                  200
+#>  6      119 House     22366          41             5 AL                  200
+#>  7      119 House     22515          41             2 AL                  100
+#>  8      119 House     29701          41             4 AL                  200
+#>  9      119 House     22503          81             1 AK                  200
+#> 10      119 House     21995          93             0 NA                  200
+#> # ℹ 545 more rows
 #> # ℹ 15 more variables: occupancy <int>, last_means <int>, bioname <chr>,
 #> #   bioguide_id <chr>, born <int>, died <int>, nominate_dim1 <dbl>,
 #> #   nominate_dim2 <dbl>, nominate_log_likelihood <dbl>,

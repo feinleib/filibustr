@@ -21,3 +21,8 @@ Useful links:
 
 **Maintainer**: Max Feinleib <mhfeinleib@gmail.com>
 ([ORCID](https://orcid.org/0009-0002-9604-3533)) \[copyright holder\]
+
+Authors:
+
+- Max Feinleib <mhfeinleib@gmail.com>
+  ([ORCID](https://orcid.org/0009-0002-9604-3533)) \[copyright holder\]

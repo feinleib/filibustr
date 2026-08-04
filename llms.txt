@@ -20,6 +20,7 @@ provides similar conveniences for baseball analytics data.
 You can install the stable version of filibustr from CRAN with:
 
 ``` r
+
 install.packages("filibustr")
 ```
 
@@ -27,6 +28,7 @@ You can install the development version of filibustr from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("feinleib/filibustr")
 ```
@@ -54,6 +56,7 @@ For demonstration, here is the table returned by
 [`get_voteview_parties()`](https://feinleib.github.io/filibustr/reference/get_voteview_parties.md).
 
 ``` r
+
 library(filibustr)
 
 get_voteview_parties()
@@ -98,6 +101,7 @@ Here is an example table returned by
 [`get_les()`](https://feinleib.github.io/filibustr/reference/get_les.md).
 
 ``` r
+
 get_les(chamber = "senate")
 #> # A tibble: 2,635 × 88
 #>    last     first state congress cgnum icpsr  year dem   majority elected female
@@ -135,6 +139,7 @@ Here are the tables returned by
 [`get_hvw_data()`](https://feinleib.github.io/filibustr/reference/get_hvw_data.md):
 
 ``` r
+
 get_hvw_data("house")
 #> # A tibble: 9,825 × 109
 #>    thomas_num thomas_name     icpsr congress  year st_name    cd dem   elected

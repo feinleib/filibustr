@@ -99,15 +99,15 @@ get_voteview_member_votes(congress = 1:3)
 #> # A tibble: 27,558 × 6
 #>    congress chamber rollnumber icpsr cast_code  prob
 #>       <int> <fct>        <int> <int>     <int> <dbl>
-#>  1        1 House            1   154         6  61.1
-#>  2        1 House            1   259         9  99.6
-#>  3        1 House            1   379         1 100  
-#>  4        1 House            1   649         1  59.2
-#>  5        1 House            1   786         1  97.7
-#>  6        1 House            1   800         9  99.9
-#>  7        1 House            1   878         6  14.4
-#>  8        1 House            1   884         9  54.8
-#>  9        1 House            1  1118         9  99.9
-#> 10        1 House            1  1260         1  99.9
+#>  1        1 House            1   154         6  56.9
+#>  2        1 House            1   259         9  98.3
+#>  3        1 House            1   379         1  98.5
+#>  4        1 House            1   649         1  55.9
+#>  5        1 House            1   786         1  99.0
+#>  6        1 House            1   800         9  99.4
+#>  7        1 House            1   878         6  27.3
+#>  8        1 House            1   884         9  52.7
+#>  9        1 House            1  1118         9  98.6
+#> 10        1 House            1  1260         1  98.0
 #> # ℹ 27,548 more rows
 ```
