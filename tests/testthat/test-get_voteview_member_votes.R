@@ -40,6 +40,14 @@ test_that("filter votes by chamber", {
     expect_equal(unique(s_votes$congress), 1:current_congress())
   }
 
+  # `NA` vote probabilities are limited
+  expect_lt(mean(is.na(s_votes$prob)), 0.12)
+  expect_lt(s_votes |>
+              dplyr::summarize(pct_na = mean(is.na(prob)), .by = c(congress, chamber)) |>
+              dplyr::pull(pct_na) |>
+              max(),
+            0.35)
+
   skip("Skipping slow online member-votes downloads.")
 
   hr_votes <- get_voteview_member_votes(chamber = "hr")
