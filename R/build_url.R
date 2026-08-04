@@ -58,18 +58,25 @@ build_les_url <- function(chamber_code) {
     call = rlang::caller_env(2))
   }
 
-  source <- "https://thelawmakers.org/wp-content/uploads/2025/03/CEL"
-  chamber_name <- if (chamber_code == "H") "House" else "Senate"
-
-  paste0(source, chamber_name, "93to118Reduced.dta")
+  # the House and Senate files no longer share a URL pattern:
+  # the House data was revised in June 2025, the Senate data was not
+  if (chamber_code == "H") {
+    paste0("https://thelawmakers.org/wp-content/uploads/2025/06/",
+           "CELHouse93to118Reduced-REVISED-06.26.2025.dta")
+  } else {
+    paste0("https://thelawmakers.org/wp-content/uploads/2025/03/",
+           "CELSenate93to118Reduced.dta")
+  }
 }
 
 match_chamber <- function(chamber) {
-  chamber_code <- dplyr::case_match(tolower(chamber),
-                                    c("all", "congress", "hs") ~ "HS",
-                                    c("house", "h", "hr") ~ "H",
-                                    c("senate", "s", "sen") ~ "S",
-                                    .default = "HS_default")
+  # `switch()` avoids requiring dplyr (>= 1.2.0) for `recode_values()`.
+  # It is not vectorized, but `chamber` must be length 1 anyway.
+  chamber_code <- switch(tolower(chamber),
+                         all = , congress = , hs = "HS",
+                         house = , h = , hr = "H",
+                         senate = , s = , sen = "S",
+                         "HS_default")
 
   # Warn for invalid chamber argument
   if (chamber_code == "HS_default") {

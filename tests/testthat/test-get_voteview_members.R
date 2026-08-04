@@ -1,7 +1,9 @@
 test_that("download from Voteview", {
   skip_if_offline()
 
-  online_voteview_members <- get_voteview_members()
+  # expect no warnings when downloading
+  # (`expect_no_warning()` would ignore deprecation warnings)
+  expect_no_condition(online_voteview_members <- get_voteview_members(), class = "warning")
   expect_s3_class(online_voteview_members, "tbl_df")
   expect_length(online_voteview_members, 22)
   # floor on all-time members length
@@ -43,9 +45,11 @@ test_that("filter by chamber", {
 
   expect_gt(nrow(hr), nrow(s))
 
-  # TODO: how to correctly test for a warning? This still produces a warning in the test.
-  # expect_warning(get_voteview_members(chamber = "not a chamber"),
-  #                "Invalid `chamber` argument \\(\"not a chamber\"\\) provided\\. Using `chamber = \"all\"`\\.")
+  # Ensure line width doesn't cause the below test to fail
+  local_reproducible_output(width = 120)
+  expect_warning(get_voteview_members(chamber = "not a chamber"),
+                 'Invalid `chamber` argument ("not a chamber") provided. Using `chamber = "all"`',
+                 fixed = TRUE)
 })
 
 test_that("filter by congress", {
@@ -100,6 +104,21 @@ test_that("column types", {
   expect_length(dplyr::select(members_98, dplyr::where(is.character)), 2)
   expect_length(dplyr::select(members_98, dplyr::where(is.factor)), 2)
   expect_length(dplyr::select(members_98, dplyr::where(is.logical)), 1)
+})
+
+test_that("party codes are complete", {
+  skip_if_offline()
+  # check that party codes in 115th-117th Congresses are correctly read as integers
+
+  # Congress-level files
+  members_115_117 <- get_voteview_members(congress = 115:117)
+  expect_type(members_115_117$party_code, "integer")
+  expect_false(anyNA(members_115_117$party_code))
+
+  # all-Congresses file
+  all_members <- get_voteview_members()
+  expect_type(all_members$party_code, "integer")
+  expect_false(anyNA(all_members$party_code))
 })
 
 test_that("local read/write", {

@@ -2,7 +2,7 @@ Package: filibustr
 Title: Data Utilities for Congressional Research
 Version: 0.5.2.9000
 Authors@R: 
-    person("Max", "Feinleib", email = "mhfeinleib@gmail.com", role = c("aut", "cre", "cph"),
+    person("Max", "Feinleib", , "mhfeinleib@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0002-9604-3533"))
 Description: Provides easy-to-understand and consistent interfaces for
     accessing data on the U.S. Congress. The functions in 'filibustr'
@@ -36,9 +36,10 @@ Suggests:
     knitr,
     mirai (>= 2.5.1),
     quarto,
-    testthat (>= 3.0.0)
+    testthat (>= 3.1.5)
+VignetteBuilder: 
+    quarto
+Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
-VignetteBuilder: quarto

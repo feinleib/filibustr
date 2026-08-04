@@ -1,4 +1,20 @@
 # filibustr (development version)
+* `get_les("house")` now downloads the revised House LES data file published by
+  the Center for Effective Lawmaking in June 2025 (#53). The revision corrects
+  the `cd`, `female`, and `afam` columns for a small number of legislators. The
+  Senate data is unchanged.
+* Fixed a parsing failure in `get_voteview_members()` and `get_voteview_parties()`
+  that set `party_code` to `NA` for members and parties in the 115th-117th
+  Congresses. `party_code` is now complete again.
+* Fixed a parsing failure in `get_voteview_member_votes()`. Voteview wrote some
+  missing `prob` values as the string `"N/A"` repeated 100 times, which is now
+  recognized as missing. The returned data is unchanged.
+* Removed an internal use of `dplyr::case_match()`, which is deprecated as of
+  dplyr 1.2.0 (#63). This silences a deprecation warning that could appear when
+  calling any `get_*()` function.
+* Fixed a warning in `get_voteview_*()` and `get_hvw_data()` caused by reading
+  literal data without `I()`.
+* Dependency bump: Now requires {testthat} >= 3.1.5.
 
 # filibustr 0.5.2 (2026-04-06)
 * Fix for CRAN.

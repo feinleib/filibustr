@@ -40,15 +40,20 @@ get_voteview_member_votes <- function(chamber = "all", congress = NULL, local_pa
     )
   }
 
+  # NOTE: Voteview writes a small number of missing `prob` values as the string
+  # "N/A" repeated 100 times. `na` matches whole fields only, so the repeated
+  # string has to be listed alongside the plain one.
+  na_strings <- c("", "NA", "N/A", strrep("N/A", 100))
+
   if (is.null(local_path)) {
     # online reading
     url <- build_url(data_source = "voteview", chamber = chamber, congress = congress,
                      sheet_type = "votes")
     online_file <- get_online_data(url = url, source_name = "Voteview")
-    df <- readr::read_csv(online_file, col_types = "ifiddd", na = c("", "NA", "N/A"))
+    df <- readr::read_csv(I(online_file), col_types = "ifiddd", na = na_strings)
   } else {
     # local reading
-    df <- read_local_file(path = local_path, col_types = "ifiddd", na = c("", "NA", "N/A"))
+    df <- read_local_file(path = local_path, col_types = "ifiddd", na = na_strings)
   }
 
   if (!is.null(local_path)) {

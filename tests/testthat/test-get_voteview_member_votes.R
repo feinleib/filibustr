@@ -16,12 +16,22 @@ test_that("download from Voteview", {
   }
   expect_gte(min(online_votes$prob, na.rm = TRUE), 0)
   expect_lte(max(online_votes$prob, na.rm = TRUE), 100)
+
+  # `NA` vote probabilities are limited
+  expect_lt(mean(is.na(online_votes$prob)), 0.16)
+  expect_lt(online_votes |>
+              dplyr::summarize(pct_na = mean(is.na(prob)), .by = c(congress, chamber)) |>
+              dplyr::pull(pct_na) |>
+              max(),
+            0.50)
 })
 
 test_that("filter votes by chamber", {
   skip_if_offline()
 
-  s_votes <- get_voteview_member_votes(chamber = "s")
+  # expect no warnings when downloading
+  # (`expect_no_warning()` would ignore deprecation warnings)
+  expect_no_condition(s_votes <- get_voteview_member_votes(chamber = "s"), class = "warning")
   expect_s3_class(s_votes, "tbl_df")
   expect_length(s_votes, 6)
   expect_equal(levels(s_votes$chamber), "Senate")
@@ -31,6 +41,14 @@ test_that("filter votes by chamber", {
   } else {
     expect_equal(unique(s_votes$congress), 1:current_congress())
   }
+
+  # `NA` vote probabilities are limited
+  expect_lt(mean(is.na(s_votes$prob)), 0.12)
+  expect_lt(s_votes |>
+              dplyr::summarize(pct_na = mean(is.na(prob)), .by = c(congress, chamber)) |>
+              dplyr::pull(pct_na) |>
+              max(),
+            0.35)
 
   skip("Skipping slow online member-votes downloads.")
 
@@ -52,7 +70,9 @@ test_that("filter votes by chamber", {
 test_that("filter votes by congress", {
   skip_if_offline()
 
-  votes_1_5 <- get_voteview_member_votes(congress = 1:5)
+  # expect no warnings when downloading
+  # (the 1st-5th Congresses contain repeated "N/A" `prob` values)
+  expect_no_condition(votes_1_5 <- get_voteview_member_votes(congress = 1:5), class = "warning")
   expect_s3_class(votes_1_5, "tbl_df")
   expect_length(votes_1_5, 6)
   expect_equal(levels(votes_1_5$chamber), c("House", "Senate"))
@@ -72,7 +92,7 @@ test_that("filter votes by congress", {
   expect_length(s_votes_117, 6)
   expect_equal(levels(s_votes_117$chamber), "Senate")
   expect_equal(unique(s_votes_117$congress), 117)
-  expect_equal(nrow(s_votes_117), 95152)
+  expect_equal(nrow(s_votes_117), 95238)
 })
 
 test_that("column types", {

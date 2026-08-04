@@ -1,7 +1,9 @@
 test_that("all parties data", {
   skip_if_offline()
 
-  all_parties <- get_voteview_parties()
+  # expect no warnings when downloading
+  # (`expect_no_warning()` would ignore deprecation warnings)
+  expect_no_condition(all_parties <- get_voteview_parties(), class = "warning")
   expect_s3_class(all_parties, "tbl_df")
   expect_length(all_parties, 9)
   expect_equal(levels(all_parties$chamber),
@@ -49,6 +51,21 @@ test_that("parties column types", {
   expect_length(dplyr::select(parties_25, dplyr::where(is.factor)), 2)
 })
 
+test_that("party codes are complete", {
+  skip_if_offline()
+  # check that party codes in 115th-117th Congresses are correctly read as integers
+
+  # Congress-level files
+  parties_115_117 <- get_voteview_parties(congress = 115:117)
+  expect_type(parties_115_117$party_code, "integer")
+  expect_false(anyNA(parties_115_117$party_code))
+
+  # all-Congresses file
+  all_parties <- get_voteview_parties()
+  expect_type(all_parties$party_code, "integer")
+  expect_false(anyNA(all_parties$party_code))
+})
+
 test_that("local read/write", {
   skip_if_offline()
 
@@ -62,7 +79,7 @@ test_that("local read/write", {
   expect_s3_class(all_parties_online, "tbl_df")
   expect_length(all_parties_online, 9)
   # this table will grow in each congress
-  expect_gte(nrow(all_parties_online), 845)
+  expect_gte(nrow(all_parties_online), 848)
   expect_equal(levels(all_parties_online$chamber), c("President", "House", "Senate"))
   readr::write_tsv(all_parties_online, tmp_tsv)
 
@@ -95,7 +112,8 @@ test_that("local read filtering", {
   all_parties <- get_voteview_parties()
   expect_s3_class(all_parties, "tbl_df")
   expect_length(all_parties, 9)
-  expect_equal(nrow(all_parties), 845)
+  # this table will grow in each congress
+  expect_gte(nrow(all_parties), 848)
   haven::write_dta(all_parties, tmp_dta)
   readr::write_csv(all_parties, tmp_csv)
 
@@ -112,7 +130,8 @@ test_that("local read filtering", {
   hr_parties <- get_voteview_parties(chamber = "hr",
                                      local_path = tmp_dta)
   expect_s3_class(hr_parties, "tbl_df")
-  expect_equal(nrow(hr_parties), 521)
+  # this table will grow in each congress
+  expect_gte(nrow(hr_parties), 524)
   expect_equal(haven::zap_formats(hr_parties),
                dplyr::filter(all_parties, chamber != "Senate") |>
                  dplyr::mutate(chamber = droplevels(chamber)))

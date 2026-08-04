@@ -1,7 +1,9 @@
 test_that("HVW house data", {
   skip_if_offline()
 
-  house_data <- get_hvw_data("house")
+  # expect no warnings when downloading
+  # (`expect_no_warning()` would ignore deprecation warnings)
+  expect_no_condition(house_data <- get_hvw_data("house"), class = "warning")
 
   # data checks
   expect_s3_class(house_data, "tbl_df")
@@ -18,7 +20,8 @@ test_that("HVW house data", {
 test_that("HVW senate data", {
   skip_if_offline()
 
-  senate_data <- get_hvw_data("senate")
+  # expect no warnings when downloading
+  expect_no_condition(senate_data <- get_hvw_data("senate"), class = "warning")
 
   # data checks
   expect_s3_class(senate_data, "tbl_df")

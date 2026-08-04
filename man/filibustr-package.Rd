@@ -20,5 +20,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Max Feinleib \email{mhfeinleib@gmail.com} (\href{https://orcid.org/0009-0002-9604-3533}{ORCID}) [copyright holder]
 
+Authors:
+\itemize{
+  \item Max Feinleib \email{mhfeinleib@gmail.com} (\href{https://orcid.org/0009-0002-9604-3533}{ORCID}) [copyright holder]
+}
+
 }
 \keyword{internal}

@@ -1,7 +1,9 @@
 test_that("download from Voteview", {
   skip_if_offline()
 
-  online_rollcalls <- get_voteview_rollcall_votes()
+  # expect no warnings when downloading
+  # (`expect_no_warning()` would ignore deprecation warnings)
+  expect_no_condition(online_rollcalls <- get_voteview_rollcall_votes(), class = "warning")
   expect_s3_class(online_rollcalls, "tbl_df")
   expect_length(online_rollcalls, 18)
   expect_equal(levels(online_rollcalls$chamber), c("House", "Senate"))
