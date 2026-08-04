@@ -102,6 +102,21 @@ test_that("column types", {
   expect_length(dplyr::select(members_98, dplyr::where(is.logical)), 1)
 })
 
+test_that("party codes are complete", {
+  skip_if_offline()
+  # check that party codes in 115th-117th Congresses are correctly read as integers
+
+  # Congress-level files
+  members_115_117 <- get_voteview_members(congress = 115:117)
+  expect_type(members_115_117$party_code, "integer")
+  expect_false(anyNA(members_115_117$party_code))
+
+  # all-Congresses file
+  all_members <- get_voteview_members()
+  expect_type(all_members$party_code, "integer")
+  expect_false(anyNA(all_members$party_code))
+})
+
 test_that("local read/write", {
   skip_if_offline()
 

@@ -49,6 +49,21 @@ test_that("parties column types", {
   expect_length(dplyr::select(parties_25, dplyr::where(is.factor)), 2)
 })
 
+test_that("party codes are complete", {
+  skip_if_offline()
+  # check that party codes in 115th-117th Congresses are correctly read as integers
+
+  # Congress-level files
+  parties_115_117 <- get_voteview_parties(congress = 115:117)
+  expect_type(parties_115_117$party_code, "integer")
+  expect_false(anyNA(parties_115_117$party_code))
+
+  # all-Congresses file
+  all_parties <- get_voteview_parties()
+  expect_type(all_parties$party_code, "integer")
+  expect_false(anyNA(all_parties$party_code))
+})
+
 test_that("local read/write", {
   skip_if_offline()
 
