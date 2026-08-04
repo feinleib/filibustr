@@ -16,6 +16,14 @@ test_that("download from Voteview", {
   }
   expect_gte(min(online_votes$prob, na.rm = TRUE), 0)
   expect_lte(max(online_votes$prob, na.rm = TRUE), 100)
+
+  # `NA` vote probabilities are limited
+  expect_lt(mean(is.na(online_votes$prob)), 0.16)
+  expect_lt(online_votes |>
+              dplyr::summarize(pct_na = mean(is.na(prob)), .by = c(congress, chamber)) |>
+              dplyr::pull(pct_na) |>
+              max(),
+            0.50)
 })
 
 test_that("filter votes by chamber", {
