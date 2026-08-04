@@ -45,9 +45,11 @@ test_that("filter by chamber", {
 
   expect_gt(nrow(hr), nrow(s))
 
-  # TODO: how to correctly test for a warning? This still produces a warning in the test.
-  # expect_warning(get_voteview_members(chamber = "not a chamber"),
-  #                "Invalid `chamber` argument \\(\"not a chamber\"\\) provided\\. Using `chamber = \"all\"`\\.")
+  # Ensure line width doesn't cause the below test to fail
+  local_reproducible_output(width = 120)
+  expect_warning(get_voteview_members(chamber = "not a chamber"),
+                 'Invalid `chamber` argument ("not a chamber") provided. Using `chamber = "all"`',
+                 fixed = TRUE)
 })
 
 test_that("filter by congress", {
