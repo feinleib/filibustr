@@ -39,7 +39,7 @@
 #' @returns A tibble.
 #' @export
 #'
-#' @examplesIf !is.null(curl::nslookup("dataverse.harvard.edu", error = FALSE))
+#' @examplesIf interactive() && !is.null(curl::nslookup("dataverse.harvard.edu", error = FALSE))
 #' get_hvw_data("senate")
 #' @examplesIf interactive() && !is.null(curl::nslookup("dataverse.harvard.edu", error = FALSE))
 #' get_hvw_data("house")
