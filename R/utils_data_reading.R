@@ -30,6 +30,10 @@ get_online_data <- function(url, source_name, return_format = "string") {
     httr2::req_error(body = error_body) |>
     httr2::req_perform()
 
+  # blame the exported `get_*()` function, not this helper
+  check_empty_body(response, source_name = source_name, url = url,
+                   call = rlang::caller_env())
+
   # return response body
   if (return_format == "raw") {
     # raw bytes
@@ -38,6 +42,48 @@ get_online_data <- function(url, source_name, return_format = "string") {
     # default: UTF-8 string
     return(httr2::resp_body_string(response))
   }
+}
+
+#' Check that a response actually contains data
+#'
+#' Aborts if an HTTP response has an empty body.
+#'
+#' Bot-protection services (such as the AWS WAF used by the Harvard Dataverse)
+#' answer automated requests with an HTTP 202 and an empty body, rather than an
+#' HTTP error. [httr2::req_error()] treats 202 as a success, and
+#' [httr2::req_retry()] can't help because the retries are blocked too, so
+#' without this check, the failure surfaces much later as an uninformative
+#' "Can't retrieve empty body" error (or an empty tibble).
+#'
+#' @param response An HTTP response (see [httr2::response()]).
+#' @param source_name The name of the data source.
+#' @param url The URL that was requested.
+#'
+#' @returns `response`, invisibly.
+#'
+#' @noRd
+check_empty_body <- function(response, source_name, url, call = rlang::caller_env()) {
+  if (httr2::resp_has_body(response)) {
+    return(invisible(response))
+  }
+
+  # AWS WAF signals a bot challenge with this header
+  bot_challenge <- identical(
+    httr2::resp_header(response, "x-amzn-waf-action"), "challenge"
+  )
+
+  cli::cli_abort(c(
+    "The {source_name} website returned an empty response.",
+    if (bot_challenge) {
+      c("x" = paste("{.url {url}} is currently behind bot protection,",
+                    "which blocks automated requests from R."))
+    } else {
+      c("x" = "{.url {url}} returned no data (HTTP {httr2::resp_status(response)}).")
+    },
+    "i" = paste("You can download the file in a web browser and read it",
+                "with the {.arg local_path} argument.")
+  ),
+  call = call)
 }
 
 read_local_file <- function(path, ...) {

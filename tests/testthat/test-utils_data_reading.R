@@ -1,3 +1,30 @@
+test_that("get_online_data(): informative error for bot-blocked requests", {
+  # the Harvard Dataverse's AWS WAF answers automated requests with
+  # an empty HTTP 202, not an HTTP error (#65)
+  waf_challenge <- function(req) {
+    httr2::response(status_code = 202,
+                    headers = list("x-amzn-waf-action" = "challenge"))
+  }
+
+  httr2::with_mocked_responses(waf_challenge, {
+    expect_error(
+      get_online_data("https://dataverse.harvard.edu/api/access/datafile/6299608",
+                      "Harvard Dataverse"),
+      "behind bot protection"
+    )
+  })
+})
+
+test_that("get_online_data(): informative error for empty responses", {
+  httr2::with_mocked_responses(function(req) httr2::response(status_code = 200), {
+    expect_error(
+      get_online_data("https://voteview.com/static/data/out/parties/HSall_parties.csv",
+                      "Voteview"),
+      "returned an empty response"
+    )
+  })
+})
+
 test_that("get_online_data(): Voteview members", {
   skip_if_offline()
 
