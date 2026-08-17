@@ -28,7 +28,7 @@
   [`get_hvw_data()`](https://feinleib.github.io/filibustr/reference/get_hvw_data.md)
   caused by reading literal data without
   [`I()`](https://rdrr.io/r/base/AsIs.html).
-- Dependency bump: Now requires {testthat} \>= 3.1.5.
+- Dependency bump: Now suggests {testthat} \>= 3.1.5.
 
 ## filibustr 0.5.2 (2026-04-06)
 

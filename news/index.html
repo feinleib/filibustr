@@ -50,7 +50,7 @@
 <li>Fixed a parsing failure in <code><a href="../reference/get_voteview_member_votes.html">get_voteview_member_votes()</a></code>. Voteview wrote some missing <code>prob</code> values as the string <code>"N/A"</code> repeated 100 times, which is now recognized as missing. The returned data is unchanged.</li>
 <li>Removed an internal use of <code><a href="https://dplyr.tidyverse.org/reference/case_match.html" class="external-link">dplyr::case_match()</a></code>, which is deprecated as of dplyr 1.2.0 (<a href="https://github.com/feinleib/filibustr/issues/63" class="external-link">#63</a>). This silences a deprecation warning that could appear when calling any <code>get_*()</code> function.</li>
 <li>Fixed a warning in <code>get_voteview_*()</code> and <code><a href="../reference/get_hvw_data.html">get_hvw_data()</a></code> caused by reading literal data without <code><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I()</a></code>.</li>
-<li>Dependency bump: Now requires {testthat} &gt;= 3.1.5.</li>
+<li>Dependency bump: Now suggests {testthat} &gt;= 3.1.5.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="filibustr-052-2026-04-06">filibustr 0.5.2 (2026-04-06)<a class="anchor" aria-label="anchor" href="#filibustr-052-2026-04-06"></a></h2><p class="text-muted">CRAN release: 2026-04-06</p>

@@ -113,8 +113,8 @@ get_voteview_parties(congress = current_congress())
 #> 2      119 House            100 Democrat          222               -0.396
 #> 3      119 House            200 Republican        227                0.53 
 #> 4      119 House            328 Independent         1                0.158
-#> 5      119 Senate           100 Democrat           45               -0.356
-#> 6      119 Senate           200 Republican         57               NA    
+#> 5      119 Senate           100 Democrat           45               -0.357
+#> 6      119 Senate           200 Republican         57                0.558
 #> 7      119 Senate           328 Independent         2               -0.358
 #> # ℹ 3 more variables: nominate_dim2_median <dbl>, nominate_dim1_mean <dbl>,
 #> #   nominate_dim2_mean <dbl>
