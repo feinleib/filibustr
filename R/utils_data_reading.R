@@ -4,7 +4,7 @@
 #' Returns the body of the HTTP response.
 #'
 #' @param url The URL to GET data from.
-#' @param data_source The name of the data source.
+#' @param source_name The name of the data source.
 #'  This name is used to make the error message more informative.
 #' @param return_format The desired format for the response body.
 #'  Supported options include `"string"` and `"raw"`, which correspond to
